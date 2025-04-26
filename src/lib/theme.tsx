@@ -3,6 +3,21 @@ import Tolkien from '../assets/fonts/Tolkien.ttf';
 import '@fontsource-variable/montserrat';
 
 export const theme = createTheme({
+  palette: {
+    background: {
+      default: '#FFFFF3',
+      paper: '#FFFFF3',
+    },
+    text: {
+      primary: '#1D263B',
+      secondary: '#1F4C0A',
+    },
+    primary: {
+      main: '#FFFFF3',
+      light: '#7796CB',
+      contrastText: '#960200',
+    },
+  },
   typography: {
     fontFamily: '"Montserrat Variable", sans-serif;',
     fontSize: 16,
