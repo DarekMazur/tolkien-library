@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Jrr from '../../assets/vector/jrrt_elipse.svg?react';
 import Leaves from '../../assets/vector/leaves.svg?react';
@@ -21,10 +21,12 @@ const Header = () => {
     >
       <SearchInput />
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Jrr style={{ maxHeight: '130px' }} />
+        <Jrr style={{ maxHeight: '130px', maxWidth: '130px' }} />
         <Typography variant="h1">Biblioteka Tolkienisty</Typography>
       </Box>
-      <MenuIcon sx={{ fontSize: '2rem' }} />
+      <IconButton sx={{ width: '3rem', height: '3rem' }} size="large">
+        <MenuIcon fontSize="inherit" />
+      </IconButton>
       <Leaves
         style={{
           width: 'auto',
