@@ -16,16 +16,6 @@ export const identificationStyles = {
   justifyContent: 'center',
 };
 
-export const logoStyles = {
-  maxHeight: '130px',
-  maxWidth: '130px',
-};
-
-export const menuIconStyles = {
-  width: '3rem',
-  height: '3rem',
-};
-
 export const decorationImageStyles = {
   width: 'auto',
   transformOrigin: 'center',

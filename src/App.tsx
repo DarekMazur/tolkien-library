@@ -1,4 +1,4 @@
-import Header from './components/Header/Header.tsx';
+import Header from './components/organisms/Header/Header.tsx';
 import { theme } from './lib/theme.tsx';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 

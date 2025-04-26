@@ -7,11 +7,6 @@ export const searchInputStyles = {
   zIndex: 5,
 };
 
-export const searchIconStyles: React.CSSProperties = {
-  position: 'absolute',
-  left: '0.5rem',
-};
-
 export const searchTextFieldStyles = {
   '& fieldset': {
     borderRadius: '3rem',
