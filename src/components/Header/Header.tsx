@@ -4,25 +4,25 @@ import Jrr from '../../assets/vector/jrrt_elipse.svg?react';
 import Leaves from '../../assets/vector/leaves.svg?react';
 import SearchInput from '../SearchInput/SearchInput.tsx';
 import {
-  StyledDecorationImage,
-  StyledHeader,
-  StyledIdentification,
-  StyledLogo,
-  StyledMenuIcon,
+  decorationImageStyles,
+  headerStyles,
+  identificationStyles,
+  logoStyles,
+  menuIconStyles,
 } from './Header.style.ts';
 
 const Header = () => {
   return (
-    <Box component="header" sx={StyledHeader}>
+    <Box component="header" sx={headerStyles}>
       <SearchInput />
-      <Box sx={StyledIdentification}>
-        <Jrr style={StyledLogo} />
+      <Box sx={identificationStyles}>
+        <Jrr style={logoStyles} />
         <Typography variant="h1">Biblioteka Tolkienisty</Typography>
       </Box>
-      <IconButton sx={StyledMenuIcon} size="large">
+      <IconButton sx={menuIconStyles} size="large">
         <MenuIcon fontSize="inherit" />
       </IconButton>
-      <Leaves style={StyledDecorationImage} />
+      <Leaves style={decorationImageStyles} />
     </Box>
   );
 };

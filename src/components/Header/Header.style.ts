@@ -1,4 +1,4 @@
-export const StyledHeader = {
+export const headerStyles = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -10,23 +10,23 @@ export const StyledHeader = {
   m: 0,
 };
 
-export const StyledIdentification = {
+export const identificationStyles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 };
 
-export const StyledLogo = {
+export const logoStyles = {
   maxHeight: '130px',
   maxWidth: '130px',
 };
 
-export const StyledMenuIcon = {
+export const menuIconStyles = {
   width: '3rem',
   height: '3rem',
 };
 
-export const StyledDecorationImage = {
+export const decorationImageStyles = {
   width: 'auto',
   transformOrigin: 'center',
   transform: 'rotate(-45deg)',

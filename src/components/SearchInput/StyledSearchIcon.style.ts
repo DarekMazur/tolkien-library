@@ -1,4 +1,4 @@
-export const StyledSearchInput = {
+export const searchInputStyles = {
   display: 'flex',
   alignItems: 'center',
   position: 'absolute',
@@ -7,12 +7,12 @@ export const StyledSearchInput = {
   zIndex: 5,
 };
 
-export const StyledSearchIcon: React.CSSProperties = {
+export const searchIconStyles: React.CSSProperties = {
   position: 'absolute',
   left: '0.5rem',
 };
 
-export const StyledSearchTextField = {
+export const searchTextFieldStyles = {
   '& fieldset': {
     borderRadius: '3rem',
     backgroundColor: '#ffffffe3',
