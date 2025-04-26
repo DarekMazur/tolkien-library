@@ -10,6 +10,18 @@ export default defineConfig([
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
+  {
+    settings: {
+      react: {
+        version: '19.0',
+      },
+    },
+  },
+  {
     ignores: [
       '**/*.config.*',
       '**/.lintstagedrc.*',
