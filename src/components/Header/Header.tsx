@@ -3,41 +3,26 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Jrr from '../../assets/vector/jrrt_elipse.svg?react';
 import Leaves from '../../assets/vector/leaves.svg?react';
 import SearchInput from '../SearchInput/SearchInput.tsx';
+import {
+  StyledDecorationImage,
+  StyledHeader,
+  StyledIdentification,
+  StyledLogo,
+  StyledMenuIcon,
+} from './Header.style.ts';
 
 const Header = () => {
   return (
-    <Box
-      component="header"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'stretch',
-        position: 'relative',
-        overflow: 'hidden',
-        height: '200px',
-        p: '1rem',
-        m: 0,
-      }}
-    >
+    <Box component="header" sx={StyledHeader}>
       <SearchInput />
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Jrr style={{ maxHeight: '130px', maxWidth: '130px' }} />
+      <Box sx={StyledIdentification}>
+        <Jrr style={StyledLogo} />
         <Typography variant="h1">Biblioteka Tolkienisty</Typography>
       </Box>
-      <IconButton sx={{ width: '3rem', height: '3rem' }} size="large">
+      <IconButton sx={StyledMenuIcon} size="large">
         <MenuIcon fontSize="inherit" />
       </IconButton>
-      <Leaves
-        style={{
-          width: 'auto',
-          transformOrigin: 'center',
-          transform: 'rotate(-45deg)',
-          position: 'absolute',
-          right: 0,
-          bottom: '-50%',
-        }}
-      />
+      <Leaves style={StyledDecorationImage} />
     </Box>
   );
 };
