@@ -1,41 +1,41 @@
-import { Box, Container, TextField, Typography } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Jrr from '../../assets/vector/jrrt_elipse.svg?react';
 import Leaves from '../../assets/vector/leaves.svg?react';
+import SearchInput from '../SearchInput/SearchInput.tsx';
 
 const Header = () => {
   return (
-    <Container component="header">
-      <Box>
-        <Jrr />
-        <Typography variant="h1">Lorem Ipsum</Typography>
-        <Typography variant="h2">Dolor Sit Amet</Typography>
+    <Box
+      component="header"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        position: 'relative',
+        overflow: 'hidden',
+        height: '200px',
+        p: 0,
+        m: 0,
+      }}
+    >
+      <SearchInput />
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Jrr style={{ maxHeight: '130px' }} />
+        <Typography variant="h1">Biblioteka Tolkienisty</Typography>
       </Box>
-      <MenuIcon />
-      <Box sx={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-        <SearchIcon style={{ position: 'absolute', left: '0.5rem' }} />
-        <TextField
-          id="input-search"
-          label="Szukaj..."
-          sx={{
-            '& fieldset': {
-              borderRadius: '3rem',
-            },
-            '& .MuiOutlinedInput-input': {
-              paddingLeft: '2.2rem',
-            },
-            '& .MuiInputLabel-root': {
-              marginLeft: '1.2rem',
-            },
-            '& .MuiInputLabel-root.MuiInputLabel-shrink': {
-              marginLeft: 0,
-            },
-          }}
-        />
-      </Box>
-      <Leaves style={{ width: 'auto', transformOrigin: 'center', transform: 'rotate(-45deg)' }} />
-    </Container>
+      <MenuIcon sx={{ fontSize: '2rem' }} />
+      <Leaves
+        style={{
+          width: 'auto',
+          transformOrigin: 'center',
+          transform: 'rotate(-45deg)',
+          position: 'absolute',
+          right: 0,
+          bottom: '-50%',
+        }}
+      />
+    </Box>
   );
 };
 
