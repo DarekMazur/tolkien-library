@@ -1,6 +1,7 @@
 import Header from './components/organisms/Header/Header.tsx';
 import { theme } from './lib/theme.tsx';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import Footer from './components/organisms/Footer/Footer.tsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         </p>
       </div>
       <p>Dolor Sit Amet</p>
+      <Footer />
     </ThemeProvider>
   );
 };
