@@ -12,10 +12,11 @@ const Header = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        alignItems: 'stretch',
         position: 'relative',
         overflow: 'hidden',
         height: '200px',
-        p: 0,
+        p: '1rem',
         m: 0,
       }}
     >
