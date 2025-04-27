@@ -1,4 +1,5 @@
-import { Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { Divider, Drawer, Link, List, ListItem, ListItemText } from '@mui/material';
+import { mainMenu } from '../../../lib/mockData/data.ts';
 
 interface IMainMenuProps {
   isMenuOpen: boolean;
@@ -9,15 +10,19 @@ const MainMenu = ({ isMenuOpen, toggleMenu }: IMainMenuProps) => {
   return (
     <Drawer open={isMenuOpen} onClose={toggleMenu}>
       <List>
-        <ListItem>
-          <ListItemText primary="Lorem" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Ipsum" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="Dolor" />
-        </ListItem>
+        <>
+          {mainMenu.map((item, index) =>
+            !item.title && item.isDivider ? (
+              <Divider key={`div_${index}`} />
+            ) : (
+              <ListItem key={item.title}>
+                <Link href={item.link}>
+                  <ListItemText primary={item.title} />
+                </Link>
+              </ListItem>
+            ),
+          )}
+        </>
       </List>
     </Drawer>
   );
