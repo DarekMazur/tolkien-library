@@ -1,53 +1,23 @@
-import { Box, Typography, Link } from '@mui/material';
-import Leaves from '../../../assets/vector/leaves.svg?react';
-import { theme } from '../../../lib/theme.tsx';
+import { Box } from '@mui/material';
+import FooterDecoration from '../../atoms/FooterDecoration/FooterDecoration.tsx';
+import FooterContent from '../../molecules/FooterContent/FooterContent.tsx';
 
-type FooterDecorationProps = { side?: 'left' | 'right' };
-
-const FooterDecoration = ({ side }: FooterDecorationProps) => {
-  return (
-    <Leaves
-      style={{
-        position: 'absolute',
-        maxHeight: '220px',
-        transformOrigin: 'center',
-        left: !side || side === 'left' ? '-2.5rem' : 'unset',
-        right: side && side === 'right' ? '-2.5rem' : 'unset',
-        top: 0,
-        transform: !side || side === 'left' ? 'scaleX(-1) rotate(30deg)' : 'rotate(30deg)',
-      }}
-    />
-  );
+const footerStyles = {
+  position: 'relative',
+  height: '174px',
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  mt: '-4rem',
 };
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <Box
-      component="footer"
-      sx={{
-        position: 'relative',
-        height: '174px',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-      }}
-    >
+    <Box component="footer" sx={footerStyles}>
       <FooterDecoration />
-      <Typography>Tolkienarium &copy; {currentYear}</Typography>
-      <Typography fontSize="small" sx={{ width: '85%', margin: '0 auto', textAlign: 'right' }}>
-        Proudly created by{' '}
-        <Link
-          href="https://nerdistry.pl"
-          target="_blank"
-          sx={{ color: theme.palette.text.secondary, fontWeight: 800 }}
-        >
-          Nerdistry
-        </Link>
-      </Typography>
+      <FooterContent />
       <FooterDecoration side="right" />
     </Box>
   );
