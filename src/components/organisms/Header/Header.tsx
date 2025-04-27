@@ -5,12 +5,16 @@ import { decorationImageStyles, headerStyles } from './Header.style.ts';
 import MenuButton from '../../atoms/MenuButton/MenuButton.tsx';
 import HeaderTitle from '../../molecules/HeaderTitle/HeaderTitle.tsx';
 
-const Header = () => {
+interface IHeaderProps {
+  toggleMenu: () => void;
+}
+
+const Header = ({ toggleMenu }: IHeaderProps) => {
   return (
     <Box component="header" sx={headerStyles}>
       <SearchInput />
       <HeaderTitle />
-      <MenuButton />
+      <MenuButton toggleMenu={toggleMenu} />
       <Leaves style={decorationImageStyles} />
     </Box>
   );

@@ -6,9 +6,13 @@ const menuIconStyles = {
   height: '3rem',
 };
 
-const MenuButton = () => {
+interface IMenuButtonProps {
+  toggleMenu: () => void;
+}
+
+const MenuButton = ({ toggleMenu }: IMenuButtonProps) => {
   return (
-    <IconButton sx={menuIconStyles} size="large">
+    <IconButton sx={menuIconStyles} size="large" onClick={toggleMenu}>
       <MenuIcon fontSize="inherit" />
     </IconButton>
   );
