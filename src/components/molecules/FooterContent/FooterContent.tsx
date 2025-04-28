@@ -1,21 +1,5 @@
 import { Link, Typography } from '@mui/material';
-import { theme } from '../../../lib/theme.tsx';
-
-const devStyles = {
-  width: '85%',
-  margin: '0 auto',
-  textAlign: 'right',
-};
-
-const linkStyles = {
-  color: theme.palette.text.secondary,
-  fontWeight: 800,
-};
-
-const copyrightStyles = {
-  fontFamily: '"Tolkien", sans-serif;',
-  fontSize: '1.3rem',
-};
+import { copyrightStyles, devStyles, linkStyles } from './FooterContent.styles.ts';
 
 const FooterContent = () => {
   const currentYear = new Date().getFullYear();
