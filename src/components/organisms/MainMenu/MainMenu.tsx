@@ -20,19 +20,21 @@ const MainMenu = ({ isMenuOpen, toggleMenu }: IMainMenuProps) => {
           <Box sx={menuCloseStyles}>
             <MenuButton toggleMenu={toggleMenu} isClose />
           </Box>
-          <List sx={menuListStyles}>
-            <>
-              {navListItems!.map((item) =>
-                !item.title && item.isDivider ? (
-                  <Divider key={item.id} sx={menuDividerStyles} />
-                ) : (
-                  <React.Fragment key={item.id}>
-                    <MenuListItem item={item} />
-                  </React.Fragment>
-                ),
-              )}
-            </>
-          </List>
+          {navListItems && navListItems.length > 0 ? (
+            <List sx={menuListStyles}>
+              <>
+                {navListItems.map((item) =>
+                  !item.title && item.isDivider ? (
+                    <Divider key={item.id} sx={menuDividerStyles} />
+                  ) : (
+                    <React.Fragment key={item.id}>
+                      <MenuListItem item={item} />
+                    </React.Fragment>
+                  ),
+                )}
+              </>
+            </List>
+          ) : null}
         </>
       )}
     </Drawer>
