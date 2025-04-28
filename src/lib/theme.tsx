@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import Tolkien from '../assets/fonts/Tolkien.ttf';
+import Tolkien from '@/assets/fonts/Tolkien.ttf';
 import '@fontsource-variable/montserrat';
 
 export const theme = createTheme({

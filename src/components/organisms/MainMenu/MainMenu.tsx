@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Divider, Drawer, List } from '@mui/material';
-import MenuButton from '../../atoms/MenuButton/MenuButton.tsx';
-import MenuListItem from '../../atoms/MenuListItem/MenuListItem.tsx';
+import MenuButton from '@/components/atoms/MenuButton/MenuButton.tsx';
+import MenuListItem from '@/components/atoms/MenuListItem/MenuListItem.tsx';
 import { menuCloseStyles, menuDividerStyles, menuListStyles } from './MainMenu.styles.ts';
-import { useGetNavigationQuery } from '../../../../store';
+import { useGetNavigationQuery } from '@/../store';
 
 interface IMainMenuProps {
   isMenuOpen: boolean;

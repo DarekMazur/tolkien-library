@@ -3,7 +3,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
-import { IMainMenuList } from '../../../lib/types.ts';
+import { IMainMenuList } from '@/lib/types.ts';
 
 interface IMenuListItemProps {
   item: IMainMenuList;

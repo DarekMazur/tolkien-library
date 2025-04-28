@@ -1,6 +1,6 @@
 import { Box, TextField } from '@mui/material';
 import { searchInputStyles, searchTextFieldStyles } from './StyledSearchIcon.style.ts';
-import IconSearch from '../../atoms/IconSearch/IconSearch.tsx';
+import IconSearch from '@/components/atoms/IconSearch/IconSearch.tsx';
 
 const SearchInput = () => {
   return (

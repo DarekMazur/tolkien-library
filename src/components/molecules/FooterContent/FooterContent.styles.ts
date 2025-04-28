@@ -1,4 +1,4 @@
-import { theme } from '../../../lib/theme.tsx';
+import { theme } from '@/lib/theme.tsx';
 
 export const devStyles = {
   width: '85%',
