@@ -1,8 +1,4 @@
-interface IMainMenuList {
-  title?: string;
-  link?: string;
-  isDivider: boolean;
-}
+import { IMainMenuList } from '../types.ts';
 
 export const mainMenu: IMainMenuList[] = [
   {
