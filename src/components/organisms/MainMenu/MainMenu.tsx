@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Divider, Drawer, List } from '@mui/material';
 import { mainMenu } from '../../../lib/mockData/data.ts';
 import MenuButton from '../../atoms/MenuButton/MenuButton.tsx';

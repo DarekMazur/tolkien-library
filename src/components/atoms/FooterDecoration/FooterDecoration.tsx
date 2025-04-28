@@ -1,8 +1,9 @@
 import Leaves from '../../../assets/vector/leaves.svg?react';
+import { Box } from '@mui/material';
 
-type FooterDecorationProps = { side?: 'left' | 'right' };
+type TFooterDecorationProps = { side?: 'left' | 'right' };
 
-const FooterDecoration = ({ side }: FooterDecorationProps) => {
+const FooterDecoration = ({ side }: TFooterDecorationProps) => {
   const decorationStyles = {
     position: 'absolute',
     maxHeight: '220px',
@@ -14,7 +15,11 @@ const FooterDecoration = ({ side }: FooterDecorationProps) => {
     zIndex: -1,
   };
 
-  return <Leaves style={decorationStyles} />;
+  return (
+    <Box sx={decorationStyles}>
+      <Leaves height={'220px'} />
+    </Box>
+  );
 };
 
 export default FooterDecoration;
