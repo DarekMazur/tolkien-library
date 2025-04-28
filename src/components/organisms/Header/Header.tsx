@@ -15,7 +15,9 @@ const Header = ({ toggleMenu }: IHeaderProps) => {
       <SearchInput />
       <HeaderTitle />
       <MenuButton toggleMenu={toggleMenu} />
-      <Leaves style={decorationImageStyles} />
+      <Box sx={decorationImageStyles}>
+        <Leaves />
+      </Box>
     </Box>
   );
 };
