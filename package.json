@@ -33,6 +33,7 @@
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.25.1",
+    "@faker-js/faker": "^9.7.0",
     "@mswjs/data": "^0.16.2",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-onboarding": "^8.6.12",
