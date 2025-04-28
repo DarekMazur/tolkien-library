@@ -12,12 +12,17 @@ const linkStyles = {
   fontWeight: 800,
 };
 
+const copyrightStyles = {
+  fontFamily: '"Tolkien", sans-serif;',
+  fontSize: '1.3rem',
+};
+
 const FooterContent = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <>
-      <Typography>Tolkienarium &copy; {currentYear}</Typography>
+      <Typography sx={copyrightStyles}>Tolkienarium &copy; {currentYear}</Typography>
       <Typography fontSize="small" sx={devStyles}>
         Proudly created by{' '}
         <Link href="https://nerdistry.pl" target="_blank" sx={linkStyles}>
