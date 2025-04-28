@@ -12,28 +12,25 @@ interface IMenuListItemProps {
 const menuListItemStyles = {
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
 };
 
 const MenuListItem = ({ item }: IMenuListItemProps) => {
   return (
     <ListItem>
-      <Link href={item.link} sx={menuListItemStyles}>
-        <ListItemButton>
-          <ListItemIcon>
-            {item.link === '/' ? (
-              <FiberNewIcon />
-            ) : item.link === '/articles' ? (
-              <AttachFileIcon />
-            ) : item.link === '/contact' ? (
-              <ContactMailIcon />
-            ) : (
-              <DoubleArrowIcon />
-            )}
-          </ListItemIcon>
-        </ListItemButton>
+      <ListItemButton component={Link} href={item.link} sx={menuListItemStyles}>
+        <ListItemIcon>
+          {item.link === '/' ? (
+            <FiberNewIcon />
+          ) : item.link === '/articles' ? (
+            <AttachFileIcon />
+          ) : item.link === '/contact' ? (
+            <ContactMailIcon />
+          ) : (
+            <DoubleArrowIcon />
+          )}
+        </ListItemIcon>
         <ListItemText primary={item.title} />
-      </Link>
+      </ListItemButton>
     </ListItem>
   );
 };
