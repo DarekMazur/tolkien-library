@@ -1,4 +1,4 @@
-import { ListItem, Link } from '@mui/material';
+import { ListItem, Link, ListItemIcon, ListItemButton, ListItemText } from '@mui/material';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -19,17 +19,20 @@ const MenuListItem = ({ item }: IMenuListItemProps) => {
   return (
     <ListItem>
       <Link href={item.link} sx={menuListItemStyles}>
-        <>
-          {item.link === '/' ? (
-            <FiberNewIcon />
-          ) : item.link === '/articles' ? (
-            <AttachFileIcon />
-          ) : item.link === '/contact' ? (
-            <ContactMailIcon />
-          ) : (
-            <DoubleArrowIcon />
-          )}
-        </>
+        <ListItemButton>
+          <ListItemIcon>
+            {item.link === '/' ? (
+              <FiberNewIcon />
+            ) : item.link === '/articles' ? (
+              <AttachFileIcon />
+            ) : item.link === '/contact' ? (
+              <ContactMailIcon />
+            ) : (
+              <DoubleArrowIcon />
+            )}
+          </ListItemIcon>
+        </ListItemButton>
+        <ListItemText primary={item.title} />
       </Link>
     </ListItem>
   );

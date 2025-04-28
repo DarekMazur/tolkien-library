@@ -16,12 +16,33 @@ worker.events.on('request:start', ({ request }) => {
 });
 
 const createNavigation = () => {
-  for (let i = 0; i < faker.number.int({ min: 25, max: 40 }); i += 1) {
-    const isDivider = faker.datatype.boolean();
+  db.navigation.create({
+    title: 'News',
+    link: `/`,
+    isDivider: false,
+  });
+
+  db.navigation.create({
+    title: 'Attached',
+    link: `/articles`,
+    isDivider: false,
+  });
+
+  db.navigation.create({
+    title: null,
+    link: null,
+    isDivider: true,
+  });
+
+  const size = faker.number.int({ min: 7, max: 13 });
+
+  for (let i = 0; i < size; i += 1) {
+    const isDivider =
+      i === size - 2 ? true : i === size - 1 ? false : faker.datatype.boolean({ probability: 0.2 });
 
     db.navigation.create({
-      title: isDivider ? null : faker.lorem.words({ min: 1, max: 2 }),
-      link: isDivider ? null : `/${faker.lorem.word()}`,
+      title: isDivider ? null : i === size - 1 ? 'Contact' : faker.lorem.words({ min: 1, max: 2 }),
+      link: isDivider ? null : i === size - 1 ? '/contact' : `/${faker.lorem.word()}`,
       isDivider,
     });
   }
