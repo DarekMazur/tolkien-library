@@ -1,4 +1,4 @@
-import Leaves from '../../../assets/vector/leaves.svg?react';
+import Leaves from '@/assets/vector/leaves.svg?react';
 import { Box } from '@mui/material';
 
 type TFooterDecorationProps = { side?: 'left' | 'right' };

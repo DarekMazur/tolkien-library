@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import FooterDecoration from '../../atoms/FooterDecoration/FooterDecoration.tsx';
-import FooterContent from '../../molecules/FooterContent/FooterContent.tsx';
+import FooterDecoration from '@/components/atoms/FooterDecoration/FooterDecoration.tsx';
+import FooterContent from '@/components/molecules/FooterContent/FooterContent.tsx';
 
 const footerStyles = {
   position: 'relative',

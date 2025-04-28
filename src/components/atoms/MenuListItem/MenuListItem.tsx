@@ -3,7 +3,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
-import { IMainMenuList } from '../../../lib/types.ts';
+import { IMainMenuList } from '@/lib/types.ts';
 
 interface IMenuListItemProps {
   item: IMainMenuList;
@@ -12,28 +12,25 @@ interface IMenuListItemProps {
 const menuListItemStyles = {
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
 };
 
 const MenuListItem = ({ item }: IMenuListItemProps) => {
   return (
     <ListItem>
-      <Link href={item.link} sx={menuListItemStyles}>
-        <ListItemButton>
-          <ListItemIcon>
-            {item.link === '/' ? (
-              <FiberNewIcon />
-            ) : item.link === '/articles' ? (
-              <AttachFileIcon />
-            ) : item.link === '/contact' ? (
-              <ContactMailIcon />
-            ) : (
-              <DoubleArrowIcon />
-            )}
-          </ListItemIcon>
-        </ListItemButton>
+      <ListItemButton component={Link} href={item.link} sx={menuListItemStyles}>
+        <ListItemIcon>
+          {item.link === '/' ? (
+            <FiberNewIcon />
+          ) : item.link === '/articles' ? (
+            <AttachFileIcon />
+          ) : item.link === '/contact' ? (
+            <ContactMailIcon />
+          ) : (
+            <DoubleArrowIcon />
+          )}
+        </ListItemIcon>
         <ListItemText primary={item.title} />
-      </Link>
+      </ListItemButton>
     </ListItem>
   );
 };

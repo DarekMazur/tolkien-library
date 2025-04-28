@@ -1,4 +1,4 @@
-import Jrr from '../../../assets/vector/jrrt_elipse.svg?react';
+import Jrr from '@/assets/vector/jrrt_elipse.svg?react';
 
 const logoStyles = {
   maxHeight: '130px',
