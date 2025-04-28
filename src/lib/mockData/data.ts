@@ -6,14 +6,14 @@ interface IMainMenuList {
 
 export const mainMenu: IMainMenuList[] = [
   {
-    title: 'Lorem Ipsum',
+    title: 'Lorem',
     isDivider: false,
     link: '/',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Ipsum',
     isDivider: false,
-    link: '/',
+    link: '/articles',
   },
   {
     title: '',
@@ -21,34 +21,34 @@ export const mainMenu: IMainMenuList[] = [
     link: '',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Dolor',
     isDivider: false,
-    link: '/',
+    link: '/lorem',
+  },
+  {
+    title: 'Sit Amet',
+    isDivider: false,
+    link: '/ipsum',
   },
   {
     title: 'Lorem Ipsum',
     isDivider: false,
-    link: '/',
+    link: '/dolor',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Dolor Sit',
     isDivider: false,
-    link: '/',
+    link: '/sit',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Sit Amet',
     isDivider: false,
-    link: '/',
+    link: '/amet',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Lorem Dolor',
     isDivider: false,
-    link: '/',
-  },
-  {
-    title: 'Lorem Ipsum',
-    isDivider: false,
-    link: '/',
+    link: '/loremipsum',
   },
   {
     title: '',
@@ -56,9 +56,9 @@ export const mainMenu: IMainMenuList[] = [
     link: '',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Lorem Amet',
     isDivider: false,
-    link: '/',
+    link: '/dolorsit',
   },
   {
     title: '',
@@ -66,8 +66,8 @@ export const mainMenu: IMainMenuList[] = [
     link: '',
   },
   {
-    title: 'Lorem Ipsum',
+    title: 'Sit Ipsum',
     isDivider: false,
-    link: '/',
+    link: '/contact',
   },
 ];
