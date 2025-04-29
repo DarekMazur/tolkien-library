@@ -1,6 +1,14 @@
 import type { Preview } from '@storybook/react';
+import AppProviders from '../src/lib/providers/AppProviders';
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <AppProviders>
+        <Story />
+      </AppProviders>
+    ),
+  ],
   parameters: {
     controls: {
       matchers: {
@@ -9,6 +17,7 @@ const preview: Preview = {
       },
     },
   },
+  tags: ['autodocs'],
 };
 
 export default preview;
