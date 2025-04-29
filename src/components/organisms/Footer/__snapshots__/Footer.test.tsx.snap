@@ -58,6 +58,8 @@ exports[`matches the snapshot 1`] = `
       <a
         class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1ogmvo6-MuiTypography-root-MuiLink-root"
         href="https://nerdistry.pl"
+        rel="noopener noreferrer"
+        role="link"
         target="_blank"
       >
         Nerdistry
