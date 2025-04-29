@@ -15,7 +15,7 @@ const footerStyles = {
 
 const Footer = () => {
   return (
-    <Box component="footer" sx={footerStyles}>
+    <Box component="footer" aria-label="footer" sx={footerStyles}>
       <FooterDecoration />
       <FooterContent />
       <FooterDecoration side="right" />

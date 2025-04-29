@@ -17,7 +17,7 @@ const FooterDecoration = ({ side }: TFooterDecorationProps) => {
 
   return (
     <Box sx={decorationStyles}>
-      <Leaves height={'220px'} />
+      <Leaves height={'220px'} title="Leaves" />
     </Box>
   );
 };
