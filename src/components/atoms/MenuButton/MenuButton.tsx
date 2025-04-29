@@ -14,8 +14,20 @@ interface IMenuButtonProps {
 
 const MenuButton = ({ toggleMenu, isClose }: IMenuButtonProps) => {
   return (
-    <IconButton sx={menuIconStyles} size="large" onClick={toggleMenu}>
-      <>{isClose ? <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />}</>
+    <IconButton
+      sx={menuIconStyles}
+      size="large"
+      onClick={toggleMenu}
+      role="button"
+      aria-label="menu"
+    >
+      <>
+        {isClose ? (
+          <CloseIcon fontSize="inherit" role="button" aria-label="close menu" />
+        ) : (
+          <MenuIcon fontSize="inherit" />
+        )}
+      </>
     </IconButton>
   );
 };

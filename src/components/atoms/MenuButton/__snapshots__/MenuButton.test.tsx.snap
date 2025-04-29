@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MenuButton > matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    aria-label="menu"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-1t9hqfr-MuiButtonBase-root-MuiIconButton-root"
+    role="button"
+    tabindex="0"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1ckov0h-MuiSvgIcon-root"
+      data-testid="MenuIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M3 18h18v-2H3zm0-5h18v-2H3zm0-7v2h18V6z"
+      />
+    </svg>
+  </button>
+</DocumentFragment>
+`;

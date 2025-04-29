@@ -6,6 +6,6 @@ const logoStyles = {
 };
 
 const Logo = () => {
-  return <Jrr style={logoStyles} />;
+  return <Jrr title="logo" style={logoStyles} />;
 };
 export default Logo;
