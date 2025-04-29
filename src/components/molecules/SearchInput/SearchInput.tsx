@@ -4,7 +4,7 @@ import IconSearch from '@/components/atoms/IconSearch/IconSearch.tsx';
 
 const SearchInput = () => {
   return (
-    <Box sx={searchInputStyles}>
+    <Box sx={searchInputStyles} aria-label="Searchbar">
       <IconSearch />
       <TextField id="input-search" label="Szukaj..." sx={searchTextFieldStyles} />
     </Box>

@@ -9,6 +9,7 @@ exports[`Header > should match snapshot 1`] = `
         class="MuiBox-root css-1rujauj"
       >
         <div
+          aria-label="Searchbar"
           class="MuiBox-root css-19u7kqq"
         >
           <svg
@@ -213,6 +214,7 @@ exports[`Header > should match snapshot 1`] = `
       class="MuiBox-root css-1rujauj"
     >
       <div
+        aria-label="Searchbar"
         class="MuiBox-root css-19u7kqq"
       >
         <svg
