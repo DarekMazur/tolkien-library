@@ -9,7 +9,13 @@ const FooterContent = () => {
       <Typography sx={copyrightStyles}>Tolkienarium &copy; {currentYear}</Typography>
       <Typography fontSize="small" sx={devStyles}>
         Proudly created by{' '}
-        <Link href="https://nerdistry.pl" target="_blank" sx={linkStyles}>
+        <Link
+          role="link"
+          href="https://nerdistry.pl"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={linkStyles}
+        >
           Nerdistry
         </Link>
       </Typography>
