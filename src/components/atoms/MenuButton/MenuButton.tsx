@@ -21,7 +21,13 @@ const MenuButton = ({ toggleMenu, isClose }: IMenuButtonProps) => {
       role="button"
       aria-label="menu"
     >
-      <>{isClose ? <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />}</>
+      <>
+        {isClose ? (
+          <CloseIcon fontSize="inherit" role="button" aria-label="close menu" />
+        ) : (
+          <MenuIcon fontSize="inherit" />
+        )}
+      </>
     </IconButton>
   );
 };
