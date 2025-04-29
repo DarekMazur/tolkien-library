@@ -1,0 +1,79 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MenuListItem > matches snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cfd5wn-MuiListItem-root"
+  >
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-u548d-MuiTypography-root-MuiLink-root-MuiButtonBase-root-MuiListItemButton-root"
+      href="/snapshot"
+      tabindex="0"
+    >
+      <div
+        class="MuiListItemIcon-root css-cokf1l-MuiListItemIcon-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-eqnrfk-MuiSvgIcon-root"
+          data-testid="DoubleArrowIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M15.5 5H11l5 7-5 7h4.5l5-7z"
+          />
+          <path
+            d="M8.5 5H4l5 7-5 7h4.5l5-7z"
+          />
+        </svg>
+      </div>
+      <div
+        class="MuiListItemText-root css-cfq8qh-MuiListItemText-root"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-vhf5fc-MuiTypography-root"
+        >
+          Snapshot
+        </span>
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MenuListItem Component > should match snapshot 1`] = `
+<DocumentFragment>
+  <li
+    class="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-cfd5wn-MuiListItem-root"
+  >
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters css-u548d-MuiTypography-root-MuiLink-root-MuiButtonBase-root-MuiListItemButton-root"
+      href="/snapshot"
+      tabindex="0"
+    >
+      <div
+        class="MuiListItemIcon-root css-cokf1l-MuiListItemIcon-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-eqnrfk-MuiSvgIcon-root"
+          data-testid="DoubleArrowIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M15.5 5H11l5 7-5 7h4.5l5-7z"
+          />
+          <path
+            d="M8.5 5H4l5 7-5 7h4.5l5-7z"
+          />
+        </svg>
+      </div>
+      <div
+        class="MuiListItemText-root css-cfq8qh-MuiListItemText-root"
+      />
+    </a>
+  </li>
+</DocumentFragment>
+`;
