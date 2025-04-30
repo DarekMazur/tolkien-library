@@ -65,6 +65,7 @@
     "jsdom": "^26.1.0",
     "lint-staged": "^15.5.1",
     "msw": "^2.7.5",
+    "msw-storybook-addon": "^2.0.4",
     "playwright": "^1.52.0",
     "prettier": "^3.5.3",
     "storybook": "^8.6.12",
@@ -74,5 +75,10 @@
     "vite-plugin-svgr": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
