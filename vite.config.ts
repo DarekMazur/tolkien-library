@@ -17,4 +17,7 @@ export default defineConfig({
     globals: true,
     setupFiles: './src/test/setup.ts',
   },
+  optimizeDeps: {
+    include: ['msw', 'msw-storybook-addon'],
+  },
 });
