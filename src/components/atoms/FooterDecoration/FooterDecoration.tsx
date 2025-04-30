@@ -12,7 +12,7 @@ const FooterDecoration = ({ side }: TFooterDecorationProps) => {
     right: side && side === 'right' ? '-2.5rem' : 'unset',
     top: 0,
     transform: !side || side === 'left' ? 'scaleX(-1) rotate(30deg)' : 'rotate(30deg)',
-    zIndex: -1,
+    zIndex: 1,
   };
 
   return (
