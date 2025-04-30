@@ -30,7 +30,7 @@ const App = () => {
           <Typography sx={{ mb: '2rem' }}>
             {faker.lorem.paragraph({ min: 50, max: 100 })}
           </Typography>
-          <Alert severity="info" sx={{ mb: '2rem' }}>
+          <Alert severity="warning" sx={{ mb: '2rem' }}>
             <AlertTitle>{faker.lorem.word()}</AlertTitle>
             {faker.lorem.paragraph({ min: 10, max: 20 })}
           </Alert>
