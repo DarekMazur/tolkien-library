@@ -6,6 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import {
   articleCardContentStyles,
   articleCardHeaderContentStyles,
+  articleCardHeaderSubtitleStyles,
   articleCardHeaderTitleStyles,
 } from '@/components/molecules/ArticleCard/ArticleCard.styles.ts';
 import { components } from '@/lib/helpers/mdComponents.tsx';
@@ -21,6 +22,9 @@ const ArticleCard = ({
         slotProps={{
           title: {
             style: articleCardHeaderTitleStyles,
+          },
+          subheader: {
+            style: articleCardHeaderSubtitleStyles,
           },
           content: {
             style: articleCardHeaderContentStyles,

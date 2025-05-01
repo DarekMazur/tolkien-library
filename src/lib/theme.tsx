@@ -12,12 +12,17 @@ export const theme = createTheme({
     },
     text: {
       primary: '#1D263B',
-      secondary: '#1F4C0A',
+      secondary: '#1D263B',
     },
     primary: {
       main: '#1D263B',
-      light: '#7796CB',
+      light: '#C2D8FF',
+      dark: '#384A73',
       contrastText: '#960200',
+    },
+    secondary: {
+      main: '#FFFFF3',
+      light: '#7796CB',
     },
   },
   typography: {
