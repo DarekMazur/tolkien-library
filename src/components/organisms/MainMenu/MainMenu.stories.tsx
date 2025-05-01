@@ -26,9 +26,9 @@ export default meta;
 
 type Story = StoryObj<typeof MainMenu>;
 
-export const Default: Story = {
+export const Open: Story = {
   args: {
-    isMenuOpen: false,
+    isMenuOpen: true,
     toggleMenu: () => console.log('Menu toggled'),
   },
   parameters: {
@@ -42,9 +42,9 @@ export const Default: Story = {
   },
 };
 
-export const Open: Story = {
+export const Close: Story = {
   args: {
-    isMenuOpen: true,
+    isMenuOpen: false,
     toggleMenu: () => console.log('Menu toggled'),
   },
   parameters: {

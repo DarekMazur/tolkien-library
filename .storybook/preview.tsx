@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react';
-import { initialize, mswDecorator } from 'msw-storybook-addon';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import AppProviders from '../src/lib/providers/AppProviders';
 import { handlers } from './mswHandlers';
 
@@ -8,8 +8,8 @@ initialize({
 });
 
 const preview: Preview = {
+  loaders: [mswLoader],
   decorators: [
-    mswDecorator,
     (Story) => (
       <AppProviders>
         <Story />
