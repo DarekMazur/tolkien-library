@@ -17,7 +17,7 @@ const CATEGORIES = [
 
 const generateAlertBlock = (): string => {
   const type = faker.helpers.arrayElement(['info', 'warning', 'danger']);
-  return `:::${type}\n${faker.lorem.paragraph()}\n:::\n`;
+  return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
 };
 
 const generateTable = (): string => {
