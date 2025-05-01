@@ -12,4 +12,7 @@ export const handlers = [
   http.get('/api/navigation', () => {
     return HttpResponse.json(navigationMock);
   }),
+  http.get('/api/articles', () => {
+    return HttpResponse.json();
+  }),
 ];
