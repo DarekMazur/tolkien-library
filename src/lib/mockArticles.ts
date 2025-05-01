@@ -31,12 +31,19 @@ const generateTable = (): string => {
   ].join('\n');
 };
 
+const generateQuote = (paragraphs: number) => {
+  if (faker.datatype.boolean({ probability: 0.6 })) {
+    return `> ${faker.lorem.sentences(paragraphs)}`;
+  }
+};
+
 const generateContent = (): string => {
   const elements = [
     faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 })),
     `- ${Array.from({ length: 3 }, () => faker.lorem.word()).join('\n- ')}`,
     `1. ${Array.from({ length: 3 }, () => faker.lorem.word()).join('\n1. ')}`,
     `> ${faker.lorem.sentence()}`,
+    generateQuote(faker.number.int({ min: 1, max: 3 })),
     generateTable(),
     `[${faker.lorem.words(2)}](${faker.internet.url()})`,
     generateAlertBlock(),

@@ -1,5 +1,7 @@
 import { createTheme } from '@mui/material';
 import Tolkien from '@/assets/fonts/Tolkien.ttf';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import '@fontsource-variable/montserrat';
 
 export const theme = createTheme({
@@ -47,9 +49,6 @@ export const theme = createTheme({
     h6: {
       fontFamily: '"Tolkien", sans-serif;',
       lineHeight: '1.5',
-    },
-    bat: {
-      fontFamily: '"Tolkien", sans-serif;',
     },
   },
   components: {
