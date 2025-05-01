@@ -3,7 +3,11 @@ import { displayDate } from '@/lib/mockArticles.ts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import quoteIcon from '@/assets/vector/quote.svg?url';
+import {
+  articleCardContentStyles,
+  articleCardHeaderContentStyles,
+  articleCardHeaderTitleStyles,
+} from '@/components/molecules/ArticleCard/ArticleCard.styles.ts';
 
 const components = {
   div: ({
@@ -41,62 +45,17 @@ const ArticleCard = ({
       <CardHeader
         slotProps={{
           title: {
-            style: {
-              fontFamily: '"Montserrat Variable", sans-serif',
-              fontSize: '1.2rem',
-              fontWeight: 700,
-            },
+            style: { articleCardHeaderTitleStyles },
           },
           content: {
-            style: {
-              display: 'flex',
-              gap: '1rem',
-            },
+            style: { articleCardHeaderContentStyles },
           },
         }}
         title={displayDate(item.date)}
         subheader={item.category || null}
       />
       <Divider />
-      <CardContent
-        sx={{
-          '& blockquote': {
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: 'lightGrey',
-            color: 'darkBlue',
-            margin: '1rem 0',
-            fontStyle: 'italic',
-            minHeight: 48,
-            pl: '5rem',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: 48,
-              height: '100%',
-              backgroundColor: 'grey',
-              backgroundImage: `url("${quoteIcon}")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: 24,
-            },
-          },
-          '& table': {
-            m: '2rem auto',
-            borderSpacing: 0,
-            border: '0.5px solid black',
-            '& th': { backgroundColor: 'lightGrey' },
-            '& td, & th': {
-              border: '0.5px solid black',
-              p: '1rem 2rem',
-              textAlign: 'center',
-            },
-          },
-        }}
-      >
+      <CardContent sx={articleCardContentStyles}>
         <Typography variant="body2" component="article" sx={{ color: 'text.secondary' }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
