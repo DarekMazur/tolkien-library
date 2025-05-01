@@ -20,10 +20,10 @@ const ArticleCard = ({
       <CardHeader
         slotProps={{
           title: {
-            style: { articleCardHeaderTitleStyles },
+            style: articleCardHeaderTitleStyles,
           },
           content: {
-            style: { articleCardHeaderContentStyles },
+            style: articleCardHeaderContentStyles,
           },
         }}
         title={displayDate(item.date)}
