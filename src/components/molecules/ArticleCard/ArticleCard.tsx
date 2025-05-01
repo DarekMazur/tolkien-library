@@ -1,4 +1,4 @@
-import { Alert, Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
 import { displayDate } from '@/lib/mockArticles.ts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -8,32 +8,7 @@ import {
   articleCardHeaderContentStyles,
   articleCardHeaderTitleStyles,
 } from '@/components/molecules/ArticleCard/ArticleCard.styles.ts';
-
-const components = {
-  div: ({
-    className,
-    children,
-    ...rest
-  }: React.HTMLProps<HTMLDivElement> & { className?: string }) => {
-    if (className?.includes('warning')) {
-      return <Alert severity="warning">{children}</Alert>;
-    }
-
-    if (className?.includes('info')) {
-      return <Alert severity="info">{children}</Alert>;
-    }
-
-    if (className?.includes('danger')) {
-      return <Alert severity="error">{children}</Alert>;
-    }
-
-    return (
-      <div className={className} {...rest}>
-        {children}
-      </div>
-    );
-  },
-};
+import { components } from '@/lib/helpers/mdComponents.tsx';
 
 const ArticleCard = ({
   item,
