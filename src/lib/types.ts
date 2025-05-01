@@ -4,3 +4,10 @@ export interface IMainMenuList {
   link?: string;
   isDivider: boolean;
 }
+
+export interface INewsEntry {
+  id: string;
+  date: Date;
+  category?: string;
+  content: string;
+}

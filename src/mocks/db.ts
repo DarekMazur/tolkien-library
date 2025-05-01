@@ -11,4 +11,10 @@ export const db = factory({
     link: nullable(() => `/${faker.lorem.word()}`),
     isDivider: () => faker.datatype.boolean(),
   },
+  articles: {
+    id: primaryKey(faker.string.uuid),
+    date: () => faker.date.recent(),
+    category: nullable(() => faker.lorem.word()),
+    content: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
+  },
 });
