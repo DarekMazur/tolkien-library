@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
-import { displayDate } from '@/lib/mockArticles.ts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -10,6 +9,7 @@ import {
   articleCardHeaderTitleStyles,
 } from '@/components/molecules/ArticleCard/ArticleCard.styles.ts';
 import { components } from '@/lib/helpers/mdComponents.tsx';
+import { displayDate } from '@/lib/helpers/displayDate.ts';
 
 const ArticleCard = ({
   item,
