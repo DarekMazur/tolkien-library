@@ -19,7 +19,7 @@ describe('Root', () => {
         <Root />
       </MemoryRouter>,
     );
-    expect(screen.getByText(/not found/i)).toBeInTheDocument();
+    expect(screen.getByText(/not all those who wander/i)).toBeInTheDocument();
   });
 
   it('renders the correct layout depending on the path', () => {
