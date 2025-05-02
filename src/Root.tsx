@@ -4,8 +4,9 @@ import { useState } from 'react';
 import MainMenu from '@/components/organisms/MainMenu/MainMenu.tsx';
 import AppProviders from '@/lib/providers/AppProviders.tsx';
 import Home from '@/components/pages/Home/Home.tsx';
+import { Route, Routes } from 'react-router';
 
-const App = () => {
+const Root = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
@@ -16,10 +17,12 @@ const App = () => {
     <AppProviders>
       <Header toggleMenu={toggleMenu} />
       <MainMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
       <Footer />
     </AppProviders>
   );
 };
 
-export default App;
+export default Root;
