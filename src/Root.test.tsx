@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router';
 import Root from './Root';
 
 describe('Root', () => {
-  it('renderuje stronę Home na ścieżce domyślnej', () => {
+  it('renders the Home page on the default path', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <Root />
@@ -13,16 +13,16 @@ describe('Root', () => {
     expect(screen.getByText(/lorem ipsum/i)).toBeInTheDocument();
   });
 
-  it('renderuje stronę Not Found dla nieistniejącej ścieżki', () => {
+  it('renders a Not Found page for a path that does not exist', () => {
     render(
-      <MemoryRouter initialEntries={['/nieistniejaca-strona']}>
+      <MemoryRouter initialEntries={['/incorrect-path']}>
         <Root />
       </MemoryRouter>,
     );
     expect(screen.getByText(/not found/i)).toBeInTheDocument();
   });
 
-  it('renderuje poprawny layout w zależności od ścieżki', () => {
+  it('renders the correct layout depending on the path', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <Root />
@@ -30,5 +30,23 @@ describe('Root', () => {
     );
     expect(screen.getByText(/biblioteka tolkienisty/i)).toBeInTheDocument();
     expect(screen.getByText(/tolkienarium ©/i)).toBeInTheDocument();
+  });
+
+  it('matches the snapshot for the default path', () => {
+    const { asFragment } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <Root />
+      </MemoryRouter>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('matches snapshot for NotFound page', () => {
+    const { asFragment } = render(
+      <MemoryRouter initialEntries={['/incorrect-path']}>
+        <Root />
+      </MemoryRouter>,
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });
