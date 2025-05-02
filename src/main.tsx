@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Root from '@/Root.tsx';
+import { BrowserRouter } from 'react-router';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -10,14 +11,16 @@ async function enableMocking() {
     return;
   }
 
-  const { worker } = await import('./mocks/browser.ts');
+  const { worker } = await import('@/mocks/browser.ts');
   return worker.start();
 }
 
 enableMocking().then(() => {
   root.render(
     <StrictMode>
-      <Root />
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
     </StrictMode>,
   );
 });
