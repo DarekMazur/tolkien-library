@@ -1,0 +1,93 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginPage Component > should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-12sc8il"
+  >
+    <form
+      class="MuiBox-root css-58imyd"
+      role="form"
+    >
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1pwu1kx-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled css-1f2ywq6-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="false"
+          for="«rc»"
+          id="«rc»-label"
+        >
+          Username
+          <span
+            aria-hidden="true"
+            class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-1ljffdk-MuiFormLabel-asterisk"
+          >
+             *
+          </span>
+        </label>
+        <div
+          class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-26feuy-MuiInputBase-root-MuiFilledInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiFilledInput-input css-voecp4-MuiInputBase-input-MuiFilledInput-input"
+            id="«rc»"
+            required=""
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-1pwu1kx-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled css-1f2ywq6-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="false"
+          for="«rd»"
+          id="«rd»-label"
+        >
+          Password
+          <span
+            aria-hidden="true"
+            class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-1ljffdk-MuiFormLabel-asterisk"
+          >
+             *
+          </span>
+        </label>
+        <div
+          class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-26feuy-MuiInputBase-root-MuiFilledInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiFilledInput-input css-voecp4-MuiInputBase-input-MuiFilledInput-input"
+            id="«rd»"
+            required=""
+            type="password"
+          />
+        </div>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-c7slva-MuiButtonBase-root-MuiButton-root"
+        role="button"
+        tabindex="0"
+        type="button"
+      >
+        Login
+      </button>
+      <div
+        class="MuiBox-root css-s6mpbk"
+      >
+        <a
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-k0i63f-MuiButtonBase-root-MuiButton-root"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          Go back home
+        </a>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;

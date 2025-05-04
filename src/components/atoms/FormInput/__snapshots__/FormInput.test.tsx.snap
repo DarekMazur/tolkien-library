@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FormInput component > should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiFormControl-root MuiTextField-root css-1pwu1kx-MuiFormControl-root-MuiTextField-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled css-1f2ywq6-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="false"
+      for="«r6»"
+      id="«r6»-label"
+    >
+      Username
+    </label>
+    <div
+      class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl css-26feuy-MuiInputBase-root-MuiFilledInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiFilledInput-input css-voecp4-MuiInputBase-input-MuiFilledInput-input"
+        id="«r6»"
+        type="text"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

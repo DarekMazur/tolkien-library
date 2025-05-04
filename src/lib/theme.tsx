@@ -4,25 +4,35 @@ import Tolkien from '@/assets/fonts/Tolkien.ttf';
 // @ts-expect-error
 import '@fontsource-variable/montserrat';
 
+const colors = {
+  light: '#FFFFF3',
+  lightBlue: '#C2D8FF',
+  blue: '#384A73',
+  darkBlue: '#1D263B',
+  greyBlue: '#7796CB',
+  green: '#1F4C0A',
+  red: '#960200',
+};
+
 export const theme = createTheme({
   palette: {
     background: {
-      default: '#FFFFF3',
-      paper: '#FFFFF3',
+      default: colors.light,
+      paper: colors.light,
     },
     text: {
-      primary: '#1D263B',
-      secondary: '#1D263B',
+      primary: colors.darkBlue,
+      secondary: colors.darkBlue,
     },
     primary: {
-      main: '#1D263B',
-      light: '#C2D8FF',
-      dark: '#384A73',
-      contrastText: '#960200',
+      main: colors.darkBlue,
+      light: colors.lightBlue,
+      dark: colors.blue,
+      contrastText: colors.red,
     },
     secondary: {
-      main: '#FFFFF3',
-      light: '#7796CB',
+      main: colors.light,
+      light: colors.greyBlue,
     },
   },
   typography: {
