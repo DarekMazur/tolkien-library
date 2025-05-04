@@ -28,7 +28,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Box component="form" sx={loginFormStyles}>
+    <Box component="form" role="form" sx={loginFormStyles}>
       <FormInput
         label="Username"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'username')}
