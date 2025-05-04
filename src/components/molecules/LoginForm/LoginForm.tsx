@@ -32,10 +32,12 @@ const LoginForm = () => {
       <FormInput
         label="Username"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'username')}
+        isRequired
       />
       <FormInput
         label="Password"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'password')}
+        isRequired
       />
       <FormInput label="Email" isRequired />
       <Button variant="contained" role="button" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}>
