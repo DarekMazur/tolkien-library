@@ -19,10 +19,10 @@ const Root = () => {
       <Routes>
         <Route element={<DefaultLayout toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
         </Route>
         <Route element={<EmptyLayout />}>
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
       </Routes>
     </AppProviders>
