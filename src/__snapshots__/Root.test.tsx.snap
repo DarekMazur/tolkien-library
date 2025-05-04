@@ -71,6 +71,7 @@ exports[`Root > matches snapshot for NotFound page 1`] = `
       <a
         class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-b34gy2-MuiButtonBase-root-MuiButton-root"
         href="/"
+        role="button"
         tabindex="0"
       >
         Better go back Home

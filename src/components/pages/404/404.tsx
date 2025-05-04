@@ -22,7 +22,12 @@ const PageNotFound = () => {
       </Typography>
       <Typography variant="body2" color="textSecondary" sx={notFoundationContentStyles}>
         Not all those who wander are lost. However, you, unfortunately, just happened to stray...
-        <Button variant="outlined" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }} href="/">
+        <Button
+          variant="outlined"
+          role="button"
+          sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}
+          href="/"
+        >
           Better go back Home
         </Button>
       </Typography>
