@@ -37,6 +37,7 @@ const LoginForm = () => {
         label="Password"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'password')}
       />
+      <FormInput label="Email" isRequired />
       <Button variant="contained" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}>
         Login
       </Button>
