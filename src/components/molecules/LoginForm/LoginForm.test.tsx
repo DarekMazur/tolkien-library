@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { expect, it, vi } from 'vitest';
 import { fireEvent, screen } from '@testing-library/react';
 import LoginForm from './LoginForm';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders.tsx';
@@ -29,5 +29,10 @@ describe('LoginForm Component', () => {
 
     expect(screen.getByLabelText(/Username/i)).toHaveValue('testuser');
     expect(screen.getByLabelText(/Password/i)).toHaveValue('Test123!');
+  });
+
+  it('should match the snapshot', () => {
+    const { asFragment } = renderWithProviders(<LoginForm />);
+    expect(asFragment()).toMatchSnapshot();
   });
 });

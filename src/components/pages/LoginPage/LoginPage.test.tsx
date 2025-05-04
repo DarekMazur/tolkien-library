@@ -23,4 +23,9 @@ describe('LoginPage Component', () => {
 
     expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
   });
+
+  it('should match the snapshot', () => {
+    const { asFragment } = renderWithProviders(<LoginPage />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

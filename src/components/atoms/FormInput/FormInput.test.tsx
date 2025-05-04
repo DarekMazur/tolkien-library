@@ -38,4 +38,9 @@ describe('FormInput component', () => {
     renderWithProviders(<FormInput label="Phone" id="phone-input" />);
     expect(screen.getByLabelText('Phone')).toHaveAttribute('id', 'phone-input');
   });
+
+  it('should match the snapshot', () => {
+    const { asFragment } = renderWithProviders(<FormInput label="Username" />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
