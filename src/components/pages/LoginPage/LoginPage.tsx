@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from '@mui/material';
+import { alpha, Box, Button, TextField } from '@mui/material';
 import moriaGate from '@/assets/images/moria.png';
 import { theme } from '@/lib/theme.tsx';
 
@@ -16,11 +16,11 @@ const LoginPage = () => {
       <Box
         component="form"
         sx={{
-          background: 'rgba(255, 255, 255, 0.15)',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+          background: alpha(theme.palette.background.default, 0.15),
+          boxShadow: `0 8px 32px 0 ${alpha(theme.palette.background.default, 0.37)}`,
           backdropFilter: 'blur(.3rem)',
           borderRadius: '0.4rem',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
+          border: `1px solid ${alpha(theme.palette.background.default, 0.18)}`,
           p: '2rem',
           display: 'flex',
           flexDirection: 'column',
@@ -40,9 +40,14 @@ const LoginPage = () => {
         >
           Password
         </TextField>
-        <Button variant="contained" sx={{ p: '1rem', m: '1rem' }}>
+        <Button variant="contained" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}>
           Login
         </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', pt: '2rem', fontWeight: 700 }}>
+          <Button href="/" sx={{ color: theme.palette.primary.light }}>
+            Go back home
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
