@@ -4,6 +4,7 @@ import Home from '@/components/pages/Home/Home.tsx';
 import { Route, Routes } from 'react-router';
 import DefaultLayout from '@/layouts/DefaultLayout.tsx';
 import EmptyLayout from '@/layouts/EmptyLayout.tsx';
+import PageNotFound from '@/components/pages/404/404.tsx';
 
 const Root = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -19,7 +20,7 @@ const Root = () => {
           <Route path="/" element={<Home />} />
         </Route>
         <Route element={<EmptyLayout />}>
-          <Route path="*" element={<div>Not Found</div>} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </AppProviders>
