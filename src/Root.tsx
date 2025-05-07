@@ -6,6 +6,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.tsx';
 import EmptyLayout from '@/layouts/EmptyLayout.tsx';
 import PageNotFound from '@/components/pages/404/404.tsx';
 import LoginPage from '@/components/pages/LoginPage/LoginPage.tsx';
+import UnauthorizedView from '@/components/pages/UnauthorizedView/UnauthorizedView.tsx';
 
 const Root = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -23,6 +24,7 @@ const Root = () => {
         <Route element={<EmptyLayout />}>
           <Route path="*" element={<PageNotFound />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/temp" element={<UnauthorizedView />} />
         </Route>
       </Routes>
     </AppProviders>
