@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { UnauthorizedIcon } from './UnauthorizedIcon';
 
 const meta: Meta<typeof UnauthorizedIcon> = {
-  title: 'Molecules/UnauthorizedIcon',
+  title: 'Components/Molecules/UnauthorizedIcon',
   component: UnauthorizedIcon,
   parameters: {
     backgrounds: {
@@ -21,7 +21,6 @@ export default meta;
 type Story = StoryObj<typeof UnauthorizedIcon>;
 
 export const Default: Story = {
-  name: 'Default',
   render: () => (
     <div
       style={{

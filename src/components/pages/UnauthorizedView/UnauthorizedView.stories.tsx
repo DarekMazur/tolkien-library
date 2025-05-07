@@ -18,7 +18,6 @@ export default meta;
 type Story = StoryObj<typeof UnauthorizedView>;
 
 export const Default: Story = {
-  name: 'Default',
   render: () => <UnauthorizedView />,
   parameters: {
     docs: {
