@@ -14,6 +14,7 @@ export const UnauthorizedIcon = () => {
         src={gandalf}
         alt="You Shall Not Pass"
         style={{ ...unauthorizedIconStyles, position: 'relative' }}
+        role="img"
       />
     </Box>
   );
