@@ -1,13 +1,13 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const flameMovement = keyframes`
+export const flameMovement = keyframes`
   50% {
     transform: scale(0.98,1.0) translate(0, 2px) rotate(-1deg);
   }
 `;
 
-const flameDisappear = keyframes`
+export const flameDisappear = keyframes`
   0%{
     transform: translate(0) rotate(180deg);
   }

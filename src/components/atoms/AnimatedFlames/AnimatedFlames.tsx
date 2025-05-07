@@ -3,8 +3,8 @@ import { FireWrapper } from '@/components/atoms/AnimatedFlames/AnimatedFlames.st
 
 const AnimatedFlames = () => {
   return (
-    <FireWrapper>
-      <Flames />
+    <FireWrapper className="mo-fire">
+      <Flames role="img" aria-hidden="true" />
     </FireWrapper>
   );
 };

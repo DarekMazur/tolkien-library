@@ -2,8 +2,22 @@
 
 exports[`FooterDecoration > should match the snapshot 1`] = `
 <DocumentFragment>
-  <div
-    class="MuiBox-root css-9u2551"
+  .emotion-0 {
+  position: absolute;
+  max-height: 220px;
+  transform-origin: center;
+  left: -2.5rem;
+  right: unset;
+  top: 0;
+  -webkit-transform: scaleX(-1) rotate(30deg);
+  -moz-transform: scaleX(-1) rotate(30deg);
+  -ms-transform: scaleX(-1) rotate(30deg);
+  transform: scaleX(-1) rotate(30deg);
+  z-index: 1;
+}
+
+<div
+    class="MuiBox-root emotion-0"
   >
     <svg
       fill="none"
