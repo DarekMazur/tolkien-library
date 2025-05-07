@@ -3,6 +3,11 @@
 exports[`FormInput component > should match the snapshot 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  position: relative;
+  padding: 1rem;
+}
+
+.emotion-1 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -16,11 +21,11 @@ exports[`FormInput component > should match the snapshot 1`] = `
   margin: 0;
   border: 0;
   vertical-align: top;
-  margin: 1rem;
+  width: 100%;
   background-color: #FFFFF3;
 }
 
-.emotion-1 {
+.emotion-2 {
   color: #1D263B;
   font-family: "Montserrat Variable",sans-serif;
   font-weight: 400;
@@ -52,19 +57,19 @@ exports[`FormInput component > should match the snapshot 1`] = `
   max-width: calc(100% - 24px);
 }
 
-.emotion-1.Mui-focused {
+.emotion-2.Mui-focused {
   color: #1D263B;
 }
 
-.emotion-1.Mui-disabled {
+.emotion-2.Mui-disabled {
   color: rgba(0, 0, 0, 0.38);
 }
 
-.emotion-1.Mui-error {
+.emotion-2.Mui-error {
   color: #d32f2f;
 }
 
-.emotion-2 {
+.emotion-3 {
   font-family: "Montserrat Variable",sans-serif;
   font-weight: 400;
   font-size: 1.1428571428571428rem;
@@ -89,30 +94,30 @@ exports[`FormInput component > should match the snapshot 1`] = `
   transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
 }
 
-.emotion-2.Mui-disabled {
+.emotion-3.Mui-disabled {
   color: rgba(0, 0, 0, 0.38);
   cursor: default;
 }
 
-.emotion-2:hover {
+.emotion-3:hover {
   background-color: rgba(0, 0, 0, 0.09);
 }
 
 @media (hover: none) {
-  .emotion-2:hover {
+  .emotion-3:hover {
     background-color: rgba(0, 0, 0, 0.06);
   }
 }
 
-.emotion-2.Mui-focused {
+.emotion-3.Mui-focused {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
-.emotion-2.Mui-disabled {
+.emotion-3.Mui-disabled {
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-.emotion-2::after {
+.emotion-3::after {
   left: 0;
   bottom: 0;
   content: "";
@@ -127,19 +132,19 @@ exports[`FormInput component > should match the snapshot 1`] = `
   pointer-events: none;
 }
 
-.emotion-2.Mui-focused:after {
+.emotion-3.Mui-focused:after {
   -webkit-transform: scaleX(1) translateX(0);
   -moz-transform: scaleX(1) translateX(0);
   -ms-transform: scaleX(1) translateX(0);
   transform: scaleX(1) translateX(0);
 }
 
-.emotion-2.Mui-error::before,
-.emotion-2.Mui-error::after {
+.emotion-3.Mui-error::before,
+.emotion-3.Mui-error::after {
   border-bottom-color: #d32f2f;
 }
 
-.emotion-2::before {
+.emotion-3::before {
   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
   left: 0;
   bottom: 0;
@@ -151,19 +156,19 @@ exports[`FormInput component > should match the snapshot 1`] = `
   pointer-events: none;
 }
 
-.emotion-2:hover:not(.Mui-disabled, .Mui-error):before {
+.emotion-3:hover:not(.Mui-disabled, .Mui-error):before {
   border-bottom: 1px solid #1D263B;
 }
 
-.emotion-2.Mui-disabled:before {
+.emotion-3.Mui-disabled:before {
   border-bottom-style: dotted;
 }
 
-.emotion-2::after {
+.emotion-3::after {
   border-bottom: 2px solid #1D263B;
 }
 
-.emotion-3 {
+.emotion-4 {
   font: inherit;
   letter-spacing: inherit;
   color: currentColor;
@@ -187,100 +192,104 @@ exports[`FormInput component > should match the snapshot 1`] = `
   padding-left: 12px;
 }
 
-.emotion-3::-webkit-input-placeholder {
+.emotion-4::-webkit-input-placeholder {
   color: currentColor;
   opacity: 0.42;
   -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.emotion-3::-moz-placeholder {
+.emotion-4::-moz-placeholder {
   color: currentColor;
   opacity: 0.42;
   -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.emotion-3::-ms-input-placeholder {
+.emotion-4::-ms-input-placeholder {
   color: currentColor;
   opacity: 0.42;
   -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   outline: 0;
 }
 
-.emotion-3:invalid {
+.emotion-4:invalid {
   box-shadow: none;
 }
 
-.emotion-3::-webkit-search-decoration {
+.emotion-4::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-label[data-shrink=false]+.MuiInputBase-formControl .emotion-3::-webkit-input-placeholder {
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-4::-webkit-input-placeholder {
   opacity: 0!important;
 }
 
-label[data-shrink=false]+.MuiInputBase-formControl .emotion-3::-moz-placeholder {
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-4::-moz-placeholder {
   opacity: 0!important;
 }
 
-label[data-shrink=false]+.MuiInputBase-formControl .emotion-3::-ms-input-placeholder {
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-4::-ms-input-placeholder {
   opacity: 0!important;
 }
 
-label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-webkit-input-placeholder {
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-webkit-input-placeholder {
   opacity: 0.42;
 }
 
-label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-moz-placeholder {
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-moz-placeholder {
   opacity: 0.42;
 }
 
-label[data-shrink=false]+.MuiInputBase-formControl .emotion-3:focus::-ms-input-placeholder {
+label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-placeholder {
   opacity: 0.42;
 }
 
-.emotion-3.Mui-disabled {
+.emotion-4.Mui-disabled {
   opacity: 1;
   -webkit-text-fill-color: rgba(0, 0, 0, 0.38);
 }
 
-.emotion-3:-webkit-autofill {
+.emotion-4:-webkit-autofill {
   -webkit-animation-duration: 5000s;
   animation-duration: 5000s;
   -webkit-animation-name: mui-auto-fill;
   animation-name: mui-auto-fill;
 }
 
-.emotion-3:-webkit-autofill {
+.emotion-4:-webkit-autofill {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
 
 <div
-    class="MuiFormControl-root MuiTextField-root emotion-0"
+    class="MuiBox-root emotion-0"
   >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled emotion-1"
-      data-shrink="false"
-      for="«r6»"
-      id="«r6»-label"
-    >
-      Username
-    </label>
     <div
-      class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl emotion-2"
+      class="MuiFormControl-root MuiTextField-root emotion-1"
     >
-      <input
-        aria-invalid="false"
-        class="MuiInputBase-input MuiFilledInput-input emotion-3"
-        id="«r6»"
-        type="text"
-      />
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled emotion-2"
+        data-shrink="false"
+        for="«r7»"
+        id="«r7»-label"
+      >
+        Username
+      </label>
+      <div
+        class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-colorPrimary MuiInputBase-formControl emotion-3"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiFilledInput-input emotion-4"
+          id="«r7»"
+          type="text"
+        />
+      </div>
     </div>
   </div>
 </DocumentFragment>

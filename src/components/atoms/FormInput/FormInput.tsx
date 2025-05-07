@@ -1,5 +1,11 @@
-import { TextField } from '@mui/material';
-import { formInputStyles } from '@/components/atoms/FormInput/FormInput.styles.ts';
+import { IconButton, TextField, Box, InputAdornment } from '@mui/material';
+import {
+  formInputStyles,
+  formInputWrapperStyles,
+} from '@/components/atoms/FormInput/FormInput.styles.ts';
+import { useState } from 'react';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 interface IInputProps {
   id?: string;
@@ -11,17 +17,36 @@ interface IInputProps {
 }
 
 const FormInput = ({ id, label, type, isRequired, isDisabled, onChange }: IInputProps) => {
+  const [isHidden, setIsHidden] = useState(type === 'password');
+
   return (
-    <TextField
-      id={id}
-      variant="filled"
-      label={label}
-      sx={formInputStyles}
-      type={type}
-      required={isRequired}
-      disabled={isDisabled}
-      onChange={onChange}
-    />
+    <Box sx={formInputWrapperStyles}>
+      <TextField
+        id={id}
+        variant="filled"
+        label={label}
+        sx={formInputStyles}
+        type={type === 'password' ? (isHidden ? 'password' : 'text') : (type ?? 'text')}
+        required={isRequired}
+        disabled={isDisabled}
+        onChange={onChange}
+        InputProps={{
+          endAdornment: type === 'password' && (
+            <InputAdornment position="end">
+              {isHidden ? (
+                <IconButton onClick={() => setIsHidden(false)}>
+                  <VisibilityIcon />
+                </IconButton>
+              ) : (
+                <IconButton onClick={() => setIsHidden(true)}>
+                  <VisibilityOffIcon />
+                </IconButton>
+              )}
+            </InputAdornment>
+          ),
+        }}
+      />
+    </Box>
   );
 };
 

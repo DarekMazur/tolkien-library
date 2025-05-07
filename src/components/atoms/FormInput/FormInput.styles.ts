@@ -1,6 +1,8 @@
 import { theme } from '@/lib/theme.tsx';
 
 export const formInputStyles = {
-  m: '1rem',
+  width: '100%',
   backgroundColor: theme.palette.background.default,
 };
+
+export const formInputWrapperStyles = { position: 'relative', p: '1rem' };
