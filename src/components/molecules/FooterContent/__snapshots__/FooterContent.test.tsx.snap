@@ -1,20 +1,60 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FooterContent > matches snapshot 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.3rem;
+}
+
+.emotion-1 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+  font-size: small;
+  width: 85%;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.emotion-2 {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: #1D263B;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: var(--Link-underlineColor);
+  --Link-underlineColor: rgba(29, 38, 59, 0.4);
+  color: #1D263B;
+  font-weight: 800;
+}
+
+.emotion-2:hover {
+  text-decoration-color: inherit;
+}
+
 <div>
   <p
-    class="MuiTypography-root MuiTypography-body1 css-15qme3q-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 emotion-0"
   >
     Tolkienarium © 
     2025
   </p>
   <p
-    class="MuiTypography-root MuiTypography-body1 css-q6abb9-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 emotion-1"
   >
     Proudly created by
      
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-ueari4-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-2"
       href="https://nerdistry.pl"
       rel="noopener noreferrer"
       role="link"

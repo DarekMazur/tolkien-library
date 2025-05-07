@@ -2,28 +2,199 @@
 
 exports[`Home > matches snapshot 1`] = `
 <DocumentFragment>
-  <main
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 css-1c77dtd-MuiPaper-root"
+  .emotion-0 {
+  background-color: #FFFFF3;
+  color: #1D263B;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: var(--Paper-shadow);
+  background-image: var(--Paper-overlay);
+  padding: 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 2rem;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: normal;
+  -ms-flex-pack: normal;
+  -webkit-justify-content: normal;
+  justify-content: normal;
+  background-color: default;
+  min-height: calc(100vh - 4rem);
+  color: black;
+}
+
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+  font-weight: 700;
+}
+
+.emotion-2 {
+  background-color: #FFFFF3;
+  color: #1D263B;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: var(--Paper-shadow);
+  background-image: var(--Paper-overlay);
+  overflow: hidden;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.emotion-4 {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.MuiTypography-root:where(.emotion-4 .MuiCardHeader-title) {
+  display: block;
+}
+
+.MuiTypography-root:where(.emotion-4 .MuiCardHeader-subheader) {
+  display: block;
+}
+
+.emotion-5 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 1.7142857142857142rem;
+}
+
+.emotion-6 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+}
+
+.emotion-7 {
+  padding: 16px;
+}
+
+.emotion-7:last-child {
+  padding-bottom: 24px;
+}
+
+.emotion-7 a {
+  color: #960200;
+  font-weight: 500;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-7 blockquote {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #C2D8FF;
+  margin: 1rem 0;
+  font-style: italic;
+  min-height: 48px;
+  padding-left: 5rem;
+}
+
+.emotion-7 blockquote::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 100%;
+  background-color: #7796CB;
+  background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20448%20512'%3e%3c!--!Font%20Awesome%20Free%206.7.2%20by%20@fontawesome%20-%20https://fontawesome.com%20License%20-%20https://fontawesome.com/license/free%20Copyright%202025%20Fonticons,%20Inc.--%3e%3cpath%20d='M0%20216C0%20149.7%2053.7%2096%20120%2096l8%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032l-8%200c-30.9%200-56%2025.1-56%2056l0%208%2064%200c35.3%200%2064%2028.7%2064%2064l0%2064c0%2035.3-28.7%2064-64%2064l-64%200c-35.3%200-64-28.7-64-64l0-32%200-32%200-72zm256%200c0-66.3%2053.7-120%20120-120l8%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032l-8%200c-30.9%200-56%2025.1-56%2056l0%208%2064%200c35.3%200%2064%2028.7%2064%2064l0%2064c0%2035.3-28.7%2064-64%2064l-64%200c-35.3%200-64-28.7-64-64l0-32%200-32%200-72z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  -webkit-background-position: center;
+  background-position: center;
+  -webkit-background-size: 18px;
+  background-size: 18px;
+}
+
+.emotion-7 table {
+  margin: 2rem auto;
+  border-spacing: 0;
+  border: 0.5px solid black;
+}
+
+.emotion-7 table th {
+  background-color: #C2D8FF;
+}
+
+.emotion-7 table td,
+.emotion-7 table th {
+  border: 0.5px solid black;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.emotion-8 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  color: #1D263B;
+}
+
+<main
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 emotion-0"
     style="--Paper-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);"
   >
     <h3
-      class="MuiTypography-root MuiTypography-h3 css-1u2dzbb-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-h3 emotion-1"
     >
       Lorem Ipsum
     </h3>
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-1vhhbhz-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root emotion-2"
       style="--Paper-shadow: none;"
     >
       <div
-        class="MuiCardHeader-root css-149tc0y-MuiCardHeader-root"
+        class="MuiCardHeader-root emotion-3"
       >
         <div
-          class="MuiCardHeader-content css-1jkp9bu-MuiCardHeader-content"
+          class="MuiCardHeader-content emotion-4"
           style="display: flex; gap: 1rem;"
         >
           <span
-            class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-44mv46-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title emotion-5"
             style="font-family: "Montserrat Variable", sans-serif; font-size: 1.2rem; font-weight: 700; color: rgb(56, 74, 115);"
           >
             NaN.NaN.NaN
@@ -31,13 +202,13 @@ exports[`Home > matches snapshot 1`] = `
         </div>
       </div>
       <hr
-        class="MuiDivider-root MuiDivider-fullWidth css-1jpc804-MuiDivider-root"
+        class="MuiDivider-root MuiDivider-fullWidth emotion-6"
       />
       <div
-        class="MuiCardContent-root css-17ahxox-MuiCardContent-root"
+        class="MuiCardContent-root emotion-7"
       >
         <article
-          class="MuiTypography-root MuiTypography-body2 css-wva74u-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body2 emotion-8"
         />
       </div>
     </div>

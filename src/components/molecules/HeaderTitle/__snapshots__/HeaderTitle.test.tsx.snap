@@ -1,9 +1,33 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches the snapshot 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 60px;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 300;
+}
+
 <div>
   <div
-    class="MuiBox-root css-gmuwbf"
+    class="MuiBox-root emotion-0"
   >
     <svg
       fill="none"
@@ -86,7 +110,7 @@ exports[`matches the snapshot 1`] = `
       />
     </svg>
     <h1
-      class="MuiTypography-root MuiTypography-h1 css-1y22gof-MuiTypography-root"
+      class="MuiTypography-root MuiTypography-h1 emotion-1"
     >
       Biblioteka Tolkienisty
     </h1>
