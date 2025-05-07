@@ -12,7 +12,7 @@ const UnauthorizedView = () => {
       <UnauthorizedIcon />
       <Typography variant="h3" sx={unauthorizedTitleStyles}>
         The dark fire will not avail you, Flame of Udûn!{' '}
-        <Button href="/" sx={unauthorizedButtonStyles}>
+        <Button href="/" sx={unauthorizedButtonStyles} role="button">
           Go back
         </Button>{' '}
         to the shadow.
