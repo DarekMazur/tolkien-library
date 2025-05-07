@@ -26,6 +26,7 @@ const Wrapper = ({ children, isCenter, isDark, margin }: IWrapperProps) => {
         justifyContent: isCenter ? 'center' : 'normal',
         backgroundColor: isDark ? theme.palette.primary.main : 'default',
         minHeight: `calc(${margin !== undefined ? (margin === 0 ? '100vh' : `100vh - {2 * margin}`) : '100vh - 4rem'})`,
+        color: isDark ? theme.palette.secondary.main : 'black',
       }}
     >
       {children}

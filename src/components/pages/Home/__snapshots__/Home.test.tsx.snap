@@ -29,6 +29,7 @@ exports[`Home > matches snapshot 1`] = `
   justify-content: normal;
   background-color: default;
   min-height: calc(100vh - 4rem);
+  color: black;
 }
 
 .emotion-1 {

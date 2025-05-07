@@ -58,6 +58,7 @@ exports[`UnauthorizedView > should match snapshot 1`] = `
   justify-content: center;
   background-color: #1D263B;
   min-height: calc(100vh);
+  color: #FFFFF3;
 }
 
 .emotion-1 {

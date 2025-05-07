@@ -5,9 +5,6 @@ import { faker } from '@faker-js/faker';
 export default {
   title: 'Components/Atoms/Wrapper',
   component: Wrapper,
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export const ShortContent = {
@@ -65,5 +62,46 @@ export const LongContent = {
         </Alert>
       </>
     ),
+  },
+};
+
+export const CenteredContent = {
+  args: {
+    children: (
+      <>
+        <Typography variant="h4" gutterBottom>
+          {faker.lorem.words({ min: 1, max: 3 })}
+        </Typography>
+        <Typography variant="body1">{faker.lorem.paragraph({ min: 4, max: 8 })}</Typography>
+        <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+          <Button variant="contained" color="primary">
+            Save
+          </Button>
+          <Button variant="outlined">Cancel</Button>
+        </Box>
+      </>
+    ),
+    isCenter: true,
+  },
+};
+
+export const DarkContent = {
+  args: {
+    children: faker.lorem.paragraph(),
+    isDark: true,
+  },
+};
+
+export const CustomMarginsContent = {
+  args: {
+    children: faker.lorem.paragraph(),
+    margin: 8,
+  },
+};
+
+export const NoMarginsContent = {
+  args: {
+    children: faker.lorem.paragraph(),
+    margin: 0,
   },
 };
