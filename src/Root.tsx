@@ -19,7 +19,7 @@ const ProtectedRoute = () => {
   if (isLoading) {
     return (
       <Wrapper isCenter>
-        <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open >
+        <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open={isLoading} >
           <CircularProgress color="inherit" size={100} />
         </Backdrop>
       </Wrapper>
