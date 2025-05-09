@@ -1,54 +1,55 @@
-import { Box, Button } from '@mui/material';
-import FormInput from '@/components/atoms/FormInput/FormInput.tsx';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Box, Button, Typography } from '@mui/material';
 import {
   loginButtonStyles,
   loginFormStyles,
   loginGoBackButtonStyles,
 } from '@/components/molecules/LoginForm/LoginForm.styles.ts';
-import { useState } from 'react';
-
-interface ILoginFormProps {
-  username: string;
-  password: string;
-}
-
-const initUser = {
-  username: '',
-  password: '',
-};
+import { useEffect } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import { theme } from '@/lib/theme.tsx';
+import CircularProgress from '@mui/material/CircularProgress';
+import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
 
 const LoginForm = () => {
-  const [user, setUser] = useState<ILoginFormProps>(initUser);
+  const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: 'username' | 'password',
-  ) => {
-    setUser({ ...user, [type]: e.target.value });
-  };
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isLoading, isAuthenticated, loginWithRedirect]);
+
+  const handleLogout = () => {
+    logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    })
+  }
 
   return (
-    <Box component="form" role="form" sx={loginFormStyles}>
-      <FormInput
-        label="Username"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'username')}
-        isRequired
-      />
-      <FormInput
-        label="Password"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, 'password')}
-        type="password"
-        isRequired
-      />
-      <Button variant="contained" role="button" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}>
-        Login
-      </Button>
-      <Box sx={loginButtonStyles}>
-        <Button href="/" role="button" sx={loginGoBackButtonStyles}>
-          Go back home
-        </Button>
-      </Box>
-    </Box>
+    <>
+      {!isAuthenticated ? (
+        <Wrapper isCenter margin={0} istransparent>
+          <Backdrop sx={{ color: theme.palette.secondary.main, zIndex: 999 }} open >
+            <CircularProgress color="inherit" size={100} />
+          </Backdrop>
+        </Wrapper>
+      ) : (
+        <Box component="form" role="form" sx={loginFormStyles}>
+          <Typography variant="h4">You are already login</Typography>
+          <Button variant="contained" role="button" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }} onClick={handleLogout}>
+            Logout
+          </Button>
+          <Box sx={loginButtonStyles}>
+            <Button href="/" role="button" sx={loginGoBackButtonStyles}>
+              Go back home
+            </Button>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 

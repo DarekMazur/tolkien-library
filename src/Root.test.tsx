@@ -1,7 +1,21 @@
-import { describe, it, expect } from 'vitest';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import Root from './Root';
+
+vi.mock('@auth0/auth0-react', async () => {
+  const actual = await vi.importActual<typeof import('@auth0/auth0-react')>('@auth0/auth0-react');
+  return {
+    ...actual,
+    Auth0Provider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    useAuth0: vi.fn(),
+  };
+});
+
+import { useAuth0 } from '@auth0/auth0-react';
+
+const mockLoginWithRedirect = vi.fn();
+const mockLogout = vi.fn();
 
 describe('Root', () => {
   it('renders the Home page on the default path', () => {
@@ -32,17 +46,39 @@ describe('Root', () => {
     expect(screen.getByText(/tolkienarium ©/i)).toBeInTheDocument();
   });
 
-  it('renders a Login Page for /login path', () => {
+  it('renders a Login Page for /login path for logged users', () => {
+    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+      isAuthenticated: true,
+      isLoading: false,
+      loginWithRedirect: mockLoginWithRedirect,
+      logout: mockLogout,
+    });
+
     render(
       <MemoryRouter initialEntries={['/login']}>
         <Root />
       </MemoryRouter>,
     );
-    expect(screen.getByText(/login/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/username/i)).toBeRequired();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeRequired();
+    expect(screen.getByText(/You are already login/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Logout/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Go back home/i })).toBeInTheDocument();
+  });
+
+  it('renders a Login Page for /login path for not logged users', () => {
+    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+      isAuthenticated: false,
+      isLoading: true,
+      loginWithRedirect: mockLoginWithRedirect,
+      logout: mockLogout,
+    });
+
+    render(
+      <MemoryRouter initialEntries={['/login']}>
+        <Root />
+      </MemoryRouter>,
+    );
+    expect(screen.queryByText(/You are already login/i)).not.toBeInTheDocument();
+    expect(screen.getByRole('progressbar', { hidden: true })).toBeInTheDocument();
   });
 
   it('matches the snapshot for the default path', () => {

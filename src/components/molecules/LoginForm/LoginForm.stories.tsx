@@ -1,22 +1,39 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { Auth0Provider } from '@/lib/providers/MockedAuth0Provider.tsx';
 import LoginForm from './LoginForm';
 
-const meta: Meta<typeof LoginForm> = {
+export default {
   title: 'Components/Molecules/LoginForm',
   component: LoginForm,
-  tags: ['autodocs'],
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'A login form with username and password fields, login button, and go back button.',
-      },
+  decorators: [
+    (Story, context) => (
+      <Auth0Provider value={context.args.auth0}>
+        <Story />
+      </Auth0Provider>
+    ),
+  ],
+  argTypes: {
+    auth0: { control: 'object' },
+  },
+};
+
+export const Loading = {
+  args: {
+    auth0: {
+      isAuthenticated: false,
+      isLoading: true,
+      loginWithRedirect: () => {},
+      logout: () => {},
     },
   },
 };
-export default meta;
-type Story = StoryObj<typeof LoginForm>;
 
-export const Default: Story = {
-  args: {},
+export const Authenticated = {
+  args: {
+    auth0: {
+      isAuthenticated: true,
+      isLoading: false,
+      loginWithRedirect: () => {},
+      logout: () => {},
+    },
+  },
 };
