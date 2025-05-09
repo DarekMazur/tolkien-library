@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import UnauthorizedView from './UnauthorizedView';
 
 const meta: Meta<typeof UnauthorizedView> = {
-  title: 'Components/Pages/UnauthorizedView',
+  title: 'Pages/UnauthorizedView',
   component: UnauthorizedView,
   parameters: {
     docs: {

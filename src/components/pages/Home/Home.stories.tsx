@@ -46,7 +46,7 @@ const defaultArticles = [
 ];
 
 const meta: Meta<typeof Home> = {
-  title: 'Components/Pages/Home',
+  title: 'Pages/Home',
   component: Home,
 };
 
