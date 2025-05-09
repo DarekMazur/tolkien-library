@@ -23,23 +23,28 @@ const LoginForm = () => {
   const handleLogout = () => {
     logout({
       logoutParams: {
-        returnTo: window.location.origin
-      }
-    })
-  }
+        returnTo: window.location.origin,
+      },
+    });
+  };
 
   return (
     <>
       {!isAuthenticated ? (
-        <Wrapper isCenter margin={0} istransparent>
-          <Backdrop sx={{ color: theme.palette.secondary.main, zIndex: 999 }} open >
+        <Wrapper isCenter margin={0} isTransparent>
+          <Backdrop sx={{ color: theme.palette.secondary.main, zIndex: 999 }} open>
             <CircularProgress color="inherit" size={100} />
           </Backdrop>
         </Wrapper>
       ) : (
         <Box component="form" role="form" sx={loginFormStyles}>
           <Typography variant="h4">You are already login</Typography>
-          <Button variant="contained" role="button" sx={{ p: '1rem', m: '1rem', fontWeight: 700 }} onClick={handleLogout}>
+          <Button
+            variant="contained"
+            role="button"
+            sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}
+            onClick={handleLogout}
+          >
             Logout
           </Button>
           <Box sx={loginButtonStyles}>
