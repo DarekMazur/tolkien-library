@@ -7,6 +7,14 @@ export const articleCardContentStyles = {
     fontWeight: '500',
     textDecoration: 'none',
   },
+  '& img': {
+    minWidth: '20rem',
+    minHeight: '15rem',
+    maxWidth: '30rem',
+    maxHeight: '25rem',
+    objectFit: 'contain',
+    borderRadius: '0.5rem',
+  },
   '& blockquote': {
     position: 'relative',
     display: 'flex',

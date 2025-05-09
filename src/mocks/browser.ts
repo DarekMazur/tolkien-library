@@ -83,12 +83,19 @@ const createArticles = () => {
     }
   };
 
+  const generateImage = () => {
+    if (faker.datatype.boolean({ probability: 0.4 })) {
+      return `<img src="${faker.image.url({ width: 500, height: 200 })}" alt="${faker.lorem.sentence()}">`;
+    }
+  };
+
   const generateContent = (): string => {
     const elements = [
       faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 })),
       `- ${Array.from({ length: 3 }, () => faker.lorem.word()).join('\n- ')}`,
       `1. ${Array.from({ length: 3 }, () => faker.lorem.word()).join('\n1. ')}`,
       `> ${faker.lorem.sentence()}`,
+      generateImage(),
       generateQuote(faker.number.int({ min: 1, max: 3 })),
       generateTable(),
       `[${faker.lorem.words(2)}](${faker.internet.url()})`,
