@@ -7,19 +7,19 @@ import EmptyLayout from '@/layouts/EmptyLayout.tsx';
 import PageNotFound from '@/components/pages/404/404.tsx';
 import LoginPage from '@/components/pages/LoginPage/LoginPage.tsx';
 import UnauthorizedView from '@/components/pages/UnauthorizedView/UnauthorizedView.tsx';
-import { useAuth } from '@/hooks/useAuth.tsx';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
 import { theme } from '@/lib/theme.tsx';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth0()
 
   if (isLoading) {
     return (
       <Wrapper isCenter>
-        <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open>
+        <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open >
           <CircularProgress color="inherit" size={100} />
         </Backdrop>
       </Wrapper>

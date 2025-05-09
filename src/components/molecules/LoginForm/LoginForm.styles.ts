@@ -10,6 +10,8 @@ export const loginFormStyles = {
   p: '2rem',
   display: 'flex',
   flexDirection: 'column',
+  minWidth: '25rem',
+  maxWidth: '50rem',
 };
 
 export const loginButtonStyles = {
