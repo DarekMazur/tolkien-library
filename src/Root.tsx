@@ -33,6 +33,16 @@ const ProtectedRoute = () => {
   );
 };
 
+const SemiProtectedRoute = () => {
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/unauthorized" />;
+};
+
 const Root = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -48,7 +58,7 @@ const Root = () => {
           <Route path="/board" element={<ProtectedRoute />}>
             <Route index element={<div>Board</div>} />
           </Route>
-          <Route path="/profile" element={<ProtectedRoute />}>
+          <Route path="/profile" element={<SemiProtectedRoute />}>
             <Route index element={<UserProfile />} />
           </Route>
         </Route>

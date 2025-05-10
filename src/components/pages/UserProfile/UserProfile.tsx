@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { Typography } from '@mui/material';
+import { Avatar, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 
 const UserProfile = () => {
@@ -11,10 +11,23 @@ const UserProfile = () => {
   return (
     isAuthenticated &&
     user && (
-      <Wrapper>
-        <img src={user.picture} alt={user.name} className="user-avatar" />
-        <Typography variant="h3">{user.username ?? user.name}</Typography>
-        <Typography>{user.email}</Typography>
+      <Wrapper sx={{ display: 'flex', alignItems: 'center' }}>
+        <Card sx={{ minWidth: '40rem', maxWidth: '50rem' }}>
+          <CardHeader
+            avatar={<Avatar src={user.picture} />}
+            title={user.username ?? user.name}
+            subheader={user.email}
+          />
+          <CardContent>
+            <Typography variant="subtitle1">
+              {user.email_verified ? null : 'You need to verify email'}
+            </Typography>
+            {user[import.meta.env.VITE_AUTH0_ROLES_DOMAIN].map((item: string) => (
+              <Typography key={item}>{item}</Typography>
+            ))}
+            <Typography>{user.email}</Typography>
+          </CardContent>
+        </Card>
       </Wrapper>
     )
   );
