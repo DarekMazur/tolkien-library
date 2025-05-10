@@ -12,7 +12,7 @@ interface IAvatarButtonProps {
 
 const AvatarButton = ({ avatar, isLoading }: IAvatarButtonProps) => {
   return isLoading ? null : (
-    <ButtonBase role="button" onClick={() => {}} sx={avatarButtonStyles}>
+    <ButtonBase role="button" sx={avatarButtonStyles} href="/profile">
       {!isLoading && avatar === undefined ? (
         <PersonIcon />
       ) : (

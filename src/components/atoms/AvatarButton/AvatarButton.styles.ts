@@ -1,4 +1,5 @@
 export const avatarButtonStyles = {
+  position: 'absolute',
   borderRadius: '50px',
   width: '50px',
   '&:has(:focus-visible)': {
