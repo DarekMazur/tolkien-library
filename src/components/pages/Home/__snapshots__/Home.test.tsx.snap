@@ -114,15 +114,6 @@ exports[`Home > matches snapshot 1`] = `
   text-decoration: none;
 }
 
-.emotion-7 img {
-  min-width: 20rem;
-  min-height: 15rem;
-  max-width: 30rem;
-  max-height: 25rem;
-  object-fit: contain;
-  border-radius: 0.5rem;
-}
-
 .emotion-7 blockquote {
   position: relative;
   display: -webkit-box;
