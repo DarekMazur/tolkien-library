@@ -18,11 +18,12 @@ const UserProfile = () => {
     );
 
   return (
-    isAuthenticated && (
+    isAuthenticated &&
+    user && (
       <Wrapper>
         <img src={user.picture} alt={user.name} className="user-avatar" />
-        <Typography variant="h3">{user.name}</Typography>
-        <Typography variant="p">{user.email}</Typography>
+        <Typography variant="h3">{user.username ?? user.name}</Typography>
+        <Typography>{user.email}</Typography>
       </Wrapper>
     )
   );

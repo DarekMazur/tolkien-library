@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppProviders from '@/lib/providers/AppProviders.tsx';
 import Home from '@/components/pages/Home/Home.tsx';
 import { Route, Routes, Outlet, Navigate } from 'react-router';
@@ -15,7 +15,11 @@ import { theme } from '@/lib/theme.tsx';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -27,7 +31,15 @@ const ProtectedRoute = () => {
     );
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/unauthorized" />;
+  return isAuthenticated &&
+    user &&
+    user.email_verified &&
+    user[import.meta.env.VITE_AUTH0_ROLES_DOMAIN] &&
+    user[import.meta.env.VITE_AUTH0_ROLES_DOMAIN].includes('admin') ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/unauthorized" />
+  );
 };
 
 const Root = () => {

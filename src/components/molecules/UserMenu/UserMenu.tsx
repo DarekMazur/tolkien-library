@@ -33,7 +33,7 @@ const UserMenu = () => {
       direction="down"
       ariaLabel="User menu"
       sx={userMenuStyles}
-      icon={<AvatarButton avatar={user.picture} isLoading={isLoading} />}
+      icon={<AvatarButton avatar={user?.picture} isLoading={isLoading} />}
       onClose={handleClose}
       onOpen={handleOpen}
       open={open}
