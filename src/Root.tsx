@@ -8,11 +8,8 @@ import PageNotFound from '@/components/pages/404/404.tsx';
 import LoginPage from '@/components/pages/LoginPage/LoginPage.tsx';
 import UserProfile from '@/components/pages/UserProfile/UserProfile.tsx';
 import UnauthorizedView from '@/components/pages/UnauthorizedView/UnauthorizedView.tsx';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { theme } from '@/lib/theme.tsx';
 import { useAuth0 } from '@auth0/auth0-react';
+import Loader from '@/components/atoms/Loader/Loader.tsx';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, user, isLoading } = useAuth0();
@@ -22,13 +19,7 @@ const ProtectedRoute = () => {
   }, [user]);
 
   if (isLoading) {
-    return (
-      <Wrapper isCenter>
-        <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open={isLoading}>
-          <CircularProgress color="inherit" size={100} />
-        </Backdrop>
-      </Wrapper>
-    );
+    return <Loader isLoading={isLoading} />;
   }
 
   return isAuthenticated &&
