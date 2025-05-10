@@ -5,21 +5,19 @@ import { decorationImageStyles, headerStyles } from './Header.style.ts';
 import MenuButton from '@/components/atoms/MenuButton/MenuButton.tsx';
 import HeaderTitle from '@/components/molecules/HeaderTitle/HeaderTitle.tsx';
 import { useAuth0 } from '@auth0/auth0-react';
-import AvatarButton from '@/components/atoms/AvatarButton/AvatarButton.tsx';
+import UserMenu from '@/components/molecules/UserMenu/UserMenu.tsx';
 
 interface IHeaderProps {
   toggleMenu: () => void;
 }
 
 const Header = ({ toggleMenu }: IHeaderProps) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     <Box component="header" sx={headerStyles}>
       <SearchInput />
-      {isAuthenticated && user ? (
-        <AvatarButton avatar={user.picture} isLoading={isLoading} />
-      ) : null}
+      {isAuthenticated && user ? <UserMenu /> : null}
       <HeaderTitle />
       <MenuButton toggleMenu={toggleMenu} />
       <Box sx={decorationImageStyles}>

@@ -1,9 +1,6 @@
-import { Avatar, ButtonBase } from '@mui/material';
+import { Avatar } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import {
-  avatarButtonStyles,
-  avatarStyles,
-} from '@/components/atoms/AvatarButton/AvatarButton.styles.ts';
+import { avatarStyles } from '@/components/atoms/AvatarButton/AvatarButton.styles.ts';
 
 interface IAvatarButtonProps {
   avatar?: string;
@@ -12,13 +9,13 @@ interface IAvatarButtonProps {
 
 const AvatarButton = ({ avatar, isLoading }: IAvatarButtonProps) => {
   return isLoading ? null : (
-    <ButtonBase role="button" sx={avatarButtonStyles} href="/profile">
+    <>
       {!isLoading && avatar === undefined ? (
         <PersonIcon />
       ) : (
         <Avatar alt={'User Avatar'} sx={avatarStyles} src={avatar} />
       )}
-    </ButtonBase>
+    </>
   );
 };
 
