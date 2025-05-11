@@ -15,6 +15,75 @@ worker.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url);
 });
 
+const createRoles = () => {
+  const roles = [
+    {
+      id: '1',
+      roleName: 'Administrator',
+      roleShorthand: 'admin',
+    },
+    {
+      id: '2',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+  ];
+
+  roles.forEach((role) => db.role.create(role));
+};
+
+createRoles();
+
+const createUsers = () => {
+  const admin = db.role.findFirst({
+    where: {
+      id: {
+        equals: '1',
+      },
+    },
+  })!;
+
+  const user = db.role.findFirst({
+    where: {
+      id: {
+        equals: '2',
+      },
+    },
+  })!;
+
+  db.user.create({
+    id: faker.string.uuid(),
+    email: 'admin@mail.com',
+    emailVerified: true,
+    password: '123',
+    isBanned: false,
+    userName: faker.person.firstName(),
+    role: admin,
+  });
+
+  db.user.create({
+    id: faker.string.uuid(),
+    email: 'user@mail.com',
+    emailVerified: true,
+    password: '123',
+    isBanned: false,
+    userName: faker.person.firstName(),
+    role: user,
+  });
+
+  for (let i = 0; i < faker.number.int({ min: 0, max: 6 }); i += 1) {
+    db.user.create({
+      id: faker.string.uuid(),
+      email: faker.internet.email(),
+      emailVerified: faker.datatype.boolean(),
+      isBanned: faker.datatype.boolean({ probability: 0.2 }),
+      password: faker.internet.password(),
+      userName: faker.person.firstName(),
+      role: faker.datatype.boolean({ probability: 0.1 }) ? admin : user,
+    });
+  }
+};
+
 const createNavigation = () => {
   db.navigation.create({
     title: 'News',
@@ -118,7 +187,7 @@ const createArticles = () => {
       { probability: 0.7 },
     );
 
-    db.articles.create({
+    db.article.create({
       id: faker.string.uuid(),
       date,
       category,
@@ -127,10 +196,13 @@ const createArticles = () => {
   }
 };
 
+createUsers();
 createNavigation();
 createArticles();
 
 window.mocks = {
+  getRoles: () => db.role.getAll(),
+  getUsers: () => db.user.getAll(),
   getNav: () => db.navigation.getAll(),
-  getNews: () => db.articles.getAll(),
+  getNews: () => db.article.getAll(),
 };

@@ -11,3 +11,19 @@ export interface INewsEntry {
   category?: string;
   content: string;
 }
+
+export interface IRole {
+  id: string;
+  roleName: string;
+  roleShorthand: string;
+}
+
+export interface IUser {
+  id: string;
+  email: string;
+  emailVerified: boolean;
+  password: string;
+  isBanned: boolean;
+  userName: string;
+  role: IRole;
+}
