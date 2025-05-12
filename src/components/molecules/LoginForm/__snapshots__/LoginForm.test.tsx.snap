@@ -375,7 +375,7 @@ exports[`LoginForm component > when loading > should render loading spinner and 
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
-  color: #FFFFF3;
+  color: #1D263B;
   z-index: 999;
 }
 
@@ -515,7 +515,7 @@ exports[`LoginForm component > when not authenticated and not loading > should m
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
-  color: #FFFFF3;
+  color: #1D263B;
   z-index: 999;
 }
 

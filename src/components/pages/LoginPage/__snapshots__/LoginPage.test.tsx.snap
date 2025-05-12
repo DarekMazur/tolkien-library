@@ -101,7 +101,7 @@ exports[`LoginPage Component > should render correctly and match snapshot 1`] = 
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
-  color: #FFFFF3;
+  color: #1D263B;
   z-index: 999;
 }
 
