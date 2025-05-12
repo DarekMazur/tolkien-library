@@ -55,7 +55,6 @@ const createUsers = () => {
     id: faker.string.uuid(),
     email: 'admin@mail.com',
     emailVerified: true,
-    password: '123',
     isBanned: false,
     userName: faker.person.firstName(),
     role: admin,
@@ -65,7 +64,6 @@ const createUsers = () => {
     id: faker.string.uuid(),
     email: 'user@mail.com',
     emailVerified: true,
-    password: '123',
     isBanned: false,
     userName: faker.person.firstName(),
     role: user,
@@ -77,7 +75,6 @@ const createUsers = () => {
       email: faker.internet.email(),
       emailVerified: faker.datatype.boolean(),
       isBanned: faker.datatype.boolean({ probability: 0.2 }),
-      password: faker.internet.password(),
       userName: faker.person.firstName(),
       role: faker.datatype.boolean({ probability: 0.1 }) ? admin : user,
     });

@@ -20,9 +20,9 @@ export interface IRole {
 
 export interface IUser {
   id: string;
+  avatar: string;
   email: string;
   emailVerified: boolean;
-  password: string;
   isBanned: boolean;
   userName: string;
   role: IRole;

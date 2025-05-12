@@ -20,7 +20,6 @@ export const db = factory({
     id: primaryKey(faker.string.uuid),
     email: () => faker.internet.email(),
     emailVerified: () => faker.datatype.boolean(),
-    password: () => faker.internet.password(),
     userName: () => faker.person.firstName(),
     avatar: () => faker.image.avatar(),
     isBanned: () => faker.datatype.boolean(),
