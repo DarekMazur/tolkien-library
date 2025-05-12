@@ -18,12 +18,15 @@ export interface IRole {
   roleShorthand: string;
 }
 
-export interface IUser {
-  id: string;
+export interface IRegisteredUser {
   avatar: string;
   email: string;
   emailVerified: boolean;
-  isBanned: boolean;
   userName: string;
+}
+
+export interface IUser extends IRegisteredUser {
+  id: string;
+  isBanned: boolean;
   role: IRole;
 }

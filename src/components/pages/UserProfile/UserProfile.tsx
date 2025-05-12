@@ -10,16 +10,11 @@ import {
   Paper,
 } from '@mui/material';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useEffect } from 'react';
 import { useMe } from '@/hooks/useMe.tsx';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 
 const UserProfile = () => {
   const { user, isLoading } = useMe();
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   if (isLoading) return <Loader isLoading />;
 

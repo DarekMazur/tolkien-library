@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IUser } from '@/lib/types';
+import { IRegisteredUser, IUser } from '@/lib/types';
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
@@ -23,7 +23,15 @@ export const usersApi = createApi({
       }),
       providesTags: ['Users'],
     }),
+    addUser: builder.mutation<IUser, IRegisteredUser>({
+      query: (user) => ({
+        url: `users`,
+        method: 'POST',
+        body: user,
+      }),
+      invalidatesTags: ['Users'],
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useGetSingleUsersQuery } = usersApi;
+export const { useGetUsersQuery, useGetSingleUsersQuery, useAddUserMutation } = usersApi;

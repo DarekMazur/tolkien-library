@@ -1,34 +1,34 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { getUserByEmail } from '@/lib/getDataFromApi.ts';
 import { useEffect, useState } from 'react';
-import { IUser } from '@/lib/types.ts';
+import { IRegisteredUser, IUser } from '@/lib/types.ts';
+import { useAddUserMutation } from '../../store';
 
 export const useMe = () => {
   const { user: authUser, isAuthenticated, isLoading: authLoading } = useAuth0();
+  const [addUser] = useAddUserMutation();
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(authLoading);
 
   useEffect(() => {
     if (authUser) {
-      getUserByEmail(authUser.email as string).then((data) => {
+      getUserByEmail(authUser.email as string).then((res) => {
         if (isAuthenticated) {
-          if (data === 'User not found') {
-            const newUser = {
-              id: authUser.sub as string,
+          if (res === 'User not found') {
+            const newUser: IRegisteredUser = {
               avatar: authUser.picture as string,
               email: authUser.email as string,
               emailVerified: authUser.email_verified as boolean,
-              isBanned: false,
               userName: authUser.nickname as string,
-              role: {
-                id: '2',
-                roleName: 'User',
-                roleShorthand: 'user',
-              },
             };
-            setUser(newUser);
+
+            addUser(newUser).then((res) => {
+              if (res.data) {
+                setUser(res.data);
+              }
+            });
           } else {
-            setUser(data.data);
+            setUser(res.data);
           }
         }
       });
