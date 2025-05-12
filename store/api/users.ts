@@ -14,15 +14,6 @@ export const usersApi = createApi({
       }),
       providesTags: ['Users'],
     }),
-    getSingleUsers: builder.query<IUser, string>({
-      query: () => ({
-        url: `users/me`,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('jwt') || sessionStorage.getItem('jwt')}`,
-        },
-      }),
-      providesTags: ['Users'],
-    }),
     addUser: builder.mutation<IUser, IRegisteredUser>({
       query: (user) => ({
         url: `users`,
@@ -34,4 +25,4 @@ export const usersApi = createApi({
   }),
 });
 
-export const { useGetUsersQuery, useGetSingleUsersQuery, useAddUserMutation } = usersApi;
+export const { useGetUsersQuery, useAddUserMutation } = usersApi;

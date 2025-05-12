@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import { factory, primaryKey, nullable, oneOf } from '@mswjs/data';
 
-faker.seed(12356);
+faker.seed(23456);
 
 export const db = factory({
   navigation: {

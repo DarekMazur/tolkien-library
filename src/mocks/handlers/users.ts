@@ -8,21 +8,48 @@ export const handlers = [
     return HttpResponse.json(db.user.getAll(), { status: 200 });
   }),
 
-  http.get(`${import.meta.env.VITE_API_URL}/users/login/:userEmail`, ({ params }) => {
-    const { userEmail } = params;
-    if (userEmail) {
-      console.log(userEmail);
-      console.log(db.user.getAll());
+  http.post(`${import.meta.env.VITE_API_URL}/users/login`, async ({ request }) => {
+    const body = await request.json();
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const { avatar, email, emailVerified, userName } = body;
+
+    if (email) {
       const loggedUser = db.user.findFirst({
         where: {
           email: {
-            equals: userEmail as string,
+            equals: email as string,
           },
         },
       });
 
       if (!loggedUser) {
-        return HttpResponse.json('User not found', { status: 404 });
+        const role = db.role.findFirst({
+          where: {
+            id: {
+              equals: '2',
+            },
+          },
+        })!;
+
+        const newUser = {
+          id: uuid(),
+          avatar,
+          email,
+          emailVerified,
+          isBanned: false,
+          userName,
+          role,
+        };
+
+        db.user.create(newUser);
+
+        return HttpResponse.json({ data: newUser }, { status: 200 });
+      }
+
+      if (loggedUser.emailVerified !== emailVerified) {
+        loggedUser.emailVerified = emailVerified;
       }
 
       const response = {
@@ -48,6 +75,18 @@ export const handlers = [
         },
       },
     })!;
+
+    const isUserExists = db.user.findFirst({
+      where: {
+        email: {
+          equals: email,
+        },
+      },
+    });
+
+    if (isUserExists) {
+      return HttpResponse.json('User already exist', { status: 409 });
+    }
 
     if (body) {
       const createdUser: IUser = {
