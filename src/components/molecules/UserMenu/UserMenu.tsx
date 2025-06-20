@@ -6,9 +6,11 @@ import { useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { userMenuStyles } from './UserMenu.styles.ts';
+import { useMe } from '@/hooks/useMe.tsx';
 
 const UserMenu = () => {
-  const { user, isLoading, logout } = useAuth0();
+  const { logout } = useAuth0();
+  const { user, isLoading } = useMe();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -33,7 +35,7 @@ const UserMenu = () => {
       direction="down"
       ariaLabel="User menu"
       sx={userMenuStyles}
-      icon={<AvatarButton avatar={user?.picture} isLoading={isLoading} />}
+      icon={<AvatarButton avatar={user?.avatar} isLoading={isLoading} />}
       onClose={handleClose}
       onOpen={handleOpen}
       open={open}

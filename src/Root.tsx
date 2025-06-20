@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AppProviders from '@/lib/providers/AppProviders.tsx';
 import Home from '@/components/pages/Home/Home.tsx';
 import { Route, Routes, Outlet, Navigate } from 'react-router';
@@ -10,23 +10,16 @@ import UserProfile from '@/components/pages/UserProfile/UserProfile.tsx';
 import UnauthorizedView from '@/components/pages/UnauthorizedView/UnauthorizedView.tsx';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
+import { useMe } from '@/hooks/useMe.tsx';
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, user, isLoading } = useAuth0();
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  const { isAuthenticated, user, isLoading } = useMe();
 
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
 
-  return isAuthenticated &&
-    user &&
-    user.email_verified &&
-    user[import.meta.env.VITE_AUTH0_ROLES_DOMAIN] &&
-    user[import.meta.env.VITE_AUTH0_ROLES_DOMAIN].includes('admin') ? (
+  return isAuthenticated && user && user.emailVerified && user.role.id === '1' ? (
     <Outlet />
   ) : (
     <Navigate to="/unauthorized" />

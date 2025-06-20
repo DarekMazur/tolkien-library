@@ -22,7 +22,14 @@ export const usersApi = createApi({
       }),
       invalidatesTags: ['Users'],
     }),
+    updateUser: builder.mutation<IUser, { id: string; userName: string; avatar: string }>({
+      query: ({ id, userName, avatar }) => ({
+        url: `users/${id}`,
+        method: 'PUT',
+        body: { id, userName, avatar },
+      }),
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useAddUserMutation } = usersApi;
+export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation } = usersApi;

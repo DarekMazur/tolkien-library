@@ -1,32 +1,57 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { getLogin } from '@/lib/getDataFromApi.ts';
 import { useEffect, useState } from 'react';
-import { IRegisteredUser, IUser } from '@/lib/types.ts';
+import { IUser } from '@/lib/types.ts';
 
 export const useMe = () => {
-  const { user: authUser, isAuthenticated, isLoading: authLoading } = useAuth0();
+  const { user: authUser, isAuthenticated: isAuth0, isLoading: authLoading } = useAuth0();
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(authLoading);
+  const [isAuthenticated, setIsAuthenticated] = useState(isAuth0);
 
   useEffect(() => {
-    if (authUser) {
-      if (isAuthenticated) {
-        const authenticatedUser: IRegisteredUser = {
-          avatar: authUser.picture as string,
-          email: authUser.email as string,
-          emailVerified: authUser.email_verified as boolean,
-          userName: authUser.nickname as string,
+    if (isAuthenticated) {
+      if (authUser) {
+        const getMyData = async () => {
+          const email = authUser.email;
+          return await fetch(`${import.meta.env.VITE_API_URL}/users/me`, {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+          })
+            .then((res) => {
+              if (res.status !== 200) {
+                throw new Error(res.statusText);
+              }
+              return res.json();
+            })
+            .then((res) => {
+              return res.data;
+            });
         };
-        getLogin(authenticatedUser).then(({ data }: { data: IUser }) => {
-          setUser(data);
+
+        getMyData().then((user) => {
+          const { id, avatar, userName, email, emailVerified, isBanned, role } = user;
+          const authenticatedUser: IUser = {
+            id,
+            avatar,
+            email,
+            emailVerified,
+            userName,
+            isBanned,
+            role,
+          };
+          setUser(authenticatedUser);
         });
       }
     }
-  }, [authUser]);
+  }, [authUser, isAuthenticated]);
+
+  useEffect(() => {
+    setIsAuthenticated(isAuth0);
+  }, [isAuth0]);
 
   useEffect(() => {
     setIsLoading(authLoading);
   }, [authLoading]);
 
-  return { user, isLoading };
+  return { user, isLoading, isAuthenticated };
 };

@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { handlers } from './handlers';
 import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
+import { IUser } from '@/lib/types.ts';
 
 declare global {
   interface Window {
@@ -51,33 +52,66 @@ const createUsers = () => {
     },
   })!;
 
-  db.user.create({
-    id: faker.string.uuid(),
-    email: 'admin@mail.com',
-    emailVerified: true,
-    isBanned: false,
-    userName: faker.person.firstName(),
-    role: admin,
-  });
+  const loadInitialData = () => {
+    try {
+      const savedUsers = localStorage.getItem('mockUsers');
+      return savedUsers ? JSON.parse(savedUsers) : [];
+    } catch (error) {
+      console.error('Error while loading data:', error);
+      return [];
+    }
+  };
 
-  db.user.create({
-    id: faker.string.uuid(),
-    email: 'user@mail.com',
-    emailVerified: true,
-    isBanned: false,
-    userName: faker.person.firstName(),
-    role: user,
-  });
+  const savedUsers = loadInitialData();
 
-  for (let i = 0; i < faker.number.int({ min: 0, max: 6 }); i += 1) {
+  if (savedUsers.length > 0) {
+    savedUsers.forEach((mockedUser: IUser) => {
+      const { id, avatar, userName, email, emailVerified, isBanned, role } = mockedUser;
+      if (!db.user.findFirst({ where: { id: { equals: user.id } } })) {
+        db.user.create({
+          id,
+          avatar,
+          userName,
+          email,
+          emailVerified,
+          isBanned,
+          role: role.id === '1' ? admin : user,
+        });
+      }
+    });
+  } else {
     db.user.create({
       id: faker.string.uuid(),
-      email: faker.internet.email(),
-      emailVerified: faker.datatype.boolean(),
-      isBanned: faker.datatype.boolean({ probability: 0.2 }),
-      userName: faker.person.firstName(),
-      role: faker.datatype.boolean({ probability: 0.1 }) ? admin : user,
+      email: 'admin@mail.com',
+      emailVerified: true,
+      isBanned: false,
+      userName: faker.internet.username(),
+      role: admin,
     });
+
+    db.user.create({
+      id: faker.string.uuid(),
+      email: 'user@mail.com',
+      emailVerified: true,
+      isBanned: false,
+      userName: faker.internet.username(),
+      role: user,
+    });
+
+    for (let i = 0; i < faker.number.int({ min: 0, max: 6 }); i += 1) {
+      db.user.create({
+        id: faker.string.uuid(),
+        email: faker.internet.email(),
+        emailVerified: faker.datatype.boolean(),
+        isBanned: faker.datatype.boolean({ probability: 0.2 }),
+        userName: faker.internet.username(),
+        role: faker.datatype.boolean({ probability: 0.1 }) ? admin : user,
+      });
+    }
+
+    const users = db.user.getAll();
+
+    localStorage.setItem('mockUsers', JSON.stringify(users));
   }
 };
 

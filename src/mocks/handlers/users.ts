@@ -19,7 +19,7 @@ export const handlers = [
       const loggedUser = db.user.findFirst({
         where: {
           email: {
-            equals: email as string,
+            equals: email,
           },
         },
       });
@@ -50,6 +50,35 @@ export const handlers = [
 
       if (loggedUser.emailVerified !== emailVerified) {
         loggedUser.emailVerified = emailVerified;
+      }
+
+      const response = {
+        data: loggedUser,
+      };
+
+      return HttpResponse.json(response, { status: 200 });
+    }
+    return HttpResponse.json('Request failed', { status: 400 });
+  }),
+
+  http.post(`${import.meta.env.VITE_API_URL}/users/me`, async ({ request }) => {
+    const body = await request.json();
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const { email } = body;
+
+    if (email) {
+      const loggedUser = db.user.findFirst({
+        where: {
+          email: {
+            equals: email,
+          },
+        },
+      });
+
+      if (!loggedUser) {
+        return HttpResponse.json('User not found', { status: 400 });
       }
 
       const response = {
@@ -105,5 +134,49 @@ export const handlers = [
     }
 
     return HttpResponse.json('Request failed', { status: 400 });
+  }),
+
+  http.put(`${import.meta.env.VITE_API_URL}/users/:userId`, async ({ request, params }) => {
+    const body = await request.json();
+    const { userId } = params;
+
+    console.log(userId);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const { id, avatar, userName } = body;
+
+    console.log(`user name: ${userName}`);
+    console.log(`id: ${id}`);
+
+    if (userId !== id) {
+      return HttpResponse.json('Request failed', { status: 400 });
+    }
+
+    const user = db.user.findFirst({
+      where: {
+        id: {
+          equals: id,
+        },
+      },
+    });
+
+    if (!user) {
+      return HttpResponse.json('User not found', { status: 404 });
+    }
+
+    db.user.update({
+      where: {
+        id: {
+          equals: user.id,
+        },
+      },
+      data: {
+        avatar,
+        userName,
+      },
+    });
+
+    return HttpResponse.json('User updated', { status: 200 });
   }),
 ];
