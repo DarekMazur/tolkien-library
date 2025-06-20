@@ -8,7 +8,7 @@ export const handlers = [
     return HttpResponse.json(db.user.getAll(), { status: 200 });
   }),
 
-  http.post(`${import.meta.env.VITE_API_URL}/users/login`, async ({ request }) => {
+  http.post(`${import.meta.env.VITE_API_URL}/users/me`, async ({ request }) => {
     const body = await request.json();
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -44,41 +44,16 @@ export const handlers = [
         };
 
         db.user.create(newUser);
+        const mockedUsers = JSON.parse(localStorage.getItem('mockUsers') || '[]');
+
+        mockedUsers.push(newUser);
+        localStorage.setItem('mockUsers', JSON.stringify(mockedUsers));
 
         return HttpResponse.json({ data: newUser }, { status: 200 });
       }
 
       if (loggedUser.emailVerified !== emailVerified) {
         loggedUser.emailVerified = emailVerified;
-      }
-
-      const response = {
-        data: loggedUser,
-      };
-
-      return HttpResponse.json(response, { status: 200 });
-    }
-    return HttpResponse.json('Request failed', { status: 400 });
-  }),
-
-  http.post(`${import.meta.env.VITE_API_URL}/users/me`, async ({ request }) => {
-    const body = await request.json();
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    const { email } = body;
-
-    if (email) {
-      const loggedUser = db.user.findFirst({
-        where: {
-          email: {
-            equals: email,
-          },
-        },
-      });
-
-      if (!loggedUser) {
-        return HttpResponse.json('User not found', { status: 400 });
       }
 
       const response = {
@@ -140,14 +115,9 @@ export const handlers = [
     const body = await request.json();
     const { userId } = params;
 
-    console.log(userId);
-
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const { id, avatar, userName } = body;
-
-    console.log(`user name: ${userName}`);
-    console.log(`id: ${id}`);
 
     if (userId !== id) {
       return HttpResponse.json('Request failed', { status: 400 });
@@ -176,6 +146,21 @@ export const handlers = [
         userName,
       },
     });
+
+    const mockedUsers = JSON.parse(localStorage.getItem('mockUsers') || '[]');
+
+    mockedUsers.map((mockedUser: IUser) => console.log(mockedUser.id !== id));
+
+    const updatedMockedUsers = mockedUsers.filter((mockedUser: IUser) => mockedUser.id !== id);
+    updatedMockedUsers.push({
+      ...user,
+      avatar,
+      userName,
+    });
+
+    console.log(updatedMockedUsers);
+
+    localStorage.setItem('mockUsers', JSON.stringify(updatedMockedUsers));
 
     return HttpResponse.json('User updated', { status: 200 });
   }),

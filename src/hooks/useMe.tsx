@@ -15,7 +15,12 @@ export const useMe = () => {
           const email = authUser.email;
           return await fetch(`${import.meta.env.VITE_API_URL}/users/me`, {
             method: 'POST',
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({
+              email,
+              userName: authUser.nickname,
+              emailVerified: isAuth0,
+              avatar: authUser.picture,
+            }),
           })
             .then((res) => {
               if (res.status !== 200) {
