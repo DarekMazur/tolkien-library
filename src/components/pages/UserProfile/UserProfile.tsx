@@ -20,6 +20,7 @@ import Loader from '@/components/atoms/Loader/Loader.tsx';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useEffect, useState } from 'react';
 import { useUpdateUserMutation } from '../../../../store';
 
@@ -115,7 +116,7 @@ const UserProfile = () => {
             <Box component="form" onSubmit={handleSubmit} noValidate>
               <Grid container spacing={4}>
                 <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <Box sx={{ textAlign: 'center' }}>
+                  <Box sx={{ textAlign: 'center', position: 'relative' }}>
                     <Avatar
                       src={user.avatar}
                       alt={user.userName}
@@ -127,6 +128,36 @@ const UserProfile = () => {
                         borderColor: 'primary.light',
                       }}
                     />
+                    <Box
+                      onClick={() => console.log('Clicked')}
+                      sx={{
+                        cursor: 'pointer',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: 120,
+                        height: 120,
+                        display: editMode ? 'flex' : 'none',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        '&::before': {
+                          content: '""',
+                          width: 120,
+                          height: 120,
+                          position: 'absolute',
+                          borderRadius: '50%',
+                          backgroundColor: 'primary.light',
+                          opacity: 0.6,
+                          transition: 'opacity 200ms ease-in',
+                          zIndex: 0,
+                        },
+                        '&:hover::before': {
+                          opacity: 0.9,
+                        },
+                      }}
+                    >
+                      <CloudUploadIcon fontSize="large" sx={{ zIndex: 1 }} />
+                    </Box>
                   </Box>
                 </Grid>
                 <Grid>
