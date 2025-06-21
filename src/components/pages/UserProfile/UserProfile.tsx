@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Card,
   CardContent,
   Grid,
@@ -20,13 +19,15 @@ import Loader from '@/components/atoms/Loader/Loader.tsx';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useUpdateUserMutation } from '../../../../store';
+import ImageController from '@/components/molecules/ImageController/ImageController.tsx';
 
 const UserProfile = () => {
   const { user, isLoading } = useMe();
   const [updateUser] = useUpdateUserMutation();
+  const [image, setImage] = useState<File[]>([]);
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [formData, setFormData] = useState({
@@ -52,7 +53,48 @@ const UserProfile = () => {
     }
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (image.length > 0) {
+      setImageUrl(URL.createObjectURL(image[0]));
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (imageUrl && user) {
+      const fetchImage = async () => {
+        const myImage = await fetch(imageUrl);
+        const myBlob = await myImage.blob();
+
+        console.log(myImage);
+        console.log(myBlob);
+
+        const imageFormData = new FormData();
+        imageFormData.append('files', myBlob, imageUrl);
+
+        console.log(imageFormData);
+
+        await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+          method: 'POST',
+          body: imageFormData,
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            const file = { ...data[0] };
+            setFormData((prev) => ({ ...prev, avatar: file.url }));
+          });
+      };
+      // noinspection JSIgnoredPromiseFromCall
+      fetchImage();
+    }
+  }, [imageUrl]);
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -67,10 +109,12 @@ const UserProfile = () => {
       userName: user?.userName || '',
       avatar: user?.avatar || '',
     });
+    setImage([]);
+    setImageUrl(user?.avatar);
     setEditMode(false);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdating(true);
     setEditMode(false);
@@ -116,49 +160,14 @@ const UserProfile = () => {
             <Box component="form" onSubmit={handleSubmit} noValidate>
               <Grid container spacing={4}>
                 <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <Box sx={{ textAlign: 'center', position: 'relative' }}>
-                    <Avatar
-                      src={user.avatar}
-                      alt={user.userName}
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        mb: 2,
-                        border: '4px solid',
-                        borderColor: 'primary.light',
-                      }}
-                    />
-                    <Box
-                      onClick={() => console.log('Clicked')}
-                      sx={{
-                        cursor: 'pointer',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: 120,
-                        height: 120,
-                        display: editMode ? 'flex' : 'none',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        '&::before': {
-                          content: '""',
-                          width: 120,
-                          height: 120,
-                          position: 'absolute',
-                          borderRadius: '50%',
-                          backgroundColor: 'primary.light',
-                          opacity: 0.6,
-                          transition: 'opacity 200ms ease-in',
-                          zIndex: 0,
-                        },
-                        '&:hover::before': {
-                          opacity: 0.9,
-                        },
-                      }}
-                    >
-                      <CloudUploadIcon fontSize="large" sx={{ zIndex: 1 }} />
-                    </Box>
-                  </Box>
+                  <ImageController
+                    image={image}
+                    imageUrl={imageUrl as string}
+                    altText={user.userName}
+                    defaultImageUrl={user.avatar}
+                    editMode={editMode}
+                    onFilesChange={(selectedFiles) => setImage(selectedFiles)}
+                  />
                 </Grid>
                 <Grid>
                   <Grid container spacing={3}>

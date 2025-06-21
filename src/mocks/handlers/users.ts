@@ -111,6 +111,46 @@ export const handlers = [
     return HttpResponse.json('Request failed', { status: 400 });
   }),
 
+  http.post(`${import.meta.env.VITE_API_URL}/upload`, async ({ request }) => {
+    const formData = await request.formData();
+
+    const files = formData.getAll('files');
+
+    if (files.length > 0) {
+      const file = files[0];
+
+      if (file instanceof File) {
+        const cloudinaryData = new FormData();
+        cloudinaryData.append('file', file);
+        cloudinaryData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_PRESET);
+
+        const response = await fetch(
+          `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_NAME}/image/upload`,
+          {
+            method: 'POST',
+            body: cloudinaryData,
+          },
+        );
+
+        if (!response.ok) {
+          return HttpResponse.json({ error: 'Cloudinary upload error' }, { status: 500 });
+        }
+
+        const cloudinaryResult = await response.json();
+
+        return HttpResponse.json(
+          [
+            {
+              url: cloudinaryResult.secure_url,
+            },
+          ],
+          { status: 200 },
+        );
+      }
+    }
+    return HttpResponse.json('Brak plików', { status: 400 });
+  }),
+
   http.put(`${import.meta.env.VITE_API_URL}/users/:userId`, async ({ request, params }) => {
     const body = await request.json();
     const { userId } = params;
@@ -149,16 +189,12 @@ export const handlers = [
 
     const mockedUsers = JSON.parse(localStorage.getItem('mockUsers') || '[]');
 
-    mockedUsers.map((mockedUser: IUser) => console.log(mockedUser.id !== id));
-
     const updatedMockedUsers = mockedUsers.filter((mockedUser: IUser) => mockedUser.id !== id);
     updatedMockedUsers.push({
       ...user,
       avatar,
       userName,
     });
-
-    console.log(updatedMockedUsers);
 
     localStorage.setItem('mockUsers', JSON.stringify(updatedMockedUsers));
 
