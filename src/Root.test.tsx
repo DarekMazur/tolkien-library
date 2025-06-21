@@ -18,6 +18,19 @@ const mockLoginWithRedirect = vi.fn();
 const mockLogout = vi.fn();
 
 describe('Root', () => {
+  beforeEach(() => {
+    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+      isAuthenticated: false,
+      isLoading: false,
+      loginWithRedirect: mockLoginWithRedirect,
+      logout: mockLogout,
+      user: {
+        name: 'Test User',
+        email: 'test@example.com',
+      },
+    });
+  });
+
   it('renders the Home page on the default path', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
