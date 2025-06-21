@@ -22,6 +22,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useUpdateUserMutation } from '../../../../store';
 import ImageController from '@/components/molecules/ImageController/ImageController.tsx';
+import { theme } from '@/lib/theme';
 
 const UserProfile = () => {
   const { user, isLoading } = useMe();
@@ -30,6 +31,7 @@ const UserProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isNewData, setIsNewData] = useState(false);
   const [formData, setFormData] = useState({
     id: '',
     userName: '',
@@ -56,6 +58,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (image.length > 0) {
       setImageUrl(URL.createObjectURL(image[0]));
+      setIsNewData(true);
     }
   }, [image]);
 
@@ -70,8 +73,6 @@ const UserProfile = () => {
 
         const imageFormData = new FormData();
         imageFormData.append('files', myBlob, imageUrl);
-
-        console.log(imageFormData);
 
         await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
           method: 'POST',
@@ -90,13 +91,10 @@ const UserProfile = () => {
     }
   }, [imageUrl]);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { value } = e.target;
+    setFormData((prev) => ({ ...prev, userName: value }));
+    setIsNewData(value !== user?.userName);
   };
 
   const handleCloseNotification = () => {
@@ -112,6 +110,7 @@ const UserProfile = () => {
     setImage([]);
     setImageUrl(user?.avatar);
     setEditMode(false);
+    setIsNewData(false);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -227,7 +226,8 @@ const UserProfile = () => {
                       type="submit"
                       variant="contained"
                       startIcon={<SaveIcon />}
-                      disabled={isUpdating}
+                      disabled={isUpdating || !isNewData}
+                      sx={{ color: theme.palette.secondary.main }}
                     >
                       {isUpdating ? (
                         <>
