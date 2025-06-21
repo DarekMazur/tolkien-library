@@ -1,6 +1,10 @@
 import { Avatar, Box } from '@mui/material';
 import { ChangeEvent, useRef } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import {
+  imageControllerAvatarStyles,
+  imageControllerButtonStyle,
+} from '@/components/molecules/ImageController/ImageController.styles.ts';
 
 interface IImageControllerTypes {
   image: File[];
@@ -39,41 +43,11 @@ const ImageController = ({
       <Avatar
         src={image.length === 0 ? defaultImageUrl : imageUrl}
         alt={altText}
-        sx={{
-          width: 120,
-          height: 120,
-          mb: 2,
-          border: '4px solid',
-          borderColor: 'primary.light',
-        }}
+        sx={imageControllerAvatarStyles}
       />
       <Box
         onClick={handleAvatarClick}
-        sx={{
-          cursor: 'pointer',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: 120,
-          height: 120,
-          display: editMode ? 'flex' : 'none',
-          justifyContent: 'center',
-          alignItems: 'center',
-          '&::before': {
-            content: '""',
-            width: 120,
-            height: 120,
-            position: 'absolute',
-            borderRadius: '50%',
-            backgroundColor: 'primary.light',
-            opacity: 0.6,
-            transition: 'opacity 200ms ease-in',
-            zIndex: 0,
-          },
-          '&:hover::before': {
-            opacity: 0.9,
-          },
-        }}
+        sx={{ ...imageControllerButtonStyle, display: editMode ? 'flex' : 'none' }}
       >
         <CloudUploadIcon fontSize="large" sx={{ zIndex: 1 }} />
       </Box>
