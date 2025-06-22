@@ -15,6 +15,8 @@ const UserHeader = ({ editMode, setEditMode }: IUserHeaderProps) => {
       <Typography variant="subtitle1">Manage your data</Typography>
       {!editMode && (
         <IconButton
+          aria-label="edit"
+          role="button"
           sx={{ position: 'absolute', right: 14, top: 14 }}
           onClick={() => setEditMode(true)}
         >
