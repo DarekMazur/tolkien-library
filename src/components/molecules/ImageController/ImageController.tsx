@@ -12,7 +12,7 @@ interface IImageControllerTypes {
   altText: string;
   imageUrl: string;
   editMode?: boolean;
-  onFilesChange(selectedFiles: File[]): void;
+  onFilesChange?: (selectedFiles: File[]) => void;
 }
 
 const ImageController = ({
@@ -34,7 +34,9 @@ const ImageController = ({
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files;
     if (file) {
-      onFilesChange([...file]);
+      if (onFilesChange) {
+        onFilesChange([...file]);
+      }
     }
   };
 
@@ -54,6 +56,7 @@ const ImageController = ({
       <input
         type="file"
         accept="image/*"
+        role="textbox"
         ref={inputRef}
         style={{ display: 'none' }}
         onChange={handleFileChange}
