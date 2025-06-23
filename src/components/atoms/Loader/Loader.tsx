@@ -14,7 +14,11 @@ interface ILoaderProps {
 const Loader = ({ isLoading, isCenter, isDark, margin, isTransparent }: ILoaderProps) => {
   return (
     <Wrapper isCenter={isCenter} isDark={isDark} margin={margin} isTransparent={isTransparent}>
-      <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open={isLoading}>
+      <Backdrop
+        aria-label="Loader"
+        sx={{ color: theme.palette.primary.main, zIndex: 999 }}
+        open={isLoading}
+      >
         <CircularProgress color="inherit" size={100} />
       </Backdrop>
     </Wrapper>
