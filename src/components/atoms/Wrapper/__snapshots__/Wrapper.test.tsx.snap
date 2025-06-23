@@ -28,7 +28,7 @@ exports[`Wrapper > matches snapshot 1`] = `
   -webkit-justify-content: normal;
   justify-content: normal;
   background-color: default;
-  min-height: calc(100vh - 4rem);
+  min-height: 100vh;
   color: black;
 }
 

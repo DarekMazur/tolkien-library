@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import path from 'path';
+import * as path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -18,6 +18,7 @@ const config: StorybookConfig = {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       '@auth0/auth0-react': path.resolve(__dirname, '../src/lib/providers/MockedAuth0Provider.tsx'),
+      '@/hooks/useMe.tsx': path.resolve(__dirname, '../src/lib/providers/MockedUseMeProvider.tsx'),
     };
     return config;
   },

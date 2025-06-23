@@ -6,24 +6,31 @@ import DefaultLayout from '@/layouts/DefaultLayout.tsx';
 import EmptyLayout from '@/layouts/EmptyLayout.tsx';
 import PageNotFound from '@/components/pages/404/404.tsx';
 import LoginPage from '@/components/pages/LoginPage/LoginPage.tsx';
+import UserProfile from '@/components/pages/UserProfile/UserProfile.tsx';
 import UnauthorizedView from '@/components/pages/UnauthorizedView/UnauthorizedView.tsx';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { theme } from '@/lib/theme.tsx';
 import { useAuth0 } from '@auth0/auth0-react';
+import Loader from '@/components/atoms/Loader/Loader.tsx';
+import { useMe } from '@/hooks/useMe.tsx';
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth0()
+  const { isAuthenticated, user, isLoading } = useMe();
 
   if (isLoading) {
-    return (
-      <Wrapper isCenter>
-        <Backdrop sx={{ color: theme.palette.primary.main, zIndex: 999 }} open={isLoading} >
-          <CircularProgress color="inherit" size={100} />
-        </Backdrop>
-      </Wrapper>
-    );
+    return <Loader isLoading={isLoading} />;
+  }
+
+  return isAuthenticated && user && user.emailVerified && user.role.id === '1' ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/unauthorized" />
+  );
+};
+
+const SemiProtectedRoute = () => {
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/unauthorized" />;
@@ -43,6 +50,9 @@ const Root = () => {
           <Route path="/" element={<Home />} />
           <Route path="/board" element={<ProtectedRoute />}>
             <Route index element={<div>Board</div>} />
+          </Route>
+          <Route path="/profile" element={<SemiProtectedRoute />}>
+            <Route index element={<UserProfile />} />
           </Route>
         </Route>
         <Route element={<EmptyLayout />}>

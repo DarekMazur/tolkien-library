@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { handlers } from './handlers';
 import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
+import { IUser } from '@/lib/types.ts';
 
 declare global {
   interface Window {
@@ -14,6 +15,105 @@ export const worker = setupWorker(...handlers);
 worker.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url);
 });
+
+const createRoles = () => {
+  const roles = [
+    {
+      id: '1',
+      roleName: 'Administrator',
+      roleShorthand: 'admin',
+    },
+    {
+      id: '2',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+  ];
+
+  roles.forEach((role) => db.role.create(role));
+};
+
+createRoles();
+
+const createUsers = () => {
+  const admin = db.role.findFirst({
+    where: {
+      id: {
+        equals: '1',
+      },
+    },
+  })!;
+
+  const user = db.role.findFirst({
+    where: {
+      id: {
+        equals: '2',
+      },
+    },
+  })!;
+
+  const loadInitialData = () => {
+    try {
+      const savedUsers = localStorage.getItem('mockUsers');
+      return savedUsers ? JSON.parse(savedUsers) : [];
+    } catch (error) {
+      console.error('Error while loading data:', error);
+      return [];
+    }
+  };
+
+  const savedUsers = loadInitialData();
+
+  if (savedUsers.length > 0) {
+    savedUsers.forEach((mockedUser: IUser) => {
+      const { id, avatar, userName, email, emailVerified, isBanned, role } = mockedUser;
+      if (!db.user.findFirst({ where: { id: { equals: user.id } } })) {
+        db.user.create({
+          id,
+          avatar,
+          userName,
+          email,
+          emailVerified,
+          isBanned,
+          role: role.id === '1' ? admin : user,
+        });
+      }
+    });
+  } else {
+    db.user.create({
+      id: faker.string.uuid(),
+      email: 'admin@mail.com',
+      emailVerified: true,
+      isBanned: false,
+      userName: faker.internet.username(),
+      role: admin,
+    });
+
+    db.user.create({
+      id: faker.string.uuid(),
+      email: 'user@mail.com',
+      emailVerified: true,
+      isBanned: false,
+      userName: faker.internet.username(),
+      role: user,
+    });
+
+    for (let i = 0; i < faker.number.int({ min: 0, max: 6 }); i += 1) {
+      db.user.create({
+        id: faker.string.uuid(),
+        email: faker.internet.email(),
+        emailVerified: faker.datatype.boolean(),
+        isBanned: faker.datatype.boolean({ probability: 0.2 }),
+        userName: faker.internet.username(),
+        role: faker.datatype.boolean({ probability: 0.1 }) ? admin : user,
+      });
+    }
+
+    const users = db.user.getAll();
+
+    localStorage.setItem('mockUsers', JSON.stringify(users));
+  }
+};
 
 const createNavigation = () => {
   db.navigation.create({
@@ -118,7 +218,7 @@ const createArticles = () => {
       { probability: 0.7 },
     );
 
-    db.articles.create({
+    db.article.create({
       id: faker.string.uuid(),
       date,
       category,
@@ -127,10 +227,13 @@ const createArticles = () => {
   }
 };
 
+createUsers();
 createNavigation();
 createArticles();
 
 window.mocks = {
+  getRoles: () => db.role.getAll(),
+  getUsers: () => db.user.getAll(),
   getNav: () => db.navigation.getAll(),
-  getNews: () => db.articles.getAll(),
+  getNews: () => db.article.getAll(),
 };

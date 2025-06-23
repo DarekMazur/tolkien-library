@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi, Mock } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import Root from './Root';
@@ -7,17 +7,31 @@ vi.mock('@auth0/auth0-react', async () => {
   const actual = await vi.importActual<typeof import('@auth0/auth0-react')>('@auth0/auth0-react');
   return {
     ...actual,
-    Auth0Provider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    Auth0Provider: ({ children }: { children: ReactNode }) => <>{children}</>,
     useAuth0: vi.fn(),
   };
 });
 
 import { useAuth0 } from '@auth0/auth0-react';
+import { ReactNode } from 'react';
 
 const mockLoginWithRedirect = vi.fn();
 const mockLogout = vi.fn();
 
 describe('Root', () => {
+  beforeEach(() => {
+    (useAuth0 as unknown as Mock).mockReturnValue({
+      isAuthenticated: false,
+      isLoading: false,
+      loginWithRedirect: mockLoginWithRedirect,
+      logout: mockLogout,
+      user: {
+        name: 'Test User',
+        email: 'test@example.com',
+      },
+    });
+  });
+
   it('renders the Home page on the default path', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
@@ -47,7 +61,7 @@ describe('Root', () => {
   });
 
   it('renders a Login Page for /login path for logged users', () => {
-    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+    (useAuth0 as unknown as Mock).mockReturnValue({
       isAuthenticated: true,
       isLoading: false,
       loginWithRedirect: mockLoginWithRedirect,
@@ -65,7 +79,7 @@ describe('Root', () => {
   });
 
   it('renders a Login Page for /login path for not logged users', () => {
-    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+    (useAuth0 as unknown as Mock).mockReturnValue({
       isAuthenticated: false,
       isLoading: true,
       loginWithRedirect: mockLoginWithRedirect,

@@ -6,10 +6,7 @@ import {
   loginGoBackButtonStyles,
 } from '@/components/molecules/LoginForm/LoginForm.styles.ts';
 import { useEffect } from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import { theme } from '@/lib/theme.tsx';
-import CircularProgress from '@mui/material/CircularProgress';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
+import Loader from '@/components/atoms/Loader/Loader.tsx';
 
 const LoginForm = () => {
   const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
@@ -31,11 +28,7 @@ const LoginForm = () => {
   return (
     <>
       {!isAuthenticated ? (
-        <Wrapper isCenter margin={0} isTransparent>
-          <Backdrop sx={{ color: theme.palette.secondary.main, zIndex: 999 }} open>
-            <CircularProgress color="inherit" size={100} />
-          </Backdrop>
-        </Wrapper>
+        <Loader isLoading isCenter margin={0} isTransparent />
       ) : (
         <Box component="form" role="form" sx={loginFormStyles}>
           <Typography variant="h4">You are already login</Typography>
