@@ -8,6 +8,7 @@ import { RootState } from '../../../../store';
 import { useIdentity } from '@/hooks/useIdentity.tsx';
 import { useEffect } from 'react';
 import { modifyIdentity } from '../../../../store/reducers/identityReducer.ts';
+import { sendMessage } from '@/lib/helpers/sendMessage.ts';
 
 const ContactPage = () => {
   const pageIdentity = useSelector((state: RootState) => state.identity);
@@ -21,12 +22,6 @@ const ContactPage = () => {
       }
     }
   }, [pageIdentity, identity]);
-
-  const recipient = pageIdentity?.adminContact.value;
-  const subject = encodeURIComponent('Message from Tolkienalia');
-  const body = encodeURIComponent('Your message...');
-
-  const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
   return (
     <Wrapper>
@@ -47,7 +42,7 @@ const ContactPage = () => {
             variant="text"
             tabIndex={-1}
             startIcon={<EmailIcon />}
-            href={pageIdentity ? mailtoLink : ''}
+            href={pageIdentity ? sendMessage(pageIdentity.adminContact.value) : ''}
           >
             Send me a message
           </Button>
