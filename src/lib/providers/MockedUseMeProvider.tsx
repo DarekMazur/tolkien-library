@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import { IRole } from '@/lib/types.ts';
 
 export interface MockedUser {
   id: string;
@@ -7,7 +8,7 @@ export interface MockedUser {
   emailVerified: boolean;
   userName: string;
   isBanned: boolean;
-  role: { id: string; name: string };
+  role: IRole;
 }
 
 export interface MockedUseMeContextType {
