@@ -16,6 +16,16 @@ worker.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url);
 });
 
+const createIdentity = () => {
+  db.identity.create({
+    adminContact: {
+      name: 'email',
+    },
+  });
+};
+
+createIdentity();
+
 const createRoles = () => {
   const roles = [
     {
@@ -236,4 +246,5 @@ window.mocks = {
   getUsers: () => db.user.getAll(),
   getNav: () => db.navigation.getAll(),
   getNews: () => db.article.getAll(),
+  getIdentity: () => db.identity.getAll(),
 };

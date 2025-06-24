@@ -5,6 +5,13 @@ import { factory, primaryKey, nullable, oneOf } from '@mswjs/data';
 faker.seed(23456);
 
 export const db = factory({
+  identity: {
+    id: primaryKey(faker.string.uuid),
+    adminContact: {
+      name: () => faker.lorem.word(),
+      value: () => faker.internet.email(),
+    },
+  },
   navigation: {
     id: primaryKey(faker.string.uuid),
     title: nullable(() => faker.lorem.words({ min: 1, max: 2 })),

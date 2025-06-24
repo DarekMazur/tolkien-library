@@ -3,8 +3,7 @@ import { navigationApi } from './api/navigation';
 import { articlesApi } from './api/articles.ts';
 import { rolesApi } from './api/roles.ts';
 import { usersApi } from './api/users';
-
-export type RootState = ReturnType<typeof store.getState>;
+import identityReducer from './reducers/identityReducer.ts';
 
 export * from './api/navigation';
 export * from './api/articles';
@@ -17,6 +16,7 @@ export const store = configureStore({
     [articlesApi.reducerPath]: articlesApi.reducer,
     [rolesApi.reducerPath]: rolesApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
+    identity: identityReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -25,3 +25,5 @@ export const store = configureStore({
       .concat(rolesApi.middleware)
       .concat(usersApi.middleware),
 });
+
+export type RootState = ReturnType<typeof store.getState>;
