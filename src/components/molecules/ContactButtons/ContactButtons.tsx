@@ -15,7 +15,7 @@ const ContactButtons = ({ email }: { email: string }) => {
     >
       <Button
         component="a"
-        role={undefined}
+        role="button"
         variant="text"
         tabIndex={-1}
         startIcon={<EmailIcon />}
@@ -25,7 +25,7 @@ const ContactButtons = ({ email }: { email: string }) => {
       </Button>
       <Button
         component="label"
-        role={undefined}
+        role="button"
         variant="text"
         tabIndex={-1}
         startIcon={<CottageIcon />}
