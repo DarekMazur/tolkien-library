@@ -30,3 +30,11 @@ export interface IUser extends IRegisteredUser {
   isBanned: boolean;
   role: IRole;
 }
+
+export interface IIdentityProps {
+  id: string;
+  adminContact: {
+    name?: string;
+    value: string;
+  };
+}

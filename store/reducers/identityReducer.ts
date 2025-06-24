@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface IIdentityProps {
-  id: string;
-  adminContact: {
-    name?: string;
-    value: string;
-  };
-}
+import { IIdentityProps } from '@/lib/types.ts';
 
 const initialIdentity = null as IIdentityProps | null;
 

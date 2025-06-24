@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { IIdentityProps } from '@/lib/types.ts';
 
 export const useIdentity = () => {
-  const [identity, setIdentity] = useState();
+  const [identity, setIdentity] = useState<IIdentityProps | null>(null);
 
   useEffect(() => {
     const fetchIdentity = async () => {
