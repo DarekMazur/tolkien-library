@@ -13,7 +13,6 @@ export const useIdentity = () => {
           return res.json();
         })
         .then((res) => {
-          console.log(res.data);
           return res.data;
         });
     };
