@@ -144,6 +144,12 @@ const createNavigation = () => {
     isDivider: true,
   });
 
+  db.navigation.create({
+    title: "Tolkien's Library",
+    link: `/library`,
+    isDivider: false,
+  });
+
   const size = faker.number.int({ min: 7, max: 13 });
 
   for (let i = 0; i < size; i += 1) {

@@ -3,6 +3,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
+import InfoIcon from '@mui/icons-material/Info';
 import { IMainMenuList } from '@/lib/types.ts';
 
 interface IMenuListItemProps {
@@ -25,6 +26,8 @@ const MenuListItem = ({ item }: IMenuListItemProps) => {
             <AttachFileIcon />
           ) : item.link === '/contact' ? (
             <ContactMailIcon />
+          ) : item.link === '/library' ? (
+            <InfoIcon />
           ) : (
             <DoubleArrowIcon />
           )}
