@@ -32,6 +32,10 @@ export interface IUser extends IRegisteredUser {
 }
 
 export interface IIdentityProps {
+  libraryContent: {
+    name?: string;
+    value: string;
+  };
   id: string;
   adminContact: {
     name?: string;
