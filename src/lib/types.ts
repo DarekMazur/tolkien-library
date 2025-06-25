@@ -42,3 +42,9 @@ export interface IIdentityProps {
     value: string;
   };
 }
+
+export interface IPageProps {
+  id: string;
+  title: string;
+  content: string;
+}
