@@ -16,10 +16,24 @@ worker.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url);
 });
 
+const generateAlertBlock = (type: string): string => {
+  return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
+};
+
 const createIdentity = () => {
   db.identity.create({
     adminContact: {
       name: 'email',
+    },
+    libraryContent: {
+      name: 'Library main page',
+      value: `${faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }))}
+
+- ${Array.from({ length: 5 }, () => faker.lorem.word()).join('\n- ')}
+
+\n\n${generateAlertBlock('info')}\n\n
+- ${Array.from({ length: 2 }, () => faker.lorem.word()).join('\n- ')}
+\n\n${generateAlertBlock('warning')}\n\n`,
     },
   });
 };
@@ -175,11 +189,6 @@ const createArticles = () => {
     faker.lorem.word(),
   ];
 
-  const generateAlertBlock = (): string => {
-    const type = faker.helpers.arrayElement(['info', 'warning', 'danger']);
-    return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
-  };
-
   const generateTable = (): string => {
     const headers = Array.from({ length: 3 }, () => faker.lorem.word());
     const rows = Array.from({ length: 3 }, () =>
@@ -215,7 +224,7 @@ const createArticles = () => {
       generateQuote(faker.number.int({ min: 1, max: 3 })),
       generateTable(),
       `[${faker.lorem.words(2)}](${faker.internet.url()})`,
-      generateAlertBlock(),
+      generateAlertBlock(faker.helpers.arrayElement(['info', 'warning', 'danger'])),
     ];
 
     return faker.helpers.arrayElements(elements, { min: 3, max: 5 }).join('\n\n');
