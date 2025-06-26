@@ -39,8 +39,16 @@ export interface IIdentityProps {
   };
 }
 
+export interface ICategoryProps {
+  id: string;
+  title: string;
+  slug: string;
+  pages?: Array<IPageProps>;
+}
+
 export interface IPageProps {
   id: string;
   title: string;
   content: string;
+  category?: ICategoryProps;
 }

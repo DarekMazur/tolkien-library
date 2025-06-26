@@ -42,6 +42,26 @@ const createIdentity = () => {
 
 createIdentity();
 
+const createCategories = () => {
+  const categoriesLength = faker.number.int({ min: 4, max: 8 });
+
+  for (let i = 0; i < categoriesLength; i++) {
+    const title = faker.lorem
+      .words({ min: 1, max: 2 })
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    db.category.create({
+      id: faker.string.uuid(),
+      title,
+      slug: createSlug(title),
+      pages: [],
+    });
+  }
+};
+
+createCategories();
+
 const createPages = () => {
   const pageTitle = 'Library';
 
@@ -56,9 +76,53 @@ const createPages = () => {
 - ${Array.from({ length: 2 }, () => faker.lorem.word()).join('\n- ')}
 \n\n${generateAlertBlock('warning')}\n\n`,
   });
+
+  const pagesLength = faker.number.int({ min: 10, max: 15 });
+
+  for (let i = 0; i < pagesLength; i++) {
+    const title = faker.lorem
+      .words({ min: 1, max: 4 })
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+
+    const categoryIndex = faker.datatype.boolean({ probability: 0.8 })
+      ? faker.number.int({ min: 0, max: db.category.getAll().length - 1 })
+      : null;
+
+    db.page.create({
+      title,
+      slug: createSlug(title),
+      content: `${faker.lorem.paragraphs(faker.number.int({ min: 2, max: 5 }))}`,
+      category: categoryIndex ? db.category.getAll()[categoryIndex] : null,
+    });
+  }
 };
 
 createPages();
+
+const updateCategories = () => {
+  const pages = db.page.getAll();
+
+  pages.forEach((page) => {
+    const category = page.category;
+
+    if (category) {
+      db.category.update({
+        where: {
+          id: {
+            equals: category.id,
+          },
+        },
+        data: {
+          pages: [...category.pages, page],
+        },
+      });
+    }
+  });
+};
+
+updateCategories();
 
 const createRoles = () => {
   const roles = [
@@ -283,4 +347,5 @@ window.mocks = {
   getNav: () => db.navigation.getAll(),
   getNews: () => db.article.getAll(),
   getIdentity: () => db.identity.getAll(),
+  getCategories: () => db.category.getAll(),
 };

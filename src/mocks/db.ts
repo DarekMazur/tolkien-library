@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { factory, primaryKey, nullable, oneOf } from '@mswjs/data';
+import { factory, primaryKey, nullable, oneOf, manyOf } from '@mswjs/data';
 
 faker.seed(23456);
 
@@ -17,6 +17,13 @@ export const db = factory({
     title: () => faker.lorem.words({ min: 1, max: 2 }),
     slug: () => faker.lorem.words({ min: 1, max: 2 }),
     content: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
+    category: nullable(oneOf('category')),
+  },
+  category: {
+    id: primaryKey(faker.string.uuid),
+    title: () => faker.lorem.words({ min: 1, max: 2 }),
+    slug: () => faker.lorem.words({ min: 1, max: 2 }),
+    pages: manyOf('page'),
   },
   navigation: {
     id: primaryKey(faker.string.uuid),
