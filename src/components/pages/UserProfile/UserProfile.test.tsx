@@ -84,7 +84,7 @@ describe('UserProfile', () => {
       fireEvent.click(screen.getByRole('button', { name: /Save/i }));
 
       waitFor(() => {
-        expect(screen.findByText(/Profile updated successfully/i)).toBeVisible();
+        expect(screen.getByText(/Profile updated successfully/i)).toBeVisible();
       });
     });
   });
