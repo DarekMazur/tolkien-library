@@ -50,7 +50,13 @@ const Root = () => {
       <Routes>
         <Route element={<DefaultLayout toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/library">
+            <Route index element={<LibraryPage />} />
+            <Route path="/library/:category">
+              <Route index element={<h3>Category</h3>} />
+              <Route path="/library/:category/:page" element={<h3>Page</h3>} />
+            </Route>
+          </Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/board" element={<ProtectedRoute />}>
             <Route index element={<div>Board</div>} />
