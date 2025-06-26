@@ -1,11 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`UserMenu Component > Authenticated User State > should match snapshot for authenticated user state 1`] = `null`;
-
-exports[`UserMenu Component > Loading State > should render loading state correctly 1`] = `null`;
-
-exports[`UserMenu Component > User without Avatar > should handle user without avatar gracefully 1`] = `null`;
-
 exports[`UserMenu Component > should match snapshot 1`] = `
 .emotion-0 {
   z-index: 1050;

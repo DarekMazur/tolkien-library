@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi, Mock } from 'vitest';
 import LoginPage from '@/components/pages/LoginPage/LoginPage';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import { screen } from '@testing-library/react';
@@ -23,7 +23,7 @@ describe('LoginPage Component', () => {
   });
 
   beforeEach(() => {
-    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+    (useAuth0 as unknown as Mock).mockReturnValue({
       isAuthenticated: false,
       isLoading: true,
       loginWithRedirect: mockLoginWithRedirect,
@@ -60,12 +60,12 @@ describe('LoginPage Component', () => {
   });
 
   it('should render logged-in state when authenticated', () => {
-    (useAuth0 as unknown as vi.Mock).mockReturnValue({
+    (useAuth0 as unknown as Mock).mockReturnValue({
       isAuthenticated: true,
       isLoading: false,
       loginWithRedirect: mockLoginWithRedirect,
       logout: mockLogout,
-    })
+    });
 
     renderWithProviders(<LoginPage />);
     expect(screen.getByText(/You are already login/i)).toBeInTheDocument();
