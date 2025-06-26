@@ -12,10 +12,10 @@
     "preview": "vite preview",
     "prepare": "husky",
     "pre": "npx lint-staged --allow-empty",
-    "test": "vitest --passWithNoTests",
+    "test": "vitest --run --passWithNoTests",
+    "test:watch": "vitest --passWithNoTests",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "test:run": "vitest --run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
