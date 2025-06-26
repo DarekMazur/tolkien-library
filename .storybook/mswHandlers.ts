@@ -8,11 +8,23 @@ const navigationMock = [
   { id: '5', title: 'Kontakt', link: '/contact', isDivider: false },
 ];
 
+const pageMock = [
+  {
+    id: 'default',
+    title: 'Default Storybook Page',
+    slug: 'default',
+    content: '# Default Content\n\nThis is the default content.',
+  },
+];
+
 export const handlers = [
   http.get('/api/navigation', () => {
     return HttpResponse.json(navigationMock);
   }),
   http.get('/api/articles', () => {
     return HttpResponse.json();
+  }),
+  http.get('/api/pages/:slug', () => {
+    return HttpResponse.json(pageMock);
   }),
 ];
