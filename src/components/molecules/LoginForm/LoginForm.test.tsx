@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi, Mock } from 'vitest';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import LoginForm from '@/components/molecules/LoginForm/LoginForm';
@@ -24,7 +24,7 @@ describe('LoginForm component', () => {
 
   describe('when loading', () => {
     beforeEach(() => {
-      (useAuth0 as unknown as vi.Mock).mockReturnValue({
+      (useAuth0 as unknown as Mock).mockReturnValue({
         isAuthenticated: false,
         isLoading: true,
         loginWithRedirect: mockLoginWithRedirect,
@@ -41,7 +41,7 @@ describe('LoginForm component', () => {
 
   describe('when not authenticated and not loading', () => {
     beforeEach(() => {
-      (useAuth0 as unknown as vi.Mock).mockReturnValue({
+      (useAuth0 as unknown as Mock).mockReturnValue({
         isAuthenticated: false,
         isLoading: false,
         loginWithRedirect: mockLoginWithRedirect,
@@ -64,7 +64,7 @@ describe('LoginForm component', () => {
 
   describe('when authenticated', () => {
     beforeEach(() => {
-      (useAuth0 as unknown as vi.Mock).mockReturnValue({
+      (useAuth0 as unknown as Mock).mockReturnValue({
         isAuthenticated: true,
         isLoading: false,
         loginWithRedirect: mockLoginWithRedirect,

@@ -1,28 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IPageProps } from '@/lib/types.ts';
 
 export const usePages = (slug: string) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState<IPageProps | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
-    const fetchPage = async () => {
-      return await fetch(`${import.meta.env.VITE_API_URL}/pages/${slug}`).then((res) => {
-        if (res.status !== 200) {
-          setIsLoading(false);
+    (async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/pages/${slug}`);
+        if (!res.ok) {
           setIsError(true);
-          throw new Error(res.statusText);
+          setIsLoading(false);
+          return;
         }
-        return res.json();
-      });
-    };
+        const data = await res.json();
+        setPage(data);
+      } catch (err) {
+        console.error(err);
+        setIsError(true);
+        setErrorMessage(errorMessage);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [slug]);
 
-    fetchPage().then((data) => {
-      setIsLoading(false);
-      setPage(data);
-    });
-  }, []);
-
-  return { page, isError, isLoading };
+  return { page, isError, isLoading, errorMessage };
 };
