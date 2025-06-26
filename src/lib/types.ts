@@ -49,6 +49,7 @@ export interface ICategoryProps {
 export interface IPageProps {
   id: string;
   title: string;
+  slug: string;
   content: string;
   category?: ICategoryProps;
 }
