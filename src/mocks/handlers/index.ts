@@ -3,6 +3,7 @@ import { handlers as articlesHandlers } from './articles';
 import { handlers as rolesHandlers } from './roles';
 import { handlers as usersHandlers } from './users';
 import { handlers as identityHandlers } from './identity';
+import { handlers as pagesHandlers } from './pages';
 
 export const handlers = [
   ...rolesHandlers,
@@ -10,4 +11,5 @@ export const handlers = [
   ...navigationHandlers,
   ...articlesHandlers,
   ...identityHandlers,
+  ...pagesHandlers,
 ];

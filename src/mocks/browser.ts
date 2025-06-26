@@ -3,6 +3,7 @@ import { handlers } from './handlers';
 import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
 import { IUser } from '@/lib/types.ts';
+import slugify from 'slugify';
 
 declare global {
   interface Window {
@@ -16,6 +17,21 @@ worker.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url);
 });
 
+const createSlug = (title: string) => {
+  return slugify(title, {
+    replacement: '-',
+    remove: /[*+~.()'"!:@]/g,
+    lower: true,
+    strict: true,
+    locale: 'pl',
+    trim: true,
+  });
+};
+
+const generateAlertBlock = (type: string): string => {
+  return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
+};
+
 const createIdentity = () => {
   db.identity.create({
     adminContact: {
@@ -25,6 +41,24 @@ const createIdentity = () => {
 };
 
 createIdentity();
+
+const createPages = () => {
+  const pageTitle = 'Library';
+
+  db.page.create({
+    title: pageTitle,
+    slug: createSlug(pageTitle),
+    content: `${faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }))}
+
+- ${Array.from({ length: 5 }, () => faker.lorem.word()).join('\n- ')}
+
+\n\n${generateAlertBlock('info')}\n\n
+- ${Array.from({ length: 2 }, () => faker.lorem.word()).join('\n- ')}
+\n\n${generateAlertBlock('warning')}\n\n`,
+  });
+};
+
+createPages();
 
 const createRoles = () => {
   const roles = [
@@ -144,6 +178,12 @@ const createNavigation = () => {
     isDivider: true,
   });
 
+  db.navigation.create({
+    title: "Tolkien's Library",
+    link: `/library`,
+    isDivider: false,
+  });
+
   const size = faker.number.int({ min: 7, max: 13 });
 
   for (let i = 0; i < size; i += 1) {
@@ -168,11 +208,6 @@ const createArticles = () => {
     faker.lorem.word(),
     faker.lorem.word(),
   ];
-
-  const generateAlertBlock = (): string => {
-    const type = faker.helpers.arrayElement(['info', 'warning', 'danger']);
-    return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
-  };
 
   const generateTable = (): string => {
     const headers = Array.from({ length: 3 }, () => faker.lorem.word());
@@ -209,7 +244,7 @@ const createArticles = () => {
       generateQuote(faker.number.int({ min: 1, max: 3 })),
       generateTable(),
       `[${faker.lorem.words(2)}](${faker.internet.url()})`,
-      generateAlertBlock(),
+      generateAlertBlock(faker.helpers.arrayElement(['info', 'warning', 'danger'])),
     ];
 
     return faker.helpers.arrayElements(elements, { min: 3, max: 5 }).join('\n\n');
@@ -244,6 +279,7 @@ createArticles();
 window.mocks = {
   getRoles: () => db.role.getAll(),
   getUsers: () => db.user.getAll(),
+  getPages: () => db.page.getAll(),
   getNav: () => db.navigation.getAll(),
   getNews: () => db.article.getAll(),
   getIdentity: () => db.identity.getAll(),

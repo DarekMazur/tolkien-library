@@ -12,6 +12,12 @@ export const db = factory({
       value: () => faker.internet.email(),
     },
   },
+  page: {
+    id: primaryKey(faker.string.uuid),
+    title: () => faker.lorem.words({ min: 1, max: 2 }),
+    slug: () => faker.lorem.words({ min: 1, max: 2 }),
+    content: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
+  },
   navigation: {
     id: primaryKey(faker.string.uuid),
     title: nullable(() => faker.lorem.words({ min: 1, max: 2 })),

@@ -32,9 +32,19 @@ export interface IUser extends IRegisteredUser {
 }
 
 export interface IIdentityProps {
+  libraryContent: {
+    name?: string;
+    value: string;
+  };
   id: string;
   adminContact: {
     name?: string;
     value: string;
   };
+}
+
+export interface IPageProps {
+  id: string;
+  title: string;
+  content: string;
 }
