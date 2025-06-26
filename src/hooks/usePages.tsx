@@ -8,18 +8,14 @@ export const usePages = (slug: string) => {
 
   useEffect(() => {
     const fetchPage = async () => {
-      return await fetch(`${import.meta.env.VITE_API_URL}/page/${slug}`)
-        .then((res) => {
-          if (res.status !== 200) {
-            setIsLoading(false);
-            setIsError(true);
-            throw new Error(res.statusText);
-          }
-          return res.json();
-        })
-        .then((res) => {
-          return res.data;
-        });
+      return await fetch(`${import.meta.env.VITE_API_URL}/pages/${slug}`).then((res) => {
+        if (res.status !== 200) {
+          setIsLoading(false);
+          setIsError(true);
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      });
     };
 
     fetchPage().then((data) => {

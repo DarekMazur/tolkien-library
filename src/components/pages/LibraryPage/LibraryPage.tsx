@@ -5,23 +5,30 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { components } from '@/lib/helpers/mdComponents.tsx';
 import ReactMarkdown from 'react-markdown';
-import { useIdentity } from '@/hooks/useIdentity.tsx';
+import { useLocation } from 'react-router';
+import { usePages } from '@/hooks/usePages.tsx';
+import Loader from '@/components/atoms/Loader/Loader.tsx';
 
 const LibraryPage = () => {
-  const { identity } = useIdentity();
+  const location = useLocation();
+  const { page, isError, isLoading } = usePages(location.pathname.slice(1));
 
   return (
     <Wrapper>
-      <Box sx={articleCardContentStyles}>
-        <Typography variant="h2">Library</Typography>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
-          components={components}
-        >
-          {identity && identity.libraryContent ? identity.libraryContent.value : null}
-        </ReactMarkdown>
-      </Box>
+      {isLoading ? (
+        <Loader isLoading={isLoading} />
+      ) : isError || !page ? null : (
+        <Box sx={articleCardContentStyles}>
+          <Typography variant="h2">{page.title}</Typography>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            components={components}
+          >
+            {page.content}
+          </ReactMarkdown>
+        </Box>
+      )}
     </Wrapper>
   );
 };
