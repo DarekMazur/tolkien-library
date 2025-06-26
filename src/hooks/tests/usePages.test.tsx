@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { vi } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { usePages } from '../usePages';
 import type { IPageProps } from '@/lib/types';
@@ -9,7 +9,7 @@ const fakePage: IPageProps = {
   content: '<p>Hello</p>',
 };
 
-describe('hook usePages', () => {
+describe('usePages hook', () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
