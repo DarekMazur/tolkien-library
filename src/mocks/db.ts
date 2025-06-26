@@ -11,10 +11,6 @@ export const db = factory({
       name: () => faker.lorem.word(),
       value: () => faker.internet.email(),
     },
-    libraryContent: {
-      name: () => faker.lorem.word(),
-      value: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
-    },
   },
   page: {
     id: primaryKey(faker.string.uuid),
