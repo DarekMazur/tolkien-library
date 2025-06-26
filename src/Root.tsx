@@ -18,7 +18,7 @@ const ProtectedRoute = () => {
   const { isAuthenticated, user, isLoading } = useMe();
 
   if (isLoading) {
-    return <Loader isLoading={isLoading} />;
+    return <Loader isLoading />;
   }
 
   return isAuthenticated && user && user.emailVerified && user.role.id === '1' ? (

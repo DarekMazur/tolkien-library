@@ -17,6 +17,7 @@ const exampleItems: IMainMenuList[] = [
   { id: faker.string.uuid(), title: 'Przypięte Artykuły', link: '/articles', isDivider: false },
   { id: faker.string.uuid(), title: 'Kontakt', link: '/contact', isDivider: false },
   { id: faker.string.uuid(), title: 'Link', link: '/default', isDivider: false },
+  { id: faker.string.uuid(), title: 'Biblioteka', link: '/library', isDivider: false },
 ];
 
 export const Default: Story = {
@@ -34,6 +35,12 @@ export const Home: Story = {
 export const AttachedArticles: Story = {
   args: {
     item: exampleItems[1],
+  },
+};
+
+export const Library: Story = {
+  args: {
+    item: exampleItems[4],
   },
 };
 

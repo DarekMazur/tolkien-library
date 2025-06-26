@@ -80,12 +80,19 @@ describe('UserProfile', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /edit/i }));
 
-    await waitFor(() => {
-      fireEvent.click(screen.getByRole('button', { name: /Save/i }));
+    const saveButton = screen.getByRole('button', { name: /save/i });
+    expect(saveButton).toBeInTheDocument();
+    expect(saveButton).toBeDisabled();
 
-      waitFor(() => {
-        expect(screen.getByText(/Profile updated successfully/i)).toBeVisible();
-      });
+    const input = screen.getByDisplayValue(/TestUser/i);
+    fireEvent.change(input, { target: { value: 'New UserName' } });
+
+    expect(saveButton).not.toBeDisabled();
+
+    fireEvent.click(screen.getByRole('button', { name: /Save/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Profile updated successfully/i)).toBeVisible();
     });
   });
 });

@@ -3,60 +3,43 @@ import { useEffect, useState } from 'react';
 import { IUser } from '@/lib/types.ts';
 
 export const useMe = () => {
-  const { user: authUser, isAuthenticated: isAuth0, isLoading: authLoading } = useAuth0();
+  const { user: authUser, isLoading: authLoading, isAuthenticated: isAuth0 } = useAuth0();
+
   const [user, setUser] = useState<IUser | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(authLoading);
-  const [isAuthenticated, setIsAuthenticated] = useState(isAuth0);
+
+  const isLoading = authLoading || (isAuth0 && user === null);
+  const isAuthenticated = isAuth0;
 
   useEffect(() => {
-    if (isAuthenticated) {
-      if (authUser) {
-        const getMyData = async () => {
-          const email = authUser.email;
-          return await fetch(`${import.meta.env.VITE_API_URL}/users/me`, {
-            method: 'POST',
-            body: JSON.stringify({
-              email,
-              userName: authUser.nickname,
-              emailVerified: isAuth0,
-              avatar: authUser.picture,
-            }),
-          })
-            .then((res) => {
-              if (res.status !== 200) {
-                throw new Error(res.statusText);
-              }
-              return res.json();
-            })
-            .then((res) => {
-              return res.data;
-            });
-        };
-
-        getMyData().then((user) => {
-          const { id, avatar, userName, email, emailVerified, isBanned, role } = user;
-          const authenticatedUser: IUser = {
-            id,
-            avatar,
-            email,
-            emailVerified,
-            userName,
-            isBanned,
-            role,
-          };
-          setUser(authenticatedUser);
-        });
-      }
+    if (!isAuthenticated || !authUser) {
+      setUser(null);
+      return;
     }
-  }, [authUser, isAuthenticated]);
 
-  useEffect(() => {
-    setIsAuthenticated(isAuth0);
-  }, [isAuth0]);
+    (async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/me`, {
+          method: 'POST',
+          body: JSON.stringify({
+            email: authUser.email,
+            userName: authUser.nickname,
+            emailVerified: isAuth0,
+            avatar: authUser.picture,
+          }),
+        });
 
-  useEffect(() => {
-    setIsLoading(authLoading);
-  }, [authLoading]);
+        if (response.status !== 200) {
+          throw new Error(response.statusText || 'Fetch error');
+        }
+
+        const { data } = await response.json();
+        setUser(data);
+      } catch (err: unknown) {
+        console.error('[useMe] fetch error:', err);
+        setUser(null);
+      }
+    })();
+  }, [isAuthenticated, authUser, isAuth0]);
 
   return { user, isLoading, isAuthenticated };
 };
