@@ -1,8 +1,8 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { Typography } from '@mui/material';
 import { useLocation } from 'react-router';
 import { useCategory } from '@/hooks/useCategory.tsx';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
+import CategoryPage from '@/components/pages/CategoryPage/CategoryPage.tsx';
 
 const CategoryLayout = () => {
   const location = useLocation();
@@ -15,18 +15,7 @@ const CategoryLayout = () => {
       {isLoading ? (
         <Loader isLoading={isLoading} />
       ) : (
-        <>
-          {isError || !category ? null : (
-            <>
-              <Typography variant="h2">{category.title}</Typography>
-              {category.pages?.map((page) => (
-                <Typography key={page.id}>
-                  <a href={`/library/${category.slug}/${page.slug}`}>{page.title}</a>
-                </Typography>
-              ))}
-            </>
-          )}
-        </>
+        <>{isError || !category ? null : <CategoryPage category={category} />}</>
       )}
     </Wrapper>
   );
