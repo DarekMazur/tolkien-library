@@ -1,5 +1,5 @@
 import { it } from 'vitest';
-import { sendMessage } from './sendMessage';
+import { sendMessage } from '../sendMessage.ts';
 
 describe('sendMessage', () => {
   it('should return a valid mailto link for a valid email address', () => {
