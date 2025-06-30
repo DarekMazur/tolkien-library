@@ -1,19 +1,19 @@
 export interface IMainMenuList {
-  id: string;
+  readonly id: string;
   title?: string;
   link?: string;
   isDivider: boolean;
 }
 
 export interface INewsEntry {
-  id: string;
+  readonly id: string;
   date: Date;
   category?: string;
   content: string;
 }
 
 export interface IRole {
-  id: string;
+  readonly id: string;
   roleName: string;
   roleShorthand: string;
 }
@@ -26,13 +26,13 @@ export interface IRegisteredUser {
 }
 
 export interface IUser extends IRegisteredUser {
-  id: string;
+  readonly id: string;
   isBanned: boolean;
   role: IRole;
 }
 
 export interface IIdentityProps {
-  id: string;
+  readonly id: string;
   adminContact: {
     name?: string;
     value: string;
@@ -40,14 +40,14 @@ export interface IIdentityProps {
 }
 
 export interface ICategoryProps {
-  id: string;
+  readonly id: string;
   title: string;
   slug: string;
   pages?: Array<IPageProps>;
 }
 
 export interface IPageProps {
-  id: string;
+  readonly id: string;
   title: string;
   slug: string;
   content: string;
