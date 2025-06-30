@@ -13,6 +13,7 @@ import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useMe } from '@/hooks/useMe.tsx';
 import ContactPage from './components/pages/ContactPage/ContactPage';
 import LibraryPage from '@/components/pages/LibraryPage/LibraryPage.tsx';
+import CategoryLayout from '@/layouts/CategoryLayout.tsx';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, user, isLoading } = useMe();
@@ -50,7 +51,13 @@ const Root = () => {
       <Routes>
         <Route element={<DefaultLayout toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/library">
+            <Route index element={<LibraryPage />} />
+            <Route path="/library/:category">
+              <Route index element={<CategoryLayout />} />
+              <Route path="/library/:category/:page" element={<h3>Page</h3>} />
+            </Route>
+          </Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/board" element={<ProtectedRoute />}>
             <Route index element={<div>Board</div>} />

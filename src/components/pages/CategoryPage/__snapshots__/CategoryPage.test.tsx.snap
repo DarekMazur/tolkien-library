@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CategoryPage > Snapshot Testing > should match snapshot with pages 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+<h2
+  class="MuiTypography-root MuiTypography-h2 emotion-0"
+>
+  React Fundamentals
+</h2>
+`;
+
+exports[`CategoryPage > Snapshot Testing > should match snapshot with undefined pages 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+<h2
+  class="MuiTypography-root MuiTypography-h2 emotion-0"
+>
+  TypeScript Guide
+</h2>
+`;
+
+exports[`CategoryPage > Snapshot Testing > should match snapshot without pages 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+<h2
+  class="MuiTypography-root MuiTypography-h2 emotion-0"
+>
+  Advanced Topics
+</h2>
+`;

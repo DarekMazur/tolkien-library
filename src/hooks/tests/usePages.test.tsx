@@ -7,6 +7,7 @@ const fakePage: IPageProps = {
   id: '1',
   title: 'Test Page',
   content: '<p>Hello</p>',
+  slug: 'test-page',
 };
 
 describe('usePages hook', () => {
