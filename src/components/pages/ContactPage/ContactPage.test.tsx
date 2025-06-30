@@ -78,7 +78,7 @@ describe('ContactPage Component', () => {
     expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 
-  it('should handle case when useIdentity returns null identity', () => {
+  it('should handle case when useApi returns null identity', () => {
     mockUseApi.mockReturnValue({
       data: null,
       isError: false,
