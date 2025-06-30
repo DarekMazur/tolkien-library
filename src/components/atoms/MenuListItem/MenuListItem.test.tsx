@@ -5,7 +5,6 @@ import MenuListItem from './MenuListItem';
 import type { IMainMenuList } from '@/lib/types.ts';
 import { faker } from '@faker-js/faker';
 
-// Helper to create typed menu item
 const createMenuItem = (props: Partial<IMainMenuList> = {}): IMainMenuList => ({
   id: faker.string.uuid(),
   isDivider: false,
@@ -14,13 +13,10 @@ const createMenuItem = (props: Partial<IMainMenuList> = {}): IMainMenuList => ({
 
 describe('MenuListItem', () => {
   it('renders home item with FiberNewIcon', () => {
-    // Arrange
     const item: IMainMenuList = createMenuItem({ title: 'Home', link: '/' });
 
-    // Act
     renderWithProviders(<MenuListItem item={item} />);
 
-    // Assert
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByTestId('FiberNewIcon')).toBeInTheDocument();
   });

@@ -1,8 +1,6 @@
 import { createTheme } from '@mui/material';
 import Tolkien from '@/assets/fonts/Tolkien.ttf';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import '@fontsource-variable/montserrat';
+import '@fontsource-variable/montserrat/index.css';
 
 const colors = {
   light: '#FFFFF3',

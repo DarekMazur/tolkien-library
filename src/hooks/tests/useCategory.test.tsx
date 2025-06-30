@@ -105,7 +105,7 @@ describe('useCategory hook', () => {
       {
         id: '3',
         title: 'Duplicate Category',
-        slug: 'test-category', // ten sam slug co pierwszy
+        slug: 'test-category',
       },
     ];
 
