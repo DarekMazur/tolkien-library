@@ -1,14 +1,15 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
 import { useLocation } from 'react-router';
-import { useCategory } from '@/hooks/useCategory.tsx';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import CategoryPage from '@/components/pages/CategoryPage/CategoryPage.tsx';
+import { getCategoryBySlug } from '@/lib/getDataFromApi.ts';
+import { useApi } from '@/hooks/useApi.tsx';
 
 const CategoryLayout = () => {
   const location = useLocation();
   const categoryFullSlug = location.pathname.split('/');
   const categorySlug = categoryFullSlug[categoryFullSlug.length - 1];
-  const { category, isLoading, isError } = useCategory(categorySlug);
+  const { data: category, isLoading, isError } = useApi(() => getCategoryBySlug(categorySlug));
 
   return (
     <Wrapper>

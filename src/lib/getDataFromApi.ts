@@ -41,10 +41,10 @@ export const getCategoryBySlug = async (slug: string): Promise<TResponse<ICatego
     };
   }
 
-  const found = res.data.find((cat) => cat.slug === slug) || null;
+  const category = res.data.find((cat) => cat.slug === slug) || null;
 
   return {
-    data: found,
+    data: category,
     isError: false,
     errorMessage: null,
   };

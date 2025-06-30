@@ -6,12 +6,17 @@ import rehypeRaw from 'rehype-raw';
 import { components } from '@/lib/helpers/mdComponents.tsx';
 import ReactMarkdown from 'react-markdown';
 import { useLocation } from 'react-router';
-import { usePages } from '@/hooks/usePages.tsx';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
+import { getPageBySlug } from '@/lib/getDataFromApi.ts';
+import { useApi } from '@/hooks/useApi.tsx';
 
 const LibraryPage = () => {
   const location = useLocation();
-  const { page, isError, isLoading } = usePages(location.pathname.slice(1));
+  const {
+    data: page,
+    isError,
+    isLoading,
+  } = useApi(() => getPageBySlug(location.pathname.slice(1)));
 
   return (
     <Wrapper>

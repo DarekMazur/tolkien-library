@@ -22,7 +22,7 @@ export const useApi = <T,>(fn: () => Promise<TResponse<T>>) => {
         setIsLoading(false);
       }
     })();
-  }, [fn]);
+  }, []);
 
   return { data, isError, isLoading, errorMessage };
 };
