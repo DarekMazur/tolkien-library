@@ -78,7 +78,6 @@ describe('ImageController Component', () => {
       const fileInput = screen.getByRole('textbox', { hidden: true }) as HTMLInputElement;
       const uploadButton = screen.getByTestId('CloudUploadIcon').closest('div');
 
-      // Mock click on file input
       const clickSpy = vi.spyOn(fileInput, 'click');
 
       await user.click(uploadButton!);
@@ -146,7 +145,6 @@ describe('ImageController Component', () => {
       const avatarImg = screen.getByRole('img');
       const avatarRoot = avatarImg.parentElement as HTMLElement;
 
-      // Check if styles are applied (this depends on your styling approach)
       expect(avatarRoot).toHaveStyle({
         width: '120px',
         height: '120px',
