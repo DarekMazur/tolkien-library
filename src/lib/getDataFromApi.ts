@@ -1,4 +1,4 @@
-import { ICategoryProps, IPageProps, TResponse } from './types.ts';
+import { ICategoryProps, IIdentityProps, IPageProps, TResponse } from './types.ts';
 
 const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
   const response: TResponse<T> = {
@@ -49,3 +49,6 @@ export const getCategoryBySlug = async (slug: string): Promise<TResponse<ICatego
     errorMessage: null,
   };
 };
+
+export const getPageIdentity = () =>
+  fetchApi<IIdentityProps>(`${import.meta.env.VITE_API_URL}/identity`);
