@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { displayDate } from './displayDate';
+import { displayDate } from '../displayDate.ts';
 
 describe('displayDate', () => {
   it('formats correctly date with one and two digit months', () => {

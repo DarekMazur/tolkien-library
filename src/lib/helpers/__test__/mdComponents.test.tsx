@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { components } from './mdComponents';
+import { components } from '../mdComponents.tsx';
 
 describe('components.div', () => {
   it('renders Alert with severity="warning" when className contains "warning"', () => {
