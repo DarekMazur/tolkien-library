@@ -11,7 +11,7 @@ export const useApi = <T,>(fn: () => Promise<TResponse<T>>) => {
     (async () => {
       setIsLoading(true);
       try {
-        const res = await fn(); // Promise<TResponse<T>>
+        const res = await fn();
         setIsError(res.isError);
         setErrorMessage(res.errorMessage);
         setData(res.data);
