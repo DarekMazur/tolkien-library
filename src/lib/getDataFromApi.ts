@@ -1,35 +1,51 @@
-import { ICategoryProps } from '@/lib/types.ts';
-type TResponse = {
-  data: ICategoryProps | null;
-  isError: boolean;
-  errorMessage: string | null;
-};
+import { ICategoryProps, IPageProps, TResponse } from './types.ts';
 
-const response: TResponse = {
-  data: null,
-  isError: false,
-  errorMessage: null,
-};
+const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
+  const response: TResponse<T> = {
+    data: null,
+    isError: false,
+    errorMessage: null,
+  };
 
-export const getCategoryBySlug = async (slug: string) => {
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
+    const res = await fetch(url);
     if (!res.ok) {
-      response.isError = true;
-      response.errorMessage = 'Failed to fetch';
-      return response;
+      return {
+        ...response,
+        isError: true,
+        errorMessage: `HTTP ${res.status}: ${res.statusText}`,
+      };
     }
-    const data = await res.json();
-    const category = data.filter((cat: ICategoryProps) => cat.slug === slug);
-    response.data = category[0];
+    const json = await res.json();
+    return { ...response, data: json };
   } catch (err) {
-    response.isError = true;
-    if (err instanceof Error) {
-      response.errorMessage = `Error:  ${err.message}`;
-    } else {
-      response.errorMessage = 'Error';
-    }
+    return {
+      ...response,
+      isError: true,
+      errorMessage: err instanceof Error ? err.message : 'Unknown error',
+    };
+  }
+};
+
+export const getPageBySlug = (slug: string) =>
+  fetchApi<IPageProps>(`${import.meta.env.VITE_API_URL}/pages/${slug}`);
+
+export const getCategoryBySlug = async (slug: string): Promise<TResponse<ICategoryProps>> => {
+  const res = await fetchApi<ICategoryProps[]>(`${import.meta.env.VITE_API_URL}/categories`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
   }
 
-  return response;
+  const found = res.data.find((cat) => cat.slug === slug) || null;
+
+  return {
+    data: found,
+    isError: false,
+    errorMessage: null,
+  };
 };
