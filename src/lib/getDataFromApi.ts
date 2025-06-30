@@ -1,22 +1,54 @@
-import { IRegisteredUser } from '@/lib/types.ts';
+import { ICategoryProps, IIdentityProps, IPageProps, TResponse } from './types.ts';
 
-export const getLogin = async ({ avatar, email, emailVerified, userName }: IRegisteredUser) => {
+export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
+  const response: TResponse<T> = {
+    data: null,
+    isError: false,
+    errorMessage: null,
+  };
+
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ avatar, email, emailVerified, userName }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    const res = await fetch(url);
+    if (!res.ok) {
+      return {
+        ...response,
+        isError: true,
+        errorMessage: `HTTP ${res.status}: ${res.statusText}`,
+      };
     }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Login error:', error);
-    throw error;
+    const json = await res.json();
+    return { ...response, data: json };
+  } catch (err) {
+    return {
+      ...response,
+      isError: true,
+      errorMessage: err instanceof Error ? err.message : 'Unknown error',
+    };
   }
 };
+
+export const getPageBySlug = (slug: string) =>
+  fetchApi<IPageProps>(`${import.meta.env.VITE_API_URL}/pages/${slug}`);
+
+export const getCategoryBySlug = async (slug: string): Promise<TResponse<ICategoryProps>> => {
+  const res = await fetchApi<ICategoryProps[]>(`${import.meta.env.VITE_API_URL}/categories`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  const category = res.data.find((cat) => cat.slug === slug) || null;
+
+  return {
+    data: category,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
+export const getPageIdentity = () =>
+  fetchApi<IIdentityProps>(`${import.meta.env.VITE_API_URL}/identity`);

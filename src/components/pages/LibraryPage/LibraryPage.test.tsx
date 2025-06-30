@@ -1,11 +1,36 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import LibraryPage from './LibraryPage';
 import * as reactRouter from 'react-router';
-import * as usePageHook from '@/hooks/usePages';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import { IPageProps } from '@/lib/types';
+import * as useApiModule from '@/hooks/useApi';
+import * as apiModule from '@/lib/getDataFromApi';
 import '@testing-library/jest-dom';
+import { useLocation, Location } from 'react-router';
+import { getPageBySlug } from '@/lib/getDataFromApi';
+
+vi.mock('@/hooks/useApi');
+vi.mock('@/lib/getDataFromApi', () => ({
+  getPageBySlug: vi.fn(),
+}));
+
+vi.mocked(apiModule.getPageBySlug).mockResolvedValue({
+  data: null,
+  isError: false,
+  errorMessage: null,
+});
+
+type GetPageBySlugReturn = ReturnType<typeof getPageBySlug>;
+type PageResponseType = Awaited<GetPageBySlugReturn>;
+
+const mockUseApi = vi.mocked(useApiModule.useApi);
+mockUseApi.mockReturnValue({
+  data: null,
+  isError: false,
+  isLoading: false,
+  errorMessage: null,
+});
 
 vi.mock('react-router', async () => {
   const actual = await vi.importActual('react-router');
@@ -14,10 +39,6 @@ vi.mock('react-router', async () => {
     useLocation: vi.fn(),
   };
 });
-
-vi.mock('@/hooks/usePages', () => ({
-  usePages: vi.fn(),
-}));
 
 describe('LibraryPage Component', () => {
   const mockLocation = {
@@ -32,15 +53,17 @@ describe('LibraryPage Component', () => {
     id: '1',
     title: 'Test Page Title',
     content: '# Test Content\n\nThis is test markdown content.',
+    slug: 'test-page-title',
   };
 
   beforeEach(() => {
     vi.mocked(reactRouter.useLocation).mockReturnValue(mockLocation);
 
-    vi.mocked(usePageHook.usePages).mockReturnValue({
-      page: null,
+    mockUseApi.mockReturnValue({
+      data: null,
       isError: false,
       isLoading: true,
+      errorMessage: null,
     });
   });
 
@@ -49,10 +72,11 @@ describe('LibraryPage Component', () => {
   });
 
   it('should display loader when page is loading', () => {
-    vi.mocked(usePageHook.usePages).mockReturnValue({
-      page: null,
+    mockUseApi.mockReturnValue({
+      data: null,
       isError: false,
       isLoading: true,
+      errorMessage: null,
     });
 
     renderWithProviders(<LibraryPage />);
@@ -62,10 +86,11 @@ describe('LibraryPage Component', () => {
   });
 
   it('should render page content when successfully loaded', () => {
-    vi.mocked(usePageHook.usePages).mockReturnValue({
-      page: mockPageData,
+    mockUseApi.mockReturnValue({
+      data: mockPageData,
       isError: false,
       isLoading: false,
+      errorMessage: null,
     });
 
     renderWithProviders(<LibraryPage />);
@@ -77,10 +102,11 @@ describe('LibraryPage Component', () => {
   });
 
   it('should render nothing when error occurs', () => {
-    vi.mocked(usePageHook.usePages).mockReturnValue({
-      page: null,
+    mockUseApi.mockReturnValue({
+      data: null,
       isError: true,
       isLoading: false,
+      errorMessage: null,
     });
 
     const { container } = renderWithProviders(<LibraryPage />);
@@ -92,10 +118,11 @@ describe('LibraryPage Component', () => {
   });
 
   it('should render nothing when page is null but not loading', () => {
-    vi.mocked(usePageHook.usePages).mockReturnValue({
-      page: null,
+    mockUseApi.mockReturnValue({
+      data: null,
       isError: false,
       isLoading: false,
+      errorMessage: null,
     });
 
     const { container } = renderWithProviders(<LibraryPage />);
@@ -106,16 +133,16 @@ describe('LibraryPage Component', () => {
     expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   });
 
-  it('should call usePages with correct slug from pathname', () => {
-    const customLocation = {
-      ...mockLocation,
-      pathname: '/my-custom-page',
-    };
-    vi.mocked(reactRouter.useLocation).mockReturnValue(customLocation);
-
+  it('should call useApi with correct slug from pathname', async () => {
+    vi.mocked(useLocation).mockReturnValue({ pathname: '/my-custom-page' } as Location);
     renderWithProviders(<LibraryPage />);
-
-    expect(usePageHook.usePages).toHaveBeenCalledWith('my-custom-page');
+    expect(useApiModule.useApi).toHaveBeenCalledWith(expect.any(Function));
+    const fetchFn = mockUseApi.mock.calls[0][0] as () => Promise<PageResponseType>;
+    await fetchFn();
+    await waitFor(() => {
+      expect(apiModule.getPageBySlug).toHaveBeenCalledWith('my-custom-page');
+      expect(apiModule.getPageBySlug).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should handle complex markdown content rendering', () => {
@@ -124,12 +151,14 @@ describe('LibraryPage Component', () => {
       title: 'Complex Page',
       content:
         '# Heading 1\n\n## Heading 2\n\n- List item 1\n- List item 2\n\n**Bold text** and *italic text*',
+      slug: 'complex-page',
     };
 
-    vi.mocked(usePageHook.usePages).mockReturnValue({
-      page: complexMarkdownPage,
+    mockUseApi.mockReturnValue({
+      data: complexMarkdownPage,
       isError: false,
       isLoading: false,
+      errorMessage: null,
     });
 
     renderWithProviders(<LibraryPage />);
@@ -154,10 +183,11 @@ describe('LibraryPage Component', () => {
 
   describe('Component Snapshots', () => {
     it('should match snapshot when loading', () => {
-      vi.mocked(usePageHook.usePages).mockReturnValue({
-        page: null,
+      mockUseApi.mockReturnValue({
+        data: null,
         isError: false,
         isLoading: true,
+        errorMessage: null,
       });
 
       const { asFragment } = renderWithProviders(<LibraryPage />);
@@ -166,10 +196,11 @@ describe('LibraryPage Component', () => {
     });
 
     it('should match snapshot when page is loaded', () => {
-      vi.mocked(usePageHook.usePages).mockReturnValue({
-        page: mockPageData,
+      mockUseApi.mockReturnValue({
+        data: mockPageData,
         isError: false,
         isLoading: false,
+        errorMessage: null,
       });
 
       const { asFragment } = renderWithProviders(<LibraryPage />);
@@ -178,10 +209,11 @@ describe('LibraryPage Component', () => {
     });
 
     it('should match snapshot when error occurs', () => {
-      vi.mocked(usePageHook.usePages).mockReturnValue({
-        page: null,
+      mockUseApi.mockReturnValue({
+        data: null,
         isError: true,
         isLoading: false,
+        errorMessage: null,
       });
 
       const { asFragment } = renderWithProviders(<LibraryPage />);
@@ -192,10 +224,11 @@ describe('LibraryPage Component', () => {
 
   describe('Component Styling and Material-UI Integration', () => {
     it('should apply correct Material-UI components and styles', () => {
-      vi.mocked(usePageHook.usePages).mockReturnValue({
-        page: mockPageData,
+      mockUseApi.mockReturnValue({
+        data: mockPageData,
         isError: false,
         isLoading: false,
+        errorMessage: null,
       });
 
       const { container } = renderWithProviders(<LibraryPage />);
@@ -212,12 +245,14 @@ describe('LibraryPage Component', () => {
         id: '3',
         title: 'GFM Test',
         content: '| Column 1 | Column 2 |\n|----------|----------|\n| Cell 1   | Cell 2   |',
+        slug: 'gfm-test',
       };
 
-      vi.mocked(usePageHook.usePages).mockReturnValue({
-        page: markdownWithGfm,
+      mockUseApi.mockReturnValue({
+        data: markdownWithGfm,
         isError: false,
         isLoading: false,
+        errorMessage: null,
       });
 
       renderWithProviders(<LibraryPage />);
@@ -229,28 +264,40 @@ describe('LibraryPage Component', () => {
   });
 
   describe('Hook Integration Tests', () => {
-    it('should handle pathname with leading slash correctly', () => {
+    it('should handle pathname with leading slash correctly', async () => {
       const locationWithSlash = {
         ...mockLocation,
         pathname: '/about-us',
       };
-      vi.mocked(reactRouter.useLocation).mockReturnValue(locationWithSlash);
+      vi.mocked(useLocation).mockReturnValue(locationWithSlash);
 
       renderWithProviders(<LibraryPage />);
 
-      expect(usePageHook.usePages).toHaveBeenCalledWith('about-us');
+      expect(useApiModule.useApi).toHaveBeenCalledWith(expect.any(Function));
+      const fetchFn = mockUseApi.mock.calls[0][0] as () => Promise<PageResponseType>;
+      await fetchFn();
+      await waitFor(() => {
+        expect(apiModule.getPageBySlug).toHaveBeenCalledWith('about-us');
+        expect(apiModule.getPageBySlug).toHaveBeenCalledTimes(1);
+      });
     });
 
-    it('should handle root pathname correctly', () => {
+    it('should handle root pathname correctly', async () => {
       const rootLocation = {
         ...mockLocation,
         pathname: '/',
       };
-      vi.mocked(reactRouter.useLocation).mockReturnValue(rootLocation);
+      vi.mocked(useLocation).mockReturnValue(rootLocation);
 
       renderWithProviders(<LibraryPage />);
 
-      expect(usePageHook.usePages).toHaveBeenCalledWith('');
+      expect(useApiModule.useApi).toHaveBeenCalledWith(expect.any(Function));
+      const fetchFn = mockUseApi.mock.calls[0][0] as () => Promise<PageResponseType>;
+      await fetchFn();
+      await waitFor(() => {
+        expect(apiModule.getPageBySlug).toHaveBeenCalledWith('');
+        expect(apiModule.getPageBySlug).toHaveBeenCalledTimes(1);
+      });
     });
   });
 });

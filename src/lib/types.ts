@@ -53,3 +53,9 @@ export interface IPageProps {
   content: string;
   category?: ICategoryProps;
 }
+
+export type TResponse<T> = {
+  data: T | null;
+  isError: boolean;
+  errorMessage: string | null;
+};

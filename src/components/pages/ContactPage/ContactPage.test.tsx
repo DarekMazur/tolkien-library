@@ -2,10 +2,12 @@ import { vi } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import ContactPage from './ContactPage';
-import * as useIdentityModule from '@/hooks/useIdentity';
+import * as useApiModule from '@/hooks/useApi';
 
-vi.mock('@/hooks/useIdentity');
-const mockUseIdentity = vi.mocked(useIdentityModule.useIdentity);
+vi.mock('@/hooks/useApi');
+vi.mock('@/lib/getDataFromApi');
+
+const mockUseApi = vi.mocked(useApiModule.useApi);
 
 vi.mock('@/lib/helpers/sendMessage', () => ({
   sendMessage: vi.fn(),
@@ -21,7 +23,12 @@ describe('ContactPage Component', () => {
   });
 
   it('should render contact page with basic elements', () => {
-    mockUseIdentity.mockReturnValue({ identity: null });
+    mockUseApi.mockReturnValue({
+      data: null,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     const { asFragment } = renderWithProviders(<ContactPage />);
 
@@ -37,7 +44,12 @@ describe('ContactPage Component', () => {
       },
     };
 
-    mockUseIdentity.mockReturnValue({ identity: mockIdentity });
+    mockUseApi.mockReturnValue({
+      data: mockIdentity,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     renderWithProviders(<ContactPage />);
 
@@ -54,15 +66,25 @@ describe('ContactPage Component', () => {
       },
     };
 
-    mockUseIdentity.mockReturnValue({ identity: mockIdentity });
+    mockUseApi.mockReturnValue({
+      data: mockIdentity,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     renderWithProviders(<ContactPage />);
 
     expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 
-  it('should handle case when useIdentity returns null identity', () => {
-    mockUseIdentity.mockReturnValue({ identity: null });
+  it('should handle case when useApi returns null identity', () => {
+    mockUseApi.mockReturnValue({
+      data: null,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     const { asFragment } = renderWithProviders(<ContactPage />);
 
@@ -71,7 +93,12 @@ describe('ContactPage Component', () => {
   });
 
   it('should render ContactButtons component', () => {
-    mockUseIdentity.mockReturnValue({ identity: null });
+    mockUseApi.mockReturnValue({
+      data: null,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     renderWithProviders(<ContactPage />);
 
@@ -79,7 +106,12 @@ describe('ContactPage Component', () => {
   });
 
   it('should apply correct Material-UI styling', () => {
-    mockUseIdentity.mockReturnValue({ identity: null });
+    mockUseApi.mockReturnValue({
+      data: null,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     const { container } = renderWithProviders(<ContactPage />);
 
@@ -98,7 +130,12 @@ describe('ContactPage Component', () => {
       },
     };
 
-    mockUseIdentity.mockReturnValue({ identity: mockIdentity });
+    mockUseApi.mockReturnValue({
+      data: mockIdentity,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+    });
 
     const { asFragment } = renderWithProviders(<ContactPage />);
 
