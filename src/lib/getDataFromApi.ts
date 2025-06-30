@@ -1,6 +1,6 @@
 import { ICategoryProps, IIdentityProps, IPageProps, TResponse } from './types.ts';
 
-const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
+export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
   const response: TResponse<T> = {
     data: null,
     isError: false,
