@@ -1,28 +1,27 @@
 import { useEffect, useState } from 'react';
 import { ICategoryProps } from '@/lib/types.ts';
+import { getCategoryBySlug } from '@/lib/getDataFromApi.ts';
 
 export const useCategory = (slug: string) => {
   const [category, setCategory] = useState<ICategoryProps | null>();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
-        if (!res.ok) {
-          setIsError(true);
-          setIsLoading(false);
-          return;
-        }
-        const data = await res.json();
-        const category = data.filter((cat: ICategoryProps) => cat.slug === slug);
-        setCategory(category[0]);
+        const res = await getCategoryBySlug(slug);
+        setIsError(res.isError);
+        setErrorMessage(res.errorMessage);
+        setCategory(res.data);
       } catch (err) {
-        console.error(err);
-        setIsError(true);
-        setErrorMessage(errorMessage);
+        if (err instanceof Error) {
+          setErrorMessage(`Error: ${err.message}`);
+        } else {
+          setErrorMessage('Error: unknown error');
+        }
       } finally {
         setIsLoading(false);
       }
