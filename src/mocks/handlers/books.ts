@@ -3,7 +3,7 @@ import { db } from '@/mocks/db.ts';
 
 export const handlers = [
   http.get(`${import.meta.env.VITE_API_URL}/books`, () => {
-    return HttpResponse.json(db.navigation.getAll());
+    return HttpResponse.json(db.book.getAll());
   }),
 
   http.get(`${import.meta.env.VITE_API_URL}/books/:bookId`, ({ params }) => {
