@@ -42,6 +42,92 @@ const createIdentity = () => {
 
 createIdentity();
 
+const createTranslator = () => {
+  const length = faker.number.int({ min: 4, max: 7 });
+
+  for (let i = 0; i < length; i++) {
+    const translator = {
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+    };
+
+    db.translator.create(translator);
+  }
+};
+
+createTranslator();
+
+const createPublisher = () => {
+  const length = faker.number.int({ min: 5, max: 10 });
+
+  for (let i = 0; i < length; i++) {
+    const publisherName = faker.lorem.words({ min: 1, max: 2 });
+
+    db.publisher.create({ title: publisherName });
+  }
+};
+
+createPublisher();
+
+const createBooks = () => {
+  const length = faker.number.int({ min: 20, max: 50 });
+
+  for (let i = 0; i < length; i++) {
+    const publishers = db.publisher.getAll();
+    const publishersIndex = faker.number.int({ min: 0, max: publishers.length - 1 });
+    const publisher = publishers[publishersIndex];
+
+    const translators = db.translator.getAll();
+    const translatorsIndex = faker.number.int({ min: 0, max: translators.length - 1 });
+    const translator = translators[translatorsIndex];
+
+    const isTolkien = faker.datatype.boolean({ probability: 0.7 });
+
+    const calculateISBN13Checksum = (isbn12: string) => {
+      const digits = isbn12.split('').map(Number);
+      let sum = 0;
+      for (let i = 0; i < digits.length; i++) {
+        sum += digits[i] * (i % 2 === 0 ? 1 : 3);
+      }
+      return (10 - (sum % 10)) % 10;
+    };
+
+    const generateRandomISBN13 = () => {
+      let isbn = Math.random() < 0.5 ? '978' : '979';
+
+      for (let i = 0; i < 9; i++) {
+        isbn += Math.floor(Math.random() * 10);
+      }
+
+      const checksum = calculateISBN13Checksum(isbn);
+      return isbn + checksum;
+    };
+
+    const isbn = generateRandomISBN13();
+
+    const book = {
+      originalTitle: isTolkien
+        ? faker.lorem.words({ min: 1, max: 4 })
+        : faker.datatype.boolean({ probability: 0.7 })
+          ? faker.lorem.words({ min: 1, max: 4 })
+          : null,
+      polishTitle: faker.lorem.words({ min: 1, max: 4 }),
+      author: isTolkien ? 'J.R.R. Tolkien' : faker.person.fullName(),
+      translator,
+      publisher,
+      year: Number(faker.date.past().getFullYear()),
+      publicationNumber: faker.number.int({ min: 1, max: 5 }),
+      cover: isTolkien ? (faker.datatype.boolean() ? 'Miękka' : 'Twarda') : null,
+      series: faker.datatype.boolean() ? faker.lorem.words({ min: 1, max: 2 }) : null,
+      isbn,
+    };
+
+    db.book.create(book);
+  }
+};
+
+createBooks();
+
 const createCategories = () => {
   const categoriesLength = faker.number.int({ min: 4, max: 8 });
 
@@ -348,4 +434,7 @@ window.mocks = {
   getNews: () => db.article.getAll(),
   getIdentity: () => db.identity.getAll(),
   getCategories: () => db.category.getAll(),
+  getBooks: () => db.book.getAll(),
+  getTranslators: () => db.translator.getAll(),
+  getPublisher: () => db.publisher.getAll(),
 };

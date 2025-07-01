@@ -1,4 +1,4 @@
-import { ICategoryProps, IIdentityProps, IPageProps, TResponse } from './types.ts';
+import { IBookProps, ICategoryProps, IIdentityProps, IPageProps, TResponse } from './types.ts';
 
 export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
   const response: TResponse<T> = {
@@ -52,3 +52,25 @@ export const getCategoryBySlug = async (slug: string): Promise<TResponse<ICatego
 
 export const getPageIdentity = () =>
   fetchApi<IIdentityProps>(`${import.meta.env.VITE_API_URL}/identity`);
+
+export const getAllBooks = () => fetchApi<IBookProps[]>(`${import.meta.env.VITE_API_URL}/books`);
+
+export const getBooksByAuthor = async (author: string): Promise<TResponse<IBookProps[]>> => {
+  const res = await fetchApi<IBookProps[]>(`${import.meta.env.VITE_API_URL}/books`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  const books = res.data.filter((book) => book.author === author) || null;
+
+  return {
+    data: books,
+    isError: false,
+    errorMessage: null,
+  };
+};

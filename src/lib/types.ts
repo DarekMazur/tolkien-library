@@ -59,3 +59,30 @@ export type TResponse<T> = {
   isError: boolean;
   errorMessage: string | null;
 };
+
+export interface IPublisherProps {
+  readonly id: string;
+  title: string;
+  description: string;
+}
+
+export interface ITransactorProps {
+  readonly id: string;
+  firstName: string;
+  lastName: string;
+  description: string;
+}
+
+export interface IBookProps {
+  readonly id: string;
+  originalTitle: string | null;
+  polishTitle: string;
+  author: string | null;
+  translator: ITransactorProps;
+  publisher: IPublisherProps;
+  year: number;
+  publicationNumber: number;
+  cover: string | null;
+  series: string | null;
+  isbn: string;
+}

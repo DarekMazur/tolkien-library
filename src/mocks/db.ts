@@ -51,4 +51,28 @@ export const db = factory({
     category: nullable(() => faker.lorem.word()),
     content: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
   },
+  translator: {
+    id: primaryKey(faker.string.uuid),
+    firstName: () => faker.person.firstName(),
+    lastName: () => faker.person.lastName(),
+    description: () => faker.lorem.paragraph(),
+  },
+  publisher: {
+    id: primaryKey(faker.string.uuid),
+    title: () => faker.lorem.words({ min: 1, max: 2 }),
+    description: () => faker.lorem.paragraph(),
+  },
+  book: {
+    id: primaryKey(faker.string.uuid),
+    originalTitle: nullable(() => faker.lorem.words({ min: 1, max: 4 })),
+    polishTitle: () => faker.lorem.words({ min: 1, max: 4 }),
+    author: nullable(() => faker.person.fullName()),
+    translator: oneOf('translator'),
+    publisher: oneOf('publisher'),
+    year: () => Number(faker.date.past().getFullYear()),
+    publicationNumber: () => faker.number.int({ min: 1, max: 5 }),
+    cover: nullable(() => faker.lorem.words({ min: 1, max: 2 })),
+    series: nullable(() => faker.lorem.words({ min: 1, max: 2 })),
+    isbn: () => faker.number.int().toString(),
+  },
 });
