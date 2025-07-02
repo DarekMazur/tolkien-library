@@ -1,7 +1,12 @@
 import { theme } from '@/lib/theme.tsx';
-import { TableRow } from '@mui/material';
+import { TableCellProps, TableRow } from '@mui/material';
+import { ReactNode } from 'react';
 
-const StyledTableRow = ({ children }) => {
+interface ITableCellProps extends TableCellProps {
+  children: ReactNode;
+}
+
+const StyledTableRow = ({ children }: ITableCellProps) => {
   const tableRowStyles = {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,

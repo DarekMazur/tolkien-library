@@ -18,7 +18,7 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
   return (
     <>
       <Box>
-        <Box>
+        <Box sx={{ pb: '2rem' }}>
           <Typography variant="h2">J.R.R. Tolkien's books catalog</Typography>
           <Typography>Catalog</Typography>
         </Box>

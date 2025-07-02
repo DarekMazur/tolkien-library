@@ -1,8 +1,13 @@
-import { tableCellClasses } from '@mui/material';
+import { tableCellClasses, TableCellProps } from '@mui/material';
 import { theme } from '@/lib/theme.tsx';
 import { TableCell } from '@mui/material';
+import { ReactNode } from 'react';
 
-const StyledTableCell = ({ children }) => {
+interface ITableCellProps extends TableCellProps {
+  children: ReactNode;
+}
+
+const StyledTableCell = ({ children }: ITableCellProps) => {
   const tableCellStyles = {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.main,
