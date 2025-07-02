@@ -3,7 +3,7 @@ import { handlers } from './handlers';
 import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
 import { IUser } from '@/lib/types.ts';
-import slugify from 'slugify';
+import { createSlug } from '@/lib/helpers/createSlug.ts';
 
 declare global {
   interface Window {
@@ -16,17 +16,6 @@ export const worker = setupWorker(...handlers);
 worker.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url);
 });
-
-const createSlug = (title: string) => {
-  return slugify(title, {
-    replacement: '-',
-    remove: /[*+~.()'"!:@]/g,
-    lower: true,
-    strict: true,
-    locale: 'pl',
-    trim: true,
-  });
-};
 
 const generateAlertBlock = (type: string): string => {
   return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
