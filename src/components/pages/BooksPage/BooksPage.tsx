@@ -26,7 +26,7 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
         <Divider />
       </Box>
       <TableContainer component={Paper} sx={{ mt: '2rem' }}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 700 }}>
           <TableHead>
             <StyledTableRow>
               <StyledTableCell>Original Title</StyledTableCell>
