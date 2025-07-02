@@ -1,4 +1,4 @@
-const ISBN_UNIVERSAL = /^(?:(?:\d[-\s]?){9}[\dX]|(?:97[89])(?:[-\s]?\d){10})$/i;
+const ISBN_UNIVERSAL = /^(?:(?:\d[-\s]?){9}[\dX]|97[89](?:[-\s]?\d){10})$/i;
 
 export const validateISBN = (isbn: string): boolean => {
   if (!ISBN_UNIVERSAL.test(isbn)) {
