@@ -1,0 +1,82 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StyledTableCell Component > matches snapshot 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.emotion-0 caption {
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  padding: 16px;
+  color: #1D263B;
+  text-align: left;
+  caption-side: bottom;
+}
+
+.emotion-1 {
+  display: table-row-group;
+}
+
+.emotion-2 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-2.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-2.Mui-selected {
+  background-color: rgba(29, 38, 59, 0.08);
+}
+
+.emotion-2.Mui-selected:hover {
+  background-color: rgba(29, 38, 59, 0.12);
+}
+
+.emotion-3 {
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: #1D263B;
+}
+
+.emotion-3.MuiTableCell-head {
+  background-color: #1D263B;
+  color: #FFFFF3;
+}
+
+<table
+    class="MuiTable-root emotion-0"
+  >
+    <tbody
+      class="MuiTableBody-root emotion-1"
+    >
+      <tr
+        class="MuiTableRow-root emotion-2"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-3"
+        >
+          Snapshot Test
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
