@@ -104,6 +104,10 @@ describe('createSlug', () => {
       const result = createSlug('test\t\n\r  mixed\t\nwhitespace');
       expect(result).toBe('test-mixed-whitespace');
     });
+    it('should handle strings with comma', () => {
+      const result = createSlug('test, string with comma');
+      expect(result).toBe('test-string-with-comma');
+    });
   });
 
   describe('type preservation', () => {
