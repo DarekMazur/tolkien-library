@@ -86,3 +86,5 @@ export interface IBookProps {
   series: string | null;
   isbn: string;
 }
+
+export type TOrder = 'asc' | 'desc';

@@ -1,4 +1,4 @@
-import { IBookProps } from '@/lib/types.ts';
+import { IBookProps, TOrder } from '@/lib/types.ts';
 import {
   Box,
   Divider,
@@ -7,14 +7,108 @@ import {
   TableBody,
   TableContainer,
   TableHead,
+  TableSortLabel,
   Typography,
 } from '@mui/material';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.tsx';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow.tsx';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 import { validateISBN } from '@/lib/helpers/validateISBN.ts';
+import { useState } from 'react';
+import { theme } from '@/lib/theme.tsx';
+
+const styledSort = {
+  color: theme.palette.secondary.main,
+  '& .MuiTableSortLabel-icon': {
+    color: `${theme.palette.secondary.main} !important`,
+  },
+  '&:hover': {
+    color: `${theme.palette.secondary.main} !important`,
+    opacity: '0.7',
+  },
+  '&.Mui-active': {
+    color: `${theme.palette.secondary.main} !important`,
+  },
+};
+
+const TableHeader = ({
+  order,
+  orderBy,
+  handleRequestSort,
+}: {
+  order: TOrder;
+  orderBy: string;
+  handleRequestSort: (property: string) => void;
+}) => {
+  const headerTitles = [
+    {
+      displayTitle: 'Original Title',
+      key: 'originalTitle',
+    },
+    {
+      displayTitle: 'Polish Title',
+      key: 'polishTitle',
+    },
+    {
+      displayTitle: 'Translator',
+      key: 'translator',
+    },
+    {
+      displayTitle: 'Publisher',
+      key: 'publisher',
+    },
+    {
+      displayTitle: 'Year',
+      key: 'year',
+    },
+    {
+      displayTitle: 'Pub. no',
+      key: 'publicationNumber',
+    },
+    {
+      displayTitle: 'Cover',
+      key: 'cover',
+    },
+    {
+      displayTitle: 'Series',
+      key: 'series',
+    },
+    {
+      displayTitle: 'ISBN',
+      key: 'isbn',
+    },
+  ];
+
+  return (
+    <TableHead>
+      <StyledTableRow>
+        {headerTitles.map((title) => (
+          <StyledTableCell key={title.key}>
+            <TableSortLabel
+              active={orderBy === title.key}
+              direction={orderBy === title.key ? order : 'asc'}
+              onClick={() => handleRequestSort(title.key)}
+              sx={styledSort}
+            >
+              {title.displayTitle}
+            </TableSortLabel>
+          </StyledTableCell>
+        ))}
+      </StyledTableRow>
+    </TableHead>
+  );
+};
 
 const BooksPage = ({ books }: { books: IBookProps[] }) => {
+  const [order, setOrder] = useState<TOrder>('asc');
+  const [orderBy, setOrderBy] = useState<string>('year');
+
+  const handleRequestSort = (property: string) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
   return (
     <>
       <Box>
@@ -27,19 +121,7 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
       </Box>
       <TableContainer component={Paper} sx={{ mt: '2rem' }}>
         <Table sx={{ minWidth: 700 }}>
-          <TableHead>
-            <StyledTableRow>
-              <StyledTableCell>Original Title</StyledTableCell>
-              <StyledTableCell>Polish Title</StyledTableCell>
-              <StyledTableCell align="right">Translator</StyledTableCell>
-              <StyledTableCell align="right">Publisher</StyledTableCell>
-              <StyledTableCell align="right">Year</StyledTableCell>
-              <StyledTableCell align="right">Pub. no</StyledTableCell>
-              <StyledTableCell align="right">Cover</StyledTableCell>
-              <StyledTableCell align="right">Series</StyledTableCell>
-              <StyledTableCell align="right">ISBN</StyledTableCell>
-            </StyledTableRow>
-          </TableHead>
+          <TableHeader order={order} orderBy={orderBy} handleRequestSort={handleRequestSort} />
           <TableBody>
             {books.map((book) => (
               <StyledTableRow key={book.id}>
