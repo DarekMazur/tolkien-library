@@ -1,0 +1,45 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StyledTableRow > matches snapshot including styles 1`] = `
+.emotion-0 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-0.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-0.Mui-selected {
+  background-color: rgba(29, 38, 59, 0.08);
+}
+
+.emotion-0.Mui-selected:hover {
+  background-color: rgba(29, 38, 59, 0.12);
+}
+
+.emotion-0:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-0:last-child td,
+.emotion-0:last-child th {
+  border: 0px solid;
+}
+
+<div>
+  <table>
+    <tbody>
+      <tr
+        class="MuiTableRow-root emotion-0"
+      >
+        <td>
+          Snapshot cell
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
