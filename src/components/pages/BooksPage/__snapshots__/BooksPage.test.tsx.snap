@@ -151,7 +151,140 @@ exports[`BooksPage component > should match snapshot when books list is empty 1`
   color: #FFFFF3;
 }
 
-.emotion-13 {
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #FFFFF3;
+}
+
+.emotion-5::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-5.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-5 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-5:focus {
+  color: #1D263B;
+}
+
+.emotion-5:hover {
+  color: #1D263B;
+}
+
+.emotion-5:hover .MuiTableSortLabel-icon {
+  opacity: 0.5;
+}
+
+.emotion-5.Mui-active {
+  color: #1D263B;
+}
+
+.emotion-5.Mui-active .MuiTableSortLabel-icon {
+  opacity: 1;
+  color: #1D263B;
+}
+
+.emotion-5 .MuiTableSortLabel-icon {
+  color: #FFFFF3!important;
+}
+
+.emotion-5:hover {
+  color: #FFFFF3!important;
+  opacity: 0.7;
+}
+
+.emotion-5.Mui-active {
+  color: #FFFFF3!important;
+}
+
+.emotion-6 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  fill: currentColor;
+  font-size: 1.7142857142857142rem;
+  font-size: 18px;
+  margin-right: 4px;
+  margin-left: 4px;
+  opacity: 0;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,-webkit-transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-31 {
   display: table-row-group;
 }
 
@@ -172,60 +305,213 @@ exports[`BooksPage component > should match snapshot when books list is empty 1`
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Original Title
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Original Title
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Polish Title
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Polish Title
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Translator
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Translator
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Publisher
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Publisher
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Year
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root Mui-active MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Year
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Pub. no
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Pub. no
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Cover
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Cover
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Series
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Series
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            ISBN
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              ISBN
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
         </tr>
       </thead>
       <tbody
-        class="MuiTableBody-root emotion-13"
+        class="MuiTableBody-root emotion-31"
       />
     </table>
   </div>
@@ -383,11 +669,144 @@ exports[`BooksPage component > should match snapshot when books list is provided
   color: #FFFFF3;
 }
 
-.emotion-13 {
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #FFFFF3;
+}
+
+.emotion-5::-moz-focus-inner {
+  border-style: none;
+}
+
+.emotion-5.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+@media print {
+  .emotion-5 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-5:focus {
+  color: #1D263B;
+}
+
+.emotion-5:hover {
+  color: #1D263B;
+}
+
+.emotion-5:hover .MuiTableSortLabel-icon {
+  opacity: 0.5;
+}
+
+.emotion-5.Mui-active {
+  color: #1D263B;
+}
+
+.emotion-5.Mui-active .MuiTableSortLabel-icon {
+  opacity: 1;
+  color: #1D263B;
+}
+
+.emotion-5 .MuiTableSortLabel-icon {
+  color: #FFFFF3!important;
+}
+
+.emotion-5:hover {
+  color: #FFFFF3!important;
+  opacity: 0.7;
+}
+
+.emotion-5.Mui-active {
+  color: #FFFFF3!important;
+}
+
+.emotion-6 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  fill: currentColor;
+  font-size: 1.7142857142857142rem;
+  font-size: 18px;
+  margin-right: 4px;
+  margin-left: 4px;
+  opacity: 0;
+  -webkit-transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,-webkit-transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.emotion-31 {
   display: table-row-group;
 }
 
-.emotion-15 {
+.emotion-33 {
   font-family: "Montserrat Variable",sans-serif;
   font-weight: 400;
   font-size: 1rem;
@@ -400,7 +819,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
   color: #1D263B;
 }
 
-.emotion-15.MuiTableCell-head {
+.emotion-33.MuiTableCell-head {
   background-color: #1D263B;
   color: #FFFFF3;
 }
@@ -422,71 +841,224 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Original Title
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Original Title
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Polish Title
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Polish Title
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Translator
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Translator
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Publisher
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Publisher
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Year
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root Mui-active MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Year
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Pub. no
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Pub. no
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Cover
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Cover
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            Series
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Series
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
           <th
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
-            ISBN
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              ISBN
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
           </th>
         </tr>
       </thead>
       <tbody
-        class="MuiTableBody-root emotion-13"
+        class="MuiTableBody-root emotion-31"
       >
         <tr
           class="MuiTableRow-root emotion-3"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             The Hobbit
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
               href="/book/hobbit-czyli-tam-i-z-powrotem"
@@ -495,37 +1067,37 @@ exports[`BooksPage component > should match snapshot when books list is provided
             </a>
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Marek Oramus
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Rebis
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2020
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             5
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Miękka
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Middle-earth
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             9781234567897
           </td>
@@ -534,12 +1106,12 @@ exports[`BooksPage component > should match snapshot when books list is provided
           class="MuiTableRow-root emotion-3"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Unfinished Tales
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
               href="/book/niedokonczone-opowiesci"
@@ -548,35 +1120,35 @@ exports[`BooksPage component > should match snapshot when books list is provided
             </a>
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Marta Nowak
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Zysk i S-ks
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2021
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Twarda
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           />
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-15"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Incorrect number
           </td>
