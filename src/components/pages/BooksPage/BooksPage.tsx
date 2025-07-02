@@ -12,6 +12,7 @@ import {
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.tsx';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow.tsx';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
+import { validateISBN } from '@/lib/helpers/validateISBN.ts';
 
 const BooksPage = ({ books }: { books: IBookProps[] }) => {
   return (
@@ -60,7 +61,9 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
                 <StyledTableCell align="right">{book.publicationNumber}</StyledTableCell>
                 <StyledTableCell align="right">{book.cover}</StyledTableCell>
                 <StyledTableCell align="right">{book.series ?? ''}</StyledTableCell>
-                <StyledTableCell align="right">{book.isbn}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {validateISBN(book.isbn) ? book.isbn : 'Incorrect number'}
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
