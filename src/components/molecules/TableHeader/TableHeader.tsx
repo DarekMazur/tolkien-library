@@ -1,4 +1,4 @@
-import { TOrder } from '@/lib/types.ts';
+import { TAllowedPaths, TOrder } from '@/lib/types.ts';
 import { TableHead, TableSortLabel } from '@mui/material';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow.tsx';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.tsx';
@@ -10,10 +10,13 @@ const TableHeader = ({
   handleRequestSort,
 }: {
   order: TOrder;
-  orderBy: string;
-  handleRequestSort: (property: string) => void;
+  orderBy: TAllowedPaths;
+  handleRequestSort: (property: TAllowedPaths) => void;
 }) => {
-  const headerTitles = [
+  const headerTitles: {
+    displayTitle: string;
+    key: TAllowedPaths;
+  }[] = [
     {
       displayTitle: 'Original Title',
       key: 'originalTitle',

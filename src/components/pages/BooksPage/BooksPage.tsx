@@ -1,4 +1,4 @@
-import { IBookProps, TOrder } from '@/lib/types.ts';
+import { aliases, IBookProps, TAllowedPaths, TOrder, TPathValue } from '@/lib/types.ts';
 import { Box, Divider, Paper, Table, TableBody, TableContainer, Typography } from '@mui/material';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.tsx';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow.tsx';
@@ -9,9 +9,62 @@ import TableHeader from '@/components/molecules/TableHeader/TableHeader.tsx';
 
 const BooksPage = ({ books }: { books: IBookProps[] }) => {
   const [order, setOrder] = useState<TOrder>('asc');
-  const [orderBy, setOrderBy] = useState<string>('year');
+  const [orderBy, setOrderBy] = useState<TAllowedPaths>('year');
 
-  const handleRequestSort = (property: string) => {
+  const resolvePath = <P extends TAllowedPaths>(path: P): Extract<string, P> => {
+    return (aliases[path as keyof typeof aliases] ?? path) as Extract<string, P>;
+  };
+
+  const getValue = <T extends object, P extends string>(
+    obj: T,
+    path: P,
+  ): TPathValue<T, P> | null => {
+    const keys = path.split('.');
+    let current: unknown = obj;
+
+    for (const key of keys) {
+      if (current == null) return null;
+      if (typeof current !== 'object' || !(key in (current as object))) {
+        return null;
+      }
+      current = (current as Record<string, unknown>)[key];
+    }
+
+    return current as TPathValue<T, P>;
+  };
+
+  const descendingComparator = <T extends object, P extends TAllowedPaths>(
+    a: T,
+    b: T,
+    path: P,
+  ): number => {
+    const realPath = resolvePath(path);
+    const aVal = getValue(a, realPath) as unknown;
+    const bVal = getValue(b, realPath) as unknown;
+
+    if (aVal == null && bVal == null) return 0;
+    if (aVal == null) return 1;
+    if (bVal == null) return -1;
+
+    if (typeof aVal === 'string' && typeof bVal === 'string') {
+      return bVal.localeCompare(aVal);
+    }
+    if (typeof aVal === 'number' && typeof bVal === 'number') {
+      return bVal - aVal;
+    }
+    return 0;
+  };
+
+  const getComparator = <T extends object, P extends TAllowedPaths>(order: TOrder, orderBy: P) => {
+    return order === 'desc'
+      ? (a: T, b: T) => descendingComparator(a, b, orderBy)
+      : (a: T, b: T) => -descendingComparator(a, b, orderBy);
+  };
+
+  const sortedBooks = <P extends TAllowedPaths>(books: IBookProps[], order: TOrder, orderBy: P) =>
+    [...books].sort(getComparator(order, orderBy));
+
+  const handleRequestSort = (property: TAllowedPaths) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -31,7 +84,7 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
         <Table sx={{ minWidth: 700 }}>
           <TableHeader order={order} orderBy={orderBy} handleRequestSort={handleRequestSort} />
           <TableBody>
-            {books.map((book) => (
+            {sortedBooks(books, order, orderBy).map((book) => (
               <StyledTableRow key={book.id}>
                 <StyledTableCell component="th" scope="row">
                   {book.originalTitle}
