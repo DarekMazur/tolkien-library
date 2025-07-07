@@ -6,6 +6,7 @@ export const useHeaders = (arrayElement: IBookProps) => {
     if (!arrayElement) {
       return [];
     }
+
     const propertyOrder: Exclude<keyof IBookProps, 'id'>[] = [
       'originalTitle',
       'polishTitle',
