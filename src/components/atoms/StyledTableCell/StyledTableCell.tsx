@@ -7,7 +7,7 @@ interface ITableCellProps extends TableCellProps {
   children: ReactNode;
 }
 
-const StyledTableCell = ({ children }: ITableCellProps) => {
+const StyledTableCell = ({ children, ...props }: ITableCellProps) => {
   const tableCellStyles = {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.primary.main,
@@ -15,7 +15,11 @@ const StyledTableCell = ({ children }: ITableCellProps) => {
     },
   };
 
-  return <TableCell sx={tableCellStyles}>{children}</TableCell>;
+  return (
+    <TableCell sx={tableCellStyles} {...props}>
+      {children}
+    </TableCell>
+  );
 };
 
 export default StyledTableCell;

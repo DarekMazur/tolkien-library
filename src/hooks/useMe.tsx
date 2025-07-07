@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
-import { IUser } from '@/lib/types.ts';
+import { IUser } from '@/lib/types';
 
 export const useMe = () => {
   const { user: authUser, isLoading: authLoading, isAuthenticated: isAuth0 } = useAuth0();

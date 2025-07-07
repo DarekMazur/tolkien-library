@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IRole } from '@/lib/types.ts';
+import { IRole } from '@/lib/types';
 
 export const rolesApi = createApi({
   reducerPath: 'rolesApi',

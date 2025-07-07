@@ -1,4 +1,4 @@
-import { ICategoryProps } from '@/lib/types.ts';
+import { ICategoryProps } from '@/lib/types';
 import { Typography } from '@mui/material';
 
 const CategoryPage = ({ category }: { category: ICategoryProps }) => {

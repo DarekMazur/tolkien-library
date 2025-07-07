@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { IRole } from '@/lib/types.ts';
+import { IRole } from '@/lib/types';
 
 export interface MockedUser {
   id: string;

@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { fetchApi, getPageBySlug, getCategoryBySlug, getPageIdentity } from '../getDataFromApi.ts';
-import type { TResponse } from '../types.ts';
+import type { TResponse } from '@/lib/types';
 
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn());

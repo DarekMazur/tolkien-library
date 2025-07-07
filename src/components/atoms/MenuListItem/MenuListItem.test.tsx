@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import MenuListItem from './MenuListItem';
-import type { IMainMenuList } from '@/lib/types.ts';
+import type { IMainMenuList } from '@/lib/types';
 import { faker } from '@faker-js/faker';
 
 const createMenuItem = (props: Partial<IMainMenuList> = {}): IMainMenuList => ({

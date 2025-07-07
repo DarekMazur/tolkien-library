@@ -3,7 +3,7 @@ import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 import { validateISBN } from '@/lib/helpers/validateISBN.ts';
 import { TableBody } from '@mui/material';
-import { aliases, IBookProps, TAllowedPaths, TOrder, TPathValue } from '@/lib/types.ts';
+import { aliases, IBookProps, TAllowedPaths, TOrder, TPathValue } from '@/lib/types';
 
 interface ITableCustomBodyProps {
   books: IBookProps[];
@@ -69,10 +69,8 @@ const TableCustomBody = ({ books, order, orderBy }: ITableCustomBodyProps) => {
     <TableBody>
       {sortedBooks(books, order, orderBy).map((book) => (
         <StyledTableRow key={book.id}>
-          <StyledTableCell component="th" scope="row">
-            {book.originalTitle}
-          </StyledTableCell>
-          <StyledTableCell component="th" scope="row">
+          <StyledTableCell>{book.originalTitle}</StyledTableCell>
+          <StyledTableCell>
             <a href={`/book/${createSlug(book.polishTitle)}`}>{book.polishTitle}</a>
           </StyledTableCell>
           <StyledTableCell align="right">

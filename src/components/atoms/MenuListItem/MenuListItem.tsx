@@ -4,7 +4,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import InfoIcon from '@mui/icons-material/Info';
-import { IMainMenuList } from '@/lib/types.ts';
+import { IMainMenuList } from '@/lib/types';
 
 interface IMenuListItemProps {
   item: IMainMenuList;
