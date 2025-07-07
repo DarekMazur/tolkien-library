@@ -1,5 +1,5 @@
 import { IBookProps, TAllowedPaths, TOrder } from '@/lib/types';
-import { Box, Divider, Paper, Table, TableContainer, Typography } from '@mui/material';
+import { Alert, Box, Divider, Paper, Table, TableContainer, Typography } from '@mui/material';
 import { useState } from 'react';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader.tsx';
 import TableCustomBody from '@/components/organisms/TableCustomBody/TableCustomBody.tsx';
@@ -23,11 +23,27 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
       ) : (
         <>
           <Box>
-            <Box sx={{ pb: '2rem' }}>
-              <Typography variant="h2">J.R.R. Tolkien's books catalog</Typography>
-              <Typography>Catalog</Typography>
-            </Box>
-            <Typography variant="h3">Publications list</Typography>
+            {books[0].author !== 'J.R.R. Tolkien' ? (
+              <>
+                <Box sx={{ pb: '2rem' }}>
+                  <Typography variant="h2">Tolkienarium</Typography>
+                  <Alert severity="info">
+                    Photos and verification of editions: Maciej Lewandowski, Hubert Lavender,
+                    Przemyslaw Szymanski, Lukasz Zarzycki, anonymous support from a group of
+                    collectors and their own shelves.
+                  </Alert>
+                </Box>
+                <Typography variant="h3">Foreign Tolkienistics, published in Polish</Typography>
+              </>
+            ) : (
+              <>
+                <Box sx={{ pb: '2rem' }}>
+                  <Typography variant="h2">J.R.R. Tolkien's books catalog</Typography>
+                  <Typography>Catalog</Typography>
+                </Box>
+                <Typography variant="h3">Publications list</Typography>
+              </>
+            )}
             <Divider />
           </Box>
           <TableContainer component={Paper} sx={{ mt: '2rem' }}>
