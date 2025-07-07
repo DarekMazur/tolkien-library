@@ -3,10 +3,12 @@ import { Box, Divider, Paper, Table, TableContainer, Typography } from '@mui/mat
 import { useState } from 'react';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader.tsx';
 import TableCustomBody from '@/components/organisms/TableCustomBody/TableCustomBody.tsx';
+import { useHeaders } from '@/hooks/useHeaders.tsx';
 
 const BooksPage = ({ books }: { books: IBookProps[] }) => {
   const [order, setOrder] = useState<TOrder>('asc');
   const [orderBy, setOrderBy] = useState<TAllowedPaths>('year');
+  const { headers } = useHeaders(books[0]);
 
   const handleRequestSort = (property: TAllowedPaths) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -116,7 +118,7 @@ const BooksPage = ({ books }: { books: IBookProps[] }) => {
             order={order}
             orderBy={orderBy}
             handleRequestSort={handleRequestSort}
-            headerTitles={headerTitles}
+            headerTitles={headers}
           />
           <TableCustomBody books={books} order={order} orderBy={orderBy} />
         </Table>
