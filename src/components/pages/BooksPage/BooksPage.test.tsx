@@ -75,7 +75,7 @@ const sampleBooks: IBookProps[] = [
 
 describe('BooksPage component', () => {
   it('should render heading and subheading correctly', () => {
-    renderWithProviders(<BooksPage books={[]} />);
+    renderWithProviders(<BooksPage books={sampleBooks} />);
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe(
       "J.R.R. Tolkien's books catalog",
     );
@@ -84,7 +84,7 @@ describe('BooksPage component', () => {
   });
 
   it('should render table headers in correct order', () => {
-    renderWithProviders(<BooksPage books={[]} />);
+    renderWithProviders(<BooksPage books={sampleBooks} />);
     const headers = screen.getAllByRole('columnheader').map((h) => h.textContent);
     expect(headers).toEqual([
       'Original Title',
@@ -121,6 +121,11 @@ describe('BooksPage component', () => {
       '/book/niedokonczone-opowiesci',
     );
     expect(screen.getByText('Incorrect number')).toBeInTheDocument();
+  });
+
+  it('should display alert when books list is empty', () => {
+    renderWithProviders(<BooksPage books={[]} />);
+    expect(screen.getByText('No books found')).toBeInTheDocument();
   });
 
   it('should match snapshot when books list is provided', () => {

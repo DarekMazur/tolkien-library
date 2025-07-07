@@ -3,6 +3,9 @@ import { IBookProps, TAllowedPaths } from '@/lib/types';
 
 export const useHeaders = (arrayElement: IBookProps) => {
   const headers = useMemo(() => {
+    if (!arrayElement) {
+      return [];
+    }
     const propertyOrder: Exclude<keyof IBookProps, 'id'>[] = [
       'originalTitle',
       'polishTitle',
