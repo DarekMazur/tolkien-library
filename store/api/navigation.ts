@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IMainMenuList } from '@/lib/types.ts';
+import { IMainMenuList } from '@/lib/types';
 
 export const navigationApi = createApi({
   reducerPath: 'navigationApi',

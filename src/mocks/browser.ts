@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { handlers } from './handlers';
 import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
-import { IUser } from '@/lib/types.ts';
+import { IUser } from '@/lib/types';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 
 declare global {

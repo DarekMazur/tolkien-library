@@ -1,4 +1,4 @@
-import { TAllowedPaths, TOrder } from '@/lib/types.ts';
+import { TAllowedPaths, TOrder } from '@/lib/types';
 import { TableHead, TableSortLabel } from '@mui/material';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow.tsx';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.tsx';

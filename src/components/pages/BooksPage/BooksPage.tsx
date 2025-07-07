@@ -1,4 +1,4 @@
-import { IBookProps, TAllowedPaths, TOrder } from '@/lib/types.ts';
+import { IBookProps, TAllowedPaths, TOrder } from '@/lib/types';
 import { Box, Divider, Paper, Table, TableContainer, Typography } from '@mui/material';
 import { useState } from 'react';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader.tsx';

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { IBookProps, TAllowedPaths } from '@/lib/types.ts';
+import { IBookProps, TAllowedPaths } from '@/lib/types';
 
 export const useHeaders = (arrayElement: IBookProps) => {
   const headers = useMemo(() => {

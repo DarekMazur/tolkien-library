@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IIdentityProps } from '@/lib/types.ts';
+import { IIdentityProps } from '@/lib/types';
 
 const initialIdentity = null as IIdentityProps | null;
 

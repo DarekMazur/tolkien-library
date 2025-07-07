@@ -1,4 +1,4 @@
-import { IBookProps, ICategoryProps, IIdentityProps, IPageProps, TResponse } from './types.ts';
+import { IBookProps, ICategoryProps, IIdentityProps, IPageProps, TResponse } from '@/lib/types';
 
 export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
   const response: TResponse<T> = {

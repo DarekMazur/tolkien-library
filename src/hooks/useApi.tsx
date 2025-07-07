@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TResponse } from '@/lib/types.ts';
+import { TResponse } from '@/lib/types';
 
 export const useApi = <T,>(fn: () => Promise<TResponse<T>>) => {
   const [data, setData] = useState<T | null>(null);

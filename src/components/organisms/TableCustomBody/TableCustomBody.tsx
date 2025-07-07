@@ -3,7 +3,7 @@ import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 import { validateISBN } from '@/lib/helpers/validateISBN.ts';
 import { TableBody } from '@mui/material';
-import { aliases, IBookProps, TAllowedPaths, TOrder, TPathValue } from '@/lib/types.ts';
+import { aliases, IBookProps, TAllowedPaths, TOrder, TPathValue } from '@/lib/types';
 
 interface ITableCustomBodyProps {
   books: IBookProps[];

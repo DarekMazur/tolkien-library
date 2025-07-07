@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import { db } from '../db';
 import { v4 as uuid } from 'uuid';
-import { IUser } from '@/lib/types.ts';
+import { IUser } from '@/lib/types';
 
 export const handlers = [
   http.get(`${import.meta.env.VITE_API_URL}/users`, () => {

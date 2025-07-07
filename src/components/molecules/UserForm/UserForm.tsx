@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, SetStateAction, useEffect, useState } from 'rea
 import { useUpdateUserMutation } from '../../../../store';
 import ImageController from '@/components/molecules/ImageController/ImageController.tsx';
 import { theme } from '@/lib/theme';
-import { IUser } from '@/lib/types.ts';
+import { IUser } from '@/lib/types';
 
 interface IUserFormProps {
   user: IUser;
