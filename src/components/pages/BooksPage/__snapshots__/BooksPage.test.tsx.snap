@@ -284,11 +284,11 @@ exports[`BooksPage component > should match snapshot when books list is provided
   transform: rotate(180deg);
 }
 
-.emotion-22 {
+.emotion-31 {
   display: table-row-group;
 }
 
-.emotion-24 {
+.emotion-33 {
   font-family: "Montserrat Variable",sans-serif;
   font-weight: 400;
   font-size: 1rem;
@@ -301,7 +301,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
   color: #1D263B;
 }
 
-.emotion-24.MuiTableCell-head {
+.emotion-33.MuiTableCell-head {
   background-color: #1D263B;
   color: #FFFFF3;
 }
@@ -352,6 +352,29 @@ exports[`BooksPage component > should match snapshot when books list is provided
               tabindex="0"
             >
               Polish Title
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
+            scope="col"
+          >
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Translator
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
@@ -443,6 +466,52 @@ exports[`BooksPage component > should match snapshot when books list is provided
               role="button"
               tabindex="0"
             >
+              Cover
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
+            scope="col"
+          >
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
+              Series
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionAsc emotion-6"
+                data-testid="ArrowDownwardIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
+            scope="col"
+          >
+            <span
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
+              role="button"
+              tabindex="0"
+            >
               ISBN
               <svg
                 aria-hidden="true"
@@ -460,18 +529,18 @@ exports[`BooksPage component > should match snapshot when books list is provided
         </tr>
       </thead>
       <tbody
-        class="MuiTableBody-root emotion-22"
+        class="MuiTableBody-root emotion-31"
       >
         <tr
           class="MuiTableRow-root emotion-3"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             The Hobbit
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
               href="/book/hobbit-czyli-tam-i-z-powrotem"
@@ -480,37 +549,37 @@ exports[`BooksPage component > should match snapshot when books list is provided
             </a>
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Marek Oramus
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Rebis
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2020
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             5
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Miękka
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Middle-earth
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             9781234567897
           </td>
@@ -519,12 +588,12 @@ exports[`BooksPage component > should match snapshot when books list is provided
           class="MuiTableRow-root emotion-3"
         >
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Unfinished Tales
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
               href="/book/niedokonczone-opowiesci"
@@ -533,35 +602,35 @@ exports[`BooksPage component > should match snapshot when books list is provided
             </a>
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Marta Nowak
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Zysk i S-ks
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2021
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Twarda
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           />
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-24"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Incorrect number
           </td>
