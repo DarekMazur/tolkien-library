@@ -316,6 +316,28 @@ exports[`BooksPage component > should match snapshot when books list is provided
   color: #FFFFF3;
 }
 
+.emotion-35 {
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: #1D263B;
+  text-align: right;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.emotion-35.MuiTableCell-head {
+  background-color: #1D263B;
+  color: #FFFFF3;
+}
+
 <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root emotion-0"
     style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
@@ -422,6 +444,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             </span>
           </th>
           <th
+            aria-sort="ascending"
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
@@ -544,52 +567,54 @@ exports[`BooksPage component > should match snapshot when books list is provided
         <tr
           class="MuiTableRow-root emotion-3"
         >
-          <td
+          <th
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            scope="row"
           >
             The Hobbit
-          </td>
-          <td
+          </th>
+          <th
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            scope="row"
           >
             <a
               href="/book/hobbit-czyli-tam-i-z-powrotem"
             >
               Hobbit, czyli tam i z powrotem
             </a>
-          </td>
+          </th>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Marek Oramus
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Rebis
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             2020
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             5
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Miękka
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Middle-earth
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             9781234567897
           </td>
@@ -597,50 +622,52 @@ exports[`BooksPage component > should match snapshot when books list is provided
         <tr
           class="MuiTableRow-root emotion-3"
         >
-          <td
+          <th
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            scope="row"
           >
             Unfinished Tales
-          </td>
-          <td
+          </th>
+          <th
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            scope="row"
           >
             <a
               href="/book/niedokonczone-opowiesci"
             >
               Niedokończone opowieści
             </a>
-          </td>
+          </th>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Marta Nowak
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Zysk i S-ks
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             2021
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             2
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Twarda
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           />
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
             Incorrect number
           </td>

@@ -22,7 +22,7 @@ const TableHeader = ({
     <TableHead>
       <StyledTableRow>
         {headerTitles.map((title) => (
-          <StyledTableCell key={title.key}>
+          <StyledTableCell key={title.key} sortDirection={orderBy === title.key ? order : false}>
             <TableSortLabel
               active={orderBy === title.key}
               direction={orderBy === title.key ? order : 'asc'}
