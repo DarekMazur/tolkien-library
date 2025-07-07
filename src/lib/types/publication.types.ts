@@ -15,7 +15,7 @@ export interface IBookProps extends ICommonId {
   originalTitle: string | null;
   polishTitle: string;
   author: string | null;
-  translator: ITransactorProps;
+  translator: ITransactorProps | null;
   publisher: IPublisherProps;
   year: number;
   publicationNumber: number;

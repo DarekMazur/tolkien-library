@@ -567,22 +567,20 @@ exports[`BooksPage component > should match snapshot when books list is provided
         <tr
           class="MuiTableRow-root emotion-3"
         >
-          <th
+          <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
-            scope="row"
           >
             The Hobbit
-          </th>
-          <th
+          </td>
+          <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
-            scope="row"
           >
             <a
               href="/book/hobbit-czyli-tam-i-z-powrotem"
             >
               Hobbit, czyli tam i z powrotem
             </a>
-          </th>
+          </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >
@@ -622,22 +620,20 @@ exports[`BooksPage component > should match snapshot when books list is provided
         <tr
           class="MuiTableRow-root emotion-3"
         >
-          <th
+          <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
-            scope="row"
           >
             Unfinished Tales
-          </th>
-          <th
+          </td>
+          <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
-            scope="row"
           >
             <a
               href="/book/niedokonczone-opowiesci"
             >
               Niedokończone opowieści
             </a>
-          </th>
+          </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
           >

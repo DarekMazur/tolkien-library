@@ -69,10 +69,8 @@ const TableCustomBody = ({ books, order, orderBy }: ITableCustomBodyProps) => {
     <TableBody>
       {sortedBooks(books, order, orderBy).map((book) => (
         <StyledTableRow key={book.id}>
-          <StyledTableCell component="th" scope="row">
-            {book.originalTitle}
-          </StyledTableCell>
-          <StyledTableCell component="th" scope="row">
+          <StyledTableCell>{book.originalTitle}</StyledTableCell>
+          <StyledTableCell>
             <a href={`/book/${createSlug(book.polishTitle)}`}>{book.polishTitle}</a>
           </StyledTableCell>
           <StyledTableCell align="right">
