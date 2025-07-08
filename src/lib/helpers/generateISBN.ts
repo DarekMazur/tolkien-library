@@ -22,6 +22,10 @@ import { validateISBN } from '@/lib/helpers/validateISBN.ts';
  */
 
 export const calculateISBN13Checksum = (isbn12: string): number => {
+  if (isbn12.length !== 12) {
+    throw new Error(`Invalid digits length: expected 12, got ${isbn12.length}`);
+  }
+
   const digits = isbn12.split('').map(Number);
   let sum = 0;
   for (let i = 0; i < digits.length; i++) {
