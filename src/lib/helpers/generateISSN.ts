@@ -11,7 +11,7 @@ import { validateISSN } from '@/lib/helpers/validateISSN.ts';
  *
  * @example
  * ```
- * const digits = [1];
+ * const digits = [0, 3, 1, 7, 8, 4, 7];
  * const checkDigit = calculateCheckDigit(digits);
  * console.log(checkDigit); // => ‘1’
  * ```
