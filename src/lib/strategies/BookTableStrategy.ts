@@ -12,7 +12,7 @@ export class BookTableStrategy implements ITableStrategy<IBookProps> {
     publisher: 'publisher.title',
   } as const;
 
-  getAliases() {
+  getAliases(): Record<string, string> {
     return this.aliases;
   }
 

@@ -1,5 +1,3 @@
-import { IBookProps } from '@/lib/types/publication.types.ts';
-
 export type TNestedKeyOf<T> = T extends object
   ? {
       [K in keyof T & string]: T[K] extends object ? K | `${K}.${TNestedKeyOf<T[K]>}` : K;
@@ -19,7 +17,7 @@ export const aliases = {
   publisher: 'publisher.title',
 } as const;
 
-export type TAllowedPaths = TNestedKeyOf<IBookProps> | keyof typeof aliases;
+export type TAllowedPaths<T> = TNestedKeyOf<T> | keyof typeof aliases;
 
 export interface IHeaderDefinition<T> {
   displayTitle: string;
@@ -30,5 +28,9 @@ export interface IHeaderDefinition<T> {
 }
 
 export interface ITableStrategy<T> {
-  getDisplayValue<P extends TNestedKeyOf<T>>(item: T, key: P): TPathValue<T, P> | null;
+  getAliases(): Record<string, string>;
+
+  getHeaders(item: T): IHeaderDefinition<T>[];
+
+  getDisplayValue<P extends TAllowedPaths<T>>(item: T, key: P): TPathValue<T, P> | null;
 }

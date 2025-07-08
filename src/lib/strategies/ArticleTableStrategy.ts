@@ -4,6 +4,7 @@ import {
   ITableStrategy,
   TNestedKeyOf,
   TPathValue,
+  TAllowedPaths,
 } from '@/lib/types';
 
 export class ArticleTableStrategy implements ITableStrategy<IPublicationProps> {
@@ -11,7 +12,7 @@ export class ArticleTableStrategy implements ITableStrategy<IPublicationProps> {
     publisher: 'publisher.title',
   } as const;
 
-  getAliases() {
+  getAliases(): Record<string, string> {
     return this.aliases;
   }
 
@@ -59,13 +60,13 @@ export class ArticleTableStrategy implements ITableStrategy<IPublicationProps> {
       .filter((definition) => !definition.condition || definition.condition(item));
   }
 
-  getDisplayValue<P extends TNestedKeyOf<IPublicationProps>>(
+  getDisplayValue<P extends TAllowedPaths<IPublicationProps>>(
     item: IPublicationProps,
     key: P,
   ): TPathValue<IPublicationProps, P> | null {
     if (key.includes('.')) {
-      const [parentKey, childKey] = key.split('.');
-      const parent = item[parentKey as keyof IPublicationProps];
+      const [parentKey, childKey] = key.split('.') as [keyof IPublicationProps, string];
+      const parent = item[parentKey];
       if (parent && typeof parent === 'object' && childKey in parent) {
         return (parent as unknown as Record<string, unknown>)[childKey] as TPathValue<
           IPublicationProps,
