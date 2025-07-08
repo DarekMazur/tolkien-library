@@ -76,7 +76,7 @@ export const generateBaseDigits = () => {
 export const generateISSN = () => {
   const baseDigits = generateBaseDigits();
   const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/^(\d{4})(\d{3})$/, '$1-$2');
+  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&-');
 
   const issn = `${formattedBase}${checkDigit}`;
 
