@@ -1,35 +1,38 @@
-import { TAllowedPaths, TOrder } from '@/lib/types';
+import type { ReactElement } from 'react';
 import { TableHead, TableSortLabel } from '@mui/material';
-import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow.tsx';
-import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell.tsx';
-import { styledSort } from '@/components/molecules/TableHeader/TableHeader.styles.ts';
+import type { TAllowedPaths, TOrder, TPublicationType } from '@/lib/types';
+import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow';
+import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell';
+import { styledSort } from './TableHeader.styles';
 
-const TableHeader = ({
+interface ITableHeaderProps<T extends TPublicationType> {
+  order: TOrder;
+  orderBy: TAllowedPaths<T> | null;
+  handleRequestSort: (property: TAllowedPaths<T>) => void;
+  headerTitles: Array<{
+    displayTitle: string;
+    key: TAllowedPaths<T>;
+  }>;
+}
+
+const TableHeader = <T extends TPublicationType>({
   order,
   orderBy,
   handleRequestSort,
   headerTitles,
-}: {
-  order: TOrder;
-  orderBy: TAllowedPaths;
-  handleRequestSort: (property: TAllowedPaths) => void;
-  headerTitles: {
-    displayTitle: string;
-    key: TAllowedPaths;
-  }[];
-}) => {
+}: ITableHeaderProps<T>): ReactElement => {
   return (
     <TableHead>
       <StyledTableRow>
-        {headerTitles.map((title) => (
-          <StyledTableCell key={title.key} sortDirection={orderBy === title.key ? order : false}>
+        {headerTitles.map(({ displayTitle, key }) => (
+          <StyledTableCell key={key} sortDirection={orderBy === key ? order : false}>
             <TableSortLabel
-              active={orderBy === title.key}
-              direction={orderBy === title.key ? order : 'asc'}
-              onClick={() => handleRequestSort(title.key)}
+              active={orderBy === key}
+              direction={orderBy === key ? order : 'asc'}
+              onClick={() => handleRequestSort(key)}
               sx={styledSort}
             >
-              {title.displayTitle}
+              {displayTitle}
             </TableSortLabel>
           </StyledTableCell>
         ))}
