@@ -1,4 +1,6 @@
-const calculateISBN13Checksum = (isbn12: string) => {
+import { validateISBN } from '@/lib/helpers/validateISBN.ts';
+
+export const calculateISBN13Checksum = (isbn12: string) => {
   const digits = isbn12.split('').map(Number);
   let sum = 0;
   for (let i = 0; i < digits.length; i++) {
@@ -15,5 +17,12 @@ export const generateRandomISBN13 = () => {
   }
 
   const checksum = calculateISBN13Checksum(isbn);
-  return isbn + checksum;
+
+  const finalISBN = isbn + checksum;
+
+  if (!validateISBN(finalISBN)) {
+    throw new Error('Invalid ISBN');
+  }
+
+  return finalISBN;
 };
