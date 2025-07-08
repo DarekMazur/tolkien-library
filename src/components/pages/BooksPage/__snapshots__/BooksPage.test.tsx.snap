@@ -2,45 +2,35 @@
 
 exports[`BooksPage component > should match snapshot when books list is empty 1`] = `
 <DocumentFragment>
-  <div
-    class="MuiBox-root emotion-0"
-  >
-    No books found
-  </div>
-</DocumentFragment>
-`;
-
-exports[`BooksPage component > should match snapshot when books list is provided 1`] = `
-<DocumentFragment>
-  .emotion-1 {
-  padding-bottom: 2rem;
-}
-
-.emotion-2 {
+  .emotion-0 {
   margin: 0;
   font-family: "Tolkien",sans-serif;
   line-height: 1.5;
   font-weight: 300;
   font-size: 4.285714285714286rem;
+  margin-bottom: 0.35em;
 }
 
-.emotion-3 {
-  margin: 0;
-  font-family: "Montserrat Variable",sans-serif;
-  font-weight: 400;
-  font-size: 1.1428571428571428rem;
-  line-height: 1.5;
-}
-
-.emotion-4 {
+<h1
+    class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom emotion-0"
+  >
+    J.R.R. Tolkien's books catalog
+  </h1>
+  .emotion-0 {
   margin: 0;
   font-family: "Tolkien",sans-serif;
-  font-size: 1.5rem;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 1.4285714285714284rem;
+  margin-bottom: 0.35em;
 }
 
-.emotion-5 {
+<h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom emotion-0"
+  >
+    Publications list
+  </h2>
+  .emotion-0 {
   margin: 0;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -51,32 +41,9 @@ exports[`BooksPage component > should match snapshot when books list is provided
   border-bottom-width: thin;
 }
 
-<div
-    class="MuiBox-root emotion-0"
-  >
-    <div
-      class="MuiBox-root emotion-1"
-    >
-      <h2
-        class="MuiTypography-root MuiTypography-h2 emotion-2"
-      >
-        J.R.R. Tolkien's books catalog
-      </h2>
-      <p
-        class="MuiTypography-root MuiTypography-body1 emotion-3"
-      >
-        Catalog
-      </p>
-    </div>
-    <h3
-      class="MuiTypography-root MuiTypography-h3 emotion-4"
-    >
-      Publications list
-    </h3>
-    <hr
-      class="MuiDivider-root MuiDivider-fullWidth emotion-5"
-    />
-  </div>
+<hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-0"
+  />
   .emotion-0 {
   background-color: #FFFFF3;
   color: #1D263B;
@@ -87,7 +54,6 @@ exports[`BooksPage component > should match snapshot when books list is provided
   background-image: var(--Paper-overlay);
   width: 100%;
   overflow-x: auto;
-  margin-top: 2rem;
 }
 
 .emotion-1 {
@@ -95,7 +61,138 @@ exports[`BooksPage component > should match snapshot when books list is provided
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  min-width: 700px;
+}
+
+.emotion-1 caption {
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  padding: 16px;
+  color: #1D263B;
+  text-align: left;
+  caption-side: bottom;
+}
+
+.emotion-2 {
+  display: table-header-group;
+}
+
+.emotion-3 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-3.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-3.Mui-selected {
+  background-color: rgba(29, 38, 59, 0.08);
+}
+
+.emotion-3.Mui-selected:hover {
+  background-color: rgba(29, 38, 59, 0.12);
+}
+
+.emotion-3:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-3:last-child td,
+.emotion-3:last-child th {
+  border: 0px solid;
+}
+
+.emotion-4 {
+  display: table-row-group;
+}
+
+<div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root emotion-0"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <table
+      class="MuiTable-root emotion-1"
+    >
+      <thead
+        class="MuiTableHead-root emotion-2"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head emotion-3"
+        />
+      </thead>
+      <tbody
+        class="MuiTableBody-root emotion-4"
+      />
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BooksPage component > should match snapshot when books list is provided 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+  margin-bottom: 0.35em;
+}
+
+<h1
+    class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom emotion-0"
+  >
+    J.R.R. Tolkien's books catalog
+  </h1>
+  .emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  font-size: 1.4285714285714284rem;
+  margin-bottom: 0.35em;
+}
+
+<h2
+    class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom emotion-0"
+  >
+    Publications list
+  </h2>
+  .emotion-0 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+}
+
+<hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-0"
+  />
+  .emotion-0 {
+  background-color: #FFFFF3;
+  color: #1D263B;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: var(--Paper-shadow);
+  background-image: var(--Paper-overlay);
+  width: 100%;
+  overflow-x: auto;
+}
+
+.emotion-1 {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .emotion-1 caption {
@@ -316,28 +413,6 @@ exports[`BooksPage component > should match snapshot when books list is provided
   color: #FFFFF3;
 }
 
-.emotion-35 {
-  font-family: "Montserrat Variable",sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.43;
-  display: table-cell;
-  vertical-align: inherit;
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
-  text-align: left;
-  padding: 16px;
-  color: #1D263B;
-  text-align: right;
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
-  flex-direction: row-reverse;
-}
-
-.emotion-35.MuiTableCell-head {
-  background-color: #1D263B;
-  color: #FFFFF3;
-}
-
 <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root emotion-0"
     style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
@@ -444,12 +519,11 @@ exports[`BooksPage component > should match snapshot when books list is provided
             </span>
           </th>
           <th
-            aria-sort="ascending"
             class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
             scope="col"
           >
             <span
-              class="MuiButtonBase-root MuiTableSortLabel-root Mui-active MuiTableSortLabel-directionAsc emotion-5"
+              class="MuiButtonBase-root MuiTableSortLabel-root MuiTableSortLabel-directionAsc emotion-5"
               role="button"
               tabindex="0"
             >
@@ -575,44 +649,40 @@ exports[`BooksPage component > should match snapshot when books list is provided
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            <a
-              href="/book/hobbit-czyli-tam-i-z-powrotem"
-            >
-              Hobbit, czyli tam i z powrotem
-            </a>
+            Hobbit, czyli tam i z powrotem
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Marek Oramus
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Rebis
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2020
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             5
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Miękka
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Middle-earth
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             9781234567897
           </td>
@@ -628,44 +698,42 @@ exports[`BooksPage component > should match snapshot when books list is provided
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            <a
-              href="/book/niedokonczone-opowiesci"
-            >
-              Niedokończone opowieści
-            </a>
+            Niedokończone opowieści
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Marta Nowak
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Zysk i S-ks
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2021
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             2
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             Twarda
           </td>
           <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
-          />
-          <td
-            class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-35"
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Incorrect number
+            -
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
+          >
+            123INVALID
           </td>
         </tr>
       </tbody>

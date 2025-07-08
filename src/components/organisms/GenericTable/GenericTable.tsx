@@ -1,12 +1,9 @@
-// GenericTable.tsx
-
-import { ReactNode, useMemo, useState } from 'react';
-import { Divider, Paper, Table, TableBody, TableContainer, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Divider, Paper, Table, TableContainer, Typography } from '@mui/material';
 import { EPublicationType, TAllowedPaths, TOrder, TPublicationType } from '@/lib/types';
 import { useGenericHeaders } from '@/hooks/useGenericHeaders';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader';
-import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow';
-import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell';
+import GenericTableBody from '../GenericTableBody/GenericTableBody';
 
 interface IGenericTableProps<T extends TPublicationType> {
   data: T[];
@@ -32,23 +29,6 @@ const GenericTable = <T extends TPublicationType>({
     setOrderBy(property);
   };
 
-  const sortedData = useMemo(() => {
-    if (!orderBy) return data;
-    return [...data].sort((a, b) => {
-      const aValue = getDisplayValue(a, orderBy!);
-      const bValue = getDisplayValue(b, orderBy!);
-
-      const av = aValue ?? null;
-      const bv = bValue ?? null;
-
-      if (av === null) return 1;
-      if (bv === null) return -1;
-
-      const comparison = av > bv ? 1 : av < bv ? -1 : 0;
-      return order === 'desc' ? -comparison : comparison;
-    });
-  }, [data, order, orderBy, getDisplayValue]);
-
   const headerTitles = headers.map((header) => ({
     displayTitle: header.displayTitle,
     key: header.key as TAllowedPaths<T>,
@@ -69,33 +49,17 @@ const GenericTable = <T extends TPublicationType>({
         <Table>
           <TableHeader
             order={order}
-            orderBy={orderBy as string}
-            handleRequestSort={handleRequestSort as (key: string) => void}
+            orderBy={orderBy}
+            handleRequestSort={handleRequestSort}
             headerTitles={headerTitles}
           />
-          <TableBody>
-            {sortedData.map((item) => (
-              <StyledTableRow key={item.id}>
-                {headers.map((header) => {
-                  const raw = getDisplayValue(item, header.key as TAllowedPaths<T>);
-
-                  const reactNodeValue: ReactNode =
-                    raw === null
-                      ? '-'
-                      : typeof raw === 'object'
-                        ? [
-                            (raw as { firstName?: string; lastName?: string }).firstName,
-                            (raw as { firstName?: string; lastName?: string }).lastName,
-                          ]
-                            .filter(Boolean)
-                            .join(' ') || '-'
-                        : String(raw);
-
-                  return <StyledTableCell key={header.key}>{reactNodeValue}</StyledTableCell>;
-                })}
-              </StyledTableRow>
-            ))}
-          </TableBody>
+          <GenericTableBody
+            data={data}
+            order={order}
+            orderBy={orderBy}
+            headers={headers}
+            getDisplayValue={getDisplayValue}
+          />
         </Table>
       </TableContainer>
     </>
