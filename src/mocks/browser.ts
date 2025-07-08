@@ -4,8 +4,8 @@ import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
 import { IUser } from '@/lib/types';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
-import { calculateCheckDigit } from '@/lib/helpers/validateISSN.ts';
 import { generateRandomISBN13 } from '@/lib/helpers/generateISBN.ts';
+import { generateISSN } from '@/lib/helpers/generateISSN.ts';
 
 declare global {
   interface Window {
@@ -21,21 +21,6 @@ worker.events.on('request:start', ({ request }) => {
 
 const generateAlertBlock = (type: string): string => {
   return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
-};
-
-const generateBaseDigits = () => {
-  const digits = [];
-  for (let i = 0; i < 7; i++) {
-    digits.push(Math.floor(Math.random() * 10));
-  }
-  return digits;
-};
-
-const generateISSN = () => {
-  const baseDigits = generateBaseDigits();
-  const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/^(\d{4})(\d{3})$/, '$1-$2');
-  return `${formattedBase}${checkDigit}`;
 };
 
 const createIdentity = () => {
