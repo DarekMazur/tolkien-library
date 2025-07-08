@@ -8,11 +8,16 @@ vi.mock('@/lib/helpers/validateISBN.ts', () => ({
 
 describe('generateRandomISBN13', () => {
   const mockedValidateISBN = vi.mocked(validateISBN);
+  let isbns: string[] = [];
+
+  beforeAll(() => {
+    mockedValidateISBN.mockReturnValue(true);
+    isbns = Array.from({ length: 50 }, () => generateRandomISBN13());
+  });
 
   beforeEach(() => {
     vi.mocked(validateISBN).mockReturnValue(true);
   });
-
   afterEach(() => {
     vi.restoreAllMocks();
   });
@@ -23,12 +28,9 @@ describe('generateRandomISBN13', () => {
     expect(isbn).toHaveLength(13);
   });
 
-  it('begins with 978 or 979', () => {
-    for (let i = 0; i < 50; i++) {
-      const isbn = generateRandomISBN13();
-      expect(isbn.startsWith('978') || isbn.startsWith('979')).toBe(true);
-      expect(() => generateRandomISBN13()).not.toThrow();
-    }
+  it.each(isbns)('%s begins with 978 or 979', (isbn) => {
+    expect(isbn.startsWith('978') || isbn.startsWith('979')).toBe(true);
+    expect(() => generateRandomISBN13()).not.toThrow();
   });
 
   it('always passes validateISBN', () => {
