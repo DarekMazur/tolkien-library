@@ -6,6 +6,7 @@ import { handlers as identityHandlers } from './identity';
 import { handlers as pagesHandlers } from './pages';
 import { handlers as categoriesHandlers } from './categories.ts';
 import { handlers as booksHandlers } from './books';
+import { handlers as publicationsHandlers } from './publications';
 
 export const handlers = [
   ...rolesHandlers,
@@ -16,4 +17,5 @@ export const handlers = [
   ...pagesHandlers,
   ...categoriesHandlers,
   ...booksHandlers,
+  ...publicationsHandlers,
 ];

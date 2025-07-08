@@ -75,4 +75,14 @@ export const db = factory({
     series: nullable(() => faker.lorem.words({ min: 1, max: 2 })),
     isbn: () => faker.number.int().toString(),
   },
+  publication: {
+    id: primaryKey(faker.string.uuid),
+    title: () => faker.lorem.words({ min: 1, max: 4 }),
+    author: () => faker.person.fullName(),
+    publisher: oneOf('publisher'),
+    year: () => faker.date.past().getFullYear().toString(),
+    isbn: nullable(() => faker.number.int().toString()),
+    issn: nullable(() => faker.number.int().toString()),
+    description: () => faker.lorem.paragraph(),
+  },
 });
