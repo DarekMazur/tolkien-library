@@ -13,7 +13,7 @@ export type TPathValue<T, P extends string> = P extends `${infer K}.${infer R}`
     : never;
 
 export const aliases = {
-  translator: 'translator.lastName',
+  translator: 'translator',
   publisher: 'publisher.title',
 } as const;
 

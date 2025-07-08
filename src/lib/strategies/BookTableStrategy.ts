@@ -8,7 +8,7 @@ import {
 
 export class BookTableStrategy implements ITableStrategy<IBookProps> {
   private readonly aliases = {
-    translator: 'translator.lastName',
+    translator: 'translator',
     publisher: 'publisher.title',
   } as const;
 
@@ -44,7 +44,7 @@ export class BookTableStrategy implements ITableStrategy<IBookProps> {
       },
       translator: {
         displayTitle: 'Translator',
-        key: 'translator.lastName' as TNestedKeyOf<IBookProps>,
+        key: 'translator' as TNestedKeyOf<IBookProps>,
         condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
         sortable: true,
       },
