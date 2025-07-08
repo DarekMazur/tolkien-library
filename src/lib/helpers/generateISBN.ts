@@ -26,7 +26,7 @@ export const calculateISBN13Checksum = (isbn12: string): number => {
     throw new Error(`Invalid digits length: expected 12, got ${isbn12.length}`);
   }
 
-  const digits = isbn12.split('').map(Number);
+  const digits: number[] = isbn12.split('').map(Number);
   let sum = 0;
   for (let i = 0; i < digits.length; i++) {
     sum += digits[i] * (i % 2 === 0 ? 1 : 3);
@@ -46,7 +46,7 @@ export const calculateISBN13Checksum = (isbn12: string): number => {
  * @returns {string}
  *   A valid ISBN-13 string of length 13, e.g., "9781234567897".
  * @throws {Error}
- *   Throws if the generated ISBN fails validation by `validateISBN`.
+ *   Throws if the generated ISBN fails validation by `validateISBN` and if the prefix is invalid (different from 978 or 979).
  *
  * @example
  * // Might return "9790123456784"
@@ -54,16 +54,30 @@ export const calculateISBN13Checksum = (isbn12: string): number => {
  * console.log(isbn); // => "979XXXXXXXXXX"
  */
 
-export const generateRandomISBN13 = (): string => {
-  let isbn = Math.random() < 0.5 ? '978' : '979';
+type TIsbnPrefix = '978' | '979';
+type TIsbn = `${TIsbnPrefix}${string}`;
+
+export const generateRandomISBN13 = (): TIsbn => {
+  const isbnPrefix: TIsbnPrefix = Math.random() < 0.5 ? '978' : '979';
+
+  const isbnElements: string[] = [isbnPrefix];
 
   for (let i = 0; i < 9; i++) {
-    isbn += Math.floor(Math.random() * 10);
+    isbnElements.push(Math.floor(Math.random() * 10).toString());
   }
 
-  const checksum = calculateISBN13Checksum(isbn);
+  const assertIsTIsbn = (s: string): TIsbn => {
+    if (!s.startsWith('978') && !s.startsWith('979')) {
+      throw new Error('Invalid ISBN prefix');
+    }
+    return s as TIsbn;
+  };
 
-  const finalISBN = isbn + checksum;
+  const rawIsbn: string = isbnElements.join('');
+  const isbn: TIsbn = assertIsTIsbn(rawIsbn);
+  const checksum: number = calculateISBN13Checksum(isbn);
+  const finalRaw: string = isbn + checksum.toString();
+  const finalISBN: TIsbn = assertIsTIsbn(finalRaw);
 
   if (!validateISBN(finalISBN)) {
     throw new Error('Invalid ISBN');
