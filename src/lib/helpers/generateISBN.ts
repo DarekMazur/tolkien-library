@@ -80,7 +80,7 @@ export const generateRandomISBN13 = (): TIsbn => {
   const finalISBN: TIsbn = assertIsTIsbn(finalRaw);
 
   if (!validateISBN(finalISBN)) {
-    throw new Error('Invalid ISBN');
+    throw new Error('Invalid ISBN format or checksum');
   }
 
   return finalISBN;
