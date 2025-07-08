@@ -1,4 +1,4 @@
-import { calculateCheckDigit } from '@/lib/helpers/generateISSN.ts';
+import { calculateCheckDigit } from '@/lib/utils/calculateCheckDigit.ts';
 
 export const validateISSN = (issn: string) => {
   const issnPattern = /^[0-9]{4}-[0-9]{3}[0-9X]$/;
