@@ -19,7 +19,7 @@ export const validateISSN = (issn: string) => {
 
   const cleanISSN = issn.trim().toUpperCase();
 
-  const digitsOnly = cleanISSN.replace('-', '');
+  const digitsOnly = cleanISSN.replace(/-/g, '');
 
   const firstSevenDigits = digitsOnly.substring(0, 7);
   const checkDigit = digitsOnly.substring(7, 8);
