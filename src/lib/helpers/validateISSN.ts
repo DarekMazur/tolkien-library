@@ -12,7 +12,7 @@ export const calculateCheckDigit = (digits: number[]) => {
 };
 
 export const validateISSN = (issn: string) => {
-  const issnPattern = /^[0-9]{4}-?[0-9]{3}[0-9X]$/;
+  const issnPattern = /^[0-9]{4}-[0-9]{3}[0-9X]$/;
   if (!issnPattern.test(issn.trim())) {
     return false;
   }

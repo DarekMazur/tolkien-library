@@ -1,8 +1,9 @@
 import { calculateCheckDigit, validateISSN } from '../validateISSN.ts';
 
-const validISSN = ['0317-8471', '03178471', '2434-561X'];
+const validISSN = ['0317-8471', '2434-561X'];
 
 const invalidISSN = [
+  '03178471', // invalid format - missing dash
   '123-4567', // invalid - too short - format
   'ABCD-EFGH', // invalid characters
   '0317-8472', // invalid checksum
