@@ -1,4 +1,10 @@
+import { validateISSN } from '@/lib/helpers/validateISSN.ts';
+
 export const calculateCheckDigit = (digits: number[]) => {
+  if (digits.length !== 7) {
+    throw new Error(`Invalid digits length: expected 7, got ${digits.length}`);
+  }
+
   const weights = [8, 7, 6, 5, 4, 3, 2];
   const sum = digits.reduce((acc, digit, idx) => acc + digit * weights[idx], 0);
   const remainder = sum % 11;
@@ -23,5 +29,11 @@ export const generateISSN = () => {
   const baseDigits = generateBaseDigits();
   const checkDigit = calculateCheckDigit(baseDigits);
   const formattedBase = baseDigits.join('').replace(/^(\d{4})(\d{3})$/, '$1-$2');
-  return `${formattedBase}${checkDigit}`;
+
+  const issn = `${formattedBase}${checkDigit}`;
+
+  if (!validateISSN(issn)) {
+    throw new Error('Invalid ISSN');
+  }
+  return issn;
 };
