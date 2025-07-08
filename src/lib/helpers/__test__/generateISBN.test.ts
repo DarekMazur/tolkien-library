@@ -56,7 +56,6 @@ describe('generateRandomISBN13', () => {
   });
 
   it('correctly calculates the checksum for the example ISBN-12', async () => {
-    const { calculateISBN13Checksum } = await import('@/lib/helpers/generateISBN.ts');
     const isbn12 = '978030640615';
     const checksum = calculateISBN13Checksum(isbn12);
     expect(checksum).toBe(7);
