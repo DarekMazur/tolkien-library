@@ -1,4 +1,4 @@
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { vi } from 'vitest';
 import { generateRandomISBN13 } from '@/lib/helpers/generateISBN.ts';
 import { validateISBN } from '@/lib/helpers/validateISBN.ts';
 
@@ -38,7 +38,7 @@ describe('generateRandomISBN13', () => {
 
   it('throws an error when validateISBN returns false', () => {
     mockedValidateISBN.mockReturnValue(false);
-    expect(() => generateRandomISBN13()).toThrowError('Invalid ISBN');
+    expect(() => generateRandomISBN13()).toThrow('Invalid ISBN');
   });
 
   it('correctly calculates the checksum for the example ISBN-12', async () => {
