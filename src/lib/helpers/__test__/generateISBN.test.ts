@@ -27,6 +27,7 @@ describe('generateRandomISBN13', () => {
     for (let i = 0; i < 50; i++) {
       const isbn = generateRandomISBN13();
       expect(isbn.startsWith('978') || isbn.startsWith('979')).toBe(true);
+      expect(() => generateRandomISBN13()).not.toThrow();
     }
   });
 
