@@ -33,3 +33,10 @@ export interface IPublicationProps extends ICommonId {
   issn: string;
   description: string;
 }
+
+export type TPublicationType = IBookProps | IPublicationProps;
+
+export enum EPublicationType {
+  BOOK = 'book',
+  ARTICLE = 'article',
+}
