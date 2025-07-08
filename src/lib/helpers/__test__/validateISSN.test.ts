@@ -16,6 +16,7 @@ const edgeCases: [string, boolean][] = [
   ['2434-561x', false], // lowercase X
   ['0000-0000', true], // zeros only - dummy ISSN
   ['0000-000X', false], // zeros with X et the end
+  ['0317--8471', false], // double dash between sections
 ];
 
 describe('calculateCheckDigit', () => {
