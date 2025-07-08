@@ -1,15 +1,4 @@
-export const calculateCheckDigit = (digits: number[]) => {
-  const weights = [8, 7, 6, 5, 4, 3, 2];
-  const sum = digits.reduce((acc, digit, idx) => acc + digit * weights[idx], 0);
-  const remainder = sum % 11;
-
-  if (remainder === 0) {
-    return '0';
-  }
-
-  const check = 11 - remainder;
-  return check === 10 ? 'X' : String(check);
-};
+import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
 
 export const validateISSN = (issn: string) => {
   const issnPattern = /^[0-9]{4}-[0-9]{3}[0-9X]$/;
