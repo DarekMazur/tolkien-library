@@ -1,5 +1,5 @@
 import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/utils/calculateCheckDigit.ts';
+import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
 
 /**
  * Generate the first seven digits of ISSN

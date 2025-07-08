@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
 import { generateBaseDigits, generateISSN } from '@/lib/helpers/generateISSN.ts';
 import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/utils/calculateCheckDigit.ts';
+import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
 
 vi.mock('@/lib/helpers/validateISSN.ts', () => ({
   validateISSN: vi.fn(),

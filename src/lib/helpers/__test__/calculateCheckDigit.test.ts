@@ -1,4 +1,4 @@
-import { calculateCheckDigit } from '@/lib/utils/calculateCheckDigit.ts';
+import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
 
 describe('calculateCheckDigit', () => {
   it('should return “0” when weighted sum % 11 === 0', () => {
