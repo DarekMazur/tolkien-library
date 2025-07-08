@@ -3,11 +3,18 @@ import { calculateCheckDigit, validateISSN } from '../validateISSN.ts';
 const validISSN = ['0317-8471', '03178471', '2434-561X'];
 
 const invalidISSN = [
-  '2434-561x', // incorrect lowercase X
   '123-4567', // invalid - too short - format
   'ABCD-EFGH', // invalid characters
   '0317-8472', // invalid checksum
   12345678, // param is not string
+];
+
+const edgeCases: [string, boolean][] = [
+  ['', false], // empty string
+  ['       ', false], // spaces only
+  ['2434-561x', false], // lowercase X
+  ['0000-0000', true], // zeros only - dummy ISSN
+  ['0000-000X', false], // zeros with X et the end
 ];
 
 describe('calculateCheckDigit', () => {
@@ -35,5 +42,11 @@ describe('validateISSN – invalid ISSN data', () => {
     if (typeof issn === 'string') {
       expect(validateISSN(issn)).toBe(false);
     }
+  });
+});
+
+describe('validateISSN – edge cases', () => {
+  it.each(edgeCases)('ISSN %s', (issn, expected) => {
+    expect(validateISSN(issn)).toBe(expected);
   });
 });
