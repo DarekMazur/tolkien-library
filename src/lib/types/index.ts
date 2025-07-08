@@ -4,4 +4,4 @@ export * from './user.types';
 export * from './content.types';
 export * from './publication.types';
 export * from './common.types';
-export * from './utility.types';
+export * from './table.types';
