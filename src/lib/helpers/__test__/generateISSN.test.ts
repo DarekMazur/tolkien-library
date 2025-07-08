@@ -115,7 +115,7 @@ describe('generateISSN', () => {
     expect(mockedValidateISSN(issn)).toBe(true);
   });
 
-  it('throws an error when validateISBN returns false', () => {
+  it('throws an error when validateISSN returns false', () => {
     mockedValidateISSN.mockReturnValue(false);
     expect(() => generateISSN()).toThrow('Invalid ISSN');
   });
