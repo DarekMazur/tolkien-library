@@ -81,7 +81,7 @@ export const generateISSN = () => {
   const issn = `${formattedBase}${checkDigit}`;
 
   if (!validateISSN(issn)) {
-    throw new Error('Invalid ISSN');
+    throw new Error('Invalid ISSN format or checksum');
   }
   return issn;
 };
