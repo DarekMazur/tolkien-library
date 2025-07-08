@@ -5,6 +5,7 @@ import { setupWorker } from 'msw/browser';
 import { IUser } from '@/lib/types';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 import { calculateCheckDigit } from '@/lib/helpers/validateISSN.ts';
+import { generateRandomISBN13 } from '@/lib/helpers/generateISBN.ts';
 
 declare global {
   interface Window {
@@ -20,26 +21,6 @@ worker.events.on('request:start', ({ request }) => {
 
 const generateAlertBlock = (type: string): string => {
   return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
-};
-
-const calculateISBN13Checksum = (isbn12: string) => {
-  const digits = isbn12.split('').map(Number);
-  let sum = 0;
-  for (let i = 0; i < digits.length; i++) {
-    sum += digits[i] * (i % 2 === 0 ? 1 : 3);
-  }
-  return (10 - (sum % 10)) % 10;
-};
-
-const generateRandomISBN13 = () => {
-  let isbn = Math.random() < 0.5 ? '978' : '979';
-
-  for (let i = 0; i < 9; i++) {
-    isbn += Math.floor(Math.random() * 10);
-  }
-
-  const checksum = calculateISBN13Checksum(isbn);
-  return isbn + checksum;
 };
 
 const generateBaseDigits = () => {
