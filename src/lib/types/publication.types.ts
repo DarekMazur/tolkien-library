@@ -23,3 +23,13 @@ export interface IBookProps extends ICommonId {
   series: string | null;
   isbn: string;
 }
+
+export interface IPublicationProps extends ICommonId {
+  title: string;
+  author: string;
+  publisher: IPublisherProps;
+  year: string;
+  isbn: string;
+  issn: string;
+  description: string;
+}
