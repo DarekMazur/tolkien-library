@@ -12,12 +12,12 @@ export const calculateCheckDigit = (digits: number[]) => {
 };
 
 export const validateISSN = (issn: string) => {
-  const cleanISSN = issn.trim().toUpperCase();
-
   const issnPattern = /^[0-9]{4}-?[0-9]{3}[0-9X]$/;
-  if (!issnPattern.test(cleanISSN)) {
+  if (!issnPattern.test(issn.trim())) {
     return false;
   }
+
+  const cleanISSN = issn.trim().toUpperCase();
 
   const digitsOnly = cleanISSN.replace('-', '');
 
