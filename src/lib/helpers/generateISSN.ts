@@ -19,7 +19,7 @@ import { validateISSN } from '@/lib/helpers/validateISSN.ts';
  * @throws {Error} When the array does not contain exactly 7 elements.
  */
 
-export const calculateCheckDigit = (digits: number[]) => {
+export const calculateCheckDigit = (digits: number[]): string => {
   if (digits.length !== 7) {
     throw new Error(`Invalid digits length: expected 7, got ${digits.length}`);
   }
@@ -49,7 +49,7 @@ export const calculateCheckDigit = (digits: number[]) => {
  */
 
 export const generateBaseDigits = () => {
-  const digits = [];
+  const digits: number[] = [];
   for (let i = 0; i < 7; i++) {
     digits.push(Math.floor(Math.random() * 10));
   }
