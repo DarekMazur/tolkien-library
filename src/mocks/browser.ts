@@ -21,6 +21,52 @@ const generateAlertBlock = (type: string): string => {
   return `<div class='${type}'>${faker.lorem.paragraph()}</div>`;
 };
 
+const calculateISBN13Checksum = (isbn12: string) => {
+  const digits = isbn12.split('').map(Number);
+  let sum = 0;
+  for (let i = 0; i < digits.length; i++) {
+    sum += digits[i] * (i % 2 === 0 ? 1 : 3);
+  }
+  return (10 - (sum % 10)) % 10;
+};
+
+const generateRandomISBN13 = () => {
+  let isbn = Math.random() < 0.5 ? '978' : '979';
+
+  for (let i = 0; i < 9; i++) {
+    isbn += Math.floor(Math.random() * 10);
+  }
+
+  const checksum = calculateISBN13Checksum(isbn);
+  return isbn + checksum;
+};
+
+const generateBaseDigits = () => {
+  const digits = [];
+  for (let i = 0; i < 7; i++) {
+    digits.push(Math.floor(Math.random() * 10));
+  }
+  return digits;
+};
+
+const calculateCheckDigit = (digits: number[]) => {
+  const weights = [8, 7, 6, 5, 4, 3, 2];
+  const sum = digits.reduce((acc, digit, idx) => acc + digit * weights[idx], 0);
+  const remainder = sum % 11;
+  if (remainder === 0) {
+    return '0';
+  }
+  const check = 11 - remainder;
+  return check === 10 ? 'X' : String(check);
+};
+
+const generateISSN = () => {
+  const baseDigits = generateBaseDigits();
+  const checkDigit = calculateCheckDigit(baseDigits);
+  const formattedBase = baseDigits.join('').replace(/^(\d{4})(\d{3})$/, '$1-$2');
+  return `${formattedBase}${checkDigit}`;
+};
+
 const createIdentity = () => {
   db.identity.create({
     adminContact: {
@@ -72,26 +118,6 @@ const createBooks = () => {
 
     const isTolkien = faker.datatype.boolean({ probability: 0.7 });
 
-    const calculateISBN13Checksum = (isbn12: string) => {
-      const digits = isbn12.split('').map(Number);
-      let sum = 0;
-      for (let i = 0; i < digits.length; i++) {
-        sum += digits[i] * (i % 2 === 0 ? 1 : 3);
-      }
-      return (10 - (sum % 10)) % 10;
-    };
-
-    const generateRandomISBN13 = () => {
-      let isbn = Math.random() < 0.5 ? '978' : '979';
-
-      for (let i = 0; i < 9; i++) {
-        isbn += Math.floor(Math.random() * 10);
-      }
-
-      const checksum = calculateISBN13Checksum(isbn);
-      return isbn + checksum;
-    };
-
     const isbn = generateRandomISBN13();
 
     const book = {
@@ -116,6 +142,25 @@ const createBooks = () => {
 };
 
 createBooks();
+
+const createPublications = () => {
+  const length = faker.number.int({ min: 4, max: 15 });
+
+  for (let i = 0; i < length; i++) {
+    const isISBN = faker.datatype.boolean();
+    const publishers = db.publisher.getAll();
+    const publishersIndex = faker.number.int({ min: 0, max: publishers.length - 1 });
+    const publisher = publishers[publishersIndex];
+
+    db.publication.create({
+      publisher,
+      isbn: isISBN ? generateRandomISBN13() : null,
+      issn: isISBN ? null : generateISSN(),
+    });
+  }
+};
+
+createPublications();
 
 const createCategories = () => {
   const categoriesLength = faker.number.int({ min: 4, max: 8 });
@@ -426,4 +471,5 @@ window.mocks = {
   getBooks: () => db.book.getAll(),
   getTranslators: () => db.translator.getAll(),
   getPublisher: () => db.publisher.getAll(),
+  getPublications: () => db.publication.getAll(),
 };
