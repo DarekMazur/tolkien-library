@@ -41,7 +41,7 @@ export const generateBaseDigits = () => {
 export const generateISSN = () => {
   const baseDigits = generateBaseDigits();
   const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&-');
+  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&-'); // Inserts a hyphen after the first 4 digits if there are exactly 3 digits further on
 
   const issn = `${formattedBase}${checkDigit}`;
 
