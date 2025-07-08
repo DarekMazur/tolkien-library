@@ -35,7 +35,7 @@ export const generateBaseDigits = () => {
  * ```
  *
  * @throws {Error}
- * Throws if the generated ISBN fails validation by `validateISSN`.
+ * Throws if the generated ISSN fails validation by `validateISSN`.
  */
 
 export const generateISSN = () => {
