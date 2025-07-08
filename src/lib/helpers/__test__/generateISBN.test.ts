@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import { generateRandomISBN13 } from '@/lib/helpers/generateISBN.ts';
+import { calculateISBN13Checksum, generateRandomISBN13 } from '@/lib/helpers/generateISBN.ts';
 import { validateISBN } from '@/lib/helpers/validateISBN.ts';
 
 vi.mock('@/lib/helpers/validateISBN.ts', () => ({
@@ -34,6 +34,17 @@ describe('generateRandomISBN13', () => {
     const isbn = generateRandomISBN13();
     expect(mockedValidateISBN).toHaveBeenCalledWith(isbn);
     expect(mockedValidateISBN(isbn)).toBe(true);
+  });
+
+  it('throws an error when isbn12 length is different than 12', () => {
+    const tooShort = `12345678901`;
+    const tooLong = '1234567890123';
+    expect(() => calculateISBN13Checksum(tooShort)).toThrow(
+      'Invalid digits length: expected 12, got 11',
+    );
+    expect(() => calculateISBN13Checksum(tooLong)).toThrow(
+      'Invalid digits length: expected 12, got 13',
+    );
   });
 
   it('throws an error when validateISBN returns false', () => {
