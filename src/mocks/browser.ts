@@ -4,6 +4,7 @@ import { db } from './db.ts';
 import { setupWorker } from 'msw/browser';
 import { IUser } from '@/lib/types';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
+import { calculateCheckDigit } from '@/lib/helpers/validateISSN.ts';
 
 declare global {
   interface Window {
@@ -47,17 +48,6 @@ const generateBaseDigits = () => {
     digits.push(Math.floor(Math.random() * 10));
   }
   return digits;
-};
-
-const calculateCheckDigit = (digits: number[]) => {
-  const weights = [8, 7, 6, 5, 4, 3, 2];
-  const sum = digits.reduce((acc, digit, idx) => acc + digit * weights[idx], 0);
-  const remainder = sum % 11;
-  if (remainder === 0) {
-    return '0';
-  }
-  const check = 11 - remainder;
-  return check === 10 ? 'X' : String(check);
 };
 
 const generateISSN = () => {
