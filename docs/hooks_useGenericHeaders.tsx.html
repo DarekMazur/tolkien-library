@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> hooks/useGenericHeaders.tsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>hooks/useGenericHeaders.tsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
+import {
+  EPublicationType,
+  TPublicationType,
+  TAllowedPaths,
+  ITableStrategy,
+  TPathValue,
+  IHeaderDefinition,
+} from '@/lib/types';
+import { TableStrategyFactory } from '@/lib/factories/TableStrategyFactory';
+
+/**
+ * Hook to generate table headers and value display functions for various publication types.
+ *
+ * @template {TPublicationType} T - Publication object type extending TPublicationType
+ *
+ * @param {T[]} items - Array of publication elements to be processed
+ * @param {EPublicationType} publicationType - The type of publication that determines the processing strategy
+ *
+ * @returns {{
+ *   headers: IHeaderDefinition&lt;T>[],
+ *   getDisplayValue: &lt;P extends TAllowedPaths&lt;T>>(item: T, key: P) => TPathValue&lt;T, P> | null,
+ *   aliases: Record&lt;string, string>
+ * }} Object containing table headers, function to retrieve display values and aliases
+ *
+ * @property {string[]} headers - An array of table headers generated from the first element
+ * @property {Function} getDisplayValue - Function to retrieve the formatted value displayed for a given key
+ * @property {Record&lt;string, string>} aliases - Alias map of column names to display
+ *
+ * @example
+ * // Basic use with articles
+ * const articles = [
+ *   { title: "Artykuł 1", author: "Jan Kowalski", date: "2023-01-01" },
+ *   { title: "Artykuł 2", author: "Anna Nowak", date: "2023-01-02" }
+ * ];
+ *
+ * const { headers, getDisplayValue, aliases } = useGenericHeaders(
+ *   articles,
+ *   EPublicationType.ARTICLE
+ * );
+ *
+ * // Using headers in a table component
+ * headers.forEach(header => {
+ *   const displayValue = getDisplayValue(articles[0], header);
+ *   console.log(`${aliases[header] || header}: ${displayValue}`);
+ * });
+ *
+ * @example
+ * // Use with an empty array
+ * const { headers } = useGenericHeaders([], EPublicationType.BOOK);
+ * console.log(headers); // []
+ *
+ * @see {@link TableStrategyFactory} - Table strategy factory
+ * @see {@link ITableStrategy} - Table strategy interface
+ * @see {@link EPublicationType} - Enum of publication types
+ */
+
+export const useGenericHeaders = &lt;T extends TPublicationType>(
+  items: T[],
+  publicationType: EPublicationType,
+): {
+  headers: IHeaderDefinition&lt;T>[];
+  getDisplayValue: &lt;P extends TAllowedPaths&lt;T>>(item: T, key: P) => TPathValue&lt;T, P> | null;
+  aliases: Record&lt;string, string>;
+} => {
+  const strategy = useMemo(
+    () => TableStrategyFactory.createStrategy(publicationType) as ITableStrategy&lt;T>,
+    [publicationType],
+  );
+
+  const headers = useMemo(() => {
+    if (items.length === 0) return [];
+    return strategy.getHeaders(items[0]);
+  }, [items, strategy]);
+
+  const getDisplayValue = useMemo(() => {
+    return &lt;P extends TAllowedPaths&lt;T>>(item: T, key: P): TPathValue&lt;T, P> | null => {
+      return strategy.getDisplayValue(item, key);
+    };
+  }, [strategy]);
+
+  const aliases = useMemo(() => strategy.getAliases(), [strategy]);
+
+  return { headers, getDisplayValue, aliases };
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

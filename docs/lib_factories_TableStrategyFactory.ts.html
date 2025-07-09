@@ -1,0 +1,175 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> lib/factories/TableStrategyFactory.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>lib/factories/TableStrategyFactory.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  ITableStrategy,
+  EPublicationType,
+  TPublicationType,
+  IBookProps,
+  IPublicationProps,
+} from '@/lib/types';
+import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy';
+import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy';
+
+type StrategyForType&lt;T extends TPublicationType> = T extends IBookProps
+  ? ITableStrategy&lt;IBookProps>
+  : T extends IPublicationProps
+    ? ITableStrategy&lt;IPublicationProps>
+    : never;
+
+/**
+ * Table strategy factory for different types of publications.
+ *
+ * By using the factory pattern, it is possible to get the appropriate instance of
+ * table strategy (`ITableStrategy`) depending on the passed publication type.
+ *
+ * @template T Default publication type, from among `TPublicationType`.
+ */
+export class TableStrategyFactory {
+  /**
+   * Returns an instance of the table strategy appropriate for the publication type.
+   *
+   * @typeParam T The type of publication whose strategy is to be created.
+   *              It can be `IBookProps` or `IPublicationProps`.
+   * @param {EPublicationType} type - Publication type, such as `EPublicationType.BOOK` or `EPublicationType.ARTICLE`.
+   * @returns {StrategyForType&lt;T>} Instance of `ITableStrategy` matched to the publication property T.
+   *
+   * @throws {Error} When the factory does not support the transferred publication type.
+   *
+   * @example
+   * // Creating a strategy for the book
+   * const bookStrategy = TableStrategyFactory.createStrategy&lt;IBookProps>(EPublicationType.BOOK);
+   * bookStrategy.renderTable(data);
+   *
+   * @example
+   * // Create a strategy for the article
+   * const articleStrategy = TableStrategyFactory.createStrategy&lt;IPublicationProps>(EPublicationType.ARTICLE);
+   * articleStrategy.renderTable(data);
+   */
+  static createStrategy&lt;T extends TPublicationType = TPublicationType>(
+    type: EPublicationType,
+  ): StrategyForType&lt;T> {
+    switch (type) {
+      case EPublicationType.BOOK:
+        return new BookTableStrategy() as unknown as StrategyForType&lt;T>;
+      case EPublicationType.ARTICLE:
+        return new ArticleTableStrategy() as unknown as StrategyForType&lt;T>;
+      default:
+        throw new Error(`Unsupported publication type: ${type}`);
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>
