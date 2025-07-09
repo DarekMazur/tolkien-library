@@ -1,6 +1,13 @@
 import { ReactNode, useMemo } from 'react';
 import { TableBody } from '@mui/material';
-import { ICommonId, IHeaderDefinition, TAllowedPaths, TOrder, TPathValue } from '@/lib/types';
+import {
+  ICommonId,
+  IHeaderDefinition,
+  ITranslatorProps,
+  TAllowedPaths,
+  TOrder,
+  TPathValue,
+} from '@/lib/types';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell';
 interface IGenericTableBodyProps<T extends ICommonId> {
@@ -23,8 +30,8 @@ const GenericTableBody = <T extends ICommonId>({
       const aValue = getDisplayValue(a, orderBy!);
       const bValue = getDisplayValue(b, orderBy!);
 
-      const av = aValue ?? null;
-      const bv = bValue ?? null;
+      const av = (aValue as ITranslatorProps)?.lastName ?? aValue ?? null;
+      const bv = (bValue as ITranslatorProps)?.lastName ?? bValue ?? null;
 
       if (av === null) return 1;
       if (bv === null) return -1;

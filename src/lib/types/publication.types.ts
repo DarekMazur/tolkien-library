@@ -5,7 +5,7 @@ export interface IPublisherProps extends ICommonId {
   description: string;
 }
 
-export interface ITransactorProps extends ICommonId {
+export interface ITranslatorProps extends ICommonId {
   firstName: string;
   lastName: string;
   description: string;
@@ -15,7 +15,7 @@ export interface IBookProps extends ICommonId {
   originalTitle: string | null;
   polishTitle: string;
   author: string | null;
-  translator: ITransactorProps | null;
+  translator: ITranslatorProps | null;
   publisher: IPublisherProps;
   year: number;
   publicationNumber: number;
