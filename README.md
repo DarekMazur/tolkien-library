@@ -21,7 +21,7 @@ The project aims to fill a gap in accessible, well-organized information on Tolk
 - **Frontend**: React (with TypeScript), Vite
 - **Linting & Formatting**: ESLint, Prettier, Husky, lint-staged
 - **Testing**: Vitest
-- **Documentation**: Markdown
+- **Documentation**: Markdown, Storybook, JSDoc
 
 ## Status
 
