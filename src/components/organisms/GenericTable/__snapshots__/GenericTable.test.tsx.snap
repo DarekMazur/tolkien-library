@@ -1,0 +1,52 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GenericTable > Snapshot tests > matches snapshot (empty data) 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+  margin-bottom: 0.35em;
+}
+
+<h1
+  class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom emotion-0"
+>
+  Test Table Title
+</h1>
+`;
+
+exports[`GenericTable > Snapshot tests > matches snapshot (full props) 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+  margin-bottom: 0.35em;
+}
+
+<h1
+  class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom emotion-0"
+>
+  Test Table Title
+</h1>
+`;
+
+exports[`GenericTable > Snapshot tests > matches snapshot (no subtitle) 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+  margin-bottom: 0.35em;
+}
+
+<h1
+  class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom emotion-0"
+>
+  Test Table Title
+</h1>
+`;

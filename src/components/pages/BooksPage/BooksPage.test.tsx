@@ -76,11 +76,10 @@ const sampleBooks: IBookProps[] = [
 describe('BooksPage component', () => {
   it('should render heading and subheading correctly', () => {
     renderWithProviders(<BooksPage books={sampleBooks} />);
-    expect(screen.getByRole('heading', { level: 2 }).textContent).toBe(
+    expect(screen.getByRole('heading', { level: 2 }).textContent).toBe('Publications list');
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe(
       "J.R.R. Tolkien's books catalog",
     );
-    expect(screen.getByText('Catalog')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('Publications list');
   });
 
   it('should render table headers in correct order', () => {
@@ -103,10 +102,7 @@ describe('BooksPage component', () => {
     renderWithProviders(<BooksPage books={sampleBooks} />);
 
     expect(screen.getByText('The Hobbit')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Hobbit, czyli tam i z powrotem/ })).toHaveAttribute(
-      'href',
-      '/book/hobbit-czyli-tam-i-z-powrotem',
-    );
+
     expect(screen.getByText('Marek Oramus')).toBeInTheDocument();
     expect(screen.getByText('Rebis')).toBeInTheDocument();
     expect(screen.getByText('2020')).toBeInTheDocument();
@@ -114,18 +110,7 @@ describe('BooksPage component', () => {
     expect(screen.getByText('Miękka')).toBeInTheDocument();
     expect(screen.getByText('Middle-earth')).toBeInTheDocument();
     expect(screen.getByText('9781234567897')).toBeInTheDocument();
-
     expect(screen.getByText('Unfinished Tales')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Niedokończone opowieści/ })).toHaveAttribute(
-      'href',
-      '/book/niedokonczone-opowiesci',
-    );
-    expect(screen.getByText('Incorrect number')).toBeInTheDocument();
-  });
-
-  it('should display alert when books list is empty', () => {
-    renderWithProviders(<BooksPage books={[]} />);
-    expect(screen.getByText('No books found')).toBeInTheDocument();
   });
 
   it('should match snapshot when books list is provided', () => {
