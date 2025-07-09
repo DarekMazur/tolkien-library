@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> lib/strategies/BookTableStrategy.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>lib/strategies/BookTableStrategy.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  IBookProps,
+  IHeaderDefinition,
+  ITableStrategy,
+  TNestedKeyOf,
+  TPathValue,
+} from '@/lib/types';
+
+/**
+ * The strategy responsible for generating a table of books.
+ * Implements methods that retrieve field aliases, header definitions and values to display.
+ *
+ * @implements {ITableStrategy&lt;IBookProps>}
+ */
+
+export class BookTableStrategy implements ITableStrategy&lt;IBookProps> {
+  /**
+   * Alias map for nested property keys, used in filtering or sorting.
+   *
+   * @readonly
+   * @private
+   * @type {{ readonly translator: 'translator'; readonly publisher: 'publisher.title' }}
+   */
+
+  private readonly aliases = {
+    translator: 'translator',
+    publisher: 'publisher.title',
+  } as const;
+
+  /**
+   * Returns an alias object for an object property.
+   *
+   * @returns {Record&lt;string, string>} Alias map, where the key is the name of the property,
+   * and the value is the path (can be with a dot) to the actual value.
+   */
+
+  getAliases(): Record&lt;string, string> {
+    return this.aliases;
+  }
+
+  /**
+   * Generates a list of column header definitions based on a sample object.
+   * It takes into account the order of properties, display conditions and the sortability flag.
+   *
+   * @param {IBookProps} item - An example of a book object used to evaluate conditions.
+   * @returns {IHeaderDefinition&lt;IBookProps>[]} An array of header definitions,
+   * sorted by predefined order of properties.
+   */
+
+  getHeaders(item: IBookProps): IHeaderDefinition&lt;IBookProps>[] {
+    const propertyOrder: Exclude&lt;keyof IBookProps, 'id'>[] = [
+      'originalTitle',
+      'polishTitle',
+      'author',
+      'translator',
+      'publisher',
+      'year',
+      'publicationNumber',
+      'cover',
+      'series',
+      'isbn',
+    ];
+
+    const headerDefinitions: Record&lt;
+      Exclude&lt;keyof IBookProps, 'id'>,
+      IHeaderDefinition&lt;IBookProps>
+    > = {
+      originalTitle: { displayTitle: 'Original Title', key: 'originalTitle', sortable: true },
+      polishTitle: { displayTitle: 'Polish Title', key: 'polishTitle', sortable: true },
+      author: {
+        displayTitle: 'Author',
+        key: 'author',
+        condition: (item: IBookProps) => item.author !== 'J.R.R. Tolkien',
+        sortable: true,
+      },
+      translator: {
+        displayTitle: 'Translator',
+        key: 'translator' as TNestedKeyOf&lt;IBookProps>,
+        condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
+        sortable: true,
+      },
+      publisher: {
+        displayTitle: 'Publisher',
+        key: 'publisher.title' as TNestedKeyOf&lt;IBookProps>,
+        sortable: true,
+      },
+      year: { displayTitle: 'Year', key: 'year', sortable: true },
+      publicationNumber: { displayTitle: 'Pub. no', key: 'publicationNumber', sortable: true },
+      cover: {
+        displayTitle: 'Cover',
+        key: 'cover',
+        condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
+        sortable: false,
+      },
+      series: {
+        displayTitle: 'Series',
+        key: 'series',
+        condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
+        sortable: true,
+      },
+      isbn: { displayTitle: 'ISBN', key: 'isbn', sortable: true },
+    };
+
+    return propertyOrder
+      .filter((prop) => prop in item)
+      .map((prop) => headerDefinitions[prop])
+      .filter((definition) => !definition.condition || definition.condition(item));
+  }
+
+  /**
+   * Retrieves the value of properties (including nested properties) for a given key.
+   *
+   * @typeParam P - Property key, can be nested (object).
+   * @param {IBookProps} item - The book object from which the value is taken.
+   * @param {P} key - Property key, such as ‘author’ or ‘publisher.title’.
+   * @returns {TPathValue&lt;IBookProps, P> | null} Property value or null if it does not exist.
+   */
+
+  getDisplayValue&lt;P extends TNestedKeyOf&lt;IBookProps>>(
+    item: IBookProps,
+    key: P,
+  ): TPathValue&lt;IBookProps, P> | null {
+    if (key.includes('.')) {
+      const [parentKey, childKey] = key.split('.') as [keyof IBookProps, string];
+      const parent = item[parentKey];
+      if (parent &amp;&amp; typeof parent === 'object' &amp;&amp; childKey in parent) {
+        return (parent as unknown as Record&lt;string, unknown>)[childKey] as TPathValue&lt;
+          IBookProps,
+          P
+        >;
+      }
+      return null;
+    }
+
+    return item[key as keyof IBookProps] as TPathValue&lt;IBookProps, P>;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>
