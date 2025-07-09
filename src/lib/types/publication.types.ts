@@ -29,8 +29,8 @@ export interface IPublicationProps extends ICommonId {
   author: string;
   publisher: IPublisherProps;
   year: string;
-  isbn: string;
-  issn: string;
+  isbn?: string | null;
+  issn?: string | null;
   description: string;
 }
 
