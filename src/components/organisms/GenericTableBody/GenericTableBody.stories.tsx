@@ -61,6 +61,12 @@ const getDisplayValue = <P extends TAllowedPaths<IBookProps>>(
 };
 
 export const Default: Story = {
+  loaders: [
+    async () => {
+      const books = await fetch('/api/books').then((res) => res.json());
+      return { books };
+    },
+  ],
   render: (_args, { loaded: { books } }) => (
     <table>
       <GenericTableBody
@@ -75,6 +81,12 @@ export const Default: Story = {
 };
 
 export const AscendingByPolishTitle: Story = {
+  loaders: [
+    async () => {
+      const books = await fetch('/api/books').then((res) => res.json());
+      return { books };
+    },
+  ],
   render: (_args, { loaded: { books } }) => (
     <table>
       <GenericTableBody
@@ -89,6 +101,12 @@ export const AscendingByPolishTitle: Story = {
 };
 
 export const DescendingByYear: Story = {
+  loaders: [
+    async () => {
+      const books = await fetch('/api/books').then((res) => res.json());
+      return { books };
+    },
+  ],
   render: (_args, { loaded: { books } }) => (
     <table>
       <GenericTableBody

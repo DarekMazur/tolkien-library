@@ -55,6 +55,8 @@ export default defineConfig([
       'dist/**',
       'build/**',
       'coverage/**',
+      'storybook-static/**',
+      'docs/**',
     ],
   },
 ]);
