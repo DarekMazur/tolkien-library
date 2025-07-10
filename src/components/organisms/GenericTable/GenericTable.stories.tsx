@@ -22,6 +22,12 @@ export const Default: Story = {
     title: 'Lista publikacji',
     subtitle: 'Wybrane publikacje J.R.R. Tolkiena',
   },
+  loaders: [
+    async () => {
+      const books = await fetch('/api/books').then((res) => res.json());
+      return { books };
+    },
+  ],
   render: (args, { loaded: { books } }) => <GenericTable {...args} data={books} />,
 };
 
@@ -30,6 +36,12 @@ export const WithoutSubtitle: Story = {
     ...Default.args,
     subtitle: undefined,
   },
+  loaders: [
+    async () => {
+      const books = await fetch('/api/books').then((res) => res.json());
+      return { books };
+    },
+  ],
   render: (args, { loaded: { books } }) => <GenericTable {...args} data={books} />,
 };
 
@@ -44,6 +56,12 @@ export const ManyRows: Story = {
   args: {
     ...Default.args,
   },
+  loaders: [
+    async () => {
+      const books = await fetch('/api/books').then((res) => res.json());
+      return { books };
+    },
+  ],
   render: (args, { loaded: { books } }) => (
     <GenericTable {...args} data={[...books, ...books, ...books]} />
   ),

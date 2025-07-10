@@ -8,13 +8,7 @@ initialize({
 });
 
 const preview: Preview = {
-  loaders: [
-    mswLoader,
-    async () => {
-      const books = await fetch('/api/books').then((res) => res.json());
-      return { books };
-    },
-  ],
+  loaders: [mswLoader],
   decorators: [
     (Story) => (
       <AppProviders>
