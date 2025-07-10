@@ -3,6 +3,7 @@ import { TableBody } from '@mui/material';
 import {
   ICommonId,
   IHeaderDefinition,
+  IPublisherProps,
   ITranslatorProps,
   TAllowedPaths,
   TOrder,
@@ -10,6 +11,7 @@ import {
 } from '@/lib/types';
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell';
+import { createSlug } from '@/lib/helpers/createSlug.ts';
 interface IGenericTableBodyProps<T extends ICommonId> {
   data: T[];
   order: TOrder;
@@ -24,6 +26,89 @@ const GenericTableBody = <T extends ICommonId>({
   headers,
   getDisplayValue,
 }: IGenericTableBodyProps<T>) => {
+  const hasLinkableField = (
+    item: unknown,
+  ): item is {
+    polishTitle?: string;
+    publisher?: IPublisherProps;
+    author?: string;
+    translator?: ITranslatorProps;
+  } => {
+    return (
+      typeof item === 'object' &&
+      item !== null &&
+      'author' in item &&
+      (item as { author?: string }).author === 'J.R.R. Tolkien' &&
+      (('polishTitle' in item &&
+        typeof (item as { polishTitle?: string }).polishTitle === 'string') ||
+        ('publisher' in item &&
+          typeof (item as { publisher?: IPublisherProps }).publisher === 'object') ||
+        ('translator' in item &&
+          typeof (item as { translator?: ITranslatorProps }).translator === 'object'))
+    );
+  };
+
+  const isPolishTitle = (item: unknown, raw: unknown): boolean => {
+    return hasLinkableField(item) && 'polishTitle' in item && item.polishTitle === raw;
+  };
+
+  const isPublisher = (item: unknown, raw: unknown): boolean => {
+    return hasLinkableField(item) && 'publisher' in item && item.publisher?.title === raw;
+  };
+
+  const isTranslator = (item: unknown, raw: unknown): boolean => {
+    return (
+      hasLinkableField(item) &&
+      'translator' in item &&
+      `${item.translator?.firstName} ${item.translator?.lastName}` === raw
+    );
+  };
+
+  const createLink = (value: string, type: 'book' | 'publisher' | 'translator') => {
+    const slug = createSlug(value);
+    const path =
+      type === 'book'
+        ? `/books/${slug}`
+        : type === 'publisher'
+          ? `/publishers/${slug}`
+          : `/translator/${slug}`;
+    return <a href={path}>{value}</a>;
+  };
+
+  const getReactNodeValue = (
+    item: unknown,
+    raw: TPathValue<T, TAllowedPaths<T>> | null,
+  ): ReactNode => {
+    if (raw === null) {
+      return '-';
+    }
+
+    if (typeof raw === 'object') {
+      const translatorName = getTranslatorName(raw);
+
+      if (isTranslator(item, translatorName)) {
+        return createLink(translatorName, 'translator');
+      }
+
+      return translatorName || '-';
+    }
+
+    if (isPolishTitle(item, raw)) {
+      return createLink(String(raw), 'book');
+    }
+
+    if (isPublisher(item, raw)) {
+      return createLink(String(raw), 'publisher');
+    }
+
+    return String(raw);
+  };
+
+  const getTranslatorName = (raw: unknown): string => {
+    const translator = raw as { firstName?: string; lastName?: string };
+    return [translator.firstName, translator.lastName].filter(Boolean).join(' ');
+  };
+
   const sortedData = useMemo(() => {
     if (!orderBy) return data;
     return [...data].sort((a, b) => {
@@ -47,17 +132,7 @@ const GenericTableBody = <T extends ICommonId>({
           {headers.map((header) => {
             const raw = getDisplayValue(item, header.key as TAllowedPaths<T>);
 
-            const reactNodeValue: ReactNode =
-              raw === null
-                ? '-'
-                : typeof raw === 'object'
-                  ? [
-                      (raw as { firstName?: string; lastName?: string }).firstName,
-                      (raw as { firstName?: string; lastName?: string }).lastName,
-                    ]
-                      .filter(Boolean)
-                      .join(' ') || '-'
-                  : String(raw);
+            const reactNodeValue = getReactNodeValue(item, raw);
 
             return <StyledTableCell key={header.key}>{reactNodeValue}</StyledTableCell>;
           })}
