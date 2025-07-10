@@ -1,9 +1,9 @@
 {
   "opts": {
     "template": "node_modules/better-docs",
-    "destination": "docs",
+    "destination": "./documentation",
     "recurse": true,
-    "readme": "README.md"
+    "readme": "../README.md"
   },
   "tags": {
     "allowUnknownTags": ["optional"]
@@ -12,7 +12,7 @@
     "node_modules/better-docs/typescript"
   ],
   "source": {
-    "include": ["src"],
+    "include": ["../src"],
     "includePattern": "\\.(jsx|js|ts|tsx)$",
     "excludePattern": "(^|\\/|\\\\)_"
   }
