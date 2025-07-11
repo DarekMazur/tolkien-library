@@ -85,4 +85,12 @@ export const db = factory({
     issn: nullable(() => faker.number.int().toString()),
     description: () => faker.lorem.paragraph(),
   },
+  online: {
+    id: primaryKey(faker.string.uuid),
+    title: () => faker.lorem.words({ min: 1, max: 4 }),
+    version: () => faker.number.int({ min: 1, max: 5 }).toString(),
+    publisher: oneOf('publisher'),
+    startDate: () => faker.date.past(),
+    lastIssueDate: nullable(() => faker.date.past()),
+  },
 });
