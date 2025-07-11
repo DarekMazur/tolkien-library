@@ -84,6 +84,15 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
+        <a
+          href="/publishers/rebis"
+        >
+          Rebis
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
         2020
       </td>
     </tr>
@@ -116,6 +125,15 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
+        <a
+          href="/publishers/rebis"
+        >
+          Rebis
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
         2019
       </td>
     </tr>
@@ -143,6 +161,15 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
           href="/translator/marek-oramus"
         >
           Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          href="/publishers/rebis"
+        >
+          Rebis
         </a>
       </td>
       <td

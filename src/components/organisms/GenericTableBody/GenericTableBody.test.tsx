@@ -1,4 +1,5 @@
 import { vi } from 'vitest';
+import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import GenericTableBody from '@/components/organisms/GenericTableBody/GenericTableBody';
 import type { IBookProps, IHeaderDefinition, TAllowedPaths, TPathValue } from '@/lib/types';
@@ -12,6 +13,7 @@ const headers: IHeaderDefinition<IBookProps>[] = [
   { key: 'originalTitle', displayTitle: 'Original Title' },
   { key: 'polishTitle', displayTitle: 'Polish Title' },
   { key: 'translator', displayTitle: 'Translator' },
+  { key: 'publisher', displayTitle: 'Publisher' },
   { key: 'year', displayTitle: 'Year' },
 ];
 
@@ -100,7 +102,7 @@ describe('GenericTableBody', () => {
       return rawValue as TPathValue<IBookProps, P>;
     }
     if (typeof rawValue === 'object' && 'title' in rawValue) {
-      return rawValue as TPathValue<IBookProps, P>;
+      return rawValue.title as TPathValue<IBookProps, P>;
     }
     if (typeof rawValue === 'string' || typeof rawValue === 'number') {
       return rawValue as TPathValue<IBookProps, P>;
@@ -127,14 +129,17 @@ describe('GenericTableBody', () => {
       'The Hobbit',
       'Hobbit, czyli tam i z powrotem',
       'Marek Oramus',
+      'Rebis',
       '2020',
       'The Lord of the Rings',
       'Władca Pierścieni',
       'Marek Oramus',
+      'Rebis',
       '2019',
       'Unfinished Tales',
       'Niedokończone opowieści',
       'Marek Oramus',
+      'Rebis',
       '2021',
     ]);
   });
@@ -155,14 +160,17 @@ describe('GenericTableBody', () => {
       'The Hobbit',
       'Hobbit, czyli tam i z powrotem',
       'Marek Oramus',
+      'Rebis',
       '2020',
       'The Lord of the Rings',
       'Władca Pierścieni',
       'Marek Oramus',
+      'Rebis',
       '2019',
       'Unfinished Tales',
       'Niedokończone opowieści',
       'Marek Oramus',
+      'Rebis',
       '2021',
     ]);
   });
@@ -183,16 +191,44 @@ describe('GenericTableBody', () => {
       'Unfinished Tales',
       'Niedokończone opowieści',
       'Marek Oramus',
+      'Rebis',
       '2021',
       'The Lord of the Rings',
       'Władca Pierścieni',
       'Marek Oramus',
+      'Rebis',
       '2019',
       'The Hobbit',
       'Hobbit, czyli tam i z powrotem',
       'Marek Oramus',
+      'Rebis',
       '2020',
     ]);
+  });
+
+  it('renders links', () => {
+    renderWithProviders(
+      <GenericTableBody
+        data={sampleData}
+        order="desc"
+        orderBy="originalTitle"
+        headers={headers}
+        getDisplayValue={mockGetDisplayValue}
+      />,
+    );
+
+    const links = screen.getAllByRole('link');
+    const titleLink = screen.getByRole('link', { name: /hobbit, czyli tam i z powrotem/i });
+    const translatorLinks = screen.getAllByRole('link', { name: /marek oramus/i });
+    const publisherLinks = screen.getAllByRole('link', { name: /rebis/i });
+
+    expect(links).toHaveLength(9);
+    expect(titleLink).toBeInTheDocument();
+    expect(titleLink.getAttribute('href')).toBe('/books/hobbit-czyli-tam-i-z-powrotem');
+    expect(translatorLinks).toHaveLength(3);
+    expect(translatorLinks[0].getAttribute('href')).toBe('/translator/marek-oramus');
+    expect(publisherLinks).toHaveLength(3);
+    expect(publisherLinks[0].getAttribute('href')).toBe('/publishers/rebis');
   });
 
   it('renders "-" for null values', () => {
@@ -226,7 +262,7 @@ describe('GenericTableBody', () => {
     );
 
     const texts = getCellTexts(container);
-    expect(texts).toEqual(['-', 'Hobbit, czyli tam i z powrotem', '-', '2020']);
+    expect(texts).toEqual(['-', 'Hobbit, czyli tam i z powrotem', '-', 'Rebis', '2020']);
   });
 
   it('matches snapshot with sorted data', () => {
