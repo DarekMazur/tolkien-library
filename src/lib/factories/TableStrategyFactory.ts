@@ -7,6 +7,7 @@ import {
 } from '@/lib/types';
 import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy';
 import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy';
+import { OnlineTableStrategy } from '@/lib/strategies/OnlineTableStrategy.ts';
 
 type StrategyForType<T extends TPublicationType> = T extends IBookProps
   ? ITableStrategy<IBookProps>
@@ -51,6 +52,8 @@ export class TableStrategyFactory {
         return new BookTableStrategy() as unknown as StrategyForType<T>;
       case EPublicationType.ARTICLE:
         return new ArticleTableStrategy() as unknown as StrategyForType<T>;
+      case EPublicationType.ONLINE:
+        return new OnlineTableStrategy() as unknown as StrategyForType<T>;
       default:
         throw new Error(`Unsupported publication type: ${type}`);
     }

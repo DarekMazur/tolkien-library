@@ -42,7 +42,7 @@ export interface IOnlineProps extends ICommonId {
   lastIssueDate: Date | null;
 }
 
-export type TPublicationType = IBookProps | IPublicationProps;
+export type TPublicationType = IBookProps | IPublicationProps | IOnlineProps;
 
 export enum EPublicationType {
   BOOK = 'book',
