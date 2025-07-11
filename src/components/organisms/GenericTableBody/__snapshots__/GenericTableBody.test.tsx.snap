@@ -66,12 +66,29 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
-        Hobbit, czyli tam i z powrotem
+        <a
+          href="/books/hobbit-czyli-tam-i-z-powrotem"
+        >
+          Hobbit, czyli tam i z powrotem
+        </a>
       </td>
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
-        Marek Oramus
+        <a
+          href="/translator/marek-oramus"
+        >
+          Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          href="/publishers/rebis"
+        >
+          Rebis
+        </a>
       </td>
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
@@ -90,12 +107,29 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
-        Władca Pierścieni
+        <a
+          href="/books/wladca-pierscieni"
+        >
+          Władca Pierścieni
+        </a>
       </td>
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
-        Marek Oramus
+        <a
+          href="/translator/marek-oramus"
+        >
+          Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          href="/publishers/rebis"
+        >
+          Rebis
+        </a>
       </td>
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
@@ -114,12 +148,29 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
-        Niedokończone opowieści
+        <a
+          href="/books/niedokonczone-opowiesci"
+        >
+          Niedokończone opowieści
+        </a>
       </td>
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
-        Marek Oramus
+        <a
+          href="/translator/marek-oramus"
+        >
+          Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          href="/publishers/rebis"
+        >
+          Rebis
+        </a>
       </td>
       <td
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"

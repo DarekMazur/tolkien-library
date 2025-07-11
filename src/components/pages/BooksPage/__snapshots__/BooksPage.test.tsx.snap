@@ -649,17 +649,29 @@ exports[`BooksPage component > should match snapshot when books list is provided
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Hobbit, czyli tam i z powrotem
+            <a
+              href="/books/hobbit-czyli-tam-i-z-powrotem"
+            >
+              Hobbit, czyli tam i z powrotem
+            </a>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Marek Oramus
+            <a
+              href="/translator/marek-oramus"
+            >
+              Marek Oramus
+            </a>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Rebis
+            <a
+              href="/publishers/rebis"
+            >
+              Rebis
+            </a>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
@@ -698,17 +710,29 @@ exports[`BooksPage component > should match snapshot when books list is provided
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Niedokończone opowieści
+            <a
+              href="/books/niedokonczone-opowiesci"
+            >
+              Niedokończone opowieści
+            </a>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Marta Nowak
+            <a
+              href="/translator/marta-nowak"
+            >
+              Marta Nowak
+            </a>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
-            Zysk i S-ks
+            <a
+              href="/publishers/zysk-i-s-ks"
+            >
+              Zysk i S-ks
+            </a>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
