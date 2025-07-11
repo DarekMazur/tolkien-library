@@ -34,9 +34,18 @@ export interface IPublicationProps extends ICommonId {
   description: string;
 }
 
-export type TPublicationType = IBookProps | IPublicationProps;
+export interface IOnlineProps extends ICommonId {
+  title: string;
+  version?: string;
+  publisher: IPublisherProps;
+  startDate: Date;
+  lastIssueDate: Date | null;
+}
+
+export type TPublicationType = IBookProps | IPublicationProps | IOnlineProps;
 
 export enum EPublicationType {
   BOOK = 'book',
   ARTICLE = 'article',
+  ONLINE = 'online',
 }
