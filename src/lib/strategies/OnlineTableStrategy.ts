@@ -55,9 +55,18 @@ export class OnlineTableStrategy implements ITableStrategy<IOnlineProps> {
     item: IOnlineProps,
     key: P,
   ): TPathValue<IOnlineProps, P> | null {
-    console.log(item);
-    console.log(key);
+    if (key.includes('.')) {
+      const [parentKey, childKey] = key.split('.');
+      const parent = item[parentKey as keyof IOnlineProps];
+      if (parent && typeof parent === 'object' && childKey in parent) {
+        return (parent as unknown as Record<string, unknown>)[childKey] as TPathValue<
+          IOnlineProps,
+          P
+        >;
+      }
+      return null;
+    }
 
-    return null;
+    return item[key as keyof IOnlineProps] as TPathValue<IOnlineProps, P> | null;
   }
 }
