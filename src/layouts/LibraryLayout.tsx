@@ -6,7 +6,7 @@ import { getBooksByAuthor, getCategoryBySlug } from '@/lib/getDataFromApi.ts';
 import { useApi } from '@/hooks/useApi.tsx';
 import BooksPage from '@/components/pages/BooksPage/BooksPage.tsx';
 
-const CategoryLayout = () => {
+const LibraryLayout = () => {
   const location = useLocation();
   const categoryFullSlug = location.pathname.split('/');
   const categorySlug = categoryFullSlug[categoryFullSlug.length - 1];
@@ -34,4 +34,4 @@ const CategoryLayout = () => {
   );
 };
 
-export default CategoryLayout;
+export default LibraryLayout;

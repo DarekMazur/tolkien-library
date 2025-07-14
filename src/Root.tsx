@@ -13,7 +13,7 @@ import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useMe } from '@/hooks/useMe.tsx';
 import ContactPage from './components/pages/ContactPage/ContactPage';
 import LibraryPage from '@/components/pages/LibraryPage/LibraryPage.tsx';
-import CategoryLayout from '@/layouts/CategoryLayout.tsx';
+import LibraryLayout from '@/layouts/LibraryLayout.tsx';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, user, isLoading } = useMe();
@@ -54,7 +54,7 @@ const Root = () => {
           <Route path="/library">
             <Route index element={<LibraryPage />} />
             <Route path="/library/:category">
-              <Route index element={<CategoryLayout />} />
+              <Route index element={<LibraryLayout />} />
               <Route path="/library/:category/:page" element={<h3>Page</h3>} />
             </Route>
             <Route path="/library/books">
