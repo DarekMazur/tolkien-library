@@ -12,7 +12,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useMe } from '@/hooks/useMe.tsx';
 import ContactPage from './components/pages/ContactPage/ContactPage';
-import LibraryPage from '@/components/pages/LibraryPage/LibraryPage.tsx';
 import LibraryLayout from '@/layouts/LibraryLayout.tsx';
 
 const ProtectedRoute = () => {
@@ -52,31 +51,8 @@ const Root = () => {
         <Route element={<DefaultLayout toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />}>
           <Route path="/" element={<Home />} />
           <Route path="/library">
-            <Route index element={<LibraryPage />} />
-            <Route path="/library/:category">
-              <Route index element={<LibraryLayout />} />
-              <Route path="/library/:category/:page" element={<h3>Page</h3>} />
-            </Route>
-            <Route path="/library/books">
-              <Route index element={<LibraryLayout />} />
-              <Route path="/library/books/:book" element={<h3>Book</h3>} />
-            </Route>
-            <Route path="/library/publications">
-              <Route index element={<>Publications</>} />
-              <Route path="/library/publications/:publication" element={<h3>Publication</h3>} />
-            </Route>
-            <Route path="/library/online">
-              <Route index element={<>Online Publications</>} />
-              <Route path="/library/online/:publication" element={<h3>Fanzin etc</h3>} />
-            </Route>
-            <Route path="/library/publishers">
-              <Route index element={<>Publishers</>} />
-              <Route path="/library/publishers/:publisher" element={<h3>Publishers</h3>} />
-            </Route>
-            <Route path="/library/translators">
-              <Route index element={<>Translators</>} />
-              <Route path="/library/translators/:translator" element={<h3>Translator</h3>} />
-            </Route>
+            <Route path=":type" element={<LibraryLayout />} />
+            <Route path=":type/:slug" element={<h3>Page</h3>} />
           </Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/board" element={<ProtectedRoute />}>
