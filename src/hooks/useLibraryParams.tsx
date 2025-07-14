@@ -5,8 +5,6 @@ export const useLibraryParams = () => {
   const { type, slug } = useParams<{ type: string; slug?: string }>();
   const location = useLocation();
 
-  console.log(location.search.slice(1));
-
   const isValidType =
     type && Object.values(EPublicationType).includes(type.slice(0, -1) as EPublicationType);
 

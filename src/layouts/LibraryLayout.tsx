@@ -1,47 +1,31 @@
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useParams } from 'react-router';
-import Loader from '@/components/atoms/Loader/Loader.tsx';
-import CategoryPage from '@/components/pages/CategoryPage/CategoryPage.tsx';
-import { getBooksByAuthor, getCategoryBySlug } from '@/lib/getDataFromApi.ts';
-import { useApi } from '@/hooks/useApi.tsx';
-import BooksPage from '@/components/pages/BooksPage/BooksPage.tsx';
-import { EPublicationType } from '@/lib/types';
+import Wrapper from '@/components/atoms/Wrapper/Wrapper';
+import Loader from '@/components/atoms/Loader/Loader';
+import CategoryPage from '@/components/pages/CategoryPage/CategoryPage';
+import BooksPage from '@/components/pages/BooksPage/BooksPage';
+import { useLibraryData } from '@/hooks/useLibraryData';
 
 const LibraryLayout = () => {
-  const { type } = useParams();
-  const { data: category, isLoading, isError } = useApi(() => getCategoryBySlug(type || ''));
-  const { data: books, isError: booksError } = useApi(() => getBooksByAuthor('J.R.R. Tolkien'));
+  const result = useLibraryData();
 
-  const isValidLibraryPath = (): boolean => {
+  if (result.state === 'loading') {
     return (
-      !!type && Object.values(EPublicationType).includes(type.slice(0, -1) as EPublicationType)
+      <Wrapper>
+        <Loader isLoading />
+      </Wrapper>
     );
-  };
+  }
 
-  const getPublicationType = (): EPublicationType | null => {
-    if (isValidLibraryPath() && type) {
-      return type.slice(0, -1) as EPublicationType;
-    }
+  if (result.state === 'error' || result.state === 'invalid') {
     return null;
-  };
-
-  const publicationType = getPublicationType();
+  }
 
   return (
     <Wrapper>
-      {publicationType === 'book' ? (
-        booksError ? null : books ? (
-          <BooksPage books={books} />
-        ) : null
-      ) : publicationType === 'article' ? (
-        <>Atricles</>
-      ) : publicationType === 'online' ? (
-        <>Onlines</>
-      ) : isLoading ? (
-        <Loader isLoading={isLoading} />
-      ) : isError ? null : category ? (
-        <CategoryPage category={category} />
-      ) : null}
+      {result.state === 'books' && <BooksPage books={result.data} />}
+      {result.state === 'publications' && <>Publications list</>}
+      {result.state === 'online' && <>Online list</>}
+      {result.state === 'category' && <CategoryPage category={result.data} />}
+      {result.state === 'empty' && <>Nothing found...</>}
     </Wrapper>
   );
 };
