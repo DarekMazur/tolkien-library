@@ -58,7 +58,7 @@ const Root = () => {
               <Route path="/library/:category/:page" element={<h3>Page</h3>} />
             </Route>
             <Route path="/library/books">
-              <Route index element={<>Books</>} />
+              <Route index element={<LibraryLayout />} />
               <Route path="/library/books/:book" element={<h3>Book</h3>} />
             </Route>
             <Route path="/library/publications">
