@@ -57,6 +57,26 @@ const Root = () => {
               <Route index element={<CategoryLayout />} />
               <Route path="/library/:category/:page" element={<h3>Page</h3>} />
             </Route>
+            <Route path="/library/books">
+              <Route index element={<>Books</>} />
+              <Route path="/library/books/:book" element={<h3>Book</h3>} />
+            </Route>
+            <Route path="/library/publications">
+              <Route index element={<>Publications</>} />
+              <Route path="/library/publications/:publication" element={<h3>Publication</h3>} />
+            </Route>
+            <Route path="/library/online">
+              <Route index element={<>Online Publications</>} />
+              <Route path="/library/online/:publication" element={<h3>Fanzin etc</h3>} />
+            </Route>
+            <Route path="/library/publishers">
+              <Route index element={<>Publishers</>} />
+              <Route path="/library/publishers/:publisher" element={<h3>Publishers</h3>} />
+            </Route>
+            <Route path="/library/translators">
+              <Route index element={<>Translators</>} />
+              <Route path="/library/translators/:translator" element={<h3>Translator</h3>} />
+            </Route>
           </Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/board" element={<ProtectedRoute />}>
