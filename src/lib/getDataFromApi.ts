@@ -55,7 +55,10 @@ export const getPageIdentity = () =>
 
 export const getAllBooks = () => fetchApi<IBookProps[]>(`${import.meta.env.VITE_API_URL}/books`);
 
-export const getBooksByAuthor = async (author: string): Promise<TResponse<IBookProps[]>> => {
+export const getBooksByAuthor = async (
+  author: string,
+  exclude?: boolean,
+): Promise<TResponse<IBookProps[]>> => {
   const res = await fetchApi<IBookProps[]>(`${import.meta.env.VITE_API_URL}/books`);
 
   if (res.isError || !res.data) {
@@ -66,7 +69,8 @@ export const getBooksByAuthor = async (author: string): Promise<TResponse<IBookP
     };
   }
 
-  const books = res.data.filter((book) => book.author === author) || null;
+  const books =
+    res.data.filter((book) => (exclude ? book.author !== author : book.author === author)) || null;
 
   return {
     data: books,
