@@ -51,6 +51,6 @@ export const useLibraryParams = (): {
     type: isValidType ? (type.slice(0, -1) as EPublicationType) : null,
     slug: slug || null,
     search: location.search.slice(1) || null,
-    isValid: isValidType,
+    isValid: !!isValidType,
   };
 };
