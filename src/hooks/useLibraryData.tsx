@@ -55,7 +55,7 @@ export const useLibraryData = () => {
   if (shouldFetchBooks) {
     if (booksLoading) return { state: 'loading' as const };
     if (booksError) return { state: 'error' as const };
-    return { state: 'books' as const, data: books!, type };
+    return { state: 'books' as const, data: books!, type, search };
   }
 
   if (shouldFetchArticles) {

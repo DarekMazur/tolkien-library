@@ -21,7 +21,9 @@ const LibraryLayout = () => {
 
   return (
     <Wrapper>
-      {result.state === 'books' && <BooksPage books={result.data} />}
+      {result.state === 'books' && (
+        <BooksPage books={result.data} isJrr={result?.search === 'jrrt'} />
+      )}
       {result.state === 'publications' && <>Publications list</>}
       {result.state === 'online' && <>Online list</>}
       {result.state === 'category' && <CategoryPage category={result.data} />}
