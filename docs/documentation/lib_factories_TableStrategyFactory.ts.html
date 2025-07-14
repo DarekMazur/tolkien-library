@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="OnlineTableStrategy.html">OnlineTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
                 
             </nav>
         </div>
@@ -94,6 +94,7 @@
 } from '@/lib/types';
 import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy';
 import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy';
+import { OnlineTableStrategy } from '@/lib/strategies/OnlineTableStrategy.ts';
 
 type StrategyForType&lt;T extends TPublicationType> = T extends IBookProps
   ? ITableStrategy&lt;IBookProps>
@@ -138,6 +139,8 @@ export class TableStrategyFactory {
         return new BookTableStrategy() as unknown as StrategyForType&lt;T>;
       case EPublicationType.ARTICLE:
         return new ArticleTableStrategy() as unknown as StrategyForType&lt;T>;
+      case EPublicationType.ONLINE:
+        return new OnlineTableStrategy() as unknown as StrategyForType&lt;T>;
       default:
         throw new Error(`Unsupported publication type: ${type}`);
     }

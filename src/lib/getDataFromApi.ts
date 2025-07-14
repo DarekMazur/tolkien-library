@@ -1,4 +1,12 @@
-import { IBookProps, ICategoryProps, IIdentityProps, IPageProps, TResponse } from '@/lib/types';
+import {
+  IBookProps,
+  ICategoryProps,
+  IIdentityProps,
+  IOnlineProps,
+  IPageProps,
+  IPublicationProps,
+  TResponse,
+} from '@/lib/types';
 
 export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
   const response: TResponse<T> = {
@@ -55,7 +63,10 @@ export const getPageIdentity = () =>
 
 export const getAllBooks = () => fetchApi<IBookProps[]>(`${import.meta.env.VITE_API_URL}/books`);
 
-export const getBooksByAuthor = async (author: string): Promise<TResponse<IBookProps[]>> => {
+export const getBooksByAuthor = async (
+  author: string,
+  exclude?: boolean,
+): Promise<TResponse<IBookProps[]>> => {
   const res = await fetchApi<IBookProps[]>(`${import.meta.env.VITE_API_URL}/books`);
 
   if (res.isError || !res.data) {
@@ -66,10 +77,47 @@ export const getBooksByAuthor = async (author: string): Promise<TResponse<IBookP
     };
   }
 
-  const books = res.data.filter((book) => book.author === author) || null;
+  const books =
+    res.data.filter((book) => (exclude ? book.author !== author : book.author === author)) || null;
 
   return {
     data: books,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
+export const getAllPublications = async (): Promise<TResponse<IPublicationProps[]>> => {
+  const res = await fetchApi<IPublicationProps[]>(`${import.meta.env.VITE_API_URL}/publications`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  return {
+    data: res.data,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
+export const getAllOnline = async (): Promise<TResponse<IOnlineProps[]>> => {
+  const res = await fetchApi<IOnlineProps[]>(`${import.meta.env.VITE_API_URL}/online`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  return {
+    data: res.data,
     isError: false,
     errorMessage: null,
   };

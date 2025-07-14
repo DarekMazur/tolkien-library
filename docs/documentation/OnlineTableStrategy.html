@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> ArticleTableStrategy</title>
+  <title> OnlineTableStrategy</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>ArticleTableStrategy</h1>
+                    <h1>OnlineTableStrategy</h1>
                 </header>
                 
 
@@ -85,10 +85,11 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ArticleTableStrategy<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>OnlineTableStrategy<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Table building strategy for publication objects (articles).
-Implements the ITableStrategy interface for the IPublicationProps type.</div>
+            <div class="class-description">Table handling strategy for online data.
+Implements the ITableStrategy interface for objects of type IOnlineProps.
+Provides functionality for generating table headers, column aliases and retrieving values for display.</div>
         
     
 </header>
@@ -107,12 +108,12 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
 
     
-    <h4 class="name" id="ArticleTableStrategy">
-        <a class="href-link" href="#ArticleTableStrategy">#</a>
+    <h4 class="name" id="OnlineTableStrategy">
+        <a class="href-link" href="#OnlineTableStrategy">#</a>
         
         <span class="code-name">
             
-                new ArticleTableStrategy<span class="signature">()</span><span class="type-signature"></span>
+                new OnlineTableStrategy<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -146,6 +147,13 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
     
 
     
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li>ITableStrategy.&lt;IOnlineProps></li>
+        
+    </ul></dd>
+    
 
     
 
@@ -166,9 +174,9 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
     
         <p class="tag-source">
-            <a href="lib_strategies_ArticleTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_OnlineTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_ArticleTableStrategy.ts.html">lib/strategies/ArticleTableStrategy.ts</a>, <a href="lib_strategies_ArticleTableStrategy.ts.html#line6">line 6</a>
+                <a href="lib_strategies_OnlineTableStrategy.ts.html">lib/strategies/OnlineTableStrategy.ts</a>, <a href="lib_strategies_OnlineTableStrategy.ts.html#line24">line 24</a>
             </span>
         </p>
     
@@ -192,6 +200,24 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>// Create an instance of the strategy
+const strategy = new OnlineTableStrategy();
+
+// Downloading aliases
+const aliases = strategy.getAliases();
+console.log(aliases.publisher); // "publisher.title"
+
+// Generating headers for an element
+const headers = strategy.getHeaders(onlineItem);
+
+// Downloading values for display
+const publisherName = strategy.getDisplayValue(onlineItem, 'publisher.title');</code></pre>
+    
 
 
 
@@ -230,7 +256,7 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
         
         <span class="code-name">
             
-                getAliases<span class="signature">()</span><span class="type-signature"> &rarr; {Record.&lt;string, string>}</span>
+                getAliases<span class="signature">()</span><span class="type-signature"> &rarr; {Readonly.&lt;Record.&lt;string, string>>}</span>
             
         </span>
     </h4>
@@ -239,7 +265,8 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
     
     
     <div class="description">
-        Returns the alias object used by this strategy.
+        Retrieves a map of column aliases.
+Returns an object containing a mapping between alias names and actual paths to properties.
     </div>
     
 
@@ -288,9 +315,9 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
     
         <p class="tag-source">
-            <a href="lib_strategies_ArticleTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_OnlineTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_ArticleTableStrategy.ts.html">lib/strategies/ArticleTableStrategy.ts</a>, <a href="lib_strategies_ArticleTableStrategy.ts.html#line133">line 133</a>
+                <a href="lib_strategies_OnlineTableStrategy.ts.html">lib/strategies/OnlineTableStrategy.ts</a>, <a href="lib_strategies_OnlineTableStrategy.ts.html#line176">line 176</a>
             </span>
         </p>
     
@@ -321,13 +348,13 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>Alias map key → property path.</div>
+    <div class='param-desc column is-7'>Column alias map</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Record.&lt;string, string></code>
+<code class="param-type">Readonly.&lt;Record.&lt;string, string>></code>
 
 
     </div>
@@ -341,6 +368,15 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
 
 
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const strategy = new OnlineTableStrategy();
+const aliases = strategy.getAliases();
+console.log(aliases.publisher); // "publisher.title"</code></pre>
+    
+
+
 </div>
             
                 <div class="member">
@@ -352,7 +388,7 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
         
         <span class="code-name">
             
-                getDisplayValue<span class="signature">(item, key)</span><span class="type-signature"> &rarr; {TPathValue.&lt;IPublicationProps, P>|null}</span>
+                getDisplayValue<span class="signature">(item, key)</span><span class="type-signature"> &rarr; {TPathValue.&lt;IOnlineProps, P>|null}</span>
             
         </span>
     </h4>
@@ -361,7 +397,8 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
     
     
     <div class="description">
-        Retrieves the value of a publication object property based on a key or nested path.
+        Retrieves the value to display for a specified key from an object.
+Supports both simple properties and nested paths (e.g. ‘publisher.title’).
     </div>
     
 
@@ -405,7 +442,7 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
   <td class="type">
   
       
-<code class="param-type">IPublicationProps</code>
+<code class="param-type">IOnlineProps</code>
 
 
   
@@ -415,7 +452,7 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
   
 
-  <td class="description last">– Object of publication.</td>
+  <td class="description last">The object from which the value is taken</td>
 </tr>
 
 
@@ -440,7 +477,7 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
   
 
-  <td class="description last">– Key or path (e.g., ‘publisher.title’).</td>
+  <td class="description last">Key or path to the property (may include a dot for nested properties)</td>
 </tr>
 
 
@@ -486,9 +523,9 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
     
         <p class="tag-source">
-            <a href="lib_strategies_ArticleTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_OnlineTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_ArticleTableStrategy.ts.html">lib/strategies/ArticleTableStrategy.ts</a>, <a href="lib_strategies_ArticleTableStrategy.ts.html#line169">line 169</a>
+                <a href="lib_strategies_OnlineTableStrategy.ts.html">lib/strategies/OnlineTableStrategy.ts</a>, <a href="lib_strategies_OnlineTableStrategy.ts.html#line231">line 231</a>
             </span>
         </p>
     
@@ -509,6 +546,27 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Throws:</label></div>
+        <div class="column is-10">
+            
+                    
+<div class="columns">
+    
+    <div class='param-desc column is-7'>When the item passed is not an object</div>
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+<code class="param-type">TypeError</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
     <div class='columns method-parameter'>
@@ -519,13 +577,13 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>The value of the indicated property or null if it does not exist.</div>
+    <div class='param-desc column is-7'>Property value or null if not found</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">TPathValue.&lt;IPublicationProps, P></code>
+<code class="param-type">TPathValue.&lt;IOnlineProps, P></code>
 |
 
 <code class="param-type">null</code>
@@ -545,10 +603,23 @@ Implements the ITableStrategy interface for the IPublicationProps type.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// For the key ‘title’ it will return string | null
-strategy.getDisplayValue(pub, 'title');
-// For nested key ‘publisher.title’ will return Publisher.title | null
-strategy.getDisplayValue(pub, 'publisher.title');</code></pre>
+        <pre class="prettyprint"><code>const strategy = new OnlineTableStrategy();
+const item = {
+  title: "Example Title",
+  publisher: { title: "Publisher Name" }
+};
+
+// Downloading a simple property
+const title = strategy.getDisplayValue(item, 'title');
+console.log(title); // "Example Title"
+
+// Downloading a nested property
+const publisherName = strategy.getDisplayValue(item, 'publisher.title');
+console.log(publisherName); // "Publisher Name"
+
+// The property does not exist
+const missing = strategy.getDisplayValue(item, 'nonexistent');
+console.log(missing); // null</code></pre>
     
 
 
@@ -572,8 +643,9 @@ strategy.getDisplayValue(pub, 'publisher.title');</code></pre>
     
     
     <div class="description">
-        Generates table header definitions in a preset order and filters them
-by conditions (e.g. presence of ISBN/ISSN values).
+        Generates table header definitions based on the passed element.
+Returns an array of header definitions in the specified order, filtering out those,
+that do not meet the conditions or do not exist in the element.
     </div>
     
 
@@ -617,7 +689,7 @@ by conditions (e.g. presence of ISBN/ISSN values).
   <td class="type">
   
       
-<code class="param-type">IPublicationProps</code>
+<code class="param-type">IOnlineProps</code>
 
 
   
@@ -627,8 +699,7 @@ by conditions (e.g. presence of ISBN/ISSN values).
 
   
 
-  <td class="description last">– A single publication object,
-  used to evaluate conditions when displaying columns.</td>
+  <td class="description last">Data element for which headers are generated</td>
 </tr>
 
 
@@ -674,9 +745,9 @@ by conditions (e.g. presence of ISBN/ISSN values).
 
     
         <p class="tag-source">
-            <a href="lib_strategies_ArticleTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_OnlineTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_ArticleTableStrategy.ts.html">lib/strategies/ArticleTableStrategy.ts</a>, <a href="lib_strategies_ArticleTableStrategy.ts.html#line152">line 152</a>
+                <a href="lib_strategies_OnlineTableStrategy.ts.html">lib/strategies/OnlineTableStrategy.ts</a>, <a href="lib_strategies_OnlineTableStrategy.ts.html#line200">line 200</a>
             </span>
         </p>
     
@@ -696,6 +767,27 @@ by conditions (e.g. presence of ISBN/ISSN values).
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Throws:</label></div>
+        <div class="column is-10">
+            
+                    
+<div class="columns">
+    
+    <div class='param-desc column is-7'>When the passed parameter is not an object</div>
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+<code class="param-type">TypeError</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
@@ -720,8 +812,17 @@ by conditions (e.g. presence of ISBN/ISSN values).
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>const headers = strategy.getHeaders(publication);
-// headers is an array of definitions with keys and title translations</code></pre>
+        <pre class="prettyprint"><code>const strategy = new OnlineTableStrategy();
+const headers = strategy.getHeaders({
+  id: 1,
+  title: "Example Title",
+  version: "1.0",
+  publisher: { title: "Publisher Name" },
+  startDate: "2023-01-01",
+  lastIssueDate: "2023-12-31"
+});
+
+// Returns an array with header definitions for all columns</code></pre>
     
 
 

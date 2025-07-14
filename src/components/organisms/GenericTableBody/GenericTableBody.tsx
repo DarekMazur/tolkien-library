@@ -68,10 +68,10 @@ const GenericTableBody = <T extends ICommonId>({
     const slug = createSlug(value);
     const path =
       type === 'book'
-        ? `/books/${slug}`
+        ? `/library/books/${slug}`
         : type === 'publisher'
-          ? `/publishers/${slug}`
-          : `/translator/${slug}`;
+          ? `/library/publishers/${slug}`
+          : `/library/translator/${slug}`;
     return <a href={path}>{value}</a>;
   };
 

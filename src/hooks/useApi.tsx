@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react';
 import { TResponse } from '@/lib/types';
 
-export const useApi = <T,>(fn: () => Promise<TResponse<T>>) => {
+export const useApi = <T,>(
+  fn: () => Promise<TResponse<T>>,
+  options: { enabled?: boolean } = {},
+) => {
+  const { enabled = true } = options;
   const [data, setData] = useState<T | null>(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!enabled) {
+      setIsLoading(false);
+      return;
+    }
     (async () => {
       setIsLoading(true);
       try {

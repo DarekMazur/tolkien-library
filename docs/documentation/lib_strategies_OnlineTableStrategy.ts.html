@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/strategies/BookTableStrategy.ts</title>
+  <title> lib/strategies/OnlineTableStrategy.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/strategies/BookTableStrategy.ts</h1>
+                    <h1>lib/strategies/OnlineTableStrategy.ts</h1>
                 </header>
                 
 
@@ -86,106 +86,121 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import {
-  IBookProps,
+  IOnlineProps,
   IHeaderDefinition,
   ITableStrategy,
   TNestedKeyOf,
   TPathValue,
+  TAllowedPaths,
 } from '@/lib/types';
 
 /**
- * The strategy responsible for generating a table of books.
- * Implements methods that retrieve field aliases, header definitions and values to display.
+ * Table handling strategy for online data.
+ * Implements the ITableStrategy interface for objects of type IOnlineProps.
+ * Provides functionality for generating table headers, column aliases and retrieving values for display.
  *
- * @implements {ITableStrategy&lt;IBookProps>}
+ * @implements {ITableStrategy&lt;IOnlineProps>}
+ * @template {IOnlineProps} T
+ * @example
+ * // Create an instance of the strategy
+ * const strategy = new OnlineTableStrategy();
+ *
+ * // Downloading aliases
+ * const aliases = strategy.getAliases();
+ * console.log(aliases.publisher); // "publisher.title"
+ *
+ * // Generating headers for an element
+ * const headers = strategy.getHeaders(onlineItem);
+ *
+ * // Downloading values for display
+ * const publisherName = strategy.getDisplayValue(onlineItem, 'publisher.title');
+ *
  */
 
-export class BookTableStrategy implements ITableStrategy&lt;IBookProps> {
+export class OnlineTableStrategy implements ITableStrategy&lt;IOnlineProps> {
   /**
-   * Alias map for nested property keys, used in filtering or sorting.
+   * Column alias map used to map nested keys.
+   * Defines shortcuts for complex property access paths.
    *
+   * @type {Readonly&lt;Record&lt;string, string>>}
    * @readonly
    * @private
-   * @type {{ readonly translator: 'translator'; readonly publisher: 'publisher.title' }}
+   * @example
+   * {
+   *   publisher: 'publisher.title'
+   * }
    */
 
-  private readonly aliases = {
-    translator: 'translator',
+  private readonly aliases: Readonly&lt;Record&lt;string, string>> = {
     publisher: 'publisher.title',
   } as const;
 
   /**
-   * Returns an alias object for an object property.
+   * Retrieves a map of column aliases.
+   * Returns an object containing a mapping between alias names and actual paths to properties.
    *
-   * @returns {Record&lt;string, string>} Alias map, where the key is the name of the property,
-   * and the value is the path (can be with a dot) to the actual value.
+   * @returns {Readonly&lt;Record&lt;string, string>>} Column alias map
+   * @example
+   * const strategy = new OnlineTableStrategy();
+   * const aliases = strategy.getAliases();
+   * console.log(aliases.publisher); // "publisher.title"
+   *
    */
 
-  getAliases(): Record&lt;string, string> {
+  getAliases(): Readonly&lt;Record&lt;string, string>> {
     return this.aliases;
   }
 
   /**
-   * Generates a list of column header definitions based on a sample object.
-   * It takes into account the order of properties, display conditions and the sortability flag.
+   * Generates table header definitions based on the passed element.
+   * Returns an array of header definitions in the specified order, filtering out those,
+   * that do not meet the conditions or do not exist in the element.
    *
-   * @param {IBookProps} item - An example of a book object used to evaluate conditions.
-   * @returns {IHeaderDefinition&lt;IBookProps>[]} An array of header definitions,
-   * sorted by predefined order of properties.
+   * @param {IOnlineProps} item - Data element for which headers are generated
+   * @returns {IHeaderDefinition&lt;IOnlineProps>[]} Header definition table
+   * @throws {TypeError} When the passed parameter is not an object
+   * @example
+   * const strategy = new OnlineTableStrategy();
+   * const headers = strategy.getHeaders({
+   *   id: 1,
+   *   title: "Example Title",
+   *   version: "1.0",
+   *   publisher: { title: "Publisher Name" },
+   *   startDate: "2023-01-01",
+   *   lastIssueDate: "2023-12-31"
+   * });
+   *
+   * // Returns an array with header definitions for all columns
+   *
    */
 
-  getHeaders(item: IBookProps): IHeaderDefinition&lt;IBookProps>[] {
-    const propertyOrder: Exclude&lt;keyof IBookProps, 'id'>[] = [
-      'originalTitle',
-      'polishTitle',
-      'author',
-      'translator',
+  getHeaders(item: IOnlineProps): IHeaderDefinition&lt;IOnlineProps>[] {
+    const propertyOrder: Exclude&lt;keyof IOnlineProps, 'id'>[] = [
+      'title',
+      'version',
       'publisher',
-      'year',
-      'publicationNumber',
-      'cover',
-      'series',
-      'isbn',
+      'startDate',
+      'lastIssueDate',
     ];
 
     const headerDefinitions: Record&lt;
-      Exclude&lt;keyof IBookProps, 'id'>,
-      IHeaderDefinition&lt;IBookProps>
+      Exclude&lt;keyof IOnlineProps, 'id'>,
+      IHeaderDefinition&lt;IOnlineProps>
     > = {
-      originalTitle: { displayTitle: 'Original Title', key: 'originalTitle', sortable: true },
-      polishTitle: { displayTitle: 'Polish Title', key: 'polishTitle', sortable: true },
-      author: {
-        displayTitle: 'Author',
-        key: 'author',
-        condition: (item: IBookProps) => item.author !== 'J.R.R. Tolkien',
-        sortable: true,
-      },
-      translator: {
-        displayTitle: 'Translator',
-        key: 'translator' as TNestedKeyOf&lt;IBookProps>,
-        condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
-        sortable: true,
-      },
+      title: { displayTitle: 'Title', key: 'title', sortable: true },
+      version: { displayTitle: 'Version', key: 'version', sortable: true },
       publisher: {
         displayTitle: 'Publisher',
-        key: 'publisher.title' as TNestedKeyOf&lt;IBookProps>,
+        key: 'publisher.title' as TNestedKeyOf&lt;IOnlineProps>,
         sortable: true,
       },
-      year: { displayTitle: 'Year', key: 'year', sortable: true },
-      publicationNumber: { displayTitle: 'Pub. no', key: 'publicationNumber', sortable: true },
-      cover: {
-        displayTitle: 'Cover',
-        key: 'cover',
-        condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
-        sortable: false,
-      },
-      series: {
-        displayTitle: 'Series',
-        key: 'series',
-        condition: (item: IBookProps) => item.author === 'J.R.R. Tolkien',
+      startDate: { displayTitle: 'From', key: 'startDate', sortable: true },
+      lastIssueDate: {
+        displayTitle: 'Last number',
+        key: 'lastIssueDate',
+        condition: (item) => item.lastIssueDate !== null,
         sortable: true,
       },
-      isbn: { displayTitle: 'ISBN', key: 'isbn', sortable: true },
     };
 
     return propertyOrder
@@ -195,31 +210,52 @@ export class BookTableStrategy implements ITableStrategy&lt;IBookProps> {
   }
 
   /**
-   * Retrieves the value of properties (including nested properties) for a given key.
+   * Retrieves the value to display for a specified key from an object.
+   * Supports both simple properties and nested paths (e.g. ‘publisher.title’).
    *
-   * @typeParam P - Property key, can be nested (object).
-   * @param {IBookProps} item - The book object from which the value is taken.
-   * @param {P} key - Property key, such as ‘author’ or ‘publisher.title’.
-   * @returns {TPathValue&lt;IBookProps, P> | null} Property value or null if it does not exist.
+   * @template {TAllowedPaths&lt;IOnlineProps>} P
+   * @param {IOnlineProps} item - The object from which the value is taken
+   * @param {P} key - Key or path to the property (may include a dot for nested properties)
+   * @returns {TPathValue&lt;IOnlineProps, P> | null} Property value or null if not found
+   * @throws {TypeError} When the item passed is not an object
+   * @example
+   * const strategy = new OnlineTableStrategy();
+   * const item = {
+   *   title: "Example Title",
+   *   publisher: { title: "Publisher Name" }
+   * };
+   *
+   * // Downloading a simple property
+   * const title = strategy.getDisplayValue(item, 'title');
+   * console.log(title); // "Example Title"
+   *
+   * // Downloading a nested property
+   * const publisherName = strategy.getDisplayValue(item, 'publisher.title');
+   * console.log(publisherName); // "Publisher Name"
+   *
+   * // The property does not exist
+   * const missing = strategy.getDisplayValue(item, 'nonexistent');
+   * console.log(missing); // null
+   *
    */
 
-  getDisplayValue&lt;P extends TNestedKeyOf&lt;IBookProps>>(
-    item: IBookProps,
+  getDisplayValue&lt;P extends TAllowedPaths&lt;IOnlineProps>>(
+    item: IOnlineProps,
     key: P,
-  ): TPathValue&lt;IBookProps, P> | null {
+  ): TPathValue&lt;IOnlineProps, P> | null {
     if (key.includes('.')) {
-      const [parentKey, childKey] = key.split('.') as [keyof IBookProps, string];
-      const parent = item[parentKey];
+      const [parentKey, childKey] = key.split('.');
+      const parent = item[parentKey as keyof IOnlineProps];
       if (parent &amp;&amp; typeof parent === 'object' &amp;&amp; childKey in parent) {
         return (parent as unknown as Record&lt;string, unknown>)[childKey] as TPathValue&lt;
-          IBookProps,
+          IOnlineProps,
           P
         >;
       }
       return null;
     }
 
-    return item[key as keyof IBookProps] as TPathValue&lt;IBookProps, P>;
+    return item[key as keyof IOnlineProps] as TPathValue&lt;IOnlineProps, P> | null;
   }
 }
 </code></pre>

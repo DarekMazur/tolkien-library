@@ -12,8 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useMe } from '@/hooks/useMe.tsx';
 import ContactPage from './components/pages/ContactPage/ContactPage';
-import LibraryPage from '@/components/pages/LibraryPage/LibraryPage.tsx';
-import CategoryLayout from '@/layouts/CategoryLayout.tsx';
+import LibraryLayout from '@/layouts/LibraryLayout.tsx';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, user, isLoading } = useMe();
@@ -52,11 +51,8 @@ const Root = () => {
         <Route element={<DefaultLayout toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />}>
           <Route path="/" element={<Home />} />
           <Route path="/library">
-            <Route index element={<LibraryPage />} />
-            <Route path="/library/:category">
-              <Route index element={<CategoryLayout />} />
-              <Route path="/library/:category/:page" element={<h3>Page</h3>} />
-            </Route>
+            <Route path=":type" element={<LibraryLayout />} />
+            <Route path=":type/:slug" element={<h3>Page</h3>} />
           </Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/board" element={<ProtectedRoute />}>

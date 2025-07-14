@@ -75,7 +75,7 @@ const sampleBooks: IBookProps[] = [
 
 describe('BooksPage component', () => {
   it('should render heading and subheading correctly', () => {
-    renderWithProviders(<BooksPage books={sampleBooks} />);
+    renderWithProviders(<BooksPage books={sampleBooks} isJrr />);
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe('Publications list');
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe(
       "J.R.R. Tolkien's books catalog",
@@ -83,7 +83,7 @@ describe('BooksPage component', () => {
   });
 
   it('should render table headers in correct order', () => {
-    renderWithProviders(<BooksPage books={sampleBooks} />);
+    renderWithProviders(<BooksPage books={sampleBooks} isJrr />);
     const headers = screen.getAllByRole('columnheader').map((h) => h.textContent);
     expect(headers).toEqual([
       'Original Title',
@@ -99,7 +99,7 @@ describe('BooksPage component', () => {
   });
 
   it('should render a row for each book with correct data', () => {
-    renderWithProviders(<BooksPage books={sampleBooks} />);
+    renderWithProviders(<BooksPage books={sampleBooks} isJrr />);
 
     expect(screen.getByText('The Hobbit')).toBeInTheDocument();
 
