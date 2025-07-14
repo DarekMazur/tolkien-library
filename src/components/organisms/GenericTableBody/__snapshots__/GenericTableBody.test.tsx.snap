@@ -67,7 +67,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/books/hobbit-czyli-tam-i-z-powrotem"
+          href="/library/books/hobbit-czyli-tam-i-z-powrotem"
         >
           Hobbit, czyli tam i z powrotem
         </a>
@@ -76,7 +76,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/translator/marek-oramus"
+          href="/library/translator/marek-oramus"
         >
           Marek Oramus
         </a>
@@ -85,7 +85,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/publishers/rebis"
+          href="/library/publishers/rebis"
         >
           Rebis
         </a>
@@ -108,7 +108,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/books/wladca-pierscieni"
+          href="/library/books/wladca-pierscieni"
         >
           Władca Pierścieni
         </a>
@@ -117,7 +117,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/translator/marek-oramus"
+          href="/library/translator/marek-oramus"
         >
           Marek Oramus
         </a>
@@ -126,7 +126,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/publishers/rebis"
+          href="/library/publishers/rebis"
         >
           Rebis
         </a>
@@ -149,7 +149,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/books/niedokonczone-opowiesci"
+          href="/library/books/niedokonczone-opowiesci"
         >
           Niedokończone opowieści
         </a>
@@ -158,7 +158,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/translator/marek-oramus"
+          href="/library/translator/marek-oramus"
         >
           Marek Oramus
         </a>
@@ -167,7 +167,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
-          href="/publishers/rebis"
+          href="/library/publishers/rebis"
         >
           Rebis
         </a>

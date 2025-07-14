@@ -224,11 +224,11 @@ describe('GenericTableBody', () => {
 
     expect(links).toHaveLength(9);
     expect(titleLink).toBeInTheDocument();
-    expect(titleLink.getAttribute('href')).toBe('/books/hobbit-czyli-tam-i-z-powrotem');
+    expect(titleLink.getAttribute('href')).toBe('/library/books/hobbit-czyli-tam-i-z-powrotem');
     expect(translatorLinks).toHaveLength(3);
-    expect(translatorLinks[0].getAttribute('href')).toBe('/translator/marek-oramus');
+    expect(translatorLinks[0].getAttribute('href')).toBe('/library/translator/marek-oramus');
     expect(publisherLinks).toHaveLength(3);
-    expect(publisherLinks[0].getAttribute('href')).toBe('/publishers/rebis');
+    expect(publisherLinks[0].getAttribute('href')).toBe('/library/publishers/rebis');
   });
 
   it('renders "-" for null values', () => {

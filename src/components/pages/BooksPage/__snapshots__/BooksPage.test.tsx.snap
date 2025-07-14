@@ -650,7 +650,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
-              href="/books/hobbit-czyli-tam-i-z-powrotem"
+              href="/library/books/hobbit-czyli-tam-i-z-powrotem"
             >
               Hobbit, czyli tam i z powrotem
             </a>
@@ -659,7 +659,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
-              href="/translator/marek-oramus"
+              href="/library/translator/marek-oramus"
             >
               Marek Oramus
             </a>
@@ -668,7 +668,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
-              href="/publishers/rebis"
+              href="/library/publishers/rebis"
             >
               Rebis
             </a>
@@ -711,7 +711,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
-              href="/books/niedokonczone-opowiesci"
+              href="/library/books/niedokonczone-opowiesci"
             >
               Niedokończone opowieści
             </a>
@@ -720,7 +720,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
-              href="/translator/marta-nowak"
+              href="/library/translator/marta-nowak"
             >
               Marta Nowak
             </a>
@@ -729,7 +729,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
-              href="/publishers/zysk-i-s-ks"
+              href="/library/publishers/zysk-i-s-ks"
             >
               Zysk i S-ks
             </a>
