@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="OnlineTableStrategy.html">OnlineTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
                 
             </nav>
         </div>
@@ -707,6 +707,104 @@ console.log(headers); // []</code></pre>
 
 </div>
             
+                <div class="member">
+
+<h4 class="name" id="useLibraryParams">
+    <a class="href-link" href="#useLibraryParams">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        useLibraryParams
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Custom hook for extracting and validating library parameters from URL routing.
+
+This hook extracts the publication type and slug from URL parameters,
+validates the type against the EPublicationType enum, and processes
+search parameters from the current location.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="hooks_useLibraryParams.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="hooks_useLibraryParams.tsx.html">hooks/useLibraryParams.tsx</a>, <a href="hooks_useLibraryParams.tsx.html#line37">line 37</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    
+        <pre class="prettyprint"><code>// URL: /books/fantasy-novel?query=tolkien
+const { type, slug, search, isValid } = useLibraryParams();
+// type: EPublicationType.BOOK (if 'books' maps to valid enum value)
+// slug: 'fantasy-novel'
+// search: 'query=tolkien'
+// isValid: true</code></pre>
+    
+
+    
+        <pre class="prettyprint"><code>// URL: /invalid-type
+const { type, slug, search, isValid } = useLibraryParams();
+// type: null
+// slug: null
+// search: null
+// isValid: false</code></pre>
+    
+
+
+</div>
+            
             </div>
         </div>
     
@@ -717,6 +815,577 @@ console.log(headers); // []</code></pre>
         <div class='vertical-section'>
             <h1>Type Definitions</h1>
             <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="CategoryState">
+    <a class="href-link" href="#CategoryState">#</a>
+    
+    <span class="code-name">
+        CategoryState
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Custom hook for fetching and managing library data based on URL parameters.
+
+This hook orchestrates data fetching for different types of library publications
+(books, articles, online resources, categories) based on the current URL parameters.
+It uses the useLibraryParams hook to extract routing information and conditionally
+fetches appropriate data using the useApi hook.
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'invalid'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Indicates invalid URL parameters</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'loading'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Indicates data is being fetched</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'error'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Indicates an error occurred during data fetching</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'empty'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Indicates no data to fetch for current parameters</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>type</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">EPublicationType</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">The publication type from URL parameters</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'books'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Successfully fetched books data</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>data</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Array of book objects from J.R.R. Tolkien</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>type</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">EPublicationType</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">The publication type (EPublicationType.BOOK)</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>search</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+|
+
+<code class="param-type">null</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Search query parameter for filtering books</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'publications'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Successfully fetched publications data</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>data</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Array of publication objects</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>type</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">EPublicationType</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">The publication type (EPublicationType.ARTICLE)</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'online'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Successfully fetched online resources data</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>data</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Array of online resource objects</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>type</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">EPublicationType</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">The publication type (EPublicationType.ONLINE)</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>state</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">'category'</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Successfully fetched category data</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>data</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Object</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">Category object retrieved by slug</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>type</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">EPublicationType</code>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last">The publication type</td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="global.html#useLibraryParams">useLibraryParams</a> - For URL parameter extraction logic</li>
+        
+            <li>useApi - For API data fetching patterns</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="hooks_useLibraryData.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="hooks_useLibraryData.tsx.html">hooks/useLibraryData.tsx</a>, <a href="hooks_useLibraryData.tsx.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    
+        <pre class="prettyprint"><code>// URL: /books?search=hobbit
+const result = useLibraryData();
+if (result.state === 'books') {
+  console.log(result.data); // Array of Tolkien books
+  console.log(result.search); // 'hobbit'
+}</code></pre>
+    
+
+    
+        <pre class="prettyprint"><code>// URL: /articles
+const result = useLibraryData();
+if (result.state === 'publications') {
+  console.log(result.data); // Array of articles
+}</code></pre>
+    
+
+    
+        <pre class="prettyprint"><code>// URL: /invalid-type
+const result = useLibraryData();
+// result.state === 'invalid'</code></pre>
+    
+
+    
+        <pre class="prettyprint"><code>// URL: /categories/fantasy
+const result = useLibraryData();
+if (result.state === 'category') {
+  console.log(result.data); // Category object for 'fantasy'
+}</code></pre>
+    
+
+
+</div>
             
                 <div class="member">
 

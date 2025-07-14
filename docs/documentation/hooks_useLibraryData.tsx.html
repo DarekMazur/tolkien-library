@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> hooks/useLibraryData.tsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="OnlineTableStrategy.html">OnlineTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>hooks/useLibraryData.tsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useApi } from '@/hooks/useApi';
+import {
+  getCategoryBySlug,
+  getBooksByAuthor,
+  getAllPublications,
+  getAllOnline,
+} from '@/lib/getDataFromApi';
+import { EPublicationType } from '@/lib/types';
+import { useLibraryParams } from './useLibraryParams';
+
+/**
+ * Custom hook for fetching and managing library data based on URL parameters.
+ *
+ * This hook orchestrates data fetching for different types of library publications
+ * (books, articles, online resources, categories) based on the current URL parameters.
+ * It uses the useLibraryParams hook to extract routing information and conditionally
+ * fetches appropriate data using the useApi hook.
+ *
+ * @typedef {Object} InvalidState
+ * @property {'invalid'} state - Indicates invalid URL parameters
+ *
+ * @typedef {Object} LoadingState
+ * @property {'loading'} state - Indicates data is being fetched
+ *
+ * @typedef {Object} ErrorState
+ * @property {'error'} state - Indicates an error occurred during data fetching
+ *
+ * @typedef {Object} EmptyState
+ * @property {'empty'} state - Indicates no data to fetch for current parameters
+ * @property {EPublicationType} type - The publication type from URL parameters
+ *
+ * @typedef {Object} BooksState
+ * @property {'books'} state - Successfully fetched books data
+ * @property {Array} data - Array of book objects from J.R.R. Tolkien
+ * @property {EPublicationType} type - The publication type (EPublicationType.BOOK)
+ * @property {string | null} search - Search query parameter for filtering books
+ *
+ * @typedef {Object} PublicationsState
+ * @property {'publications'} state - Successfully fetched publications data
+ * @property {Array} data - Array of publication objects
+ * @property {EPublicationType} type - The publication type (EPublicationType.ARTICLE)
+ *
+ * @typedef {Object} OnlineState
+ * @property {'online'} state - Successfully fetched online resources data
+ * @property {Array} data - Array of online resource objects
+ * @property {EPublicationType} type - The publication type (EPublicationType.ONLINE)
+ *
+ * @typedef {Object} CategoryState
+ * @property {'category'} state - Successfully fetched category data
+ * @property {Object} data - Category object retrieved by slug
+ * @property {EPublicationType} type - The publication type
+ *
+ * @returns {InvalidState | LoadingState | ErrorState | EmptyState | BooksState | PublicationsState | OnlineState | CategoryState}
+ * A discriminated union representing the current state of data fetching and the associated data.
+ * The return type is determined by the URL parameters and the current fetch status.
+ *
+ * @example
+ * // URL: /books?search=hobbit
+ * const result = useLibraryData();
+ * if (result.state === 'books') {
+ *   console.log(result.data); // Array of Tolkien books
+ *   console.log(result.search); // 'hobbit'
+ * }
+ *
+ * @example
+ * // URL: /articles
+ * const result = useLibraryData();
+ * if (result.state === 'publications') {
+ *   console.log(result.data); // Array of articles
+ * }
+ *
+ * @example
+ * // URL: /invalid-type
+ * const result = useLibraryData();
+ * // result.state === 'invalid'
+ *
+ * @example
+ * // URL: /categories/fantasy
+ * const result = useLibraryData();
+ * if (result.state === 'category') {
+ *   console.log(result.data); // Category object for 'fantasy'
+ * }
+ *
+ * @requires useLibraryParams - Custom hook for extracting URL parameters
+ * @requires useApi - Custom hook for API data fetching
+ * @requires @/lib/getDataFromApi - API functions for different data types
+ * @requires @/lib/types - EPublicationType enum
+ *
+ * @see {@link useLibraryParams} - For URL parameter extraction logic
+ * @see {@link useApi} - For API data fetching patterns
+ *
+ * @throws {Error} When API calls fail, returns state 'error' instead of throwing
+ *
+ * @note This hook specifically fetches J.R.R. Tolkien books when type is BOOK.
+ *       The search parameter 'jrrt' is used to exclude/include Tolkien-specific results.
+ *
+ * @note Categories are only fetched when type is not BOOK, ARTICLE, or ONLINE and a slug is present.
+ *
+ * @performance The hook uses conditional API calls to avoid unnecessary network requests.
+ *              Only the relevant API endpoint is called based on the current URL parameters.
+ */
+
+export const useLibraryData = () => {
+  const { type, slug, search, isValid } = useLibraryParams();
+
+  if (!isValid) return { state: 'invalid' as const };
+
+  const shouldFetchBooks = type === EPublicationType.BOOK;
+  const shouldFetchArticles = type === EPublicationType.ARTICLE;
+  const shouldFetchOnline = type === EPublicationType.ONLINE;
+  const shouldFetchCategory =
+    type !== EPublicationType.BOOK &amp;&amp;
+    type !== EPublicationType.ARTICLE &amp;&amp;
+    type !== EPublicationType.ONLINE &amp;&amp;
+    !!slug;
+
+  const {
+    data: books,
+    isLoading: booksLoading,
+    isError: booksError,
+  } = useApi(() => getBooksByAuthor('J.R.R. Tolkien', search !== 'jrrt'), {
+    enabled: shouldFetchBooks,
+  });
+
+  const {
+    data: publications,
+    isLoading: publicationsLoading,
+    isError: publicationsError,
+  } = useApi(() => getAllPublications(), {
+    enabled: shouldFetchArticles,
+  });
+
+  const {
+    data: online,
+    isLoading: onlineLoading,
+    isError: onlineError,
+  } = useApi(() => getAllOnline(), {
+    enabled: shouldFetchOnline,
+  });
+
+  const {
+    data: category,
+    isLoading: categoryLoading,
+    isError: categoryError,
+  } = useApi(() => getCategoryBySlug(slug!), { enabled: shouldFetchCategory });
+
+  if (shouldFetchBooks) {
+    if (booksLoading) return { state: 'loading' as const };
+    if (booksError) return { state: 'error' as const };
+    return { state: 'books' as const, data: books!, type, search };
+  }
+
+  if (shouldFetchArticles) {
+    if (publicationsLoading) return { state: 'loading' as const };
+    if (publicationsError) return { state: 'error' as const };
+    return { state: 'publications' as const, data: publications!, type };
+  }
+
+  if (shouldFetchOnline) {
+    if (onlineLoading) return { state: 'loading' as const };
+    if (onlineError) return { state: 'error' as const };
+    return { state: 'online' as const, data: online!, type };
+  }
+
+  if (shouldFetchCategory) {
+    if (categoryLoading) return { state: 'loading' as const };
+    if (categoryError) return { state: 'error' as const };
+    return { state: 'category' as const, data: category!, type };
+  }
+
+  return { state: 'empty' as const, type };
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>
