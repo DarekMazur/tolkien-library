@@ -32,6 +32,7 @@ export interface IPublicationProps extends ICommonId {
   isbn?: string | null;
   issn?: string | null;
   description: string;
+  type: EPublicationType;
 }
 
 export interface IOnlineProps extends ICommonId {
@@ -42,9 +43,15 @@ export interface IOnlineProps extends ICommonId {
   lastIssueDate: Date | null;
 }
 
+export enum EPublicationType {
+  PARTIAL = 'partial',
+  INCLUDING = 'including',
+  EPUB = 'epub',
+}
+
 export type TPublicationType = IBookProps | IPublicationProps | IOnlineProps;
 
-export enum EPublicationType {
+export enum ETableType {
   BOOK = 'book',
   ARTICLE = 'article',
   ONLINE = 'online',

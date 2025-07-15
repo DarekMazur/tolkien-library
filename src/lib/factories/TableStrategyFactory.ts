@@ -1,6 +1,6 @@
 import {
   ITableStrategy,
-  EPublicationType,
+  ETableType,
   TPublicationType,
   IBookProps,
   IPublicationProps,
@@ -29,30 +29,30 @@ export class TableStrategyFactory {
    *
    * @typeParam T The type of publication whose strategy is to be created.
    *              It can be `IBookProps` or `IPublicationProps`.
-   * @param {EPublicationType} type - Publication type, such as `EPublicationType.BOOK` or `EPublicationType.ARTICLE`.
+   * @param {ETableType} type - Publication type, such as `ETableType.BOOK` or `ETableType.ARTICLE`.
    * @returns {StrategyForType<T>} Instance of `ITableStrategy` matched to the publication property T.
    *
    * @throws {Error} When the factory does not support the transferred publication type.
    *
    * @example
    * // Creating a strategy for the book
-   * const bookStrategy = TableStrategyFactory.createStrategy<IBookProps>(EPublicationType.BOOK);
+   * const bookStrategy = TableStrategyFactory.createStrategy<IBookProps>(ETableType.BOOK);
    * bookStrategy.renderTable(data);
    *
    * @example
    * // Create a strategy for the article
-   * const articleStrategy = TableStrategyFactory.createStrategy<IPublicationProps>(EPublicationType.ARTICLE);
+   * const articleStrategy = TableStrategyFactory.createStrategy<IPublicationProps>(ETableType.ARTICLE);
    * articleStrategy.renderTable(data);
    */
   static createStrategy<T extends TPublicationType = TPublicationType>(
-    type: EPublicationType,
+    type: ETableType,
   ): StrategyForType<T> {
     switch (type) {
-      case EPublicationType.BOOK:
+      case ETableType.BOOK:
         return new BookTableStrategy() as unknown as StrategyForType<T>;
-      case EPublicationType.ARTICLE:
+      case ETableType.ARTICLE:
         return new ArticleTableStrategy() as unknown as StrategyForType<T>;
-      case EPublicationType.ONLINE:
+      case ETableType.ONLINE:
         return new OnlineTableStrategy() as unknown as StrategyForType<T>;
       default:
         throw new Error(`Unsupported publication type: ${type}`);

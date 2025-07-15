@@ -3,7 +3,7 @@ import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import GenericTable from './GenericTable';
 
-import { EPublicationType, IPublicationProps, TAllowedPaths } from '@/lib/types';
+import { ETableType, IPublicationProps, TAllowedPaths } from '@/lib/types';
 import { IHeaderDefinition } from '@/lib/types/table.types';
 
 type PublicationKey = TAllowedPaths<IPublicationProps>;
@@ -123,7 +123,7 @@ vi.mock('../GenericTableBody/GenericTableBody', () => ({
 describe('GenericTable', () => {
   const defaultProps = {
     data: mockData,
-    publicationType: EPublicationType.ARTICLE,
+    publicationType: ETableType.ARTICLE,
     title: 'Test Table Title',
     subtitle: 'Test Table Subtitle',
   };

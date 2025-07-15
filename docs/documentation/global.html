@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="OnlineTableStrategy.html">OnlineTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="OnlineTableStrategy.html">OnlineTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PublicationPage">PublicationPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
                 
             </nav>
         </div>
@@ -656,7 +656,7 @@ console.log(issn) // => '0317-8471'
         
             <li>ITableStrategy - Table strategy interface</li>
         
-            <li>EPublicationType - Enum of publication types</li>
+            <li>ETableType - Enum of publication types</li>
         </ul>
     </dd>
     
@@ -688,7 +688,7 @@ const articles = [
 
 const { headers, getDisplayValue, aliases } = useGenericHeaders(
   articles,
-  EPublicationType.ARTICLE
+  ETableType.ARTICLE
 );
 
 // Using headers in a table component
@@ -700,7 +700,7 @@ headers.forEach(header => {
 
     
         <pre class="prettyprint"><code>// Use with an empty array
-const { headers } = useGenericHeaders([], EPublicationType.BOOK);
+const { headers } = useGenericHeaders([], ETableType.BOOK);
 console.log(headers); // []</code></pre>
     
 
@@ -729,7 +729,7 @@ console.log(headers); // []</code></pre>
     Custom hook for extracting and validating library parameters from URL routing.
 
 This hook extracts the publication type and slug from URL parameters,
-validates the type against the EPublicationType enum, and processes
+validates the type against the ETableType enum, and processes
 search parameters from the current location.
 </div>
 
@@ -787,7 +787,7 @@ search parameters from the current location.
     
         <pre class="prettyprint"><code>// URL: /books/fantasy-novel?query=tolkien
 const { type, slug, search, isValid } = useLibraryParams();
-// type: EPublicationType.BOOK (if 'books' maps to valid enum value)
+// type: ETableType.BOOK (if 'books' maps to valid enum value)
 // slug: 'fantasy-novel'
 // search: 'query=tolkien'
 // isValid: true</code></pre>
@@ -809,6 +809,211 @@ const { type, slug, search, isValid } = useLibraryParams();
         </div>
     
 
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="PublicationPage">
+        <a class="href-link" href="#PublicationPage">#</a>
+        
+        <span class="code-name">
+            
+                PublicationPage<span class="signature">(props)</span><span class="type-signature"> &rarr; {ReactElement}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        A site with Tolkien publications divided into three categories.
+(`partial`, `including`, `epub`) and displayed in separate tables.
+
+Sections:
+ • Items partially related to Tolkien (`partial`)
+ • With Tolkien elements - items containing articles about Tolkien or
+   only partially devoted to him (`including`)
+ • E-editions - electronic publications (`epub`)
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">props.data – publication array; each object must contain at least
+       fields:
+       • `id: string | number` – unique identifier
+       • `type: 'partial' | 'including' | 'epub'` – record category
+       • `title: string` – heading
+       • Additional fields from `IPublicationProps` are also supported.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_pages_PublicationPage_PublicationPage.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_pages_PublicationPage_PublicationPage.tsx.html">components/pages/PublicationPage/PublicationPage.tsx</a>, <a href="components_pages_PublicationPage_PublicationPage.tsx.html#line34">line 34</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>JSX structure with a header and up to three tables.</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">ReactElement</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>```
+import { fetchPublications } from '@/api';
+
+const data = await fetchPublications();
+
+&lt;PublicationPage data={data} />;
+```</code></pre>
+    
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -975,7 +1180,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1044,7 +1249,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1054,7 +1259,7 @@ fetches appropriate data using the useApi hook.
 
     
 
-    <td class="description last">The publication type (EPublicationType.BOOK)</td>
+    <td class="description last">The publication type (ETableType.BOOK)</td>
 </tr>
 
         
@@ -1139,7 +1344,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1149,7 +1354,7 @@ fetches appropriate data using the useApi hook.
 
     
 
-    <td class="description last">The publication type (EPublicationType.ARTICLE)</td>
+    <td class="description last">The publication type (ETableType.ARTICLE)</td>
 </tr>
 
         
@@ -1208,7 +1413,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1218,7 +1423,7 @@ fetches appropriate data using the useApi hook.
 
     
 
-    <td class="description last">The publication type (EPublicationType.ONLINE)</td>
+    <td class="description last">The publication type (ETableType.ONLINE)</td>
 </tr>
 
         
@@ -1277,7 +1482,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     

@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/helpers/generateISBN.ts</title>
+  <title> components/pages/PublicationPage/PublicationPage.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/helpers/generateISBN.ts</h1>
+                    <h1>components/pages/PublicationPage/PublicationPage.tsx</h1>
                 </header>
                 
 
@@ -85,93 +85,79 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { validateISBN } from '@/lib/helpers/validateISBN.ts';
+            <pre class="prettyprint source linenums"><code>import { ETableType, IPublicationProps } from '@/lib/types';
+import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
+import { Divider, Typography } from '@mui/material';
 
 /**
- * Calculates the ISBN-13 checksum digit for a 12-digit ISBN prefix.
+ * A site with Tolkien publications divided into three categories.
+ * (`partial`, `including`, `epub`) and displayed in separate tables.
  *
- * This function applies the ISBN-13 weighting algorithm:
- * - Digits in odd positions (0-based index even) are multiplied by 1.
- * - Digits in even positions (0-based index odd) are multiplied by 3.
- * The checksum is the number that, when added to the weighted sum, makes it
- * a multiple of 10. If the weighted sum modulo 10 is 0, the checksum is 0.
+ * Sections:
+ *  • Items partially related to Tolkien (`partial`)
+ *  • With Tolkien elements - items containing articles about Tolkien or
+ *    only partially devoted to him (`including`)
+ *  • E-editions - electronic publications (`epub`)
  *
- * @param {string} isbn12
- *   A string of exactly 12 numeric characters representing the first
- *   twelve digits of an ISBN-13 code (e.g., "978030640615").
- * @returns {number}
- *   The computed checksum digit (0–9).
- * @throws {Error}
- *   Throws if `isbn12` contains non-digit characters or is not length 12.
- *
- * @example
- * calculateISBN13Checksum('978030640615'); // => 7
- */
-
-export const calculateISBN13Checksum = (isbn12: string): number => {
-  if (isbn12.length !== 12) {
-    throw new Error(`Invalid digits length: expected 12, got ${isbn12.length}`);
-  }
-
-  const digits: number[] = isbn12.split('').map(Number);
-  let sum = 0;
-  for (let i = 0; i &lt; digits.length; i++) {
-    sum += digits[i] * (i % 2 === 0 ? 1 : 3);
-  }
-  return (10 - (sum % 10)) % 10;
-};
-
-/**
- * Generates a valid random ISBN-13 string.
- *
- * This function constructs a 13-digit ISBN by:
- * 1. Randomly choosing a prefix of "978" or "979".
- * 2. Appending nine random digits (0–9).
- * 3. Calculating the checksum digit via `calculateISBN13Checksum`.
- * 4. Concatenating the checksum and validating the final ISBN string.
- *
- * @returns {string}
- *   A valid ISBN-13 string of length 13, e.g., "9781234567897".
- * @throws {Error}
- *   Throws if the generated ISBN fails validation by `validateISBN` and if the prefix is invalid (different from 978 or 979).
+ * @component
+ * @param {{ data: IPublicationProps[] }} props
+ *        props.data – publication array; each object must contain at least
+ *        fields:
+ *        • `id: string | number` – unique identifier
+ *        • `type: 'partial' | 'including' | 'epub'` – record category
+ *        • `title: string` – heading
+ *        • Additional fields from `IPublicationProps` are also supported.
+ * @returns {ReactElement} JSX structure with a header and up to three tables.
  *
  * @example
- * // Might return "9790123456784"
- * const isbn = generateRandomISBN13();
- * console.log(isbn); // => "979XXXXXXXXXX"
+ * ```
+ * import { fetchPublications } from '@/api';
+ *
+ * const data = await fetchPublications();
+ *
+ * &lt;PublicationPage data={data} />;
+ * ```
  */
 
-type TIsbnPrefix = '978' | '979';
-type TIsbn = `${TIsbnPrefix}${string}`;
+const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
+  const partialPublications: IPublicationProps[] = data.filter((item) => item.type === 'partial');
+  const includingPublications: IPublicationProps[] = data.filter(
+    (item) => item.type === 'including',
+  );
+  const epubPublications: IPublicationProps[] = data.filter((item) => item.type === 'epub');
 
-export const generateRandomISBN13 = (): TIsbn => {
-  const isbnPrefix: TIsbnPrefix = Math.random() &lt; 0.5 ? '978' : '979';
-
-  const isbnElements: string[] = [isbnPrefix];
-
-  for (let i = 0; i &lt; 9; i++) {
-    isbnElements.push(Math.floor(Math.random() * 10).toString());
-  }
-
-  const assertIsTIsbn = (s: string): TIsbn => {
-    if (!s.startsWith('978') &amp;&amp; !s.startsWith('979')) {
-      throw new Error('Invalid ISBN prefix');
-    }
-    return s as TIsbn;
-  };
-
-  const rawIsbn: string = isbnElements.join('');
-  const isbn: TIsbn = assertIsTIsbn(rawIsbn);
-  const checksum: number = calculateISBN13Checksum(isbn);
-  const finalRaw: string = isbn + checksum.toString();
-  const finalISBN: TIsbn = assertIsTIsbn(finalRaw);
-
-  if (!validateISBN(finalISBN)) {
-    throw new Error('Invalid ISBN format or checksum');
-  }
-
-  return finalISBN;
+  return (
+    &lt;>
+      &lt;Typography variant="h2" component="h3">
+        Fragmentarium
+      &lt;/Typography>
+      &lt;Divider sx={{ mb: 4 }} />
+      {partialPublications.length > 0 ? (
+        &lt;GenericTable
+          data={data.filter((item) => item.type === 'partial')}
+          publicationType={ETableType.ARTICLE}
+          title="Items partly related to Tolkien"
+        />
+      ) : null}
+      {includingPublications.length > 0 ? (
+        &lt;GenericTable
+          data={data.filter((item) => item.type === 'including')}
+          publicationType={ETableType.ARTICLE}
+          title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
+        />
+      ) : null}
+      {epubPublications.length > 0 ? (
+        &lt;GenericTable
+          data={data.filter((item) => item.type === 'epub')}
+          publicationType={ETableType.ARTICLE}
+          title="E-publications"
+        />
+      ) : null}
+    &lt;/>
+  );
 };
+
+export default PublicationPage;
 </code></pre>
         </article>
     </section>

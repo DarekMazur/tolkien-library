@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Divider, Paper, Table, TableContainer, Typography } from '@mui/material';
-import { EPublicationType, TAllowedPaths, TOrder, TPublicationType } from '@/lib/types';
+import { ETableType, TAllowedPaths, TOrder, TPublicationType } from '@/lib/types';
 import { useGenericHeaders } from '@/hooks/useGenericHeaders';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader';
 import GenericTableBody from '../GenericTableBody/GenericTableBody';
 
 interface IGenericTableProps<T extends TPublicationType> {
   data: T[];
-  publicationType: EPublicationType;
+  publicationType: ETableType;
   title: string;
   subtitle?: string;
+  headerVariant?: 'h1' | 'h2' | 'h3' | 'h4';
 }
 
 const GenericTable = <T extends TPublicationType>({
@@ -17,6 +18,7 @@ const GenericTable = <T extends TPublicationType>({
   publicationType,
   title,
   subtitle,
+  headerVariant,
 }: IGenericTableProps<T>) => {
   const [order, setOrder] = useState<TOrder>('asc');
   const [orderBy, setOrderBy] = useState<TAllowedPaths<T> | null>(null);
@@ -36,7 +38,7 @@ const GenericTable = <T extends TPublicationType>({
 
   return (
     <>
-      <Typography variant="h2" component="h1" gutterBottom>
+      <Typography variant={headerVariant ?? 'h2'} component="h1" gutterBottom>
         {title}
       </Typography>
       {subtitle && (
@@ -45,8 +47,8 @@ const GenericTable = <T extends TPublicationType>({
         </Typography>
       )}
       <Divider />
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} sx={{ mb: 5 }}>
+        <Table aria-label={title}>
           <TableHeader
             order={order}
             orderBy={orderBy}
