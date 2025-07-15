@@ -1,23 +1,21 @@
-import { EPublicationType } from '@/lib/types';
+import { ETableType } from '@/lib/types';
 import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy.ts';
 import { TableStrategyFactory } from '@/lib/factories/TableStrategyFactory.ts';
 import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy.ts';
 
 describe('TableStrategyFactory.createStrategy', () => {
-  it('should return an instance of BookTableStrategy for EPublicationType.BOOK', () => {
-    const strategy = TableStrategyFactory.createStrategy(EPublicationType.BOOK);
+  it('should return an instance of BookTableStrategy for ETableType.BOOK', () => {
+    const strategy = TableStrategyFactory.createStrategy(ETableType.BOOK);
     expect(strategy).toBeInstanceOf(BookTableStrategy);
   });
 
-  it('should return an ArticleTableStrategy instance for EPublicationType.ARTICLE', () => {
-    const strategy = TableStrategyFactory.createStrategy(EPublicationType.ARTICLE);
+  it('should return an ArticleTableStrategy instance for ETableType.ARTICLE', () => {
+    const strategy = TableStrategyFactory.createStrategy(ETableType.ARTICLE);
     expect(strategy).toBeInstanceOf(ArticleTableStrategy);
   });
 
   it('should have methods specific to BookTableStrategy', () => {
-    const strategy = TableStrategyFactory.createStrategy(
-      EPublicationType.BOOK,
-    ) as BookTableStrategy;
+    const strategy = TableStrategyFactory.createStrategy(ETableType.BOOK) as BookTableStrategy;
     expect(typeof strategy.getHeaders).toBe('function');
     expect(typeof strategy.getDisplayValue).toBe('function');
     expect(typeof strategy.getAliases).toBe('function');
@@ -25,7 +23,7 @@ describe('TableStrategyFactory.createStrategy', () => {
 
   it('should have methods specific to ArticleTableStrategy', () => {
     const strategy = TableStrategyFactory.createStrategy(
-      EPublicationType.ARTICLE,
+      ETableType.ARTICLE,
     ) as ArticleTableStrategy;
     expect(typeof strategy.getHeaders).toBe('function');
     expect(typeof strategy.getDisplayValue).toBe('function');

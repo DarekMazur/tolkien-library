@@ -656,7 +656,7 @@ console.log(issn) // => '0317-8471'
         
             <li>ITableStrategy - Table strategy interface</li>
         
-            <li>EPublicationType - Enum of publication types</li>
+            <li>ETableType - Enum of publication types</li>
         </ul>
     </dd>
     
@@ -688,7 +688,7 @@ const articles = [
 
 const { headers, getDisplayValue, aliases } = useGenericHeaders(
   articles,
-  EPublicationType.ARTICLE
+  ETableType.ARTICLE
 );
 
 // Using headers in a table component
@@ -700,7 +700,7 @@ headers.forEach(header => {
 
     
         <pre class="prettyprint"><code>// Use with an empty array
-const { headers } = useGenericHeaders([], EPublicationType.BOOK);
+const { headers } = useGenericHeaders([], ETableType.BOOK);
 console.log(headers); // []</code></pre>
     
 
@@ -729,7 +729,7 @@ console.log(headers); // []</code></pre>
     Custom hook for extracting and validating library parameters from URL routing.
 
 This hook extracts the publication type and slug from URL parameters,
-validates the type against the EPublicationType enum, and processes
+validates the type against the ETableType enum, and processes
 search parameters from the current location.
 </div>
 
@@ -787,7 +787,7 @@ search parameters from the current location.
     
         <pre class="prettyprint"><code>// URL: /books/fantasy-novel?query=tolkien
 const { type, slug, search, isValid } = useLibraryParams();
-// type: EPublicationType.BOOK (if 'books' maps to valid enum value)
+// type: ETableType.BOOK (if 'books' maps to valid enum value)
 // slug: 'fantasy-novel'
 // search: 'query=tolkien'
 // isValid: true</code></pre>
@@ -1180,7 +1180,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1249,7 +1249,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1259,7 +1259,7 @@ fetches appropriate data using the useApi hook.
 
     
 
-    <td class="description last">The publication type (EPublicationType.BOOK)</td>
+    <td class="description last">The publication type (ETableType.BOOK)</td>
 </tr>
 
         
@@ -1344,7 +1344,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1354,7 +1354,7 @@ fetches appropriate data using the useApi hook.
 
     
 
-    <td class="description last">The publication type (EPublicationType.ARTICLE)</td>
+    <td class="description last">The publication type (ETableType.ARTICLE)</td>
 </tr>
 
         
@@ -1413,7 +1413,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     
@@ -1423,7 +1423,7 @@ fetches appropriate data using the useApi hook.
 
     
 
-    <td class="description last">The publication type (EPublicationType.ONLINE)</td>
+    <td class="description last">The publication type (ETableType.ONLINE)</td>
 </tr>
 
         
@@ -1482,7 +1482,7 @@ fetches appropriate data using the useApi hook.
     <td class="type">
     
         
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
     

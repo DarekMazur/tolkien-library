@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import {
-  EPublicationType,
+  ETableType,
   TPublicationType,
   TAllowedPaths,
   ITableStrategy,
@@ -15,7 +15,7 @@ import { TableStrategyFactory } from '@/lib/factories/TableStrategyFactory';
  * @template {TPublicationType} T - Publication object type extending TPublicationType
  *
  * @param {T[]} items - Array of publication elements to be processed
- * @param {EPublicationType} publicationType - The type of publication that determines the processing strategy
+ * @param {ETableType} publicationType - The type of publication that determines the processing strategy
  *
  * @returns {{
  *   headers: IHeaderDefinition<T>[],
@@ -36,7 +36,7 @@ import { TableStrategyFactory } from '@/lib/factories/TableStrategyFactory';
  *
  * const { headers, getDisplayValue, aliases } = useGenericHeaders(
  *   articles,
- *   EPublicationType.ARTICLE
+ *   ETableType.ARTICLE
  * );
  *
  * // Using headers in a table component
@@ -47,17 +47,17 @@ import { TableStrategyFactory } from '@/lib/factories/TableStrategyFactory';
  *
  * @example
  * // Use with an empty array
- * const { headers } = useGenericHeaders([], EPublicationType.BOOK);
+ * const { headers } = useGenericHeaders([], ETableType.BOOK);
  * console.log(headers); // []
  *
  * @see {@link TableStrategyFactory} - Table strategy factory
  * @see {@link ITableStrategy} - Table strategy interface
- * @see {@link EPublicationType} - Enum of publication types
+ * @see {@link ETableType} - Enum of publication types
  */
 
 export const useGenericHeaders = <T extends TPublicationType>(
   items: T[],
-  publicationType: EPublicationType,
+  publicationType: ETableType,
 ): {
   headers: IHeaderDefinition<T>[];
   getDisplayValue: <P extends TAllowedPaths<T>>(item: T, key: P) => TPathValue<T, P> | null;

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Divider, Paper, Table, TableContainer, Typography } from '@mui/material';
-import { EPublicationType, TAllowedPaths, TOrder, TPublicationType } from '@/lib/types';
+import { ETableType, TAllowedPaths, TOrder, TPublicationType } from '@/lib/types';
 import { useGenericHeaders } from '@/hooks/useGenericHeaders';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader';
 import GenericTableBody from '../GenericTableBody/GenericTableBody';
 
 interface IGenericTableProps<T extends TPublicationType> {
   data: T[];
-  publicationType: EPublicationType;
+  publicationType: ETableType;
   title: string;
   subtitle?: string;
 }

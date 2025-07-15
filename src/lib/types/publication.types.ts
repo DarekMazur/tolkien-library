@@ -47,7 +47,7 @@ export type TArticleType = 'partial' | 'including' | 'epub';
 
 export type TPublicationType = IBookProps | IPublicationProps | IOnlineProps;
 
-export enum EPublicationType {
+export enum ETableType {
   BOOK = 'book',
   ARTICLE = 'article',
   ONLINE = 'online',

@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { screen } from '@testing-library/react';
 import PublicationPage from './PublicationPage';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
-import { EPublicationType, IPublicationProps } from '@/lib/types';
+import { ETableType, IPublicationProps } from '@/lib/types';
 
 vi.mock('@/components/organisms/GenericTable/GenericTable.tsx', () => ({
   default: vi.fn(({ data, publicationType, title }) => (
@@ -76,7 +76,7 @@ describe('PublicationPage', () => {
 
     expect(screen.getByText('Items partly related to Tolkien')).toBeInTheDocument();
     expect(screen.getByText('Data count: 1')).toBeInTheDocument();
-    expect(screen.getByText(`Publication type: ${EPublicationType.ARTICLE}`)).toBeInTheDocument();
+    expect(screen.getByText(`Publication type: ${ETableType.ARTICLE}`)).toBeInTheDocument();
   });
 
   it('renders GenericTable for including publications when data exists', () => {
@@ -89,7 +89,7 @@ describe('PublicationPage', () => {
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('Data count: 1')).toBeInTheDocument();
-    expect(screen.getByText(`Publication type: ${EPublicationType.ARTICLE}`)).toBeInTheDocument();
+    expect(screen.getByText(`Publication type: ${ETableType.ARTICLE}`)).toBeInTheDocument();
   });
 
   it('renders GenericTable for epub publications when data exists', () => {
@@ -98,7 +98,7 @@ describe('PublicationPage', () => {
 
     expect(screen.getByText('E-publications')).toBeInTheDocument();
     expect(screen.getByText('Data count: 1')).toBeInTheDocument();
-    expect(screen.getByText(`Publication type: ${EPublicationType.ARTICLE}`)).toBeInTheDocument();
+    expect(screen.getByText(`Publication type: ${ETableType.ARTICLE}`)).toBeInTheDocument();
   });
 
   it('does not render GenericTable when no partial publications exist', () => {

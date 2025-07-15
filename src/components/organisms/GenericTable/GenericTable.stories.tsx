@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { EPublicationType } from '@/lib/types';
+import { ETableType } from '@/lib/types';
 import GenericTable from './GenericTable';
 import { booksHandler } from '../../../../.storybook/mswHandlers.ts';
 
@@ -18,7 +18,7 @@ type Story = StoryObj<typeof GenericTable>;
 
 export const Default: Story = {
   args: {
-    publicationType: EPublicationType.BOOK,
+    publicationType: ETableType.BOOK,
     title: 'Lista publikacji',
     subtitle: 'Wybrane publikacje J.R.R. Tolkiena',
   },

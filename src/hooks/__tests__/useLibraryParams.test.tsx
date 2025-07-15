@@ -1,6 +1,6 @@
 import { vi, Mock } from 'vitest';
 import { useLocation, useParams } from 'react-router';
-import { EPublicationType } from '@/lib/types';
+import { ETableType } from '@/lib/types';
 import { useLibraryParams } from '../useLibraryParams';
 import { renderHook } from '@testing-library/react';
 
@@ -23,7 +23,7 @@ describe('useLibraryParams', () => {
 
     const { result } = renderHook(() => useLibraryParams());
 
-    expect(result.current.type).toBe(EPublicationType.BOOK);
+    expect(result.current.type).toBe(ETableType.BOOK);
     expect(result.current.slug).toBe('fantasy-novel');
     expect(result.current.search).toBe('query=tolkien');
     expect(result.current.isValid).toBe(true);
@@ -35,7 +35,7 @@ describe('useLibraryParams', () => {
 
     const { result } = renderHook(() => useLibraryParams());
 
-    expect(result.current.type).toBe(EPublicationType.BOOK);
+    expect(result.current.type).toBe(ETableType.BOOK);
     expect(result.current.slug).toBeNull();
     expect(result.current.search).toBeNull();
     expect(result.current.isValid).toBe(true);

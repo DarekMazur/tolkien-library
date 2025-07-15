@@ -289,7 +289,7 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
   <td class="type">
   
       
-<code class="param-type">EPublicationType</code>
+<code class="param-type">ETableType</code>
 
 
   
@@ -299,7 +299,7 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
 
   
 
-  <td class="description last">Publication type, such as `EPublicationType.BOOK` or `EPublicationType.ARTICLE`.</td>
+  <td class="description last">Publication type, such as `ETableType.BOOK` or `ETableType.ARTICLE`.</td>
 </tr>
 
 
@@ -423,13 +423,13 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
     
     
         <pre class="prettyprint"><code>// Creating a strategy for the book
-const bookStrategy = TableStrategyFactory.createStrategy&lt;IBookProps>(EPublicationType.BOOK);
+const bookStrategy = TableStrategyFactory.createStrategy&lt;IBookProps>(ETableType.BOOK);
 bookStrategy.renderTable(data);</code></pre>
     
 
     
         <pre class="prettyprint"><code>// Create a strategy for the article
-const articleStrategy = TableStrategyFactory.createStrategy&lt;IPublicationProps>(EPublicationType.ARTICLE);
+const articleStrategy = TableStrategyFactory.createStrategy&lt;IPublicationProps>(ETableType.ARTICLE);
 articleStrategy.renderTable(data);</code></pre>
     
 

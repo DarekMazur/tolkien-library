@@ -1,6 +1,6 @@
 import { vi, Mock } from 'vitest';
 import { useGenericHeaders } from '../useGenericHeaders';
-import { EPublicationType, IBookProps } from '@/lib/types';
+import { ETableType, IBookProps } from '@/lib/types';
 import { TableStrategyFactory } from '@/lib/factories/TableStrategyFactory';
 import { renderHook } from '@testing-library/react';
 
@@ -53,23 +53,23 @@ describe('useGenericHeaders', () => {
 
   it('should return empty headers when items vi empty', () => {
     const { result, rerender } = renderHook(({ items, type }) => useGenericHeaders(items, type), {
-      initialProps: { items: [], type: EPublicationType.BOOK },
+      initialProps: { items: [], type: ETableType.BOOK },
     });
 
     expect(result.current.headers).toEqual([]);
-    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(EPublicationType.BOOK);
+    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(ETableType.BOOK);
 
-    rerender({ items: [], type: EPublicationType.ARTICLE });
+    rerender({ items: [], type: ETableType.ARTICLE });
     expect(result.current.headers).toEqual([]);
-    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(EPublicationType.ARTICLE);
+    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(ETableType.ARTICLE);
   });
 
   it('should return headers from the strategy when items not vi empty', () => {
     mockGetHeaders.mockReturnValue(['col1', 'col2']);
 
-    const { result } = renderHook(() => useGenericHeaders(items, EPublicationType.BOOK));
+    const { result } = renderHook(() => useGenericHeaders(items, ETableType.BOOK));
 
-    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(EPublicationType.BOOK);
+    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(ETableType.BOOK);
     expect(mockGetHeaders).toHaveBeenCalledWith(sampleBook);
     expect(result.current.headers).toEqual(['col1', 'col2']);
   });
@@ -78,7 +78,7 @@ describe('useGenericHeaders', () => {
     const key = 'year';
     mockGetDisplayValue.mockReturnValue('Value for name');
 
-    const { result } = renderHook(() => useGenericHeaders(items, EPublicationType.BOOK));
+    const { result } = renderHook(() => useGenericHeaders(items, ETableType.BOOK));
 
     const display = result.current.getDisplayValue(sampleBook, key);
     expect(mockGetDisplayValue).toHaveBeenCalledWith(sampleBook, key);
@@ -88,7 +88,7 @@ describe('useGenericHeaders', () => {
   it('aliases should return aliases from the strategy', () => {
     mockGetAliases.mockReturnValue({ translator: 'Maria Skibniewska' });
 
-    const { result } = renderHook(() => useGenericHeaders(items, EPublicationType.BOOK));
+    const { result } = renderHook(() => useGenericHeaders(items, ETableType.BOOK));
 
     expect(mockGetAliases).toHaveBeenCalled();
     expect(result.current.aliases).toEqual({ translator: 'Maria Skibniewska' });
@@ -111,15 +111,15 @@ describe('useGenericHeaders', () => {
       .mockReturnValueOnce(strategyArticle);
 
     const { result, rerender } = renderHook(({ items, type }) => useGenericHeaders(items, type), {
-      initialProps: { items, type: EPublicationType.BOOK },
+      initialProps: { items, type: ETableType.BOOK },
     });
 
-    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(EPublicationType.BOOK);
+    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(ETableType.BOOK);
     expect(result.current.headers).toEqual(['first']);
 
-    rerender({ items, type: EPublicationType.ARTICLE });
+    rerender({ items, type: ETableType.ARTICLE });
 
-    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(EPublicationType.ARTICLE);
+    expect(TableStrategyFactory.createStrategy).toHaveBeenCalledWith(ETableType.ARTICLE);
     expect(result.current.headers).toEqual(['second']);
   });
 });

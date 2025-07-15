@@ -1,4 +1,4 @@
-import { EPublicationType, IPublicationProps } from '@/lib/types';
+import { ETableType, IPublicationProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 import { Divider, Typography } from '@mui/material';
 
@@ -50,21 +50,21 @@ const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
           {partialPublications.length > 0 ? (
             <GenericTable
               data={data.filter((item) => item.type === 'partial')}
-              publicationType={EPublicationType.ARTICLE}
+              publicationType={ETableType.ARTICLE}
               title="Items partly related to Tolkien"
             />
           ) : null}
           {includingPublications.length > 0 ? (
             <GenericTable
               data={data.filter((item) => item.type === 'including')}
-              publicationType={EPublicationType.ARTICLE}
+              publicationType={ETableType.ARTICLE}
               title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
             />
           ) : null}
           {epubPublications.length > 0 ? (
             <GenericTable
               data={data.filter((item) => item.type === 'epub')}
-              publicationType={EPublicationType.ARTICLE}
+              publicationType={ETableType.ARTICLE}
               title="E-publications"
             />
           ) : null}

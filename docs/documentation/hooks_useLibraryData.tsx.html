@@ -92,7 +92,7 @@ import {
   getAllPublications,
   getAllOnline,
 } from '@/lib/getDataFromApi';
-import { EPublicationType } from '@/lib/types';
+import { ETableType } from '@/lib/types';
 import { useLibraryParams } from './useLibraryParams';
 
 /**
@@ -114,28 +114,28 @@ import { useLibraryParams } from './useLibraryParams';
  *
  * @typedef {Object} EmptyState
  * @property {'empty'} state - Indicates no data to fetch for current parameters
- * @property {EPublicationType} type - The publication type from URL parameters
+ * @property {ETableType} type - The publication type from URL parameters
  *
  * @typedef {Object} BooksState
  * @property {'books'} state - Successfully fetched books data
  * @property {Array} data - Array of book objects from J.R.R. Tolkien
- * @property {EPublicationType} type - The publication type (EPublicationType.BOOK)
+ * @property {ETableType} type - The publication type (ETableType.BOOK)
  * @property {string | null} search - Search query parameter for filtering books
  *
  * @typedef {Object} PublicationsState
  * @property {'publications'} state - Successfully fetched publications data
  * @property {Array} data - Array of publication objects
- * @property {EPublicationType} type - The publication type (EPublicationType.ARTICLE)
+ * @property {ETableType} type - The publication type (ETableType.ARTICLE)
  *
  * @typedef {Object} OnlineState
  * @property {'online'} state - Successfully fetched online resources data
  * @property {Array} data - Array of online resource objects
- * @property {EPublicationType} type - The publication type (EPublicationType.ONLINE)
+ * @property {ETableType} type - The publication type (ETableType.ONLINE)
  *
  * @typedef {Object} CategoryState
  * @property {'category'} state - Successfully fetched category data
  * @property {Object} data - Category object retrieved by slug
- * @property {EPublicationType} type - The publication type
+ * @property {ETableType} type - The publication type
  *
  * @returns {InvalidState | LoadingState | ErrorState | EmptyState | BooksState | PublicationsState | OnlineState | CategoryState}
  * A discriminated union representing the current state of data fetching and the associated data.
@@ -171,7 +171,7 @@ import { useLibraryParams } from './useLibraryParams';
  * @requires useLibraryParams - Custom hook for extracting URL parameters
  * @requires useApi - Custom hook for API data fetching
  * @requires @/lib/getDataFromApi - API functions for different data types
- * @requires @/lib/types - EPublicationType enum
+ * @requires @/lib/types - ETableType enum
  *
  * @see {@link useLibraryParams} - For URL parameter extraction logic
  * @see {@link useApi} - For API data fetching patterns
@@ -192,13 +192,13 @@ export const useLibraryData = () => {
 
   if (!isValid) return { state: 'invalid' as const };
 
-  const shouldFetchBooks = type === EPublicationType.BOOK;
-  const shouldFetchArticles = type === EPublicationType.ARTICLE;
-  const shouldFetchOnline = type === EPublicationType.ONLINE;
+  const shouldFetchBooks = type === ETableType.BOOK;
+  const shouldFetchArticles = type === ETableType.ARTICLE;
+  const shouldFetchOnline = type === ETableType.ONLINE;
   const shouldFetchCategory =
-    type !== EPublicationType.BOOK &amp;&amp;
-    type !== EPublicationType.ARTICLE &amp;&amp;
-    type !== EPublicationType.ONLINE &amp;&amp;
+    type !== ETableType.BOOK &amp;&amp;
+    type !== ETableType.ARTICLE &amp;&amp;
+    type !== ETableType.ONLINE &amp;&amp;
     !!slug;
 
   const {
