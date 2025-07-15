@@ -1,6 +1,7 @@
 import { EPublicationType, ETableType, IPublicationProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 import { Divider, Typography } from '@mui/material';
+import { useCallback } from 'react';
 
 /**
  * A site with Tolkien publications divided into three categories.
@@ -33,15 +34,22 @@ import { Divider, Typography } from '@mui/material';
  */
 
 const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
-  const renderTable = (type: EPublicationType, title: string) =>
-    data.filter((item) => item.type === type).length > 0 && (
-      <GenericTable
-        data={data.filter((item) => item.type === type)}
-        publicationType={ETableType.ARTICLE}
-        title={title}
-        headerVariant="h3"
-      />
-    );
+  const renderTable = useCallback(
+    (type: EPublicationType, title: string) => {
+      const filteredData = data.filter((item) => item.type === type);
+      return (
+        filteredData.length > 0 && (
+          <GenericTable
+            data={filteredData}
+            publicationType={ETableType.ARTICLE}
+            title={title}
+            headerVariant="h3"
+          />
+        )
+      );
+    },
+    [data],
+  );
 
   return (
     <>
