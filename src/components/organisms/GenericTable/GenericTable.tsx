@@ -36,7 +36,7 @@ const GenericTable = <T extends TPublicationType>({
 
   return (
     <>
-      <Typography variant="h2" component="h1" gutterBottom>
+      <Typography variant={subtitle ? 'h2' : 'h3'} component="h1" gutterBottom>
         {title}
       </Typography>
       {subtitle && (
@@ -45,7 +45,7 @@ const GenericTable = <T extends TPublicationType>({
         </Typography>
       )}
       <Divider />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ mb: 5 }}>
         <Table>
           <TableHeader
             order={order}

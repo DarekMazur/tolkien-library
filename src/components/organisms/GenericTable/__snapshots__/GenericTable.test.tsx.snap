@@ -38,14 +38,14 @@ exports[`GenericTable > Snapshot tests > matches snapshot (no subtitle) 1`] = `
 .emotion-0 {
   margin: 0;
   font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
   line-height: 1.5;
-  font-weight: 300;
-  font-size: 4.285714285714286rem;
+  font-weight: 400;
   margin-bottom: 0.35em;
 }
 
 <h1
-  class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom emotion-0"
+  class="MuiTypography-root MuiTypography-h3 MuiTypography-gutterBottom emotion-0"
 >
   Test Table Title
 </h1>

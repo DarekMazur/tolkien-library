@@ -54,6 +54,7 @@ exports[`BooksPage component > should match snapshot when books list is empty 1`
   background-image: var(--Paper-overlay);
   width: 100%;
   overflow-x: auto;
+  margin-bottom: 40px;
 }
 
 .emotion-1 {
@@ -186,6 +187,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
   background-image: var(--Paper-overlay);
   width: 100%;
   overflow-x: auto;
+  margin-bottom: 40px;
 }
 
 .emotion-1 {

@@ -14,7 +14,7 @@ const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
       <Typography variant="h2" component="h3">
         Fragmentarium
       </Typography>
-      <Divider />
+      <Divider sx={{ mb: 4 }} />
       {partialPublications.length > 0 ? (
         <GenericTable
           data={data.filter((item) => item.type === 'partial')}
