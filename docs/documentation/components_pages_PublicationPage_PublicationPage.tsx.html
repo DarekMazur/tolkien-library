@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/factories/TableStrategyFactory.ts</title>
+  <title> components/pages/PublicationPage/PublicationPage.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/factories/TableStrategyFactory.ts</h1>
+                    <h1>components/pages/PublicationPage/PublicationPage.tsx</h1>
                 </header>
                 
 
@@ -85,67 +85,79 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  ITableStrategy,
-  EPublicationType,
-  TPublicationType,
-  IBookProps,
-  IPublicationProps,
-} from '@/lib/types';
-import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy';
-import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy';
-import { OnlineTableStrategy } from '@/lib/strategies/OnlineTableStrategy.ts';
-
-type StrategyForType&lt;T extends TPublicationType> = T extends IBookProps
-  ? ITableStrategy&lt;IBookProps>
-  : T extends IPublicationProps
-    ? ITableStrategy&lt;IPublicationProps>
-    : never;
+            <pre class="prettyprint source linenums"><code>import { EPublicationType, IPublicationProps } from '@/lib/types';
+import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
+import { Divider, Typography } from '@mui/material';
 
 /**
- * Table strategy factory for different types of publications.
+ * A site with Tolkien publications divided into three categories.
+ * (`partial`, `including`, `epub`) and displayed in separate tables.
  *
- * By using the factory pattern, it is possible to get the appropriate instance of
- * table strategy (`ITableStrategy`) depending on the passed publication type.
+ * Sections:
+ *  • Items partially related to Tolkien (`partial`)
+ *  • With Tolkien elements - items containing articles about Tolkien or
+ *    only partially devoted to him (`including`)
+ *  • E-editions - electronic publications (`epub`)
  *
- * @template T Default publication type, from among `TPublicationType`.
+ * @component
+ * @param {{ data: IPublicationProps[] }} props
+ *        props.data – publication array; each object must contain at least
+ *        fields:
+ *        • `id: string | number` – unique identifier
+ *        • `type: 'partial' | 'including' | 'epub'` – record category
+ *        • `title: string` – heading
+ *        • Additional fields from `IPublicationProps` are also supported.
+ * @returns {ReactElement} JSX structure with a header and up to three tables.
+ *
+ * @example
+ * ```
+ * import { fetchPublications } from '@/api';
+ *
+ * const data = await fetchPublications();
+ *
+ * &lt;PublicationPage data={data} />;
+ * ```
  */
-export class TableStrategyFactory {
-  /**
-   * Returns an instance of the table strategy appropriate for the publication type.
-   *
-   * @typeParam T The type of publication whose strategy is to be created.
-   *              It can be `IBookProps` or `IPublicationProps`.
-   * @param {EPublicationType} type - Publication type, such as `EPublicationType.BOOK` or `EPublicationType.ARTICLE`.
-   * @returns {StrategyForType&lt;T>} Instance of `ITableStrategy` matched to the publication property T.
-   *
-   * @throws {Error} When the factory does not support the transferred publication type.
-   *
-   * @example
-   * // Creating a strategy for the book
-   * const bookStrategy = TableStrategyFactory.createStrategy&lt;IBookProps>(EPublicationType.BOOK);
-   * bookStrategy.renderTable(data);
-   *
-   * @example
-   * // Create a strategy for the article
-   * const articleStrategy = TableStrategyFactory.createStrategy&lt;IPublicationProps>(EPublicationType.ARTICLE);
-   * articleStrategy.renderTable(data);
-   */
-  static createStrategy&lt;T extends TPublicationType = TPublicationType>(
-    type: EPublicationType,
-  ): StrategyForType&lt;T> {
-    switch (type) {
-      case EPublicationType.BOOK:
-        return new BookTableStrategy() as unknown as StrategyForType&lt;T>;
-      case EPublicationType.ARTICLE:
-        return new ArticleTableStrategy() as unknown as StrategyForType&lt;T>;
-      case EPublicationType.ONLINE:
-        return new OnlineTableStrategy() as unknown as StrategyForType&lt;T>;
-      default:
-        throw new Error(`Unsupported publication type: ${type}`);
-    }
-  }
-}
+
+const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
+  const partialPublications: IPublicationProps[] = data.filter((item) => item.type === 'partial');
+  const includingPublications: IPublicationProps[] = data.filter(
+    (item) => item.type === 'including',
+  );
+  const epubPublications: IPublicationProps[] = data.filter((item) => item.type === 'epub');
+
+  return (
+    &lt;>
+      &lt;Typography variant="h2" component="h3">
+        Fragmentarium
+      &lt;/Typography>
+      &lt;Divider sx={{ mb: 4 }} />
+      {partialPublications.length > 0 ? (
+        &lt;GenericTable
+          data={data.filter((item) => item.type === 'partial')}
+          publicationType={EPublicationType.ARTICLE}
+          title="Items partly related to Tolkien"
+        />
+      ) : null}
+      {includingPublications.length > 0 ? (
+        &lt;GenericTable
+          data={data.filter((item) => item.type === 'including')}
+          publicationType={EPublicationType.ARTICLE}
+          title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
+        />
+      ) : null}
+      {epubPublications.length > 0 ? (
+        &lt;GenericTable
+          data={data.filter((item) => item.type === 'epub')}
+          publicationType={EPublicationType.ARTICLE}
+          title="E-publications"
+        />
+      ) : null}
+    &lt;/>
+  );
+};
+
+export default PublicationPage;
 </code></pre>
         </article>
     </section>
