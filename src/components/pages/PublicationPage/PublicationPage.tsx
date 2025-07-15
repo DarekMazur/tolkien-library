@@ -1,11 +1,24 @@
-import Wrapper from '@/components/atoms/Wrapper/Wrapper';
-import { Typography } from '@mui/material';
+import { EPublicationType, IPublicationProps } from '@/lib/types';
+import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
+import { Divider, Typography } from '@mui/material';
 
-const PublicationPage = () => {
+const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
   return (
-    <Wrapper>
-      <Typography>Lorem Ipsum</Typography>
-    </Wrapper>
+    <>
+      <Typography variant="h3">Fragmentarium</Typography>
+      <Divider />
+      <GenericTable
+        data={data}
+        publicationType={EPublicationType.ARTICLE}
+        title="Items partly related to Tolkien"
+      />
+      <GenericTable
+        data={data}
+        publicationType={EPublicationType.ARTICLE}
+        title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
+      />
+      <GenericTable data={data} publicationType={EPublicationType.ARTICLE} title="E-publications" />
+    </>
   );
 };
 

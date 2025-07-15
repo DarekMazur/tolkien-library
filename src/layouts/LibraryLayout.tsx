@@ -25,7 +25,7 @@ const LibraryLayout = () => {
       {result.state === 'books' && (
         <BooksPage books={result.data} isJrr={result?.search === 'jrrt'} />
       )}
-      {result.state === 'publications' && <PublicationPage />}
+      {result.state === 'publications' && <PublicationPage data={result.data} />}
       {result.state === 'online' && <>Online list</>}
       {result.state === 'category' && <CategoryPage category={result.data} />}
       {result.state === 'empty' && <>Nothing found...</>}
