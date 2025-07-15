@@ -84,7 +84,7 @@ export const db = factory({
     isbn: nullable(() => faker.number.int().toString()),
     issn: nullable(() => faker.number.int().toString()),
     description: () => faker.lorem.paragraph(),
-    type: () => faker.lorem.word(),
+    type: () => faker.helpers.arrayElement(['partial', 'including', 'epub']),
   },
   online: {
     id: primaryKey(faker.string.uuid),
