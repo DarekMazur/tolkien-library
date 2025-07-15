@@ -107,11 +107,14 @@ const createPublications = () => {
     const publishers = db.publisher.getAll();
     const publishersIndex = faker.number.int({ min: 0, max: publishers.length - 1 });
     const publisher = publishers[publishersIndex];
+    const typeProbability = faker.number.int({ min: 1, max: 3 });
+    const type = typeProbability === 1 ? 'partial' : typeProbability === 2 ? 'including' : 'epub';
 
     db.publication.create({
       publisher,
       isbn: isISBN ? generateRandomISBN13() : null,
       issn: isISBN ? null : generateISSN(),
+      type,
     });
   }
 };
