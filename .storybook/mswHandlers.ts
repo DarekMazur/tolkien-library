@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
+import { EPublicationType } from '@/lib/types';
 
 const navigationMock = [
   { id: '1', title: 'Strona główna', link: '/', isDivider: false },
@@ -157,7 +158,7 @@ const publicationsMock = [
   {
     id: faker.string.uuid(),
     title: 'Inklingowie : C. S. Lewis, J. R. R. Tolkien, Charles Williams i ich przyjaciele',
-    type: 'partial',
+    type: EPublicationType.PARTIAL,
     author: 'Humphrey Carpenter',
     publisher: {
       title: 'Zysk i S-ka',
@@ -171,7 +172,7 @@ const publicationsMock = [
   {
     id: faker.string.uuid(),
     title: 'Bóg artystów XX wieku',
-    type: 'including',
+    type: EPublicationType.INCLUDING,
     author: 'red. Dariusz Kulesza, Marcin Lula, Marta Sawicka',
     publisher: {
       title: 'Wydawnictwo Uniwersytetu w Białymstoku',
@@ -185,7 +186,7 @@ const publicationsMock = [
   {
     id: faker.string.uuid(),
     title: 'Tolkien i C. S. Lewis : historia niezwykłej przyjaźni',
-    type: 'partial',
+    type: EPublicationType.PARTIAL,
     author: 'Colin Duriez',
     publisher: {
       title: 'M',
@@ -199,7 +200,7 @@ const publicationsMock = [
   {
     id: faker.string.uuid(),
     title: 'Anthropos? PODRÓŻ DO ŹRÓDŁA',
-    type: 'epub',
+    type: EPublicationType.EPUB,
     author: 'Rafał Kowalski',
     publisher: {
       title: 'Wydział Filologiczny, Uniwersytet Śląski w Katowicach',
@@ -214,7 +215,7 @@ const publicationsMock = [
     id: faker.string.uuid(),
     title:
       'Quaestiones Oralitatis II 2, Kultury oralne a mityczny świat J.R.R. Tolkiena i jego następców',
-    type: 'including',
+    type: EPublicationType.INCLUDING,
     author: 'red. Karol Zieliński',
     publisher: {
       title: 'Pracownia Badań nad Tradycją Oralną, Uniwersytet Wrocławski',
@@ -228,7 +229,7 @@ const publicationsMock = [
   {
     id: faker.string.uuid(),
     title: 'Światotwórstwo w fantastyce. Od przedstawienia do zamieszkiwania',
-    type: 'including',
+    type: EPublicationType.INCLUDING,
     author: 'Krzysztof M. Maj',
     publisher: {
       title: 'Universitas',

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { factory, primaryKey, nullable, oneOf, manyOf } from '@mswjs/data';
+import { EPublicationType } from '@/lib/types';
 
 faker.seed(23456);
 
@@ -84,7 +85,12 @@ export const db = factory({
     isbn: nullable(() => faker.number.int().toString()),
     issn: nullable(() => faker.number.int().toString()),
     description: () => faker.lorem.paragraph(),
-    type: () => faker.helpers.arrayElement(['partial', 'including', 'epub']),
+    type: (): EPublicationType =>
+      faker.helpers.arrayElement([
+        EPublicationType.PARTIAL,
+        EPublicationType.INCLUDING,
+        EPublicationType.EPUB,
+      ]),
   },
   online: {
     id: primaryKey(faker.string.uuid),
