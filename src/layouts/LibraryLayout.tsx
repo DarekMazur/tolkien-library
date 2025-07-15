@@ -3,6 +3,7 @@ import Loader from '@/components/atoms/Loader/Loader';
 import CategoryPage from '@/components/pages/CategoryPage/CategoryPage';
 import BooksPage from '@/components/pages/BooksPage/BooksPage';
 import { useLibraryData } from '@/hooks/useLibraryData';
+import PublicationPage from '@/components/pages/PublicationPage/PublicationPage.tsx';
 
 const LibraryLayout = () => {
   const result = useLibraryData();
@@ -24,7 +25,7 @@ const LibraryLayout = () => {
       {result.state === 'books' && (
         <BooksPage books={result.data} isJrr={result?.search === 'jrrt'} />
       )}
-      {result.state === 'publications' && <>Publications list</>}
+      {result.state === 'publications' && <PublicationPage />}
       {result.state === 'online' && <>Online list</>}
       {result.state === 'category' && <CategoryPage category={result.data} />}
       {result.state === 'empty' && <>Nothing found...</>}
