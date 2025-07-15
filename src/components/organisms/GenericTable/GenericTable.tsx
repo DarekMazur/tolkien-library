@@ -48,7 +48,7 @@ const GenericTable = <T extends TPublicationType>({
       )}
       <Divider />
       <TableContainer component={Paper} sx={{ mb: 5 }}>
-        <Table>
+        <Table aria-label={title}>
           <TableHeader
             order={order}
             orderBy={orderBy}
