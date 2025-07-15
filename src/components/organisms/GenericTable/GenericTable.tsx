@@ -10,6 +10,7 @@ interface IGenericTableProps<T extends TPublicationType> {
   publicationType: ETableType;
   title: string;
   subtitle?: string;
+  headerVariant?: 'h1' | 'h2' | 'h3' | 'h4';
 }
 
 const GenericTable = <T extends TPublicationType>({
@@ -17,6 +18,7 @@ const GenericTable = <T extends TPublicationType>({
   publicationType,
   title,
   subtitle,
+  headerVariant,
 }: IGenericTableProps<T>) => {
   const [order, setOrder] = useState<TOrder>('asc');
   const [orderBy, setOrderBy] = useState<TAllowedPaths<T> | null>(null);
@@ -36,7 +38,7 @@ const GenericTable = <T extends TPublicationType>({
 
   return (
     <>
-      <Typography variant={subtitle ? 'h2' : 'h3'} component="h1" gutterBottom>
+      <Typography variant={headerVariant ?? 'h2'} component="h1" gutterBottom>
         {title}
       </Typography>
       {subtitle && (

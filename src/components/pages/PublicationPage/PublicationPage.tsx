@@ -39,6 +39,7 @@ const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
         data={data.filter((item) => item.type === type)}
         publicationType={ETableType.ARTICLE}
         title={title}
+        headerVariant="h3"
       />
     );
 
