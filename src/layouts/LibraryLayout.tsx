@@ -3,7 +3,7 @@ import Loader from '@/components/atoms/Loader/Loader';
 import CategoryPage from '@/components/pages/CategoryPage/CategoryPage';
 import BooksPage from '@/components/pages/BooksPage/BooksPage';
 import { useLibraryData } from '@/hooks/useLibraryData';
-import PublicationPage from '@/components/pages/PublicationPage/PublicationPage.tsx';
+import PublicationPage from '@/components/pages/PublicationPage/PublicationPage';
 
 const LibraryLayout = () => {
   const result = useLibraryData();
