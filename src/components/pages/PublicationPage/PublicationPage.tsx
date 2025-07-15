@@ -33,7 +33,15 @@ import { useCallback } from 'react';
  * ```
  */
 
-const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
+interface PublicationPageProps {
+  data: IPublicationProps[];
+}
+
+const PublicationPage = ({ data = [] }: PublicationPageProps) => {
+  if (!Array.isArray(data)) {
+    return <Typography>Error: Incorrect data format</Typography>;
+  }
+
   const renderTable = useCallback(
     (type: EPublicationType, title: string) => {
       const filteredData = data.filter((item) => item.type === type);
