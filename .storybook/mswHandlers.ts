@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
 
 const navigationMock = [
@@ -152,6 +153,94 @@ const booksMock = [
   },
 ];
 
+const publicationsMock = [
+  {
+    id: faker.string.uuid(),
+    title: 'Inklingowie : C. S. Lewis, J. R. R. Tolkien, Charles Williams i ich przyjaciele',
+    type: 'partial',
+    author: 'Humphrey Carpenter',
+    publisher: {
+      title: 'Zysk i S-ka',
+      description: '',
+      id: faker.string.uuid(),
+    },
+    issn: '83-7150-663-5',
+    year: '1999',
+    description: '',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Bóg artystów XX wieku',
+    type: 'including',
+    author: 'red. Dariusz Kulesza, Marcin Lula, Marta Sawicka',
+    publisher: {
+      title: 'Wydawnictwo Uniwersytetu w Białymstoku',
+      description: '',
+      id: faker.string.uuid(),
+    },
+    issn: '83-89031-45-0',
+    year: '2003',
+    description: '',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Tolkien i C. S. Lewis : historia niezwykłej przyjaźni',
+    type: 'partial',
+    author: 'Colin Duriez',
+    publisher: {
+      title: 'M',
+      description: '',
+      id: faker.string.uuid(),
+    },
+    issn: '978-83-7595-037-3',
+    year: '2011',
+    description: '',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Anthropos? PODRÓŻ DO ŹRÓDŁA',
+    type: 'epub',
+    author: 'Rafał Kowalski',
+    publisher: {
+      title: 'Wydział Filologiczny, Uniwersytet Śląski w Katowicach',
+      description: '',
+      id: faker.string.uuid(),
+    },
+    issn: '1730-9549',
+    year: '26/2017',
+    description: '(artykuł) Wyprawa do źródła magii w Śródziemiu',
+  },
+  {
+    id: faker.string.uuid(),
+    title:
+      'Quaestiones Oralitatis II 2, Kultury oralne a mityczny świat J.R.R. Tolkiena i jego następców',
+    type: 'including',
+    author: 'red. Karol Zieliński',
+    publisher: {
+      title: 'Pracownia Badań nad Tradycją Oralną, Uniwersytet Wrocławski',
+      description: '',
+      id: faker.string.uuid(),
+    },
+    issn: '2449–8181',
+    year: '2/II 2016',
+    description: '',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Światotwórstwo w fantastyce. Od przedstawienia do zamieszkiwania',
+    type: 'including',
+    author: 'Krzysztof M. Maj',
+    publisher: {
+      title: 'Universitas',
+      description: '',
+      id: faker.string.uuid(),
+    },
+    issn: '97883-242-3613-8',
+    year: '2019',
+    description: '',
+  },
+];
+
 export const navigationHandler = http.get('/api/navigation', () => {
   return HttpResponse.json(navigationMock);
 });
@@ -168,4 +257,14 @@ export const booksHandler = http.get('/api/books', () => {
   return HttpResponse.json(booksMock);
 });
 
-export const handlers = [navigationHandler, articlesHandler, pagesHandler, booksHandler];
+export const publicationsHandler = http.get('/api/publications', () => {
+  return HttpResponse.json(publicationsMock);
+});
+
+export const handlers = [
+  navigationHandler,
+  articlesHandler,
+  pagesHandler,
+  booksHandler,
+  publicationsHandler,
+];
