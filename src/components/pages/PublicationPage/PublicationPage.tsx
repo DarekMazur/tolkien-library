@@ -33,11 +33,14 @@ import { Divider, Typography } from '@mui/material';
  */
 
 const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
-  const partialPublications: IPublicationProps[] = data.filter((item) => item.type === 'partial');
-  const includingPublications: IPublicationProps[] = data.filter(
-    (item) => item.type === 'including',
-  );
-  const epubPublications: IPublicationProps[] = data.filter((item) => item.type === 'epub');
+  const renderTable = (type: EPublicationType, title: string) =>
+    data.filter((item) => item.type === type).length > 0 && (
+      <GenericTable
+        data={data.filter((item) => item.type === type)}
+        publicationType={ETableType.ARTICLE}
+        title={title}
+      />
+    );
 
   return (
     <>
@@ -47,27 +50,12 @@ const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
       <Divider sx={{ mb: 4 }} />
       {data.length > 0 ? (
         <>
-          {partialPublications.length > 0 ? (
-            <GenericTable
-              data={data.filter((item) => item.type === EPublicationType.PARTIAL)}
-              publicationType={ETableType.ARTICLE}
-              title="Items partly related to Tolkien"
-            />
-          ) : null}
-          {includingPublications.length > 0 ? (
-            <GenericTable
-              data={data.filter((item) => item.type === EPublicationType.INCLUDING)}
-              publicationType={ETableType.ARTICLE}
-              title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
-            />
-          ) : null}
-          {epubPublications.length > 0 ? (
-            <GenericTable
-              data={data.filter((item) => item.type === EPublicationType.EPUB)}
-              publicationType={ETableType.ARTICLE}
-              title="E-publications"
-            />
-          ) : null}
+          {renderTable(EPublicationType.PARTIAL, 'Items partly related to Tolkien')}
+          {renderTable(
+            EPublicationType.INCLUDING,
+            "Items that contain Tolkien articles or are partially devoted to Tolkien's works",
+          )}
+          {renderTable(EPublicationType.EPUB, 'E-publications')}
         </>
       ) : (
         <Typography>No publications found</Typography>

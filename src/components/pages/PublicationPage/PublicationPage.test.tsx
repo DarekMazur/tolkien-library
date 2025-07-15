@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { screen } from '@testing-library/react';
 import PublicationPage from './PublicationPage';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
-import { ETableType, IPublicationProps } from '@/lib/types';
+import { EPublicationType, ETableType, IPublicationProps } from '@/lib/types';
 
 vi.mock('@/components/organisms/GenericTable/GenericTable.tsx', () => ({
   default: vi.fn(({ data, publicationType, title }) => (
@@ -19,7 +19,7 @@ describe('PublicationPage', () => {
     {
       id: '1',
       title: 'Partial Tolkien Article',
-      type: 'partial',
+      type: EPublicationType.PARTIAL,
       author: 'Bilbo Baggins',
       publisher: {
         title: 'Rebis',
@@ -32,7 +32,7 @@ describe('PublicationPage', () => {
     {
       id: '2',
       title: 'Including Tolkien Content',
-      type: 'including',
+      type: EPublicationType.INCLUDING,
       author: 'Bilbo Baggins',
       publisher: {
         title: 'Rebis',
@@ -45,7 +45,7 @@ describe('PublicationPage', () => {
     {
       id: '3',
       title: 'E-publication Example',
-      type: 'epub',
+      type: EPublicationType.EPUB,
       author: 'Bilbo Baggins',
       publisher: {
         title: 'Rebis',
@@ -71,7 +71,9 @@ describe('PublicationPage', () => {
   });
 
   it('renders GenericTable for partial publications when data exists', () => {
-    const partialData = mockPublicationsData.filter((item) => item.type === 'partial');
+    const partialData = mockPublicationsData.filter(
+      (item) => item.type === EPublicationType.PARTIAL,
+    );
     renderWithProviders(<PublicationPage data={partialData} />);
 
     expect(screen.getByText('Items partly related to Tolkien')).toBeInTheDocument();
@@ -80,7 +82,9 @@ describe('PublicationPage', () => {
   });
 
   it('renders GenericTable for including publications when data exists', () => {
-    const includingData = mockPublicationsData.filter((item) => item.type === 'including');
+    const includingData = mockPublicationsData.filter(
+      (item) => item.type === EPublicationType.INCLUDING,
+    );
     renderWithProviders(<PublicationPage data={includingData} />);
 
     expect(
@@ -93,7 +97,7 @@ describe('PublicationPage', () => {
   });
 
   it('renders GenericTable for epub publications when data exists', () => {
-    const epubData = mockPublicationsData.filter((item) => item.type === 'epub');
+    const epubData = mockPublicationsData.filter((item) => item.type === EPublicationType.EPUB);
     renderWithProviders(<PublicationPage data={epubData} />);
 
     expect(screen.getByText('E-publications')).toBeInTheDocument();
@@ -158,7 +162,7 @@ describe('PublicationPage', () => {
       {
         id: '1',
         title: 'Partial 1',
-        type: 'partial',
+        type: EPublicationType.PARTIAL,
         author: 'Bilbo Baggins',
         publisher: {
           title: 'Rebis',
@@ -171,7 +175,7 @@ describe('PublicationPage', () => {
       {
         id: '2',
         title: 'Including 1',
-        type: 'including',
+        type: EPublicationType.INCLUDING,
         author: 'Bilbo Baggins',
         publisher: {
           title: 'Rebis',
@@ -184,7 +188,7 @@ describe('PublicationPage', () => {
       {
         id: '3',
         title: 'Partial 2',
-        type: 'partial',
+        type: EPublicationType.PARTIAL,
         author: 'Bilbo Baggins',
         publisher: {
           title: 'Rebis',
@@ -197,7 +201,7 @@ describe('PublicationPage', () => {
       {
         id: '4',
         title: 'Epub 1',
-        type: 'epub',
+        type: EPublicationType.EPUB,
         author: 'Bilbo Baggins',
         publisher: {
           title: 'Rebis',
@@ -210,7 +214,7 @@ describe('PublicationPage', () => {
       {
         id: '5',
         title: 'Including 2',
-        type: 'including',
+        type: EPublicationType.INCLUDING,
         author: 'Bilbo Baggins',
         publisher: {
           title: 'Rebis',
@@ -223,7 +227,7 @@ describe('PublicationPage', () => {
       {
         id: '6',
         title: 'Including 3',
-        type: 'including',
+        type: EPublicationType.INCLUDING,
         author: 'Bilbo Baggins',
         publisher: {
           title: 'Rebis',
