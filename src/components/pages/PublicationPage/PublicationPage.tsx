@@ -45,27 +45,33 @@ const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
         Fragmentarium
       </Typography>
       <Divider sx={{ mb: 4 }} />
-      {partialPublications.length > 0 ? (
-        <GenericTable
-          data={data.filter((item) => item.type === 'partial')}
-          publicationType={EPublicationType.ARTICLE}
-          title="Items partly related to Tolkien"
-        />
-      ) : null}
-      {includingPublications.length > 0 ? (
-        <GenericTable
-          data={data.filter((item) => item.type === 'including')}
-          publicationType={EPublicationType.ARTICLE}
-          title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
-        />
-      ) : null}
-      {epubPublications.length > 0 ? (
-        <GenericTable
-          data={data.filter((item) => item.type === 'epub')}
-          publicationType={EPublicationType.ARTICLE}
-          title="E-publications"
-        />
-      ) : null}
+      {data.length > 0 ? (
+        <>
+          {partialPublications.length > 0 ? (
+            <GenericTable
+              data={data.filter((item) => item.type === 'partial')}
+              publicationType={EPublicationType.ARTICLE}
+              title="Items partly related to Tolkien"
+            />
+          ) : null}
+          {includingPublications.length > 0 ? (
+            <GenericTable
+              data={data.filter((item) => item.type === 'including')}
+              publicationType={EPublicationType.ARTICLE}
+              title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
+            />
+          ) : null}
+          {epubPublications.length > 0 ? (
+            <GenericTable
+              data={data.filter((item) => item.type === 'epub')}
+              publicationType={EPublicationType.ARTICLE}
+              title="E-publications"
+            />
+          ) : null}
+        </>
+      ) : (
+        <Typography>No publications found</Typography>
+      )}
     </>
   );
 };

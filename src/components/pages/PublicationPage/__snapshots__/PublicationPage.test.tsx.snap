@@ -99,6 +99,14 @@ exports[`PublicationPage > matches snapshot with empty data 1`] = `
   margin-bottom: 32px;
 }
 
+.emotion-2 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+}
+
 <div>
   <h3
     class="MuiTypography-root MuiTypography-h2 emotion-0"
@@ -108,6 +116,11 @@ exports[`PublicationPage > matches snapshot with empty data 1`] = `
   <hr
     class="MuiDivider-root MuiDivider-fullWidth emotion-1"
   />
+  <p
+    class="MuiTypography-root MuiTypography-body1 emotion-2"
+  >
+    No publications found
+  </p>
 </div>
 `;
 
