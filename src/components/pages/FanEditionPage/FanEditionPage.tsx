@@ -1,9 +1,27 @@
 import { ETableType, IFanEditionsProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
+import { Divider, Typography } from '@mui/material';
 
 const FanEditionPage = ({ data }: { data: IFanEditionsProps[] }) => {
   return (
-    <GenericTable data={data} publicationType={ETableType.FANEDITION} title="Fans' editions" />
+    <>
+      <Typography variant="h2" component="h3">
+        Fan's Editions
+      </Typography>
+      <Divider sx={{ mb: 4 }} />
+      <GenericTable
+        data={data.filter((item) => item.isMumakil)}
+        publicationType={ETableType.FANEDITION}
+        title="MumakiL Fandom PresSsss..."
+        headerVariant="h3"
+      />
+      <GenericTable
+        data={data.filter((item) => !item.isMumakil)}
+        publicationType={ETableType.FANEDITION}
+        title="Others"
+        headerVariant="h3"
+      />
+    </>
   );
 };
 

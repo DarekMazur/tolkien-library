@@ -14,8 +14,8 @@ const FanZonePage = () => {
           </a>
         </ListItem>
         <ListItem>
-          <a href="/library/mumakil">
-            <ListItemText primary="Mumakil" />
+          <a href="/library/fanedition">
+            <ListItemText primary="Fan's Editions" />
           </a>
         </ListItem>
       </List>
