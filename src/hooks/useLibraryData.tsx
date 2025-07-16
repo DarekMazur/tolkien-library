@@ -4,6 +4,7 @@ import {
   getBooksByAuthor,
   getAllPublications,
   getAllOnline,
+  getAllFanzin,
 } from '@/lib/getDataFromApi';
 import { ETableType } from '@/lib/types';
 import { useLibraryParams } from './useLibraryParams';
@@ -108,8 +109,13 @@ export const useLibraryData = () => {
   const shouldFetchBooks = type === ETableType.BOOK;
   const shouldFetchArticles = type === ETableType.ARTICLE;
   const shouldFetchOnline = type === ETableType.ONLINE;
+  const shouldFetchFanzin = type === ETableType.FANZIN;
   const shouldFetchCategory =
-    type !== ETableType.BOOK && type !== ETableType.ARTICLE && type !== ETableType.ONLINE && !!slug;
+    type !== ETableType.BOOK &&
+    type !== ETableType.ARTICLE &&
+    type !== ETableType.ONLINE &&
+    type !== ETableType.FANZIN &&
+    !!slug;
 
   const {
     data: books,
@@ -136,6 +142,14 @@ export const useLibraryData = () => {
   });
 
   const {
+    data: fanzin,
+    isLoading: fanzinLoading,
+    isError: fanzinError,
+  } = useApi(() => getAllFanzin(), {
+    enabled: shouldFetchFanzin,
+  });
+
+  const {
     data: category,
     isLoading: categoryLoading,
     isError: categoryError,
@@ -157,6 +171,12 @@ export const useLibraryData = () => {
     if (onlineLoading) return { state: 'loading' as const };
     if (onlineError) return { state: 'error' as const };
     return { state: 'online' as const, data: online!, type };
+  }
+
+  if (shouldFetchFanzin) {
+    if (fanzinLoading) return { state: 'loading' as const };
+    if (fanzinError) return { state: 'error' as const };
+    return { state: 'fanzin' as const, data: fanzin!, type };
   }
 
   if (shouldFetchCategory) {
