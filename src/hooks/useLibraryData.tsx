@@ -5,6 +5,7 @@ import {
   getAllPublications,
   getAllOnline,
   getAllFanzin,
+  getAllMumakil,
 } from '@/lib/getDataFromApi';
 import { ETableType } from '@/lib/types';
 import { useLibraryParams } from './useLibraryParams';
@@ -110,11 +111,13 @@ export const useLibraryData = () => {
   const shouldFetchArticles = type === ETableType.ARTICLE;
   const shouldFetchOnline = type === ETableType.ONLINE;
   const shouldFetchFanzin = type === ETableType.FANZIN;
+  const shouldFetchMumakil = type === ETableType.MUMAKIL;
   const shouldFetchCategory =
     type !== ETableType.BOOK &&
     type !== ETableType.ARTICLE &&
     type !== ETableType.ONLINE &&
     type !== ETableType.FANZIN &&
+    type !== ETableType.MUMAKIL &&
     !!slug;
 
   const {
@@ -150,6 +153,14 @@ export const useLibraryData = () => {
   });
 
   const {
+    data: mumakil,
+    isLoading: mumakilLoading,
+    isError: mumakilError,
+  } = useApi(() => getAllMumakil(), {
+    enabled: shouldFetchMumakil,
+  });
+
+  const {
     data: category,
     isLoading: categoryLoading,
     isError: categoryError,
@@ -177,6 +188,12 @@ export const useLibraryData = () => {
     if (fanzinLoading) return { state: 'loading' as const };
     if (fanzinError) return { state: 'error' as const };
     return { state: 'fanzin' as const, data: fanzin!, type };
+  }
+
+  if (shouldFetchMumakil) {
+    if (mumakilLoading) return { state: 'loading' as const };
+    if (mumakilError) return { state: 'error' as const };
+    return { state: 'mumakil' as const, data: mumakil!, type };
   }
 
   if (shouldFetchCategory) {
