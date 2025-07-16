@@ -7,7 +7,7 @@ import {
   TAllowedPaths,
 } from '@/lib/types';
 
-export class OnlineTableStrategy implements ITableStrategy<IFanzinProps> {
+export class FanzinTableStrategy implements ITableStrategy<IFanzinProps> {
   private readonly aliases: Readonly<Record<string, string>> = {
     publisher: 'publisher.title',
   } as const;

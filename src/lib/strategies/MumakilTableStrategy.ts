@@ -6,7 +6,7 @@ import {
   TAllowedPaths,
 } from '@/lib/types';
 
-export class OnlineTableStrategy implements ITableStrategy<IMumakilProps> {
+export class MumakilTableStrategy implements ITableStrategy<IMumakilProps> {
   private readonly aliases: Readonly<Record<string, string>> = {
     publisher: 'publisher.title',
   } as const;
