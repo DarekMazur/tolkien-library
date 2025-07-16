@@ -1,12 +1,12 @@
 import {
-  IMumakilProps,
+  IFanEditionsProps,
   IHeaderDefinition,
   ITableStrategy,
   TPathValue,
   TAllowedPaths,
 } from '@/lib/types';
 
-export class MumakilTableStrategy implements ITableStrategy<IMumakilProps> {
+export class FanEditionTableStrategy implements ITableStrategy<IFanEditionsProps> {
   private readonly aliases: Readonly<Record<string, string>> = {
     publisher: 'publisher.title',
   } as const;
@@ -15,8 +15,8 @@ export class MumakilTableStrategy implements ITableStrategy<IMumakilProps> {
     return this.aliases;
   }
 
-  getHeaders(item: IMumakilProps): IHeaderDefinition<IMumakilProps>[] {
-    const propertyOrder: Exclude<keyof IMumakilProps, 'id'>[] = [
+  getHeaders(item: IFanEditionsProps): IHeaderDefinition<IFanEditionsProps>[] {
+    const propertyOrder: Exclude<keyof IFanEditionsProps, 'id' | 'isMumakil'>[] = [
       'cover',
       'title',
       'year',
@@ -24,8 +24,8 @@ export class MumakilTableStrategy implements ITableStrategy<IMumakilProps> {
     ];
 
     const headerDefinitions: Record<
-      Exclude<keyof IMumakilProps, 'id'>,
-      IHeaderDefinition<IMumakilProps>
+      Exclude<keyof IFanEditionsProps, 'id' | 'isMumakil'>,
+      IHeaderDefinition<IFanEditionsProps>
     > = {
       cover: { displayTitle: 'Cover', key: 'cover', sortable: true },
       title: { displayTitle: 'Title', key: 'title', sortable: true },
@@ -39,22 +39,22 @@ export class MumakilTableStrategy implements ITableStrategy<IMumakilProps> {
       .filter((definition) => !definition.condition || definition.condition(item));
   }
 
-  getDisplayValue<P extends TAllowedPaths<IMumakilProps>>(
-    item: IMumakilProps,
+  getDisplayValue<P extends TAllowedPaths<IFanEditionsProps>>(
+    item: IFanEditionsProps,
     key: P,
-  ): TPathValue<IMumakilProps, P> | null {
+  ): TPathValue<IFanEditionsProps, P> | null {
     if (key.includes('.')) {
       const [parentKey, childKey] = key.split('.');
-      const parent = item[parentKey as keyof IMumakilProps];
+      const parent = item[parentKey as keyof IFanEditionsProps];
       if (parent && typeof parent === 'object' && childKey in parent) {
         return (parent as unknown as Record<string, unknown>)[childKey] as TPathValue<
-          IMumakilProps,
+          IFanEditionsProps,
           P
         >;
       }
       return null;
     }
 
-    return item[key as keyof IMumakilProps] as TPathValue<IMumakilProps, P> | null;
+    return item[key as keyof IFanEditionsProps] as TPathValue<IFanEditionsProps, P> | null;
   }
 }

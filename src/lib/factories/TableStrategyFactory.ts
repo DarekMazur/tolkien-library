@@ -10,7 +10,7 @@ import {
 import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy';
 import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy';
 import { FanzinTableStrategy } from '@/lib/strategies/FanzinTableStrategy.ts';
-import { MumakilTableStrategy } from '@/lib/strategies/MumakilTableStrategy.ts';
+import { FanEditionTableStrategy } from '@/lib/strategies/FanEditionTableStrategy.ts';
 
 type StrategyForType<T extends TPublicationType> = T extends IBookProps
   ? ITableStrategy<IBookProps>
@@ -62,7 +62,7 @@ export class TableStrategyFactory {
       case ETableType.FANZIN:
         return new FanzinTableStrategy() as unknown as StrategyForType<T>;
       case ETableType.FANEDITION:
-        return new MumakilTableStrategy() as unknown as StrategyForType<T>;
+        return new FanEditionTableStrategy() as unknown as StrategyForType<T>;
       default:
         throw new Error(`Unsupported publication type: ${type}`);
     }
