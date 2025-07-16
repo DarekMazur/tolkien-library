@@ -4,8 +4,12 @@ const FanZonePage = () => {
   return (
     <Box>
       <List>
-        <ListItem>Fanzins</ListItem>
-        <ListItem>Mumakil</ListItem>
+        <ListItem>
+          <a href="/library/fanzin">Fanzins</a>
+        </ListItem>
+        <ListItem>
+          <a href="/library/mumakil">Mumakil</a>
+        </ListItem>
       </List>
     </Box>
   );
