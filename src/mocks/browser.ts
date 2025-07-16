@@ -153,15 +153,15 @@ const createFanzin = () => {
 
 createFanzin();
 
-const createMumakil = () => {
+const createFanEditions = () => {
   const length = faker.number.int({ min: 4, max: 25 });
 
   for (let i = 0; i < length; i++) {
-    db.mumakil.create();
+    db.fanEditions.create();
   }
 };
 
-createMumakil();
+createFanEditions();
 
 const createCategories = () => {
   const categoriesLength = faker.number.int({ min: 4, max: 8 });
@@ -475,5 +475,5 @@ window.mocks = {
   getPublications: () => db.publication.getAll(),
   getOnline: () => db.online.getAll(),
   getFanzin: () => db.fanzin.getAll(),
-  getMumakil: () => db.mumakil.getAll(),
+  getFanEditions: () => db.fanEditions.getAll(),
 };

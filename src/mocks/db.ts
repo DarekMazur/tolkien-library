@@ -109,11 +109,12 @@ export const db = factory({
     startDate: () => faker.date.past(),
     lastIssueDate: nullable(() => faker.date.past()),
   },
-  mumakil: {
+  fanEditions: {
     id: primaryKey(faker.string.uuid),
     cover: () => faker.image.url(),
     title: () => faker.lorem.words({ min: 1, max: 4 }),
     year: () => faker.date.past().getFullYear().toString(),
     description: () => faker.lorem.paragraph(),
+    isMumakil: () => faker.datatype.boolean({ probability: 0.7 }),
   },
 });

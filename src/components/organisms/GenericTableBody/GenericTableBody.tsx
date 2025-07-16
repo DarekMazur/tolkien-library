@@ -3,7 +3,7 @@ import { TableBody } from '@mui/material';
 import {
   ICommonId,
   IHeaderDefinition,
-  IMumakilProps,
+  IFanEditionsProps,
   IPublisherProps,
   ITranslatorProps,
   TAllowedPaths,
@@ -76,7 +76,7 @@ const GenericTableBody = <T extends ICommonId>({
     return <a href={path}>{value}</a>;
   };
 
-  const isIMumakilProps = (item: unknown): item is IMumakilProps => {
+  const isIMumakilProps = (item: unknown): item is IFanEditionsProps => {
     return typeof item === 'object' && item !== null && 'cover' in item && 'title' in item;
   };
 

@@ -52,11 +52,12 @@ export interface IFanzinProps extends ICommonId {
   lastIssueDate: Date | null;
 }
 
-export interface IMumakilProps extends ICommonId {
+export interface IFanEditionsProps extends ICommonId {
   cover?: string;
   title: string;
   year?: number | string;
   description?: string;
+  isMumakil?: boolean;
 }
 
 export enum EPublicationType {
@@ -70,12 +71,12 @@ export type TPublicationType =
   | IPublicationProps
   | IOnlineProps
   | IFanzinProps
-  | IMumakilProps;
+  | IFanEditionsProps;
 
 export enum ETableType {
   BOOK = 'book',
   ARTICLE = 'article',
   ONLINE = 'online',
   FANZIN = 'fanzin',
-  MUMAKIL = 'mumakil',
+  FANEDITION = 'fanedition',
 }

@@ -3,7 +3,7 @@ import {
   ICategoryProps,
   IFanzinProps,
   IIdentityProps,
-  IMumakilProps,
+  IFanEditionsProps,
   IOnlineProps,
   IPageProps,
   IPublicationProps,
@@ -143,8 +143,8 @@ export const getAllFanzin = async (): Promise<TResponse<IFanzinProps[]>> => {
   };
 };
 
-export const getAllMumakil = async (): Promise<TResponse<IMumakilProps[]>> => {
-  const res = await fetchApi<IMumakilProps[]>(`${import.meta.env.VITE_API_URL}/mumakil`);
+export const getAllFanEditions = async (): Promise<TResponse<IFanEditionsProps[]>> => {
+  const res = await fetchApi<IFanEditionsProps[]>(`${import.meta.env.VITE_API_URL}/faneditions`);
 
   if (res.isError || !res.data) {
     return {

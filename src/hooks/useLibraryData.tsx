@@ -5,7 +5,7 @@ import {
   getAllPublications,
   getAllOnline,
   getAllFanzin,
-  getAllMumakil,
+  getAllFanEditions,
 } from '@/lib/getDataFromApi';
 import { ETableType } from '@/lib/types';
 import { useLibraryParams } from './useLibraryParams';
@@ -111,13 +111,13 @@ export const useLibraryData = () => {
   const shouldFetchArticles = type === ETableType.ARTICLE;
   const shouldFetchOnline = type === ETableType.ONLINE;
   const shouldFetchFanzin = type === ETableType.FANZIN;
-  const shouldFetchMumakil = type === ETableType.MUMAKIL;
+  const shouldFetchMumakil = type === ETableType.FANEDITION;
   const shouldFetchCategory =
     type !== ETableType.BOOK &&
     type !== ETableType.ARTICLE &&
     type !== ETableType.ONLINE &&
     type !== ETableType.FANZIN &&
-    type !== ETableType.MUMAKIL &&
+    type !== ETableType.FANEDITION &&
     !!slug;
 
   const {
@@ -156,7 +156,7 @@ export const useLibraryData = () => {
     data: mumakil,
     isLoading: mumakilLoading,
     isError: mumakilError,
-  } = useApi(() => getAllMumakil(), {
+  } = useApi(() => getAllFanEditions(), {
     enabled: shouldFetchMumakil,
   });
 
