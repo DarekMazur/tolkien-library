@@ -4,6 +4,7 @@ import CategoryPage from '@/components/pages/CategoryPage/CategoryPage';
 import BooksPage from '@/components/pages/BooksPage/BooksPage';
 import { useLibraryData } from '@/hooks/useLibraryData';
 import PublicationPage from '@/components/pages/PublicationPage/PublicationPage';
+import FanZonePage from '@/components/pages/FanzonePage/FanzonePage.tsx';
 
 const LibraryLayout = () => {
   const result = useLibraryData();
@@ -26,7 +27,7 @@ const LibraryLayout = () => {
         <BooksPage books={result.data} isJrr={result?.search === 'jrrt'} />
       )}
       {result.state === 'publications' && <PublicationPage data={result.data} />}
-      {result.state === 'online' && <>Online list</>}
+      {result.state === 'online' && <FanZonePage />}
       {result.state === 'category' && <CategoryPage category={result.data} />}
       {result.state === 'empty' && <>Nothing found...</>}
     </Wrapper>
