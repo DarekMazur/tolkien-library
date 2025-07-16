@@ -43,16 +43,39 @@ export interface IOnlineProps extends ICommonId {
   lastIssueDate: Date | null;
 }
 
+export interface IFanzinProps extends ICommonId {
+  title: string;
+  version?: string;
+  publisher: IPublisherProps;
+  numbers?: number | string;
+  startDate: Date;
+  lastIssueDate: Date | null;
+}
+
+export interface IMumakilProps extends ICommonId {
+  cover?: string;
+  title: string;
+  year?: number | string;
+  description?: string;
+}
+
 export enum EPublicationType {
   PARTIAL = 'partial',
   INCLUDING = 'including',
   EPUB = 'epub',
 }
 
-export type TPublicationType = IBookProps | IPublicationProps | IOnlineProps;
+export type TPublicationType =
+  | IBookProps
+  | IPublicationProps
+  | IOnlineProps
+  | IFanzinProps
+  | IMumakilProps;
 
 export enum ETableType {
   BOOK = 'book',
   ARTICLE = 'article',
   ONLINE = 'online',
+  FANZIN = 'fanzin',
+  MUMAKIL = 'mumakil',
 }
