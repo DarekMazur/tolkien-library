@@ -92,14 +92,6 @@ export const db = factory({
         EPublicationType.EPUB,
       ]),
   },
-  online: {
-    id: primaryKey(faker.string.uuid),
-    title: () => faker.lorem.words({ min: 1, max: 4 }),
-    version: () => faker.number.int({ min: 1, max: 5 }).toString(),
-    publisher: oneOf('publisher'),
-    startDate: () => faker.date.past(),
-    lastIssueDate: nullable(() => faker.date.past()),
-  },
   fanzin: {
     id: primaryKey(faker.string.uuid),
     title: () => faker.lorem.words({ min: 1, max: 4 }),

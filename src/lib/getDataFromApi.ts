@@ -4,7 +4,6 @@ import {
   IFanzinProps,
   IIdentityProps,
   IFanEditionsProps,
-  IOnlineProps,
   IPageProps,
   IPublicationProps,
   TResponse,
@@ -91,24 +90,6 @@ export const getBooksByAuthor = async (
 
 export const getAllPublications = async (): Promise<TResponse<IPublicationProps[]>> => {
   const res = await fetchApi<IPublicationProps[]>(`${import.meta.env.VITE_API_URL}/publications`);
-
-  if (res.isError || !res.data) {
-    return {
-      data: null,
-      isError: res.isError,
-      errorMessage: res.errorMessage,
-    };
-  }
-
-  return {
-    data: res.data,
-    isError: false,
-    errorMessage: null,
-  };
-};
-
-export const getAllOnline = async (): Promise<TResponse<IOnlineProps[]>> => {
-  const res = await fetchApi<IOnlineProps[]>(`${import.meta.env.VITE_API_URL}/online`);
 
   if (res.isError || !res.data) {
     return {

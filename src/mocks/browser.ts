@@ -118,22 +118,6 @@ const createPublications = () => {
 
 createPublications();
 
-const createOnline = () => {
-  const length = faker.number.int({ min: 4, max: 15 });
-
-  for (let i = 0; i < length; i++) {
-    const publishers = db.publisher.getAll();
-    const publishersIndex = faker.number.int({ min: 0, max: publishers.length - 1 });
-    const publisher = publishers[publishersIndex];
-
-    db.publication.create({
-      publisher,
-    });
-  }
-};
-
-createOnline();
-
 const createFanzin = () => {
   const length = faker.number.int({ min: 4, max: 25 });
 
@@ -473,7 +457,6 @@ window.mocks = {
   getTranslators: () => db.translator.getAll(),
   getPublisher: () => db.publisher.getAll(),
   getPublications: () => db.publication.getAll(),
-  getOnline: () => db.online.getAll(),
   getFanzin: () => db.fanzin.getAll(),
   getFanEditions: () => db.fanEditions.getAll(),
 };
