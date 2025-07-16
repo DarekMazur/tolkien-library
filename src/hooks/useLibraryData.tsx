@@ -41,17 +41,12 @@ import { useLibraryParams } from './useLibraryParams';
  * @property {Array} data - Array of publication objects
  * @property {ETableType} type - The publication type (ETableType.ARTICLE)
  *
- * @typedef {Object} OnlineState
- * @property {'online'} state - Successfully fetched online resources data
- * @property {Array} data - Array of online resource objects
- * @property {ETableType} type - The publication type (ETableType.ONLINE)
- *
  * @typedef {Object} CategoryState
  * @property {'category'} state - Successfully fetched category data
  * @property {Object} data - Category object retrieved by slug
  * @property {ETableType} type - The publication type
  *
- * @returns {InvalidState | LoadingState | ErrorState | EmptyState | BooksState | PublicationsState | OnlineState | CategoryState}
+ * @returns {InvalidState | LoadingState | ErrorState | EmptyState | BooksState | PublicationsState | CategoryState}
  * A discriminated union representing the current state of data fetching and the associated data.
  * The return type is determined by the URL parameters and the current fetch status.
  *
@@ -95,7 +90,7 @@ import { useLibraryParams } from './useLibraryParams';
  * @note This hook specifically fetches J.R.R. Tolkien books when type is BOOK.
  *       The search parameter 'jrrt' is used to exclude/include Tolkien-specific results.
  *
- * @note Categories are only fetched when type is not BOOK, ARTICLE, or ONLINE and a slug is present.
+ * @note Categories are only fetched when type is not BOOK, ARTICLE, FANZONE, FANZIN or FANEDITION and a slug is present.
  *
  * @performance The hook uses conditional API calls to avoid unnecessary network requests.
  *              Only the relevant API endpoint is called based on the current URL parameters.
