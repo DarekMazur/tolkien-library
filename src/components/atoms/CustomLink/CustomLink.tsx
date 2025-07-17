@@ -1,4 +1,4 @@
-import { Link as RouterLink } from 'react-router';
+import { Link as RouterLink, NavLink } from 'react-router';
 import { Link } from '@mui/material';
 import { ReactNode } from 'react';
 import { SxProps } from '@mui/system';
