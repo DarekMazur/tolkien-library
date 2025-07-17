@@ -31,7 +31,7 @@ const NoContent = ({ alert = 'Nothing found...' }: { alert?: string }) => {
         justifyContent="center"
         display="flex"
       >
-        {alert}
+        {alert ? alert : 'Nothing found...'}
       </Typography>
     </Box>
   );

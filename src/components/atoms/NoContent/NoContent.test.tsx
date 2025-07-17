@@ -62,7 +62,7 @@ describe('NoContent Component', () => {
     renderWithProviders(<NoContent alert="" />);
 
     const messageElement = screen.getByRole('heading', { level: 3 });
-    expect(messageElement).toHaveTextContent('');
+    expect(messageElement).toHaveTextContent('Nothing found...');
   });
 
   it('handles special characters in alert prop', () => {
