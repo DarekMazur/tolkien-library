@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import FanZonePage from './FanzonePage';
+import FanZonePage from './FanZonePage.tsx';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders.tsx';
 
 describe('FanZonePage component', () => {

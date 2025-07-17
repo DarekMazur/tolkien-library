@@ -4,7 +4,7 @@ import CategoryPage from '@/components/pages/CategoryPage/CategoryPage';
 import BooksPage from '@/components/pages/BooksPage/BooksPage';
 import { useLibraryData } from '@/hooks/useLibraryData';
 import PublicationPage from '@/components/pages/PublicationPage/PublicationPage';
-import FanZonePage from '@/components/pages/FanzonePage/FanzonePage';
+import FanZonePage from '@/components/pages/FanZonePage/FanZonePage.tsx';
 import FanzinPage from '@/components/pages/FanzinPage/FanzinPage';
 import FanEditionPage from '@/components/pages/FanEditionPage/FanEditionPage';
 
