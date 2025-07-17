@@ -13,13 +13,16 @@ const CustomLink = ({
   children: ReactNode;
   styles?: SxProps;
   onClick?: () => void;
+  isNav?: boolean;
 }) => {
+  const RouterComponent = isNav ? NavLink : RouterLink;
+
   return (
-    <RouterLink to={url} onClick={onClick}>
+    <RouterComponent to={url} onClick={onClick}>
       <Link component="span" sx={styles}>
         {children}
       </Link>
-    </RouterLink>
+    </RouterComponent>
   );
 };
 
