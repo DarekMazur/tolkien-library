@@ -296,6 +296,37 @@ const fanzinMock = [
   },
 ];
 
+const faneditionMock = [
+  {
+    id: faker.string.uuid(),
+    title: 'Syn Gondoru (wyd I )',
+    isMumakil: true,
+    year: 2006,
+    description: 'fanfick Katarzyny Chmiel-Gugulskiej',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Narn e-Rach Morgoth',
+    isMumakil: true,
+    year: 2007,
+    description: 'Opowieść o Klątwie Morgotha/ alternatywa dla Dzieci Húrina',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Inne umysły, serca i dłonie - I tom',
+    isMumakil: true,
+    year: 2008,
+    description: 'Antologia tekstów i ilustracji inspirowanych twórczością J.R.R. Tolkiena',
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Słownik Sindarinu',
+    year: 2000,
+    desription:
+      'Słownik języka Elfów Szarych opracowany na podstawie pism Profesora Johna Ronalda Reula Tolkiena',
+  },
+];
+
 export const navigationHandler = http.get('/api/navigation', () => {
   return HttpResponse.json(navigationMock);
 });
@@ -320,6 +351,10 @@ export const fanzinHandler = http.get('/api/fanzin', () => {
   return HttpResponse.json(fanzinMock);
 });
 
+export const faneditionHandler = http.get('/api/faneditions', () => {
+  return HttpResponse.json(faneditionMock);
+});
+
 export const handlers = [
   navigationHandler,
   articlesHandler,
@@ -327,4 +362,5 @@ export const handlers = [
   booksHandler,
   publicationsHandler,
   fanzinHandler,
+  faneditionHandler,
 ];

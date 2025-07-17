@@ -9,18 +9,22 @@ const FanEditionPage = ({ data }: { data: IFanEditionsProps[] }) => {
         Fan's Editions
       </Typography>
       <Divider sx={{ mb: 4 }} />
-      <GenericTable
-        data={data.filter((item) => item.isMumakil)}
-        publicationType={ETableType.FANEDITION}
-        title="MumakiL Fandom PresSsss..."
-        headerVariant="h3"
-      />
-      <GenericTable
-        data={data.filter((item) => !item.isMumakil)}
-        publicationType={ETableType.FANEDITION}
-        title="Others"
-        headerVariant="h3"
-      />
+      {data.filter((item) => item.isMumakil).length > 0 ? (
+        <GenericTable
+          data={data.filter((item) => item.isMumakil)}
+          publicationType={ETableType.FANEDITION}
+          title="MumakiL Fandom PresSsss..."
+          headerVariant="h3"
+        />
+      ) : null}
+      {data.filter((item) => !item.isMumakil).length > 0 ? (
+        <GenericTable
+          data={data.filter((item) => !item.isMumakil)}
+          publicationType={ETableType.FANEDITION}
+          title="Others"
+          headerVariant="h3"
+        />
+      ) : null}
     </>
   );
 };

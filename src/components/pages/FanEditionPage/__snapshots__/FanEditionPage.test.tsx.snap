@@ -120,25 +120,6 @@ exports[`FanEditionPage > should render with Mumakil-only data snapshot 1`] = `
       2
     </div>
   </div>
-  <div
-    data-testid="generic-table"
-  >
-    <h3>
-      Others
-    </h3>
-    <div>
-      Publication Type: 
-      fanedition
-    </div>
-    <div>
-      Header Variant: 
-      h3
-    </div>
-    <div>
-      Data Count: 
-      0
-    </div>
-  </div>
 </div>
 `;
 
@@ -172,44 +153,6 @@ exports[`FanEditionPage > should render with empty data snapshot 1`] = `
   <hr
     class="MuiDivider-root MuiDivider-fullWidth emotion-1"
   />
-  <div
-    data-testid="generic-table"
-  >
-    <h3>
-      MumakiL Fandom PresSsss...
-    </h3>
-    <div>
-      Publication Type: 
-      fanedition
-    </div>
-    <div>
-      Header Variant: 
-      h3
-    </div>
-    <div>
-      Data Count: 
-      0
-    </div>
-  </div>
-  <div
-    data-testid="generic-table"
-  >
-    <h3>
-      Others
-    </h3>
-    <div>
-      Publication Type: 
-      fanedition
-    </div>
-    <div>
-      Header Variant: 
-      h3
-    </div>
-    <div>
-      Data Count: 
-      0
-    </div>
-  </div>
 </div>
 `;
 
@@ -243,25 +186,6 @@ exports[`FanEditionPage > should render with non-Mumakil-only data snapshot 1`] 
   <hr
     class="MuiDivider-root MuiDivider-fullWidth emotion-1"
   />
-  <div
-    data-testid="generic-table"
-  >
-    <h3>
-      MumakiL Fandom PresSsss...
-    </h3>
-    <div>
-      Publication Type: 
-      fanedition
-    </div>
-    <div>
-      Header Variant: 
-      h3
-    </div>
-    <div>
-      Data Count: 
-      0
-    </div>
-  </div>
   <div
     data-testid="generic-table"
   >
