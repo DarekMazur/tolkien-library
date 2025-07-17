@@ -242,6 +242,60 @@ const publicationsMock = [
   },
 ];
 
+const STSKF = {
+  id: faker.string.uuid(),
+  title: 'Sekcja Tolkienowska Śląskiego Klubu Fantastyki',
+  description: '',
+};
+
+const fanzinMock = [
+  {
+    id: faker.string.uuid(),
+    title: 'Aiglos',
+    version: 'Papier',
+    publisher: STSKF,
+    numbers: '26',
+    startDate: new Date('2004'),
+    lastIssueDate: new Date('2024'),
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Simbelmynë',
+    version: 'Papier',
+    publisher: STSKF,
+    numbers: '31',
+    startDate: new Date('1997'),
+    lastIssueDate: new Date('2019'),
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Gwaihir',
+    version: 'Papier',
+    publisher: STSKF,
+    numbers: '11',
+    startDate: new Date('1984'),
+    lastIssueDate: new Date('2024'),
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Gwaihirzę',
+    version: 'Papier',
+    publisher: STSKF,
+    numbers: '95',
+    startDate: new Date('1989'),
+    lastIssueDate: new Date('1997'),
+  },
+  {
+    id: faker.string.uuid(),
+    title: 'Little Gwaihir',
+    version: 'Papier',
+    publisher: STSKF,
+    numbers: '100+',
+    startDate: new Date('1989'),
+    lastIssueDate: null,
+  },
+];
+
 export const navigationHandler = http.get('/api/navigation', () => {
   return HttpResponse.json(navigationMock);
 });
@@ -262,10 +316,15 @@ export const publicationsHandler = http.get('/api/publications', () => {
   return HttpResponse.json(publicationsMock);
 });
 
+export const fanzinHandler = http.get('/api/fanzin', () => {
+  return HttpResponse.json(fanzinMock);
+});
+
 export const handlers = [
   navigationHandler,
   articlesHandler,
   pagesHandler,
   booksHandler,
   publicationsHandler,
+  fanzinHandler,
 ];
