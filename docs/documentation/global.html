@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="PublicationPageProps.html">PublicationPageProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Default">Default</a></li><li><a href="global.html#Empty">Empty</a></li><li><a href="global.html#EmptyData">EmptyData</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#LargeDataset">LargeDataset</a></li><li><a href="global.html#MixedWithMissingDescriptions">MixedWithMissingDescriptions</a></li><li><a href="global.html#OnlyMumakilEditions">OnlyMumakilEditions</a></li><li><a href="global.html#OnlyOtherEditions">OnlyOtherEditions</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="PublicationPageProps.html">PublicationPageProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Default">Default</a></li><li><a href="global.html#Empty">Empty</a></li><li><a href="global.html#EmptyData">EmptyData</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#LargeDataset">LargeDataset</a></li><li><a href="global.html#MixedWithMissingDescriptions">MixedWithMissingDescriptions</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#OnlyMumakilEditions">OnlyMumakilEditions</a></li><li><a href="global.html#OnlyOtherEditions">OnlyOtherEditions</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
                 
             </nav>
         </div>
@@ -1624,7 +1624,7 @@ The component uses Material-UI components for styling and layout.
         <p class="tag-source">
             <a href="components_pages_FanEditionPage_FanEditionPage.tsx.html" class="button">View Source</a>
             <span>
-                <a href="components_pages_FanEditionPage_FanEditionPage.tsx.html">components/pages/FanEditionPage/FanEditionPage.tsx</a>, <a href="components_pages_FanEditionPage_FanEditionPage.tsx.html#line41">line 41</a>
+                <a href="components_pages_FanEditionPage_FanEditionPage.tsx.html">components/pages/FanEditionPage/FanEditionPage.tsx</a>, <a href="components_pages_FanEditionPage_FanEditionPage.tsx.html#line42">line 42</a>
             </span>
         </p>
     
@@ -1957,7 +1957,7 @@ Renders a table of fanzines using the GenericTable component.
         <p class="tag-source">
             <a href="components_pages_FanzinPage_FanzinPage.tsx.html" class="button">View Source</a>
             <span>
-                <a href="components_pages_FanzinPage_FanzinPage.tsx.html">components/pages/FanzinPage/FanzinPage.tsx</a>, <a href="components_pages_FanzinPage_FanzinPage.tsx.html#line41">line 41</a>
+                <a href="components_pages_FanzinPage_FanzinPage.tsx.html">components/pages/FanzinPage/FanzinPage.tsx</a>, <a href="components_pages_FanzinPage_FanzinPage.tsx.html#line42">line 42</a>
             </span>
         </p>
     
@@ -2036,6 +2036,251 @@ Renders a table of fanzines using the GenericTable component.
   },
 ];
 &lt;FanzinPage data={mockData} />;</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="NoContent">
+        <a class="href-link" href="#NoContent">#</a>
+        
+        <span class="code-name">
+            
+                NoContent<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Displays a centered heading indicating that no data or content
+was found for the current context.
+
+Typical use-case: render in place of a list, table, or page section
+when filters return an empty result set.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last">– Component props.</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>alert</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          'Nothing found…'
+      
+      </td>
+  
+
+  <td class="description last">– Message shown to the user.</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_atoms_NoContent_NoContent.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_atoms_NoContent_NoContent.tsx.html">components/atoms/NoContent/NoContent.tsx</a>, <a href="components_atoms_NoContent_NoContent.tsx.html#line23">line 23</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>A MUI <Box> containing a level-2 <Typography> message.</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">JSX.Element</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>```
+&lt;NoContent />                          // → “Nothing found…”
+&lt;NoContent alert="No posts yet" />     // → “No posts yet”
+```</code></pre>
     
 
 

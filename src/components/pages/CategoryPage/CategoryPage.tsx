@@ -1,7 +1,11 @@
+import NoContent from '@/components/atoms/NoContent/NoContent';
 import { ICategoryProps } from '@/lib/types';
 import { Typography } from '@mui/material';
 
 const CategoryPage = ({ category }: { category: ICategoryProps }) => {
+  if (!category) {
+    return <NoContent />;
+  }
   return (
     <>
       <Typography variant="h2">{category.title}</Typography>
