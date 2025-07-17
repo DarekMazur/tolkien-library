@@ -1,6 +1,6 @@
+import { EPublicationType } from '@/lib/types';
 import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
-import { EPublicationType } from '@/lib/types';
 
 const navigationMock = [
   { id: '1', title: 'Strona główna', link: '/', isDivider: false },
