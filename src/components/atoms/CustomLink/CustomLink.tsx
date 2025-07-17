@@ -7,6 +7,7 @@ const CustomLink = ({
   children,
   url,
   styles,
+  isNav,
   onClick,
 }: {
   url: string;
