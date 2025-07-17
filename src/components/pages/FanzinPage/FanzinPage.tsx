@@ -1,5 +1,6 @@
 import { ETableType, IFanzinProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
+import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
 
 /**
  * FanzinPage component
@@ -40,7 +41,11 @@ import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
  */
 
 const FanzinPage = ({ data }: { data: IFanzinProps[] }) => {
-  return <GenericTable data={data} publicationType={ETableType.FANZIN} title="Fanzins" />;
+  return data ? (
+    <GenericTable data={data} publicationType={ETableType.FANZIN} title="Fanzins" />
+  ) : (
+    <NoContent />
+  );
 };
 
 export default FanzinPage;

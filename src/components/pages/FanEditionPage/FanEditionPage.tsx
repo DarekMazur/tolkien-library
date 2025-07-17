@@ -1,6 +1,7 @@
 import { ETableType, IFanEditionsProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 import { Divider, Typography } from '@mui/material';
+import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
 
 /**
  * FanEditionPage component displays fan editions in a structured layout with two separate tables.
@@ -46,6 +47,7 @@ const FanEditionPage = ({ data }: { data: IFanEditionsProps[] }) => {
         Fan's Editions
       </Typography>
       <Divider sx={{ mb: 4 }} />
+      {!data && <NoContent />}
       {data.filter((item) => item.isMumakil).length > 0 ? (
         <GenericTable
           data={data.filter((item) => item.isMumakil)}

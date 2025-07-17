@@ -2,6 +2,7 @@ import { EPublicationType, ETableType, IPublicationProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 import { Divider, Typography } from '@mui/material';
 import { useCallback } from 'react';
+import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
 
 /**
  * A site with Tolkien publications divided into three categories.
@@ -75,7 +76,7 @@ const PublicationPage = ({ data = [] }: PublicationPageProps) => {
           {renderTable(EPublicationType.EPUB, 'E-publications')}
         </>
       ) : (
-        <Typography>No publications found</Typography>
+        <NoContent />
       )}
     </>
   );

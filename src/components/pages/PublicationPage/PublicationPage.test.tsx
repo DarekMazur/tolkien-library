@@ -154,7 +154,7 @@ describe('PublicationPage', () => {
     ).not.toBeInTheDocument();
     expect(screen.queryByText('E-publications')).not.toBeInTheDocument();
     expect(screen.queryByTestId('generic-table')).not.toBeInTheDocument();
-    expect(screen.getByText('No publications found')).toBeInTheDocument();
+    expect(screen.getByText('Nothing found...')).toBeInTheDocument();
   });
 
   it('filters data correctly for each publication type', () => {
