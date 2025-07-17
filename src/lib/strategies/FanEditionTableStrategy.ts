@@ -7,9 +7,7 @@ import {
 } from '@/lib/types';
 
 export class FanEditionTableStrategy implements ITableStrategy<IFanEditionsProps> {
-  private readonly aliases: Readonly<Record<string, string>> = {
-    publisher: 'publisher.title',
-  } as const;
+  private readonly aliases: Readonly<Record<string, string>> = {} as const;
 
   getAliases(): Readonly<Record<string, string>> {
     return this.aliases;
