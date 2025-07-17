@@ -29,10 +29,6 @@ const meta: Meta<typeof FanEditionPage> = {
 export default meta;
 type Story = StoryObj<typeof FanEditionPage>;
 
-/**
- * Default view with mixed fan editions data (Mumakil and other publications).
- */
-
 export const Default: Story = {
   loaders: [
     async () => {
@@ -40,22 +36,28 @@ export const Default: Story = {
       return { data };
     },
   ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default view with mixed fan editions data (Mumakil and other publications).',
+      },
+    },
+  },
   render: (_args, { loaded: { data } }) => {
     return <FanEditionPage data={data} />;
   },
 };
 
-/**
- * Page with empty data array - shows how component handles no data.
- */
-
 export const EmptyData: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Page with empty data array - shows how component handles no data.',
+      },
+    },
+  },
   render: () => <FanEditionPage data={[]} />,
 };
-
-/**
- * Page showing only Mumakil fan editions with empty "Others" section.
- */
 
 export const OnlyMumakilEditions: Story = {
   loaders: [
@@ -64,14 +66,17 @@ export const OnlyMumakilEditions: Story = {
       return { data };
     },
   ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Page showing only Mumakil fan editions with empty "Others" section.',
+      },
+    },
+  },
   render: (_args, { loaded: { data } }) => {
     return <FanEditionPage data={data.filter((item: IFanEditionsProps) => item.isMumakil)} />;
   },
 };
-
-/**
- * Page showing only non-Mumakil editions with empty "MumakiL Fandom" section.Page with a large dataset to test performance and table rendering with many items.
- */
 
 export const OnlyOtherEditions: Story = {
   loaders: [
@@ -80,14 +85,18 @@ export const OnlyOtherEditions: Story = {
       return { data };
     },
   ],
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Page showing only non-Mumakil editions with empty "MumakiL Fandom" section.Page with a large dataset to test performance and table rendering with many items.',
+      },
+    },
+  },
   render: (_args, { loaded: { data } }) => {
     return <FanEditionPage data={data.filter((item: IFanEditionsProps) => !item.isMumakil)} />;
   },
 };
-
-/**
- * Page with a large dataset to test performance and table rendering with many items.
- */
 
 export const LargeDataset: Story = {
   loaders: [
@@ -96,6 +105,13 @@ export const LargeDataset: Story = {
       return { data };
     },
   ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Page with a large dataset to test performance and table rendering with many items.',
+      },
+    },
+  },
   render: (_args, { loaded: { data } }) => {
     return (
       <FanEditionPage
@@ -114,11 +130,14 @@ export const LargeDataset: Story = {
   },
 };
 
-/**
- * Page with items that have missing or empty descriptions.
- */
-
 export const MixedWithMissingDescriptions: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Page with items that have missing or empty descriptions.',
+      },
+    },
+  },
   render: () => (
     <FanEditionPage
       data={[

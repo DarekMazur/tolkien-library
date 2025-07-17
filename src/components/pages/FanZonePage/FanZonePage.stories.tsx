@@ -18,9 +18,6 @@ export default meta;
 
 type FanZoneStory = StoryObj<typeof FanZonePage>;
 
-/**
- * Default FanZonePage
- */
 export const Default: FanZoneStory = {
   args: {},
   parameters: {

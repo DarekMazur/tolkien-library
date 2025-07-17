@@ -33,10 +33,6 @@ const meta: Meta<FanzinPageProps> = {
 export default meta;
 type Story = StoryObj<typeof FanzinPage>;
 
-/**
- * Default story showing a page of sample fanzines.
- */
-
 export const Default: Story = {
   loaders: [
     async () => {
@@ -44,14 +40,25 @@ export const Default: Story = {
       return { data };
     },
   ],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default story showing a page of sample fanzines.',
+      },
+    },
+  },
   render: (_args, { loaded: { data } }) => {
     return <FanzinPage data={data} />;
   },
 };
 
-/**
- * Blank list - for the state without available fanzines.
- */
 export const Empty: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Blank list - for the state without available fanzines.',
+      },
+    },
+  },
   render: () => <FanzinPage data={[]} />,
 };
