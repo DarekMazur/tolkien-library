@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-const NoContent = () => {
+const NoContent = ({ alert = 'Nothing found...' }: { alert?: string }) => {
   return (
     <Box sx={{ my: 3 }}>
       <Typography
@@ -10,7 +10,7 @@ const NoContent = () => {
         justifyContent="center"
         display="flex"
       >
-        Nothing found...
+        {alert}
       </Typography>
     </Box>
   );
