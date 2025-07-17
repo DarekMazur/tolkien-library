@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/helpers/generateISSN.ts</title>
+  <title> lib/strategies/FanzinTableStrategy.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/helpers/generateISSN.ts</h1>
+                    <h1>lib/strategies/FanzinTableStrategy.ts</h1>
                 </header>
                 
 
@@ -85,58 +85,127 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
+            <pre class="prettyprint source linenums"><code>import {
+  IFanzinProps,
+  IHeaderDefinition,
+  ITableStrategy,
+  TNestedKeyOf,
+  TPathValue,
+  TAllowedPaths,
+} from '@/lib/types';
 
 /**
- * Generate the first seven digits of ISSN
+ * Concrete implementation of ITableStrategy for rendering
+ * and handling table data for Fanzin entities.
  *
- * @returns array of numbers with length === 7
- *
- * @example
- * ```
- * const digits = generateBaseDigits()
- * console.log(digits) // => [0, 1, 2, 3, 4, 5, 6, 7]
- * ```
+ * Manages column aliases, header definitions, and value extraction
+ * (including nested properties) for IFanzinProps items.
  */
 
-export const generateBaseDigits = () => {
-  const digits: number[] = [];
-  for (let i = 0; i &lt; 7; i++) {
-    digits.push(Math.floor(Math.random() * 10));
+export class FanzinTableStrategy implements ITableStrategy&lt;IFanzinProps> {
+  /**
+   * Mapping of property aliases to nested property keys.
+   * Used to translate simple alias keys into full data paths.
+   *
+   * @readonly
+   * @private
+   * @type {Readonly&lt;Record&lt;string, string>>}
+   */
+
+  private readonly aliases: Readonly&lt;Record&lt;string, string>> = {
+    publisher: 'publisher.title',
+  } as const;
+  /**
+   * Returns the alias-to-path mapping for this strategy.
+   *
+   * @returns {Readonly&lt;Record&lt;string, string>>} Read-only record of aliases
+   */
+
+  getAliases(): Readonly&lt;Record&lt;string, string>> {
+    return this.aliases;
   }
-  return digits;
-};
+  /**
+   * Builds and returns the header definitions for a given item.
+   *
+   * The headers are defined in a fixed order:
+   * 'title', 'version', 'publisher', 'numbers', 'startDate', 'lastIssueDate'.
+   * Headers with a `condition` function will be included only if the
+   * condition returns true for the provided item.
+   *
+   * @param {IFanzinProps} item - The Fanzin item used to determine which headers to include.
+   * @returns {IHeaderDefinition&lt;IFanzinProps>[]} Array of header definitions,
+   *   in display order, filtered by existence and condition.
+   */
 
-/**
- * Generate the ISSN according to the ISO 3297 standard.
- *
- * Use generateBaseDigits() to get ISSN prefix.
- * Calculate checksum using calculateCheckDigit()
- * Reformat results to format XXXX-XXXC.
- *
- * @example
- * ```
- * const issn = generateISSN()
- * console.log(issn) // => '0317-8471'
- * ```
- *
- * @throws {Error}
- * Throws if the generated ISSN fails validation by `validateISSN`.
- */
+  getHeaders(item: IFanzinProps): IHeaderDefinition&lt;IFanzinProps>[] {
+    const propertyOrder: Exclude&lt;keyof IFanzinProps, 'id'>[] = [
+      'title',
+      'version',
+      'publisher',
+      'numbers',
+      'startDate',
+      'lastIssueDate',
+    ];
 
-export const generateISSN = () => {
-  const baseDigits = generateBaseDigits();
-  const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&amp;-'); // Inserts a hyphen after the first 4 digits if there are exactly 3 digits further on
+    const headerDefinitions: Record&lt;
+      Exclude&lt;keyof IFanzinProps, 'id'>,
+      IHeaderDefinition&lt;IFanzinProps>
+    > = {
+      title: { displayTitle: 'Title', key: 'title', sortable: true },
+      version: { displayTitle: 'Version', key: 'version', sortable: true },
+      publisher: {
+        displayTitle: 'Publisher',
+        key: 'publisher.title' as TNestedKeyOf&lt;IFanzinProps>,
+        sortable: true,
+      },
+      numbers: { displayTitle: 'Numbers count', key: 'numbers', sortable: true },
+      startDate: { displayTitle: 'From', key: 'startDate', sortable: true },
+      lastIssueDate: {
+        displayTitle: 'Last number',
+        key: 'lastIssueDate',
+        condition: (item) => item.lastIssueDate !== null,
+        sortable: true,
+      },
+    };
 
-  const issn = `${formattedBase}${checkDigit}`;
-
-  if (!validateISSN(issn)) {
-    throw new Error('Invalid ISSN format or checksum');
+    return propertyOrder
+      .filter((prop) => prop in item)
+      .map((prop) => headerDefinitions[prop])
+      .filter((definition) => !definition.condition || definition.condition(item));
   }
-  return issn;
-};
+  /**
+   * Retrieves the display value from the provided item for the given key.
+   * Supports nested keys delimited by a dot ('.').
+   *
+   * Examples:
+   * - key = 'title' returns item.title
+   * - key = 'publisher.title' returns item.publisher.title if available
+   *
+   * @typeParam P - A valid path key of IFanzinProps, possibly nested.
+   * @param {IFanzinProps} item - The source object from which the value is extracted.
+   * @param {P} key - The property key (or nested key) to extract.
+   * @returns {TPathValue&lt;IFanzinProps, P> | null} The value at the specified key, or null if not present.
+   */
+
+  getDisplayValue&lt;P extends TAllowedPaths&lt;IFanzinProps>>(
+    item: IFanzinProps,
+    key: P,
+  ): TPathValue&lt;IFanzinProps, P> | null {
+    if (key.includes('.')) {
+      const [parentKey, childKey] = key.split('.');
+      const parent = item[parentKey as keyof IFanzinProps];
+      if (parent &amp;&amp; typeof parent === 'object' &amp;&amp; childKey in parent) {
+        return (parent as unknown as Record&lt;string, unknown>)[childKey] as TPathValue&lt;
+          IFanzinProps,
+          P
+        >;
+      }
+      return null;
+    }
+
+    return item[key as keyof IFanzinProps] as TPathValue&lt;IFanzinProps, P> | null;
+  }
+}
 </code></pre>
         </article>
     </section>

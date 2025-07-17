@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="OnlineTableStrategy.html">OnlineTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PublicationPage">PublicationPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="PublicationPageProps.html">PublicationPageProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Default">Default</a></li><li><a href="global.html#Empty">Empty</a></li><li><a href="global.html#EmptyData">EmptyData</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#LargeDataset">LargeDataset</a></li><li><a href="global.html#MixedWithMissingDescriptions">MixedWithMissingDescriptions</a></li><li><a href="global.html#OnlyMumakilEditions">OnlyMumakilEditions</a></li><li><a href="global.html#OnlyOtherEditions">OnlyOtherEditions</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
                 
             </nav>
         </div>
@@ -85,9 +85,10 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ETableType, IPublicationProps } from '@/lib/types';
+            <pre class="prettyprint source linenums"><code>import { EPublicationType, ETableType, IPublicationProps } from '@/lib/types';
 import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 import { Divider, Typography } from '@mui/material';
+import { useCallback } from 'react';
 
 /**
  * A site with Tolkien publications divided into three categories.
@@ -119,12 +120,31 @@ import { Divider, Typography } from '@mui/material';
  * ```
  */
 
-const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
-  const partialPublications: IPublicationProps[] = data.filter((item) => item.type === 'partial');
-  const includingPublications: IPublicationProps[] = data.filter(
-    (item) => item.type === 'including',
+interface PublicationPageProps {
+  data: IPublicationProps[];
+}
+
+const PublicationPage = ({ data = [] }: PublicationPageProps) => {
+  if (!Array.isArray(data)) {
+    return &lt;Typography>Error: Incorrect data format&lt;/Typography>;
+  }
+
+  const renderTable = useCallback(
+    (type: EPublicationType, title: string) => {
+      const filteredData = data.filter((item) => item.type === type);
+      return (
+        filteredData.length > 0 &amp;&amp; (
+          &lt;GenericTable
+            data={filteredData}
+            publicationType={ETableType.ARTICLE}
+            title={title}
+            headerVariant="h3"
+          />
+        )
+      );
+    },
+    [data],
   );
-  const epubPublications: IPublicationProps[] = data.filter((item) => item.type === 'epub');
 
   return (
     &lt;>
@@ -132,27 +152,18 @@ const PublicationPage = ({ data }: { data: IPublicationProps[] }) => {
         Fragmentarium
       &lt;/Typography>
       &lt;Divider sx={{ mb: 4 }} />
-      {partialPublications.length > 0 ? (
-        &lt;GenericTable
-          data={data.filter((item) => item.type === 'partial')}
-          publicationType={ETableType.ARTICLE}
-          title="Items partly related to Tolkien"
-        />
-      ) : null}
-      {includingPublications.length > 0 ? (
-        &lt;GenericTable
-          data={data.filter((item) => item.type === 'including')}
-          publicationType={ETableType.ARTICLE}
-          title="Items that contain Tolkien articles or are partially devoted to Tolkien's works"
-        />
-      ) : null}
-      {epubPublications.length > 0 ? (
-        &lt;GenericTable
-          data={data.filter((item) => item.type === 'epub')}
-          publicationType={ETableType.ARTICLE}
-          title="E-publications"
-        />
-      ) : null}
+      {data.length > 0 ? (
+        &lt;>
+          {renderTable(EPublicationType.PARTIAL, 'Items partly related to Tolkien')}
+          {renderTable(
+            EPublicationType.INCLUDING,
+            "Items that contain Tolkien articles or are partially devoted to Tolkien's works",
+          )}
+          {renderTable(EPublicationType.EPUB, 'E-publications')}
+        &lt;/>
+      ) : (
+        &lt;Typography>No publications found&lt;/Typography>
+      )}
     &lt;/>
   );
 };

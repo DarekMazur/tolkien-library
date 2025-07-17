@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/helpers/generateISSN.ts</title>
+  <title> components/pages/FanZonePage/FanZonePage.stories.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/helpers/generateISSN.ts</h1>
+                    <h1>components/pages/FanZonePage/FanZonePage.stories.tsx</h1>
                 </header>
                 
 
@@ -85,57 +85,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
+            <pre class="prettyprint source linenums"><code>import { Meta, StoryObj } from '@storybook/react';
+import FanZonePage from './FanZonePage';
 
-/**
- * Generate the first seven digits of ISSN
- *
- * @returns array of numbers with length === 7
- *
- * @example
- * ```
- * const digits = generateBaseDigits()
- * console.log(digits) // => [0, 1, 2, 3, 4, 5, 6, 7]
- * ```
- */
-
-export const generateBaseDigits = () => {
-  const digits: number[] = [];
-  for (let i = 0; i &lt; 7; i++) {
-    digits.push(Math.floor(Math.random() * 10));
-  }
-  return digits;
+const meta: Meta&lt;typeof FanZonePage> = {
+  title: 'Pages/FanZonePage',
+  component: FanZonePage,
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'FanZone page includes header, separator and list of links.',
+      },
+    },
+  },
 };
 
+export default meta;
+
+type FanZoneStory = StoryObj&lt;typeof FanZonePage>;
+
 /**
- * Generate the ISSN according to the ISO 3297 standard.
- *
- * Use generateBaseDigits() to get ISSN prefix.
- * Calculate checksum using calculateCheckDigit()
- * Reformat results to format XXXX-XXXC.
- *
- * @example
- * ```
- * const issn = generateISSN()
- * console.log(issn) // => '0317-8471'
- * ```
- *
- * @throws {Error}
- * Throws if the generated ISSN fails validation by `validateISSN`.
+ * Default FanZonePage
  */
-
-export const generateISSN = () => {
-  const baseDigits = generateBaseDigits();
-  const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&amp;-'); // Inserts a hyphen after the first 4 digits if there are exactly 3 digits further on
-
-  const issn = `${formattedBase}${checkDigit}`;
-
-  if (!validateISSN(issn)) {
-    throw new Error('Invalid ISSN format or checksum');
-  }
-  return issn;
+export const Default: FanZoneStory = {
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Basic view of the FanZone page with default links.',
+      },
+    },
+  },
 };
 </code></pre>
         </article>
