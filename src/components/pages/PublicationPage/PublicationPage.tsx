@@ -76,7 +76,7 @@ const PublicationPage = ({ data = [] }: PublicationPageProps) => {
           {renderTable(EPublicationType.EPUB, 'E-publications')}
         </>
       ) : (
-        <NoContent />
+        <NoContent alert="No publications found" />
       )}
     </>
   );

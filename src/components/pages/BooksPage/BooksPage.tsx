@@ -4,7 +4,7 @@ import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
 
 const BooksPage = ({ books, isJrr }: { books: IBookProps[]; isJrr?: boolean }) => {
   if (!books) {
-    return <NoContent />;
+    return <NoContent alert="Books not found" />;
   }
 
   return (

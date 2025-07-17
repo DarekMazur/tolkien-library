@@ -139,7 +139,7 @@ exports[`PublicationPage > matches snapshot with empty data 1`] = `
     <h3
       class="MuiTypography-root MuiTypography-h2 emotion-3"
     >
-      Nothing found...
+      No publications found
     </h3>
   </div>
 </div>
