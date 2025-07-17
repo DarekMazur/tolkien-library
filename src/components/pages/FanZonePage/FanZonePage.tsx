@@ -1,5 +1,14 @@
 import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 
+/**
+ * FanZonePage component displays the FanZone page header, a divider,
+ * and a list of navigation links to fanzins and fan editions.
+ *
+ * @component
+ * @example
+ * return <FanZonePage />;
+ */
+
 const FanZonePage = () => {
   return (
     <Box>
