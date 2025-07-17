@@ -18,11 +18,9 @@ const CustomLink = ({
   const RouterComponent = isNav ? NavLink : RouterLink;
 
   return (
-    <RouterComponent to={url} onClick={onClick}>
-      <Link component="span" sx={styles}>
-        {children}
-      </Link>
-    </RouterComponent>
+    <Link component={RouterComponent} to={url} onClick={onClick} sx={styles}>
+      {children}
+    </Link>
   );
 };
 
