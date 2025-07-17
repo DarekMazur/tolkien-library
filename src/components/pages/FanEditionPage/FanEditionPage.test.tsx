@@ -111,33 +111,30 @@ describe('FanEditionPage', () => {
   it('should handle empty data array', () => {
     renderWithProviders(<FanEditionPage data={[]} />);
 
-    const tables = screen.getAllByTestId('generic-table');
-    expect(tables).toHaveLength(2);
-
-    tables.forEach((table) => {
-      expect(table).toHaveTextContent('Data Count: 0');
-    });
+    expect(screen.queryByText("Fan's Editions")).toBeInTheDocument();
+    expect(screen.queryByTestId('generic-table')).not.toBeInTheDocument();
+    expect(screen.queryByText('MumakiL Fandom PresSsss...')).not.toBeInTheDocument();
+    expect(screen.queryByText('Others')).not.toBeInTheDocument();
   });
 
   it('should handle data with only Mumakil items', () => {
     renderWithProviders(<FanEditionPage data={mockDataWithMumakil} />);
 
     const tables = screen.getAllByTestId('generic-table');
+    expect(tables).toHaveLength(1);
     const mumakilTable = tables[0];
-    const othersTable = tables[1];
 
     expect(mumakilTable).toHaveTextContent('Data Count: 2');
-    expect(othersTable).toHaveTextContent('Data Count: 0');
+    expect(screen.queryByText('Others')).not.toBeInTheDocument();
   });
 
   it('should handle data with only non-Mumakil items', () => {
     renderWithProviders(<FanEditionPage data={mockDataWithoutMumakil} />);
 
     const tables = screen.getAllByTestId('generic-table');
-    const mumakilTable = tables[0];
-    const othersTable = tables[1];
-
-    expect(mumakilTable).toHaveTextContent('Data Count: 0');
+    expect(tables).toHaveLength(1);
+    const othersTable = tables[0];
+    expect(screen.queryByText('MumakiL Fandom PresSsss...')).not.toBeInTheDocument();
     expect(othersTable).toHaveTextContent('Data Count: 2');
   });
 
