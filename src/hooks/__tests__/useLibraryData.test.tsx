@@ -98,28 +98,6 @@ describe('useLibraryData', () => {
     });
   });
 
-  it('should return state “online” for online resources', () => {
-    const online = [{ id: 1, url: 'link' }];
-    mockUseLibraryParams.mockReturnValue({
-      type: ETableType.ONLINE,
-      slug: null,
-      search: null,
-      isValid: true,
-    });
-    mockUseApi.mockReturnValue({
-      data: online,
-      isLoading: false,
-      isError: false,
-      errorMessage: null,
-    });
-    const { result } = renderHook(() => useLibraryData());
-    expect(result.current).toEqual({
-      state: 'online',
-      data: online,
-      type: ETableType.ONLINE,
-    });
-  });
-
   it('should return state “category” for category', () => {
     const category = { id: 'fantasy', name: 'Fantasy' };
     mockUseLibraryParams.mockReturnValue({

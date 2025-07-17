@@ -1,0 +1,209 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FanEditionPage > should render component correctly with mixed data 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-1 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-bottom: 32px;
+}
+
+<div>
+  <h3
+    class="MuiTypography-root MuiTypography-h2 emotion-0"
+  >
+    Fan's Editions
+  </h3>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-1"
+  />
+  <div
+    data-testid="generic-table"
+  >
+    <h3>
+      MumakiL Fandom PresSsss...
+    </h3>
+    <div>
+      Publication Type: 
+      fanedition
+    </div>
+    <div>
+      Header Variant: 
+      h3
+    </div>
+    <div>
+      Data Count: 
+      2
+    </div>
+  </div>
+  <div
+    data-testid="generic-table"
+  >
+    <h3>
+      Others
+    </h3>
+    <div>
+      Publication Type: 
+      fanedition
+    </div>
+    <div>
+      Header Variant: 
+      h3
+    </div>
+    <div>
+      Data Count: 
+      2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FanEditionPage > should render with Mumakil-only data snapshot 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-1 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-bottom: 32px;
+}
+
+<div>
+  <h3
+    class="MuiTypography-root MuiTypography-h2 emotion-0"
+  >
+    Fan's Editions
+  </h3>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-1"
+  />
+  <div
+    data-testid="generic-table"
+  >
+    <h3>
+      MumakiL Fandom PresSsss...
+    </h3>
+    <div>
+      Publication Type: 
+      fanedition
+    </div>
+    <div>
+      Header Variant: 
+      h3
+    </div>
+    <div>
+      Data Count: 
+      2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FanEditionPage > should render with empty data snapshot 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-1 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-bottom: 32px;
+}
+
+<div>
+  <h3
+    class="MuiTypography-root MuiTypography-h2 emotion-0"
+  >
+    Fan's Editions
+  </h3>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-1"
+  />
+</div>
+`;
+
+exports[`FanEditionPage > should render with non-Mumakil-only data snapshot 1`] = `
+.emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-1 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-bottom: 32px;
+}
+
+<div>
+  <h3
+    class="MuiTypography-root MuiTypography-h2 emotion-0"
+  >
+    Fan's Editions
+  </h3>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-1"
+  />
+  <div
+    data-testid="generic-table"
+  >
+    <h3>
+      Others
+    </h3>
+    <div>
+      Publication Type: 
+      fanedition
+    </div>
+    <div>
+      Header Variant: 
+      h3
+    </div>
+    <div>
+      Data Count: 
+      2
+    </div>
+  </div>
+</div>
+`;

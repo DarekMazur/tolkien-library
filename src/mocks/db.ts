@@ -92,12 +92,21 @@ export const db = factory({
         EPublicationType.EPUB,
       ]),
   },
-  online: {
+  fanzin: {
     id: primaryKey(faker.string.uuid),
     title: () => faker.lorem.words({ min: 1, max: 4 }),
     version: () => faker.number.int({ min: 1, max: 5 }).toString(),
     publisher: oneOf('publisher'),
+    numbers: () => faker.number.int({ min: 1, max: 300 }),
     startDate: () => faker.date.past(),
     lastIssueDate: nullable(() => faker.date.past()),
+  },
+  fanEditions: {
+    id: primaryKey(faker.string.uuid),
+    cover: () => faker.image.url(),
+    title: () => faker.lorem.words({ min: 1, max: 4 }),
+    year: () => faker.date.past().getFullYear().toString(),
+    description: () => faker.lorem.paragraph(),
+    isMumakil: () => faker.datatype.boolean({ probability: 0.7 }),
   },
 });

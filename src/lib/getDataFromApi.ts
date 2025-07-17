@@ -1,8 +1,9 @@
 import {
   IBookProps,
   ICategoryProps,
+  IFanzinProps,
   IIdentityProps,
-  IOnlineProps,
+  IFanEditionsProps,
   IPageProps,
   IPublicationProps,
   TResponse,
@@ -105,8 +106,26 @@ export const getAllPublications = async (): Promise<TResponse<IPublicationProps[
   };
 };
 
-export const getAllOnline = async (): Promise<TResponse<IOnlineProps[]>> => {
-  const res = await fetchApi<IOnlineProps[]>(`${import.meta.env.VITE_API_URL}/online`);
+export const getAllFanzin = async (): Promise<TResponse<IFanzinProps[]>> => {
+  const res = await fetchApi<IFanzinProps[]>(`${import.meta.env.VITE_API_URL}/fanzin`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  return {
+    data: res.data,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
+export const getAllFanEditions = async (): Promise<TResponse<IFanEditionsProps[]>> => {
+  const res = await fetchApi<IFanEditionsProps[]>(`${import.meta.env.VITE_API_URL}/faneditions`);
 
   if (res.isError || !res.data) {
     return {

@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> BookTableStrategy</title>
+  <title> FanEditionTableStrategy</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>BookTableStrategy</h1>
+                    <h1>FanEditionTableStrategy</h1>
                 </header>
                 
 
@@ -85,10 +85,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BookTableStrategy<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>FanEditionTableStrategy<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The strategy responsible for generating a table of books.
-Implements methods that retrieve field aliases, header definitions and values to display.</div>
+            <div class="class-description">FanEditionTableStrategy implements the ITableStrategy interface for IFanEditionsProps.
+It provides table header definitions and value extraction logic for fan edition items.</div>
         
     
 </header>
@@ -107,12 +107,12 @@ Implements methods that retrieve field aliases, header definitions and values to
 
 
     
-    <h4 class="name" id="BookTableStrategy">
-        <a class="href-link" href="#BookTableStrategy">#</a>
+    <h4 class="name" id="FanEditionTableStrategy">
+        <a class="href-link" href="#FanEditionTableStrategy">#</a>
         
         <span class="code-name">
             
-                new BookTableStrategy<span class="signature">()</span><span class="type-signature"></span>
+                new FanEditionTableStrategy<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -146,13 +146,6 @@ Implements methods that retrieve field aliases, header definitions and values to
     
 
     
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li>ITableStrategy.&lt;IBookProps></li>
-        
-    </ul></dd>
-    
 
     
 
@@ -173,9 +166,9 @@ Implements methods that retrieve field aliases, header definitions and values to
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanEditionTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line8">line 8</a>
+                <a href="lib_strategies_FanEditionTableStrategy.ts.html">lib/strategies/FanEditionTableStrategy.ts</a>, <a href="lib_strategies_FanEditionTableStrategy.ts.html#line6">line 6</a>
             </span>
         </p>
     
@@ -237,7 +230,7 @@ Implements methods that retrieve field aliases, header definitions and values to
         
         <span class="code-name">
             
-                getAliases<span class="signature">()</span><span class="type-signature"> &rarr; {Record.&lt;string, string>}</span>
+                getAliases<span class="signature">()</span><span class="type-signature"> &rarr; {Readonly.&lt;Record.&lt;string, string>>}</span>
             
         </span>
     </h4>
@@ -246,7 +239,7 @@ Implements methods that retrieve field aliases, header definitions and values to
     
     
     <div class="description">
-        Returns an alias object for an object property.
+        Returns the current alias mappings.
     </div>
     
 
@@ -295,9 +288,9 @@ Implements methods that retrieve field aliases, header definitions and values to
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanEditionTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line130">line 130</a>
+                <a href="lib_strategies_FanEditionTableStrategy.ts.html">lib/strategies/FanEditionTableStrategy.ts</a>, <a href="lib_strategies_FanEditionTableStrategy.ts.html#line96">line 96</a>
             </span>
         </p>
     
@@ -328,14 +321,14 @@ Implements methods that retrieve field aliases, header definitions and values to
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>Alias map, where the key is the name of the property,
-and the value is the path (can be with a dot) to the actual value.</div>
+    <div class='param-desc column is-7'>An object where each key is
+ an alias and each value is the corresponding nested property path.</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Record.&lt;string, string></code>
+<code class="param-type">Readonly.&lt;Record.&lt;string, string>></code>
 
 
     </div>
@@ -360,7 +353,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
         
         <span class="code-name">
             
-                getDisplayValue<span class="signature">(item, key)</span><span class="type-signature"> &rarr; {TPathValue.&lt;IBookProps, P>|null}</span>
+                getDisplayValue<span class="signature">(item, key)</span><span class="type-signature"> &rarr; {TPathValue.&lt;IFanEditionsProps, P>|null}</span>
             
         </span>
     </h4>
@@ -369,7 +362,11 @@ and the value is the path (can be with a dot) to the actual value.</div>
     
     
     <div class="description">
-        Retrieves the value of properties (including nested properties) for a given key.
+        Retrieves the display value for a given key on the item.
+
+Supports both shallow keys (e.g. 'title') and nested keys (e.g. 'publisher.title').
+If the key includes a dot, the method attempts to access the nested property.
+Returns `null` if the nested path is invalid or the property is missing.
     </div>
     
 
@@ -413,7 +410,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
   <td class="type">
   
       
-<code class="param-type">IBookProps</code>
+<code class="param-type">IFanEditionsProps</code>
 
 
   
@@ -423,7 +420,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
   
 
-  <td class="description last">The book object from which the value is taken.</td>
+  <td class="description last">The item to extract the value from.</td>
 </tr>
 
 
@@ -448,7 +445,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
   
 
-  <td class="description last">Property key, such as ‘author’ or ‘publisher.title’.</td>
+  <td class="description last">The property key or alias (allowed paths) to retrieve.</td>
 </tr>
 
 
@@ -494,9 +491,9 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanEditionTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line150">line 150</a>
+                <a href="lib_strategies_FanEditionTableStrategy.ts.html">lib/strategies/FanEditionTableStrategy.ts</a>, <a href="lib_strategies_FanEditionTableStrategy.ts.html#line122">line 122</a>
             </span>
         </p>
     
@@ -527,13 +524,13 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>Property value or null if it does not exist.</div>
+    <div class='param-desc column is-7'>The extracted value or `null` if not found.</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">TPathValue.&lt;IBookProps, P></code>
+<code class="param-type">TPathValue.&lt;IFanEditionsProps, P></code>
 |
 
 <code class="param-type">null</code>
@@ -570,8 +567,11 @@ and the value is the path (can be with a dot) to the actual value.</div>
     
     
     <div class="description">
-        Generates a list of column header definitions based on a sample object.
-It takes into account the order of properties, display conditions and the sortability flag.
+        Builds and returns an array of header definitions for a given item.
+
+The headers appear in the fixed order: cover, title, year, description.
+Optional headers are included only if the corresponding property exists
+on the item and any defined `condition` functions return true.
     </div>
     
 
@@ -615,7 +615,7 @@ It takes into account the order of properties, display conditions and the sortab
   <td class="type">
   
       
-<code class="param-type">IBookProps</code>
+<code class="param-type">IFanEditionsProps</code>
 
 
   
@@ -625,7 +625,7 @@ It takes into account the order of properties, display conditions and the sortab
 
   
 
-  <td class="description last">An example of a book object used to evaluate conditions.</td>
+  <td class="description last">The fan edition item to generate headers for.</td>
 </tr>
 
 
@@ -671,9 +671,9 @@ It takes into account the order of properties, display conditions and the sortab
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanEditionTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line140">line 140</a>
+                <a href="lib_strategies_FanEditionTableStrategy.ts.html">lib/strategies/FanEditionTableStrategy.ts</a>, <a href="lib_strategies_FanEditionTableStrategy.ts.html#line108">line 108</a>
             </span>
         </p>
     

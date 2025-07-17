@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> BookTableStrategy</title>
+  <title> FanzinTableStrategy</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Class</p>
-                    <h1>BookTableStrategy</h1>
+                    <h1>FanzinTableStrategy</h1>
                 </header>
                 
 
@@ -85,10 +85,13 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BookTableStrategy<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>FanzinTableStrategy<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The strategy responsible for generating a table of books.
-Implements methods that retrieve field aliases, header definitions and values to display.</div>
+            <div class="class-description">Concrete implementation of ITableStrategy for rendering
+and handling table data for Fanzin entities.
+
+Manages column aliases, header definitions, and value extraction
+(including nested properties) for IFanzinProps items.</div>
         
     
 </header>
@@ -107,12 +110,12 @@ Implements methods that retrieve field aliases, header definitions and values to
 
 
     
-    <h4 class="name" id="BookTableStrategy">
-        <a class="href-link" href="#BookTableStrategy">#</a>
+    <h4 class="name" id="FanzinTableStrategy">
+        <a class="href-link" href="#FanzinTableStrategy">#</a>
         
         <span class="code-name">
             
-                new BookTableStrategy<span class="signature">()</span><span class="type-signature"></span>
+                new FanzinTableStrategy<span class="signature">()</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -146,13 +149,6 @@ Implements methods that retrieve field aliases, header definitions and values to
     
 
     
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li>ITableStrategy.&lt;IBookProps></li>
-        
-    </ul></dd>
-    
 
     
 
@@ -173,9 +169,9 @@ Implements methods that retrieve field aliases, header definitions and values to
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanzinTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line8">line 8</a>
+                <a href="lib_strategies_FanzinTableStrategy.ts.html">lib/strategies/FanzinTableStrategy.ts</a>, <a href="lib_strategies_FanzinTableStrategy.ts.html#line9">line 9</a>
             </span>
         </p>
     
@@ -237,7 +233,7 @@ Implements methods that retrieve field aliases, header definitions and values to
         
         <span class="code-name">
             
-                getAliases<span class="signature">()</span><span class="type-signature"> &rarr; {Record.&lt;string, string>}</span>
+                getAliases<span class="signature">()</span><span class="type-signature"> &rarr; {Readonly.&lt;Record.&lt;string, string>>}</span>
             
         </span>
     </h4>
@@ -246,7 +242,7 @@ Implements methods that retrieve field aliases, header definitions and values to
     
     
     <div class="description">
-        Returns an alias object for an object property.
+        Returns the alias-to-path mapping for this strategy.
     </div>
     
 
@@ -295,9 +291,9 @@ Implements methods that retrieve field aliases, header definitions and values to
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanzinTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line130">line 130</a>
+                <a href="lib_strategies_FanzinTableStrategy.ts.html">lib/strategies/FanzinTableStrategy.ts</a>, <a href="lib_strategies_FanzinTableStrategy.ts.html#line117">line 117</a>
             </span>
         </p>
     
@@ -328,14 +324,13 @@ Implements methods that retrieve field aliases, header definitions and values to
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>Alias map, where the key is the name of the property,
-and the value is the path (can be with a dot) to the actual value.</div>
+    <div class='param-desc column is-7'>Read-only record of aliases</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Record.&lt;string, string></code>
+<code class="param-type">Readonly.&lt;Record.&lt;string, string>></code>
 
 
     </div>
@@ -360,7 +355,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
         
         <span class="code-name">
             
-                getDisplayValue<span class="signature">(item, key)</span><span class="type-signature"> &rarr; {TPathValue.&lt;IBookProps, P>|null}</span>
+                getDisplayValue<span class="signature">(item, key)</span><span class="type-signature"> &rarr; {TPathValue.&lt;IFanzinProps, P>|null}</span>
             
         </span>
     </h4>
@@ -369,7 +364,12 @@ and the value is the path (can be with a dot) to the actual value.</div>
     
     
     <div class="description">
-        Retrieves the value of properties (including nested properties) for a given key.
+        Retrieves the display value from the provided item for the given key.
+Supports nested keys delimited by a dot ('.').
+
+Examples:
+- key = 'title' returns item.title
+- key = 'publisher.title' returns item.publisher.title if available
     </div>
     
 
@@ -413,7 +413,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
   <td class="type">
   
       
-<code class="param-type">IBookProps</code>
+<code class="param-type">IFanzinProps</code>
 
 
   
@@ -423,7 +423,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
   
 
-  <td class="description last">The book object from which the value is taken.</td>
+  <td class="description last">The source object from which the value is extracted.</td>
 </tr>
 
 
@@ -448,7 +448,7 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
   
 
-  <td class="description last">Property key, such as ‘author’ or ‘publisher.title’.</td>
+  <td class="description last">The property key (or nested key) to extract.</td>
 </tr>
 
 
@@ -494,9 +494,9 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanzinTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line150">line 150</a>
+                <a href="lib_strategies_FanzinTableStrategy.ts.html">lib/strategies/FanzinTableStrategy.ts</a>, <a href="lib_strategies_FanzinTableStrategy.ts.html#line146">line 146</a>
             </span>
         </p>
     
@@ -527,13 +527,13 @@ and the value is the path (can be with a dot) to the actual value.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>Property value or null if it does not exist.</div>
+    <div class='param-desc column is-7'>The value at the specified key, or null if not present.</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">TPathValue.&lt;IBookProps, P></code>
+<code class="param-type">TPathValue.&lt;IFanzinProps, P></code>
 |
 
 <code class="param-type">null</code>
@@ -570,8 +570,12 @@ and the value is the path (can be with a dot) to the actual value.</div>
     
     
     <div class="description">
-        Generates a list of column header definitions based on a sample object.
-It takes into account the order of properties, display conditions and the sortability flag.
+        Builds and returns the header definitions for a given item.
+
+The headers are defined in a fixed order:
+'title', 'version', 'publisher', 'numbers', 'startDate', 'lastIssueDate'.
+Headers with a `condition` function will be included only if the
+condition returns true for the provided item.
     </div>
     
 
@@ -615,7 +619,7 @@ It takes into account the order of properties, display conditions and the sortab
   <td class="type">
   
       
-<code class="param-type">IBookProps</code>
+<code class="param-type">IFanzinProps</code>
 
 
   
@@ -625,7 +629,7 @@ It takes into account the order of properties, display conditions and the sortab
 
   
 
-  <td class="description last">An example of a book object used to evaluate conditions.</td>
+  <td class="description last">The Fanzin item used to determine which headers to include.</td>
 </tr>
 
 
@@ -671,9 +675,9 @@ It takes into account the order of properties, display conditions and the sortab
 
     
         <p class="tag-source">
-            <a href="lib_strategies_BookTableStrategy.ts.html" class="button">View Source</a>
+            <a href="lib_strategies_FanzinTableStrategy.ts.html" class="button">View Source</a>
             <span>
-                <a href="lib_strategies_BookTableStrategy.ts.html">lib/strategies/BookTableStrategy.ts</a>, <a href="lib_strategies_BookTableStrategy.ts.html#line140">line 140</a>
+                <a href="lib_strategies_FanzinTableStrategy.ts.html">lib/strategies/FanzinTableStrategy.ts</a>, <a href="lib_strategies_FanzinTableStrategy.ts.html#line131">line 131</a>
             </span>
         </p>
     

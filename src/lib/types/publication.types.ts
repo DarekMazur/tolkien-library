@@ -35,12 +35,21 @@ export interface IPublicationProps extends ICommonId {
   type: EPublicationType;
 }
 
-export interface IOnlineProps extends ICommonId {
+export interface IFanzinProps extends ICommonId {
   title: string;
   version?: string;
   publisher: IPublisherProps;
+  numbers?: number | string;
   startDate: Date;
   lastIssueDate: Date | null;
+}
+
+export interface IFanEditionsProps extends ICommonId {
+  cover?: string;
+  title: string;
+  year?: number | string;
+  description?: string;
+  isMumakil?: boolean;
 }
 
 export enum EPublicationType {
@@ -49,10 +58,12 @@ export enum EPublicationType {
   EPUB = 'epub',
 }
 
-export type TPublicationType = IBookProps | IPublicationProps | IOnlineProps;
+export type TPublicationType = IBookProps | IPublicationProps | IFanzinProps | IFanEditionsProps;
 
 export enum ETableType {
   BOOK = 'book',
   ARTICLE = 'article',
-  ONLINE = 'online',
+  FANZONE = 'fanzone',
+  FANZIN = 'fanzin',
+  FANEDITION = 'fanedition',
 }

@@ -17,6 +17,7 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname, '../src'),
       '@auth0/auth0-react': path.resolve(__dirname, '../src/lib/providers/MockedAuth0Provider.tsx'),
       '@/hooks/useMe.tsx': path.resolve(__dirname, '../src/lib/providers/MockedUseMeProvider.tsx'),
     };

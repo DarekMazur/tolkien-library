@@ -44,10 +44,18 @@ export const useLibraryParams = (): {
   const { type, slug } = useParams<{ type: string; slug?: string }>();
   const location = useLocation();
 
-  const isValidType = type && Object.values(ETableType).includes(type.slice(0, -1) as ETableType);
+  const isValidType =
+    type &&
+    Object.values(ETableType).includes(
+      type.endsWith('s') ? (type.slice(0, -1) as ETableType) : (type as ETableType),
+    );
 
   return {
-    type: isValidType ? (type.slice(0, -1) as ETableType) : null,
+    type: isValidType
+      ? type.endsWith('s')
+        ? (type.slice(0, -1) as ETableType)
+        : (type as ETableType)
+      : null,
     slug: slug || null,
     search: location.search.slice(1) || null,
     isValid: !!isValidType,

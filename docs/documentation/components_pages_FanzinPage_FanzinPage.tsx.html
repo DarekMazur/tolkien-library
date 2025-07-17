@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/helpers/generateISSN.ts</title>
+  <title> components/pages/FanzinPage/FanzinPage.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/helpers/generateISSN.ts</h1>
+                    <h1>components/pages/FanzinPage/FanzinPage.tsx</h1>
                 </header>
                 
 
@@ -85,58 +85,52 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
+            <pre class="prettyprint source linenums"><code>import { ETableType, IFanzinProps } from '@/lib/types';
+import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 
 /**
- * Generate the first seven digits of ISSN
+ * FanzinPage component
  *
- * @returns array of numbers with length === 7
+ * Renders a table of fanzines using the GenericTable component.
  *
- * @example
- * ```
- * const digits = generateBaseDigits()
- * console.log(digits) // => [0, 1, 2, 3, 4, 5, 6, 7]
- * ```
- */
-
-export const generateBaseDigits = () => {
-  const digits: number[] = [];
-  for (let i = 0; i &lt; 7; i++) {
-    digits.push(Math.floor(Math.random() * 10));
-  }
-  return digits;
-};
-
-/**
- * Generate the ISSN according to the ISO 3297 standard.
+ * @param {Object} props - Component props
+ * @param {IFanzinProps[]} props.data - Array of fanzine items to display in the table
  *
- * Use generateBaseDigits() to get ISSN prefix.
- * Calculate checksum using calculateCheckDigit()
- * Reformat results to format XXXX-XXXC.
+ * @returns {JSX.Element} The rendered GenericTable with fanzine data
  *
  * @example
- * ```
- * const issn = generateISSN()
- * console.log(issn) // => '0317-8471'
- * ```
- *
- * @throws {Error}
- * Throws if the generated ISSN fails validation by `validateISSN`.
+ * const mockData: IFanzinProps[] = [
+ *   {
+ *     id: '1',
+ *     title: 'Fanzin One',
+ *     publisher: {
+ *       id: '1',
+ *       title: 'Publisher 1',
+ *       description: '',
+ *     },
+ *     startDate: new Date('2025-01-01'),
+ *     lastIssueDate: null,
+ *   },
+ *   {
+ *     id: '2',
+ *     title: 'Fanzin Two',
+ *     publisher: {
+ *       id: '1',
+ *       title: 'Publisher 1',
+ *       description: '',
+ *     },
+ *     startDate: new Date('2025-02-01'),
+ *     lastIssueDate: null,
+ *   },
+ * ];
+ * &lt;FanzinPage data={mockData} />;
  */
 
-export const generateISSN = () => {
-  const baseDigits = generateBaseDigits();
-  const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&amp;-'); // Inserts a hyphen after the first 4 digits if there are exactly 3 digits further on
-
-  const issn = `${formattedBase}${checkDigit}`;
-
-  if (!validateISSN(issn)) {
-    throw new Error('Invalid ISSN format or checksum');
-  }
-  return issn;
+const FanzinPage = ({ data }: { data: IFanzinProps[] }) => {
+  return &lt;GenericTable data={data} publicationType={ETableType.FANZIN} title="Fanzins" />;
 };
+
+export default FanzinPage;
 </code></pre>
         </article>
     </section>

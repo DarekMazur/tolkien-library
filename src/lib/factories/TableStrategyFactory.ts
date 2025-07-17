@@ -4,16 +4,23 @@ import {
   TPublicationType,
   IBookProps,
   IPublicationProps,
+  IFanzinProps,
+  IFanEditionsProps,
 } from '@/lib/types';
 import { BookTableStrategy } from '@/lib/strategies/BookTableStrategy';
 import { ArticleTableStrategy } from '@/lib/strategies/ArticleTableStrategy';
-import { OnlineTableStrategy } from '@/lib/strategies/OnlineTableStrategy.ts';
+import { FanzinTableStrategy } from '@/lib/strategies/FanzinTableStrategy.ts';
+import { FanEditionTableStrategy } from '@/lib/strategies/FanEditionTableStrategy.ts';
 
 type StrategyForType<T extends TPublicationType> = T extends IBookProps
   ? ITableStrategy<IBookProps>
   : T extends IPublicationProps
     ? ITableStrategy<IPublicationProps>
-    : never;
+    : T extends IFanzinProps
+      ? ITableStrategy<IFanzinProps>
+      : T extends IFanEditionsProps
+        ? ITableStrategy<IFanEditionsProps>
+        : never;
 
 /**
  * Table strategy factory for different types of publications.
@@ -52,8 +59,10 @@ export class TableStrategyFactory {
         return new BookTableStrategy() as unknown as StrategyForType<T>;
       case ETableType.ARTICLE:
         return new ArticleTableStrategy() as unknown as StrategyForType<T>;
-      case ETableType.ONLINE:
-        return new OnlineTableStrategy() as unknown as StrategyForType<T>;
+      case ETableType.FANZIN:
+        return new FanzinTableStrategy() as unknown as StrategyForType<T>;
+      case ETableType.FANEDITION:
+        return new FanEditionTableStrategy() as unknown as StrategyForType<T>;
       default:
         throw new Error(`Unsupported publication type: ${type}`);
     }

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/helpers/generateISSN.ts</title>
+  <title> PublicationPageProps</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -75,71 +73,121 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>lib/helpers/generateISSN.ts</h1>
+                    <p>Interface</p>
+                    <h1>PublicationPageProps</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
+        <h2>PublicationPageProps</h2>
+        
+    
+</header>
 
-/**
- * Generate the first seven digits of ISSN
- *
- * @returns array of numbers with length === 7
- *
- * @example
- * ```
- * const digits = generateBaseDigits()
- * console.log(digits) // => [0, 1, 2, 3, 4, 5, 6, 7]
- * ```
- */
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">A site with Tolkien publications divided into three categories.
+(`partial`, `including`, `epub`) and displayed in separate tables.
 
-export const generateBaseDigits = () => {
-  const digits: number[] = [];
-  for (let i = 0; i &lt; 7; i++) {
-    digits.push(Math.floor(Math.random() * 10));
-  }
-  return digits;
-};
+Sections:
+ • Items partially related to Tolkien (`partial`)
+ • With Tolkien elements - items containing articles about Tolkien or
+   only partially devoted to him (`including`)
+ • E-editions - electronic publications (`epub`)</div>
+        
 
-/**
- * Generate the ISSN according to the ISO 3297 standard.
- *
- * Use generateBaseDigits() to get ISSN prefix.
- * Calculate checksum using calculateCheckDigit()
- * Reformat results to format XXXX-XXXC.
- *
- * @example
- * ```
- * const issn = generateISSN()
- * console.log(issn) // => '0317-8471'
- * ```
- *
- * @throws {Error}
- * Throws if the generated ISSN fails validation by `validateISSN`.
- */
+        
 
-export const generateISSN = () => {
-  const baseDigits = generateBaseDigits();
-  const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&amp;-'); // Inserts a hyphen after the first 4 digits if there are exactly 3 digits further on
 
-  const issn = `${formattedBase}${checkDigit}`;
+<dl class="details">
 
-  if (!validateISSN(issn)) {
-    throw new Error('Invalid ISSN format or checksum');
-  }
-  return issn;
-};
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_pages_PublicationPage_PublicationPage.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_pages_PublicationPage_PublicationPage.tsx.html">components/pages/PublicationPage/PublicationPage.tsx</a>, <a href="components_pages_PublicationPage_PublicationPage.tsx.html#line28">line 28</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+        
+            <h3>Example</h3>
+            
+    
+        <pre class="prettyprint"><code>```
+import { fetchPublications } from '@/api';
+
+const data = await fetchPublications();
+
+&lt;PublicationPage data={data} />;
+```</code></pre>
+    
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

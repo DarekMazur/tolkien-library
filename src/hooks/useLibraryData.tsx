@@ -3,7 +3,8 @@ import {
   getCategoryBySlug,
   getBooksByAuthor,
   getAllPublications,
-  getAllOnline,
+  getAllFanzin,
+  getAllFanEditions,
 } from '@/lib/getDataFromApi';
 import { ETableType } from '@/lib/types';
 import { useLibraryParams } from './useLibraryParams';
@@ -40,17 +41,12 @@ import { useLibraryParams } from './useLibraryParams';
  * @property {Array} data - Array of publication objects
  * @property {ETableType} type - The publication type (ETableType.ARTICLE)
  *
- * @typedef {Object} OnlineState
- * @property {'online'} state - Successfully fetched online resources data
- * @property {Array} data - Array of online resource objects
- * @property {ETableType} type - The publication type (ETableType.ONLINE)
- *
  * @typedef {Object} CategoryState
  * @property {'category'} state - Successfully fetched category data
  * @property {Object} data - Category object retrieved by slug
  * @property {ETableType} type - The publication type
  *
- * @returns {InvalidState | LoadingState | ErrorState | EmptyState | BooksState | PublicationsState | OnlineState | CategoryState}
+ * @returns {InvalidState | LoadingState | ErrorState | EmptyState | BooksState | PublicationsState | CategoryState}
  * A discriminated union representing the current state of data fetching and the associated data.
  * The return type is determined by the URL parameters and the current fetch status.
  *
@@ -94,7 +90,7 @@ import { useLibraryParams } from './useLibraryParams';
  * @note This hook specifically fetches J.R.R. Tolkien books when type is BOOK.
  *       The search parameter 'jrrt' is used to exclude/include Tolkien-specific results.
  *
- * @note Categories are only fetched when type is not BOOK, ARTICLE, or ONLINE and a slug is present.
+ * @note Categories are only fetched when type is not BOOK, ARTICLE, FANZONE, FANZIN or FANEDITION and a slug is present.
  *
  * @performance The hook uses conditional API calls to avoid unnecessary network requests.
  *              Only the relevant API endpoint is called based on the current URL parameters.
@@ -107,9 +103,16 @@ export const useLibraryData = () => {
 
   const shouldFetchBooks = type === ETableType.BOOK;
   const shouldFetchArticles = type === ETableType.ARTICLE;
-  const shouldFetchOnline = type === ETableType.ONLINE;
+  const isFanzone = type === ETableType.FANZONE;
+  const shouldFetchFanzin = type === ETableType.FANZIN;
+  const shouldFetchMumakil = type === ETableType.FANEDITION;
   const shouldFetchCategory =
-    type !== ETableType.BOOK && type !== ETableType.ARTICLE && type !== ETableType.ONLINE && !!slug;
+    type !== ETableType.BOOK &&
+    type !== ETableType.ARTICLE &&
+    type !== ETableType.FANZONE &&
+    type !== ETableType.FANZIN &&
+    type !== ETableType.FANEDITION &&
+    !!slug;
 
   const {
     data: books,
@@ -128,11 +131,19 @@ export const useLibraryData = () => {
   });
 
   const {
-    data: online,
-    isLoading: onlineLoading,
-    isError: onlineError,
-  } = useApi(() => getAllOnline(), {
-    enabled: shouldFetchOnline,
+    data: fanzin,
+    isLoading: fanzinLoading,
+    isError: fanzinError,
+  } = useApi(() => getAllFanzin(), {
+    enabled: shouldFetchFanzin,
+  });
+
+  const {
+    data: mumakil,
+    isLoading: mumakilLoading,
+    isError: mumakilError,
+  } = useApi(() => getAllFanEditions(), {
+    enabled: shouldFetchMumakil,
   });
 
   const {
@@ -153,10 +164,20 @@ export const useLibraryData = () => {
     return { state: 'publications' as const, data: publications!, type };
   }
 
-  if (shouldFetchOnline) {
-    if (onlineLoading) return { state: 'loading' as const };
-    if (onlineError) return { state: 'error' as const };
-    return { state: 'online' as const, data: online!, type };
+  if (isFanzone) {
+    return { state: 'fanzone' as const, data: undefined, type };
+  }
+
+  if (shouldFetchFanzin) {
+    if (fanzinLoading) return { state: 'loading' as const };
+    if (fanzinError) return { state: 'error' as const };
+    return { state: 'fanzin' as const, data: fanzin!, type };
+  }
+
+  if (shouldFetchMumakil) {
+    if (mumakilLoading) return { state: 'loading' as const };
+    if (mumakilError) return { state: 'error' as const };
+    return { state: 'mumakil' as const, data: mumakil!, type };
   }
 
   if (shouldFetchCategory) {

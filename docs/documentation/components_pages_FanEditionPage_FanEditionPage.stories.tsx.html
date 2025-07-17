@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> lib/helpers/generateISSN.ts</title>
+  <title> components/pages/FanEditionPage/FanEditionPage.stories.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>lib/helpers/generateISSN.ts</h1>
+                    <h1>components/pages/FanEditionPage/FanEditionPage.stories.tsx</h1>
                 </header>
                 
 
@@ -85,57 +85,146 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { validateISSN } from '@/lib/helpers/validateISSN.ts';
-import { calculateCheckDigit } from '@/lib/helpers/calculateCheckDigit.ts';
+            <pre class="prettyprint source linenums"><code>import type { Meta, StoryObj } from '@storybook/react';
+import FanEditionPage from './FanEditionPage';
+import { faneditionHandler } from '../../../../.storybook/mswHandlers.ts';
+import { IFanEditionsProps } from '@/lib/types';
+
+const meta: Meta&lt;typeof FanEditionPage> = {
+  title: 'Pages/FanEditionPage',
+  component: FanEditionPage,
+  parameters: {
+    msw: {
+      handlers: [faneditionHandler],
+    },
+    layout: 'padded',
+    docs: {
+      description: {
+        component:
+          'Page component displaying fan editions divided into Mumakil and other publications.',
+      },
+    },
+  },
+  argTypes: {
+    data: {
+      description: 'Array of fan edition items',
+      control: 'object',
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj&lt;typeof FanEditionPage>;
 
 /**
- * Generate the first seven digits of ISSN
- *
- * @returns array of numbers with length === 7
- *
- * @example
- * ```
- * const digits = generateBaseDigits()
- * console.log(digits) // => [0, 1, 2, 3, 4, 5, 6, 7]
- * ```
+ * Default view with mixed fan editions data (Mumakil and other publications).
  */
 
-export const generateBaseDigits = () => {
-  const digits: number[] = [];
-  for (let i = 0; i &lt; 7; i++) {
-    digits.push(Math.floor(Math.random() * 10));
-  }
-  return digits;
+export const Default: Story = {
+  loaders: [
+    async () => {
+      const data = await fetch('/api/faneditions').then((res) => res.json());
+      return { data };
+    },
+  ],
+  render: (_args, { loaded: { data } }) => {
+    return &lt;FanEditionPage data={data} />;
+  },
 };
 
 /**
- * Generate the ISSN according to the ISO 3297 standard.
- *
- * Use generateBaseDigits() to get ISSN prefix.
- * Calculate checksum using calculateCheckDigit()
- * Reformat results to format XXXX-XXXC.
- *
- * @example
- * ```
- * const issn = generateISSN()
- * console.log(issn) // => '0317-8471'
- * ```
- *
- * @throws {Error}
- * Throws if the generated ISSN fails validation by `validateISSN`.
+ * Page with empty data array - shows how component handles no data.
  */
 
-export const generateISSN = () => {
-  const baseDigits = generateBaseDigits();
-  const checkDigit = calculateCheckDigit(baseDigits);
-  const formattedBase = baseDigits.join('').replace(/\d{4}(?=\d{3}$)/, '$&amp;-'); // Inserts a hyphen after the first 4 digits if there are exactly 3 digits further on
+export const EmptyData: Story = {
+  render: () => &lt;FanEditionPage data={[]} />,
+};
 
-  const issn = `${formattedBase}${checkDigit}`;
+/**
+ * Page showing only Mumakil fan editions with empty "Others" section.
+ */
 
-  if (!validateISSN(issn)) {
-    throw new Error('Invalid ISSN format or checksum');
-  }
-  return issn;
+export const OnlyMumakilEditions: Story = {
+  loaders: [
+    async () => {
+      const data = await fetch('/api/faneditions').then((res) => res.json());
+      return { data };
+    },
+  ],
+  render: (_args, { loaded: { data } }) => {
+    return &lt;FanEditionPage data={data.filter((item: IFanEditionsProps) => item.isMumakil)} />;
+  },
+};
+
+/**
+ * Page showing only non-Mumakil editions with empty "MumakiL Fandom" section.Page with a large dataset to test performance and table rendering with many items.
+ */
+
+export const OnlyOtherEditions: Story = {
+  loaders: [
+    async () => {
+      const data = await fetch('/api/faneditions').then((res) => res.json());
+      return { data };
+    },
+  ],
+  render: (_args, { loaded: { data } }) => {
+    return &lt;FanEditionPage data={data.filter((item: IFanEditionsProps) => !item.isMumakil)} />;
+  },
+};
+
+/**
+ * Page with a large dataset to test performance and table rendering with many items.
+ */
+
+export const LargeDataset: Story = {
+  loaders: [
+    async () => {
+      const data = await fetch('/api/faneditions').then((res) => res.json());
+      return { data };
+    },
+  ],
+  render: (_args, { loaded: { data } }) => {
+    return (
+      &lt;FanEditionPage
+        data={[
+          ...data,
+          ...Array.from({ length: 15 }, (_, index) => ({
+            id: `generated-${index}`,
+            title: `Fan Edition ${index + 1}`,
+            isMumakil: index % 3 === 0,
+            year: 2000 + index,
+            description: `Generated description for fan edition ${index + 1}`,
+          })),
+        ]}
+      />
+    );
+  },
+};
+
+/**
+ * Page with items that have missing or empty descriptions.
+ */
+
+export const MixedWithMissingDescriptions: Story = {
+  render: () => (
+    &lt;FanEditionPage
+      data={[
+        {
+          id: '1',
+          title: 'No description Mumakil',
+          isMumakil: true,
+          year: 2010,
+          description: '',
+        },
+        {
+          id: '2',
+          title: 'Other with no description',
+          year: 2015,
+          description: '',
+        },
+      ]}
+    />
+  ),
 };
 </code></pre>
         </article>

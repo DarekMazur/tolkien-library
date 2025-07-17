@@ -3,6 +3,7 @@ import { TableBody } from '@mui/material';
 import {
   ICommonId,
   IHeaderDefinition,
+  IFanEditionsProps,
   IPublisherProps,
   ITranslatorProps,
   TAllowedPaths,
@@ -75,12 +76,37 @@ const GenericTableBody = <T extends ICommonId>({
     return <a href={path}>{value}</a>;
   };
 
+  const isIMumakilProps = (item: unknown): item is IFanEditionsProps => {
+    return typeof item === 'object' && item !== null && 'cover' in item && 'title' in item;
+  };
+
+  const isValidImageUrl = (value: unknown): value is string => {
+    if (typeof value !== 'string') return false;
+
+    try {
+      const url = new URL(value);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  };
+
   const getReactNodeValue = (
     item: unknown,
     raw: TPathValue<T, TAllowedPaths<T>> | null,
   ): ReactNode => {
     if (raw === null) {
       return '-';
+    }
+
+    if (isIMumakilProps(item) && isValidImageUrl(raw)) {
+      return (
+        <img
+          src={raw}
+          alt={`${item.title} cover`}
+          style={{ maxHeight: '150px', maxWidth: '200px', objectFit: 'contain' }}
+        />
+      );
     }
 
     if (typeof raw === 'object') {
