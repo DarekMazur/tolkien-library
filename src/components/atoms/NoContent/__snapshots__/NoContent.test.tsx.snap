@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NoContent Component > matches snapshot with custom alert 1`] = `
+.emotion-0 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<div
+  class="MuiBox-root emotion-0"
+>
+  <h3
+    class="MuiTypography-root MuiTypography-h2 emotion-1"
+  >
+    Custom no content message
+  </h3>
+</div>
+`;
+
+exports[`NoContent Component > matches snapshot with default props 1`] = `
+.emotion-0 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+<div
+  class="MuiBox-root emotion-0"
+>
+  <h3
+    class="MuiTypography-root MuiTypography-h2 emotion-1"
+  >
+    Nothing found...
+  </h3>
+</div>
+`;
