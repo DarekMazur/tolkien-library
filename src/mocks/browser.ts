@@ -353,18 +353,41 @@ const createNavigation = () => {
     isDivider: false,
   });
 
-  const size = faker.number.int({ min: 7, max: 13 });
+  db.navigation.create({
+    title: "Tolkien's books",
+    link: `/library/books?jrrt`,
+    isDivider: false,
+  });
 
-  for (let i = 0; i < size; i += 1) {
-    const isDivider =
-      i === size - 2 ? true : i === size - 1 ? false : faker.datatype.boolean({ probability: 0.2 });
+  db.navigation.create({
+    title: 'Tolkienarium',
+    link: `/library/books`,
+    isDivider: false,
+  });
 
-    db.navigation.create({
-      title: isDivider ? null : i === size - 1 ? 'Contact' : faker.lorem.words({ min: 1, max: 2 }),
-      link: isDivider ? null : i === size - 1 ? '/contact' : `/${faker.lorem.word()}`,
-      isDivider,
-    });
-  }
+  db.navigation.create({
+    title: 'Fragmentarium',
+    link: `/library/articles`,
+    isDivider: false,
+  });
+
+  db.navigation.create({
+    title: 'Fanzone',
+    link: `/library/fanzone`,
+    isDivider: false,
+  });
+
+  db.navigation.create({
+    title: null,
+    link: null,
+    isDivider: true,
+  });
+
+  db.navigation.create({
+    title: 'Contact',
+    link: `/contact`,
+    isDivider: false,
+  });
 };
 
 const createArticles = () => {
