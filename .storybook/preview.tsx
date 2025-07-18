@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/react';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import AppProviders from '../src/lib/providers/AppProviders';
 import { handlers } from './mswHandlers';
+import { MemoryRouter } from 'react-router';
 
 initialize({
   onUnhandledRequest: 'bypass',
@@ -11,9 +12,11 @@ const preview: Preview = {
   loaders: [mswLoader],
   decorators: [
     (Story) => (
-      <AppProviders>
-        <Story />
-      </AppProviders>
+      <MemoryRouter>
+        <AppProviders>
+          <Story />
+        </AppProviders>
+      </MemoryRouter>
     ),
   ],
   parameters: {
