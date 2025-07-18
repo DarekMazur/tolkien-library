@@ -58,7 +58,7 @@ export class ArticleTableStrategy implements ITableStrategy<IPublicationProps> {
    */
 
   getHeaders(item: IPublicationProps): IHeaderDefinition<IPublicationProps>[] {
-    const propertyOrder: Exclude<keyof IPublicationProps, 'id'>[] = [
+    const propertyOrder: Exclude<keyof IPublicationProps, 'id' | 'type'>[] = [
       'title',
       'author',
       'publisher',
@@ -69,7 +69,7 @@ export class ArticleTableStrategy implements ITableStrategy<IPublicationProps> {
     ];
 
     const headerDefinitions: Record<
-      Exclude<keyof IPublicationProps, 'id'>,
+      Exclude<keyof IPublicationProps, 'id' | 'type'>,
       IHeaderDefinition<IPublicationProps>
     > = {
       title: { displayTitle: 'Tytuł', key: 'title', sortable: true },

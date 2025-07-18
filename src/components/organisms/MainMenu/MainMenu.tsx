@@ -28,7 +28,7 @@ const MainMenu = ({ isMenuOpen, toggleMenu }: IMainMenuProps) => {
                     <Divider key={item.id} sx={menuDividerStyles} />
                   ) : (
                     <React.Fragment key={item.id}>
-                      <MenuListItem item={item} />
+                      <MenuListItem item={item} toggleMenu={toggleMenu} />
                     </React.Fragment>
                   ),
                 )}
