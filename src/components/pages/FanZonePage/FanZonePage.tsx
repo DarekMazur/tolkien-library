@@ -1,4 +1,5 @@
 import { Box, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
+import CustomLink from '@/components/atoms/CustomLink/CustomLink.tsx';
 
 /**
  * FanZonePage component displays the FanZone page header, a divider,
@@ -18,14 +19,14 @@ const FanZonePage = () => {
       <Divider />
       <List>
         <ListItem>
-          <a href="/library/fanzin">
+          <CustomLink href="/library/fanzin">
             <ListItemText primary="Fanzins" />
-          </a>
+          </CustomLink>
         </ListItem>
         <ListItem>
-          <a href="/library/fanedition">
+          <CustomLink href="/library/fanedition">
             <ListItemText primary="Fan's Editions" />
-          </a>
+          </CustomLink>
         </ListItem>
       </List>
     </Box>
