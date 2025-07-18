@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> TableStrategyFactory</title>
+  <title> ICustomLinkProps</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>TableStrategyFactory</h1>
+                    <p>Interface</p>
+                    <h1>ICustomLinkProps</h1>
                 </header>
                 
 
@@ -85,12 +85,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TableStrategyFactory<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Table strategy factory for different types of publications.
-
-By using the factory pattern, it is possible to get the appropriate instance of
-table strategy (`ITableStrategy`) depending on the passed publication type.</div>
+        <h2>ICustomLinkProps</h2>
         
     
 </header>
@@ -99,40 +94,10 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
     <div class="container-overview">
     
         
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="TableStrategyFactory">
-        <a class="href-link" href="#TableStrategyFactory">#</a>
+            <div class="description">Props interface for CustomLink component</div>
         
-        <span class="code-name">
-            
-                new TableStrategyFactory<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
 
-    
-    
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 <dl class="details">
@@ -168,43 +133,29 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
 
     
         <p class="tag-source">
-            <a href="lib_factories_TableStrategyFactory.ts.html" class="button">View Source</a>
+            <a href="components_atoms_CustomLink_CustomLink.tsx.html" class="button">View Source</a>
             <span>
-                <a href="lib_factories_TableStrategyFactory.ts.html">lib/factories/TableStrategyFactory.ts</a>, <a href="lib_factories_TableStrategyFactory.ts.html#line15">line 15</a>
+                <a href="components_atoms_CustomLink_CustomLink.tsx.html">components/atoms/CustomLink/CustomLink.tsx</a>, <a href="components_atoms_CustomLink_CustomLink.tsx.html#line45">line 45</a>
             </span>
         </p>
     
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
         
     
     </div>
     
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>Omit<MuiLinkProps,</li>
+    </ul>
+
 
     
 
@@ -220,92 +171,35 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
 
     
         <div class='vertical-section'>
-            <h1>Methods</h1>
+            <h1>Members</h1>
             <div class="members">
             
                 <div class="member">
 
-
-    
-    <h4 class="name" id=".createStrategy">
-        <a class="href-link" href="#.createStrategy">#</a>
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
         
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                createStrategy<span class="signature">(type)</span><span class="type-signature"> &rarr; {StrategyForType.&lt;T>}</span>
-            
-        </span>
-    </h4>
+<code class="param-type">SxProps</code>
+
+
+    </span>
+
+<h4 class="name" id="activeStyles">
+    <a class="href-link" href="#activeStyles">#</a>
     
-
+    <span class="code-name">
+        activeStyles
+    </span>
     
+        <span class='tag'>Optional</span>
     
-    <div class="description">
-        Returns an instance of the table strategy appropriate for the publication type.
-    </div>
-    
+</h4>
 
 
 
 
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>type</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">ETableType</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">Publication type, such as `ETableType.BOOK` or `ETableType.ARTICLE`.</td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
+<div class="description">
+    Styles to apply when the link is active (only applicable when isNav is true)
 </div>
 
 
@@ -345,9 +239,9 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
 
     
         <p class="tag-source">
-            <a href="lib_factories_TableStrategyFactory.ts.html" class="button">View Source</a>
+            <a href="components_atoms_CustomLink_CustomLink.tsx.html" class="button">View Source</a>
             <span>
-                <a href="lib_factories_TableStrategyFactory.ts.html">lib/factories/TableStrategyFactory.ts</a>, <a href="lib_factories_TableStrategyFactory.ts.html#line80">line 80</a>
+                <a href="components_atoms_CustomLink_CustomLink.tsx.html">components/atoms/CustomLink/CustomLink.tsx</a>, <a href="components_atoms_CustomLink_CustomLink.tsx.html#line64">line 64</a>
             </span>
         </p>
     
@@ -357,87 +251,324 @@ table strategy (`ITableStrategy`) depending on the passed publication type.</div
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Throws:</label></div>
-        <div class="column is-10">
-            
-                    
-<div class="columns">
-    
-    <div class='param-desc column is-7'>When the factory does not support the transferred publication type.</div>
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-<code class="param-type">Error</code>
-
-
-    </div>
-    
 </div>
-
-                
-        </div>
-    </div>
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
             
-                    
+                <div class="member">
 
-<div class="columns">
-    
-    <div class='param-desc column is-7'>Instance of `ITableStrategy` matched to the publication property T.</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
         
-<code class="param-type">StrategyForType.&lt;T></code>
+<code class="param-type">ReactNode</code>
 
 
-    </div>
+    </span>
+
+<h4 class="name" id="children">
+    <a class="href-link" href="#children">#</a>
     
+    <span class="code-name">
+        children
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The content to be rendered inside the link
 </div>
 
-                
-        </div>
-    </div>
 
 
 
 
-    <h5>Examples</h5>
-    
-    
-        <pre class="prettyprint"><code>// Creating a strategy for the book
-const bookStrategy = TableStrategyFactory.createStrategy&lt;IBookProps>(ETableType.BOOK);
-bookStrategy.renderTable(data);</code></pre>
+<dl class="details">
+
     
 
     
-        <pre class="prettyprint"><code>// Create a strategy for the article
-const articleStrategy = TableStrategyFactory.createStrategy&lt;IPublicationProps>(ETableType.ARTICLE);
-articleStrategy.renderTable(data);</code></pre>
+
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_atoms_CustomLink_CustomLink.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_atoms_CustomLink_CustomLink.tsx.html">components/atoms/CustomLink/CustomLink.tsx</a>, <a href="components_atoms_CustomLink_CustomLink.tsx.html#line55">line 55</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+
+
+    </span>
+
+<h4 class="name" id="href">
+    <a class="href-link" href="#href">#</a>
+    
+    <span class="code-name">
+        href
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    The URL or path to navigate to
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_atoms_CustomLink_CustomLink.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_atoms_CustomLink_CustomLink.tsx.html">components/atoms/CustomLink/CustomLink.tsx</a>, <a href="components_atoms_CustomLink_CustomLink.tsx.html#line51">line 51</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">boolean</code>
+
+
+    </span>
+
+<h4 class="name" id="isNav">
+    <a class="href-link" href="#isNav">#</a>
+    
+    <span class="code-name">
+        isNav
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Whether to use NavLink component for active state styling
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_atoms_CustomLink_CustomLink.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_atoms_CustomLink_CustomLink.tsx.html">components/atoms/CustomLink/CustomLink.tsx</a>, <a href="components_atoms_CustomLink_CustomLink.tsx.html#line69">line 69</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">SxProps</code>
+
+
+    </span>
+
+<h4 class="name" id="styles">
+    <a class="href-link" href="#styles">#</a>
+    
+    <span class="code-name">
+        styles
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Custom styles to apply to the link using MUI's sx prop
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_atoms_CustomLink_CustomLink.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_atoms_CustomLink_CustomLink.tsx.html">components/atoms/CustomLink/CustomLink.tsx</a>, <a href="components_atoms_CustomLink_CustomLink.tsx.html#line59">line 59</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
 
 
 </div>
             
             </div>
         </div>
+    
+
     
 
     
