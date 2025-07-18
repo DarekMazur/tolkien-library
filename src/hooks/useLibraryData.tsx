@@ -105,7 +105,7 @@ export const useLibraryData = () => {
   const shouldFetchArticles = type === ETableType.ARTICLE;
   const isFanzone = type === ETableType.FANZONE;
   const shouldFetchFanzin = type === ETableType.FANZIN;
-  const shouldFetchMumakil = type === ETableType.FANEDITION;
+  const shouldFetchFanedition = type === ETableType.FANEDITION;
   const shouldFetchCategory =
     type !== ETableType.BOOK &&
     type !== ETableType.ARTICLE &&
@@ -139,11 +139,11 @@ export const useLibraryData = () => {
   });
 
   const {
-    data: mumakil,
-    isLoading: mumakilLoading,
-    isError: mumakilError,
+    data: fanedition,
+    isLoading: faneditionLoading,
+    isError: faneditionError,
   } = useApi(() => getAllFanEditions(), {
-    enabled: shouldFetchMumakil,
+    enabled: shouldFetchFanedition,
   });
 
   const {
@@ -174,10 +174,10 @@ export const useLibraryData = () => {
     return { state: 'fanzin' as const, data: fanzin!, type };
   }
 
-  if (shouldFetchMumakil) {
-    if (mumakilLoading) return { state: 'loading' as const };
-    if (mumakilError) return { state: 'error' as const };
-    return { state: 'mumakil' as const, data: mumakil!, type };
+  if (shouldFetchFanedition) {
+    if (faneditionLoading) return { state: 'loading' as const };
+    if (faneditionError) return { state: 'error' as const };
+    return { state: 'fanedition' as const, data: fanedition!, type };
   }
 
   if (shouldFetchCategory) {
