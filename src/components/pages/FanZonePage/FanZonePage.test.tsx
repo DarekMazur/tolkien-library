@@ -1,10 +1,15 @@
 import { screen } from '@testing-library/react';
 import FanZonePage from './FanZonePage.tsx';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders.tsx';
+import { MemoryRouter } from 'react-router';
 
 describe('FanZonePage component', () => {
   it('renders heading and divider correctly', () => {
-    renderWithProviders(<FanZonePage />);
+    renderWithProviders(
+      <MemoryRouter>
+        <FanZonePage />
+      </MemoryRouter>,
+    );
     const heading = screen.getByRole('heading', { level: 1, name: 'FanZone' });
     expect(heading).toBeInTheDocument();
     const divider = screen.getByRole('separator');
@@ -12,7 +17,11 @@ describe('FanZonePage component', () => {
   });
 
   it('renders links with correct hrefs and text', () => {
-    renderWithProviders(<FanZonePage />);
+    renderWithProviders(
+      <MemoryRouter>
+        <FanZonePage />
+      </MemoryRouter>,
+    );
     const fanzinsLink = screen.getByText('Fanzins').closest('a');
     const fanEditionsLink = screen.getByText("Fan's Editions").closest('a');
 
@@ -24,7 +33,11 @@ describe('FanZonePage component', () => {
   });
 
   it('matches the snapshot', () => {
-    const { container } = renderWithProviders(<FanZonePage />);
+    const { container } = renderWithProviders(
+      <MemoryRouter>
+        <FanZonePage />
+      </MemoryRouter>,
+    );
     expect(container).toMatchSnapshot();
   });
 });

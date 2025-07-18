@@ -416,6 +416,22 @@ exports[`BooksPage component > should match snapshot when books list is provided
   color: #FFFFF3;
 }
 
+.emotion-35 {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: #1D263B;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: var(--Link-underlineColor);
+  --Link-underlineColor: rgba(29, 38, 59, 0.4);
+}
+
+.emotion-35:hover {
+  text-decoration-color: inherit;
+}
+
 <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root emotion-0"
     style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
@@ -654,6 +670,8 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
+              data-discover="true"
               href="/library/books/hobbit-czyli-tam-i-z-powrotem"
             >
               Hobbit, czyli tam i z powrotem
@@ -663,6 +681,8 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
+              data-discover="true"
               href="/library/translator/marek-oramus"
             >
               Marek Oramus
@@ -672,6 +692,8 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
+              data-discover="true"
               href="/library/publishers/rebis"
             >
               Rebis
@@ -715,6 +737,8 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
+              data-discover="true"
               href="/library/books/niedokonczone-opowiesci"
             >
               Niedokończone opowieści
@@ -724,6 +748,8 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
+              data-discover="true"
               href="/library/translator/marta-nowak"
             >
               Marta Nowak
@@ -733,6 +759,8 @@ exports[`BooksPage component > should match snapshot when books list is provided
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-33"
           >
             <a
+              class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
+              data-discover="true"
               href="/library/publishers/zysk-i-s-ks"
             >
               Zysk i S-ks

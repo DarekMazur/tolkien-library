@@ -13,6 +13,7 @@ import {
 import StyledTableRow from '@/components/atoms/StyledTableRow/StyledTableRow';
 import StyledTableCell from '@/components/atoms/StyledTableCell/StyledTableCell';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
+import CustomLink from '@/components/atoms/CustomLink/CustomLink.tsx';
 interface IGenericTableBodyProps<T extends ICommonId> {
   data: T[];
   order: TOrder;
@@ -73,7 +74,7 @@ const GenericTableBody = <T extends ICommonId>({
         : type === 'publisher'
           ? `/library/publishers/${slug}`
           : `/library/translator/${slug}`;
-    return <a href={path}>{value}</a>;
+    return <CustomLink href={path}>{value}</CustomLink>;
   };
 
   const isIMumakilProps = (item: unknown): item is IFanEditionsProps => {

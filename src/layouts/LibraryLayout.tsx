@@ -31,7 +31,7 @@ const LibraryLayout = () => {
       {result.state === 'publications' && <PublicationPage data={result.data} />}
       {result.state === 'fanzone' && <FanZonePage />}
       {result.state === 'fanzin' && <FanzinPage data={result.data} />}
-      {result.state === 'mumakil' && <FanEditionPage data={result.data} />}
+      {result.state === 'fanedition' && <FanEditionPage data={result.data} />}
       {result.state === 'category' && <CategoryPage category={result.data} />}
       {result.state === 'empty' && <>Nothing found...</>}
     </Wrapper>

@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import BooksPage from './BooksPage';
 import { IBookProps } from '@/lib/types';
+import { MemoryRouter } from 'react-router';
 
 const specials = /[*+~.,()'"!:@]/g;
 vi.mock('@/lib/helpers/createSlug', () => ({
@@ -75,7 +76,11 @@ const sampleBooks: IBookProps[] = [
 
 describe('BooksPage component', () => {
   it('should render heading and subheading correctly', () => {
-    renderWithProviders(<BooksPage books={sampleBooks} isJrr />);
+    renderWithProviders(
+      <MemoryRouter>
+        <BooksPage books={sampleBooks} isJrr />
+      </MemoryRouter>,
+    );
     expect(screen.getByRole('heading', { level: 2 }).textContent).toBe('Publications list');
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe(
       "J.R.R. Tolkien's books catalog",
@@ -83,7 +88,11 @@ describe('BooksPage component', () => {
   });
 
   it('should render table headers in correct order', () => {
-    renderWithProviders(<BooksPage books={sampleBooks} isJrr />);
+    renderWithProviders(
+      <MemoryRouter>
+        <BooksPage books={sampleBooks} isJrr />
+      </MemoryRouter>,
+    );
     const headers = screen.getAllByRole('columnheader').map((h) => h.textContent);
     expect(headers).toEqual([
       'Original Title',
@@ -99,7 +108,11 @@ describe('BooksPage component', () => {
   });
 
   it('should render a row for each book with correct data', () => {
-    renderWithProviders(<BooksPage books={sampleBooks} isJrr />);
+    renderWithProviders(
+      <MemoryRouter>
+        <BooksPage books={sampleBooks} isJrr />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('The Hobbit')).toBeInTheDocument();
 
@@ -114,12 +127,20 @@ describe('BooksPage component', () => {
   });
 
   it('should match snapshot when books list is provided', () => {
-    const { asFragment } = renderWithProviders(<BooksPage books={sampleBooks} />);
+    const { asFragment } = renderWithProviders(
+      <MemoryRouter>
+        <BooksPage books={sampleBooks} />
+      </MemoryRouter>,
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should match snapshot when books list is empty', () => {
-    const { asFragment } = renderWithProviders(<BooksPage books={[]} />);
+    const { asFragment } = renderWithProviders(
+      <MemoryRouter>
+        <BooksPage books={[]} />
+      </MemoryRouter>,
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

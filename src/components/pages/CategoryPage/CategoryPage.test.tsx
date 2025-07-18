@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import CategoryPage from './CategoryPage';
 import { ICategoryProps } from '@/lib/types';
+import { MemoryRouter } from 'react-router';
 
 const mockCategoryWithPages: ICategoryProps = {
   id: '1',
@@ -46,7 +47,11 @@ const mockCategoryWithUndefinedPages: ICategoryProps = {
 describe('CategoryPage', () => {
   describe('Rendering', () => {
     it('should render category title correctly', () => {
-      renderWithProviders(<CategoryPage category={mockCategoryWithPages} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithPages} />
+        </MemoryRouter>,
+      );
 
       const titleElement = screen.getByRole('heading', { level: 2 });
       expect(titleElement).toBeInTheDocument();
@@ -54,7 +59,11 @@ describe('CategoryPage', () => {
     });
 
     it('should render all page links when pages are provided', () => {
-      renderWithProviders(<CategoryPage category={mockCategoryWithPages} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithPages} />
+        </MemoryRouter>,
+      );
 
       const pageLinks = screen.getAllByRole('link');
       expect(pageLinks).toHaveLength(3);
@@ -79,7 +88,11 @@ describe('CategoryPage', () => {
     });
 
     it('should render only title when pages array is empty', () => {
-      renderWithProviders(<CategoryPage category={mockCategoryWithoutPages} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithoutPages} />
+        </MemoryRouter>,
+      );
 
       const titleElement = screen.getByRole('heading', { level: 2 });
       expect(titleElement).toBeInTheDocument();
@@ -90,7 +103,11 @@ describe('CategoryPage', () => {
     });
 
     it('should render only title when pages is undefined', () => {
-      renderWithProviders(<CategoryPage category={mockCategoryWithUndefinedPages} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithUndefinedPages} />
+        </MemoryRouter>,
+      );
 
       const titleElement = screen.getByRole('heading', { level: 2 });
       expect(titleElement).toBeInTheDocument();
@@ -103,20 +120,28 @@ describe('CategoryPage', () => {
 
   describe('Material-UI Integration', () => {
     it('should render Typography components with correct variants', () => {
-      const { container } = renderWithProviders(<CategoryPage category={mockCategoryWithPages} />);
+      const { container } = renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithPages} />
+        </MemoryRouter>,
+      );
 
       const titleTypography = container.querySelector('.MuiTypography-h2');
       expect(titleTypography).toBeInTheDocument();
       expect(titleTypography).toHaveTextContent('React Fundamentals');
 
       const pageTypographies = container.querySelectorAll('.MuiTypography-root');
-      expect(pageTypographies).toHaveLength(4);
+      expect(pageTypographies).toHaveLength(7);
     });
   });
 
   describe('Link Generation', () => {
     it('should generate correct URLs for page links', () => {
-      renderWithProviders(<CategoryPage category={mockCategoryWithPages} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithPages} />
+        </MemoryRouter>,
+      );
 
       const expectedUrls = [
         '/library/react-fundamentals/introduction-to-react',
@@ -133,7 +158,11 @@ describe('CategoryPage', () => {
 
   describe('Accessibility', () => {
     it('should have proper heading structure', () => {
-      renderWithProviders(<CategoryPage category={mockCategoryWithPages} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithPages} />
+        </MemoryRouter>,
+      );
 
       const heading = screen.getByRole('heading', { level: 2 });
       expect(heading).toBeInTheDocument();
@@ -143,7 +172,11 @@ describe('CategoryPage', () => {
     it('should have accessible links with proper text content', () => {
       const category = mockCategoryWithPages;
 
-      renderWithProviders(<CategoryPage category={category} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={category} />
+        </MemoryRouter>,
+      );
 
       const links = screen.getAllByRole('link');
       links.forEach((link, index) => {
@@ -161,7 +194,11 @@ describe('CategoryPage', () => {
         pages: [],
       };
 
-      renderWithProviders(<CategoryPage category={categoryWithSpecialChars} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={categoryWithSpecialChars} />
+        </MemoryRouter>,
+      );
 
       const titleElement = screen.getByRole('heading', { level: 2 });
       expect(titleElement).toHaveTextContent('React & TypeScript: Advanced Patterns');
@@ -182,7 +219,11 @@ describe('CategoryPage', () => {
         ],
       };
 
-      renderWithProviders(<CategoryPage category={categoryWithSpecialPageTitles} />);
+      renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={categoryWithSpecialPageTitles} />
+        </MemoryRouter>,
+      );
 
       const pageLink = screen.getByRole('link');
       expect(pageLink).toHaveTextContent('Hooks & Context: Best Practices');
@@ -191,14 +232,20 @@ describe('CategoryPage', () => {
 
   describe('Snapshot Testing', () => {
     it('should match snapshot with pages', () => {
-      const { container } = renderWithProviders(<CategoryPage category={mockCategoryWithPages} />);
+      const { container } = renderWithProviders(
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithPages} />
+        </MemoryRouter>,
+      );
 
       expect(container.firstChild).toMatchSnapshot();
     });
 
     it('should match snapshot without pages', () => {
       const { container } = renderWithProviders(
-        <CategoryPage category={mockCategoryWithoutPages} />,
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithoutPages} />
+        </MemoryRouter>,
       );
 
       expect(container.firstChild).toMatchSnapshot();
@@ -206,7 +253,9 @@ describe('CategoryPage', () => {
 
     it('should match snapshot with undefined pages', () => {
       const { container } = renderWithProviders(
-        <CategoryPage category={mockCategoryWithUndefinedPages} />,
+        <MemoryRouter>
+          <CategoryPage category={mockCategoryWithUndefinedPages} />
+        </MemoryRouter>,
       );
 
       expect(container.firstChild).toMatchSnapshot();

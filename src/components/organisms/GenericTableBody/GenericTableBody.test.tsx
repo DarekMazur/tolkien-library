@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import GenericTableBody from '@/components/organisms/GenericTableBody/GenericTableBody';
 import type { IBookProps, IHeaderDefinition, TAllowedPaths, TPathValue } from '@/lib/types';
+import { MemoryRouter } from 'react-router';
 
 type GDV = <P extends TAllowedPaths<IBookProps>>(
   item: IBookProps,
@@ -112,13 +113,15 @@ describe('GenericTableBody', () => {
 
   it('renders rows and cells correctly', () => {
     const { container } = renderWithProviders(
-      <GenericTableBody
-        data={sampleData}
-        order="asc"
-        orderBy={null}
-        headers={headers}
-        getDisplayValue={mockGetDisplayValue}
-      />,
+      <MemoryRouter>
+        <GenericTableBody
+          data={sampleData}
+          order="asc"
+          orderBy={null}
+          headers={headers}
+          getDisplayValue={mockGetDisplayValue}
+        />
+      </MemoryRouter>,
     );
 
     const rows = container.querySelectorAll('tr');
@@ -146,13 +149,15 @@ describe('GenericTableBody', () => {
 
   it('sorts by originalTitle ascending when orderBy="originalTitle"', () => {
     const { container } = renderWithProviders(
-      <GenericTableBody
-        data={sampleData}
-        order="asc"
-        orderBy="originalTitle"
-        headers={headers}
-        getDisplayValue={mockGetDisplayValue}
-      />,
+      <MemoryRouter>
+        <GenericTableBody
+          data={sampleData}
+          order="asc"
+          orderBy="originalTitle"
+          headers={headers}
+          getDisplayValue={mockGetDisplayValue}
+        />
+      </MemoryRouter>,
     );
 
     const texts = getCellTexts(container);
@@ -177,13 +182,15 @@ describe('GenericTableBody', () => {
 
   it('sorts by originalTitle descending when order="desc"', () => {
     const { container } = renderWithProviders(
-      <GenericTableBody
-        data={sampleData}
-        order="desc"
-        orderBy="originalTitle"
-        headers={headers}
-        getDisplayValue={mockGetDisplayValue}
-      />,
+      <MemoryRouter>
+        <GenericTableBody
+          data={sampleData}
+          order="desc"
+          orderBy="originalTitle"
+          headers={headers}
+          getDisplayValue={mockGetDisplayValue}
+        />
+      </MemoryRouter>,
     );
 
     const texts = getCellTexts(container);
@@ -208,13 +215,15 @@ describe('GenericTableBody', () => {
 
   it('renders links', () => {
     renderWithProviders(
-      <GenericTableBody
-        data={sampleData}
-        order="desc"
-        orderBy="originalTitle"
-        headers={headers}
-        getDisplayValue={mockGetDisplayValue}
-      />,
+      <MemoryRouter>
+        <GenericTableBody
+          data={sampleData}
+          order="desc"
+          orderBy="originalTitle"
+          headers={headers}
+          getDisplayValue={mockGetDisplayValue}
+        />
+      </MemoryRouter>,
     );
 
     const links = screen.getAllByRole('link');
@@ -252,13 +261,15 @@ describe('GenericTableBody', () => {
       },
     ];
     const { container } = renderWithProviders(
-      <GenericTableBody
-        data={dataWithNull}
-        order="asc"
-        orderBy={null}
-        headers={headers}
-        getDisplayValue={mockGetDisplayValue}
-      />,
+      <MemoryRouter>
+        <GenericTableBody
+          data={dataWithNull}
+          order="asc"
+          orderBy={null}
+          headers={headers}
+          getDisplayValue={mockGetDisplayValue}
+        />
+      </MemoryRouter>,
     );
 
     const texts = getCellTexts(container);
@@ -267,13 +278,15 @@ describe('GenericTableBody', () => {
 
   it('matches snapshot with sorted data', () => {
     const tree = renderWithProviders(
-      <GenericTableBody
-        data={sampleData}
-        order="asc"
-        orderBy="originalTitle"
-        headers={headers}
-        getDisplayValue={mockGetDisplayValue}
-      />,
+      <MemoryRouter>
+        <GenericTableBody
+          data={sampleData}
+          order="asc"
+          orderBy="originalTitle"
+          headers={headers}
+          getDisplayValue={mockGetDisplayValue}
+        />
+      </MemoryRouter>,
     ).container;
     expect(tree).toMatchSnapshot();
   });

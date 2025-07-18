@@ -51,6 +51,22 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
   color: #FFFFF3;
 }
 
+.emotion-4 {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: #1D263B;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: var(--Link-underlineColor);
+  --Link-underlineColor: rgba(29, 38, 59, 0.4);
+}
+
+.emotion-4:hover {
+  text-decoration-color: inherit;
+}
+
 <div>
   <tbody
     class="MuiTableBody-root emotion-0"
@@ -67,6 +83,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/books/hobbit-czyli-tam-i-z-powrotem"
         >
           Hobbit, czyli tam i z powrotem
@@ -76,6 +94,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/translator/marek-oramus"
         >
           Marek Oramus
@@ -85,6 +105,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/publishers/rebis"
         >
           Rebis
@@ -108,6 +130,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/books/wladca-pierscieni"
         >
           Władca Pierścieni
@@ -117,6 +141,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/translator/marek-oramus"
         >
           Marek Oramus
@@ -126,6 +152,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/publishers/rebis"
         >
           Rebis
@@ -149,6 +177,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/books/niedokonczone-opowiesci"
         >
           Niedokończone opowieści
@@ -158,6 +188,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/translator/marek-oramus"
         >
           Marek Oramus
@@ -167,6 +199,8 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
       >
         <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
           href="/library/publishers/rebis"
         >
           Rebis
