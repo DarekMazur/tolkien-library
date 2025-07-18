@@ -285,14 +285,14 @@ exports[`Root > matches snapshot for NotFound page 1`] = `
       class="MuiTypography-root MuiTypography-body2 emotion-4"
     >
       Not all those who wander are lost. However, you, unfortunately, just happened to stray...
-      <a
+      <button
         class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary emotion-5"
-        href="/"
         role="button"
         tabindex="0"
+        type="button"
       >
         Better go back Home
-      </a>
+      </button>
     </p>
   </div>
 </DocumentFragment>

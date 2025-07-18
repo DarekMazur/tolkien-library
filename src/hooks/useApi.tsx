@@ -30,7 +30,7 @@ export const useApi = <T,>(
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [enabled]);
 
   return { data, isError, isLoading, errorMessage };
 };

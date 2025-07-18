@@ -7,8 +7,11 @@ import {
   notFoundationTitleStyles,
   notFoundWrapperStyles,
 } from '@/components/pages/404/404.styles.ts';
+import { useNavigate } from 'react-router';
 
 const PageNotFound = () => {
+  const navigate = useNavigate();
+
   return (
     <Box sx={notFoundWrapperStyles}>
       <Box sx={notFoundationRingWrapperStyles}>
@@ -26,7 +29,7 @@ const PageNotFound = () => {
           variant="outlined"
           role="button"
           sx={{ p: '1rem', m: '1rem', fontWeight: 700 }}
-          href="/"
+          onClick={() => navigate('/')}
         >
           Better go back Home
         </Button>
