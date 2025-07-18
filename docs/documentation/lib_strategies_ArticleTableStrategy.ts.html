@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="PublicationPageProps.html">PublicationPageProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
                 
             </nav>
         </div>
@@ -145,7 +145,7 @@ export class ArticleTableStrategy implements ITableStrategy&lt;IPublicationProps
    */
 
   getHeaders(item: IPublicationProps): IHeaderDefinition&lt;IPublicationProps>[] {
-    const propertyOrder: Exclude&lt;keyof IPublicationProps, 'id'>[] = [
+    const propertyOrder: Exclude&lt;keyof IPublicationProps, 'id' | 'type'>[] = [
       'title',
       'author',
       'publisher',
@@ -156,7 +156,7 @@ export class ArticleTableStrategy implements ITableStrategy&lt;IPublicationProps
     ];
 
     const headerDefinitions: Record&lt;
-      Exclude&lt;keyof IPublicationProps, 'id'>,
+      Exclude&lt;keyof IPublicationProps, 'id' | 'type'>,
       IHeaderDefinition&lt;IPublicationProps>
     > = {
       title: { displayTitle: 'Tytuł', key: 'title', sortable: true },
