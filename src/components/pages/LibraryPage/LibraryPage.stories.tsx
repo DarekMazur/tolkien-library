@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MemoryRouter } from 'react-router';
 import { http, HttpResponse, delay } from 'msw';
 import LibraryPage from './LibraryPage';
 
@@ -16,13 +15,7 @@ const meta: Meta<typeof LibraryPage> = {
   title: 'Pages/LibraryPage',
   component: LibraryPage,
   tags: ['!autodocs'],
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={['/storybook-page']}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+  decorators: [(Story) => <Story />],
   parameters: {
     msw: {
       handlers: [

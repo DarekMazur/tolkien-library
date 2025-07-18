@@ -11,13 +11,15 @@ initialize({
 const preview: Preview = {
   loaders: [mswLoader],
   decorators: [
-    (Story) => (
-      <MemoryRouter>
+    (Story, context) => {
+      const Wrapper = (
         <AppProviders>
           <Story />
         </AppProviders>
-      </MemoryRouter>
-    ),
+      );
+
+      return context.parameters.noMemoryRouter ? Wrapper : <MemoryRouter>{Wrapper}</MemoryRouter>;
+    },
   ],
   parameters: {
     msw: {

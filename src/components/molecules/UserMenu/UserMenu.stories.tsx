@@ -8,6 +8,9 @@ import { MockedUseMeProvider } from '@/lib/providers/MockedUseMeProvider.tsx';
 export default {
   title: 'Components/Molecules/UserMenu',
   component: UserMenu,
+  parameters: {
+    noMemoryRouter: true,
+  },
   decorators: [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
@@ -28,7 +31,7 @@ export default {
           emailVerified: true,
           userName: user.nickname,
           isBanned: false,
-          role: { id: '2', name: 'user' },
+          role: { id: '2', roleName: 'user', roleShorthand: 'user' },
         },
         isLoading: context.args.auth0?.isLoading ?? false,
         isAuthenticated: context.args.auth0?.isAuthenticated ?? true,
