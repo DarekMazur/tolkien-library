@@ -5,6 +5,7 @@ import MainMenu from './MainMenu';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import { server } from '@/setupTest';
 import '@/setupTest';
+import { MemoryRouter } from 'react-router';
 
 const mockNavigationData = [
   { id: 1, title: 'Home', path: '/', isDivider: false },
@@ -22,13 +23,21 @@ describe('MainMenu Component', () => {
   });
 
   it('should render menu drawer when open', () => {
-    renderWithProviders(<MainMenu isMenuOpen={true} toggleMenu={vi.fn()} />);
+    renderWithProviders(
+      <MemoryRouter>
+        <MainMenu isMenuOpen={true} toggleMenu={vi.fn()} />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByRole('presentation')).toBeInTheDocument();
   });
 
   it('should render navigation items after loading', async () => {
-    renderWithProviders(<MainMenu isMenuOpen={true} toggleMenu={vi.fn()} />);
+    renderWithProviders(
+      <MemoryRouter>
+        <MainMenu isMenuOpen={true} toggleMenu={vi.fn()} />
+      </MemoryRouter>,
+    );
 
     await waitFor(() => {
       expect(screen.getAllByRole('listitem')).toHaveLength(2);
@@ -38,7 +47,11 @@ describe('MainMenu Component', () => {
   });
 
   it('should match snapshot', async () => {
-    const { container } = renderWithProviders(<MainMenu isMenuOpen={true} toggleMenu={vi.fn()} />);
+    const { container } = renderWithProviders(
+      <MemoryRouter>
+        <MainMenu isMenuOpen={true} toggleMenu={vi.fn()} />
+      </MemoryRouter>,
+    );
 
     await waitFor(() => {
       expect(container).toMatchSnapshot();
