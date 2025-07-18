@@ -1,0 +1,217 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
+.emotion-0 {
+  display: table-row-group;
+}
+
+.emotion-1 {
+  color: inherit;
+  display: table-row;
+  vertical-align: middle;
+  outline: 0;
+}
+
+.emotion-1.MuiTableRow-hover:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-1.Mui-selected {
+  background-color: rgba(29, 38, 59, 0.08);
+}
+
+.emotion-1.Mui-selected:hover {
+  background-color: rgba(29, 38, 59, 0.12);
+}
+
+.emotion-1:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emotion-1:last-child td,
+.emotion-1:last-child th {
+  border: 0px solid;
+}
+
+.emotion-2 {
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: #1D263B;
+}
+
+.emotion-2.MuiTableCell-head {
+  background-color: #1D263B;
+  color: #FFFFF3;
+}
+
+.emotion-4 {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: #1D263B;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: var(--Link-underlineColor);
+  --Link-underlineColor: rgba(29, 38, 59, 0.4);
+}
+
+.emotion-4:hover {
+  text-decoration-color: inherit;
+}
+
+<div>
+  <tbody
+    class="MuiTableBody-root emotion-0"
+  >
+    <tr
+      class="MuiTableRow-root emotion-1"
+    >
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        The Hobbit
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/books/hobbit-czyli-tam-i-z-powrotem"
+        >
+          Hobbit, czyli tam i z powrotem
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/translator/marek-oramus"
+        >
+          Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/publishers/rebis"
+        >
+          Rebis
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        2020
+      </td>
+    </tr>
+    <tr
+      class="MuiTableRow-root emotion-1"
+    >
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        The Lord of the Rings
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/books/wladca-pierscieni"
+        >
+          Władca Pierścieni
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/translator/marek-oramus"
+        >
+          Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/publishers/rebis"
+        >
+          Rebis
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        2019
+      </td>
+    </tr>
+    <tr
+      class="MuiTableRow-root emotion-1"
+    >
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        Unfinished Tales
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/books/niedokonczone-opowiesci"
+        >
+          Niedokończone opowieści
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/translator/marek-oramus"
+        >
+          Marek Oramus
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        <a
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
+          data-discover="true"
+          href="/library/publishers/rebis"
+        >
+          Rebis
+        </a>
+      </td>
+      <td
+        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-2"
+      >
+        2021
+      </td>
+    </tr>
+  </tbody>
+</div>
+`;
