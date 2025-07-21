@@ -2,8 +2,20 @@ import { http, HttpResponse } from 'msw';
 import { db } from '@/mocks/db.ts';
 
 export const handlers = [
-  http.get(`${import.meta.env.VITE_API_URL}/books`, () => {
-    return HttpResponse.json(db.book.getAll());
+  http.get(`${import.meta.env.VITE_API_URL}/books`, ({ request }) => {
+    const url = new URL(request.url);
+    const translatorId = url.searchParams.get('translator');
+
+    const books = db.book.getAll();
+
+    if (translatorId) {
+      return HttpResponse.json(
+        books.filter((book) => book.translator?.id === translatorId),
+        { status: 200 },
+      );
+    }
+
+    return HttpResponse.json(db.book.getAll(), { status: 200 });
   }),
 
   http.get(`${import.meta.env.VITE_API_URL}/books/:bookId`, ({ params }) => {
