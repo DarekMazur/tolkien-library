@@ -11,7 +11,7 @@ export const handlers = [
     const slug = params.slug;
     const translators = db.translator.getAll();
 
-    const singleTranslator = translators.map((translator) => {
+    const singleTranslator = translators.filter((translator) => {
       const translatorSlug = createSlug(`${translator.firstName} ${translator.lastName}`);
       return translatorSlug === slug;
     });
@@ -24,6 +24,6 @@ export const handlers = [
       return HttpResponse.json('Invalid response - translator should be unique', { status: 409 });
     }
 
-    return HttpResponse.json(singleTranslator, { status: 200 });
+    return HttpResponse.json(singleTranslator[0], { status: 200 });
   }),
 ];

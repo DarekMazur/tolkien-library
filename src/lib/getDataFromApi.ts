@@ -143,9 +143,10 @@ export const getAllFanEditions = async (): Promise<TResponse<IFanEditionsProps[]
   };
 };
 
-export const getTranslatorBySlug = async (slug: string): Promise<TResponse<ITranslatorProps[]>> => {
-  const res = await fetchApi<ITranslatorProps[]>(
-    `${import.meta.env.VITE_API_URL}/translator/${slug}`,
+export const getTranslatorBySlug = async (slug: string): Promise<TResponse<ITranslatorProps>> => {
+  console.log(slug);
+  const res = await fetchApi<ITranslatorProps>(
+    `${import.meta.env.VITE_API_URL}/translators/${slug}`,
   );
 
   if (res.isError || !res.data) {
