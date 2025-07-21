@@ -9,8 +9,12 @@ import {
   Typography,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useNavigate } from 'react-router';
+import { createSlug } from '@/lib/helpers/createSlug.ts';
 
 const TranslatedBooksList = ({ books }: { books: IBookProps[] | null }) => {
+  const navigate = useNavigate();
+
   if (!books || books.length === 0) {
     return (
       <Box>
@@ -34,7 +38,7 @@ const TranslatedBooksList = ({ books }: { books: IBookProps[] | null }) => {
           <ListItem key={book.id} disablePadding>
             <ListItemButton
               onClick={() => {
-                console.log(`Navigate to book: ${book.originalTitle}`);
+                navigate(`/library/books/${createSlug(book.polishTitle)}`);
               }}
             >
               <ListItemIcon>
