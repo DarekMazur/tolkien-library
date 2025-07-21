@@ -1,5 +1,5 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import { useParams } from 'react-router';
 import { useApi } from '@/hooks/useApi.tsx';
 import { getTranslatorBySlug } from '@/lib/getDataFromApi.ts';
@@ -17,9 +17,10 @@ const TranslatorPage = () => {
     <Wrapper>
       {!isError && data ? (
         <>
-          <Typography variant="h2">Translator</Typography>
-          <Typography variant="h3">{`${data.firstName} ${data.lastName}`}</Typography>
-          <Box pb={2}>{data.description}</Box>
+          <Typography variant="h2">{`${data.firstName} ${data.lastName}`}</Typography>
+          <Typography variant="h3">Translator</Typography>
+          <Divider sx={{ my: 4 }} />
+          <Box>{data.description}</Box>
         </>
       ) : null}
     </Wrapper>
