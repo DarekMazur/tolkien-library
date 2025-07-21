@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/atoms/CustomLink/CustomLink.tsx</title>
+  <title> components/molecules/TranslatedBooksList/TranslatedBooksList.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/atoms/CustomLink/CustomLink.tsx</h1>
+                    <h1>components/molecules/TranslatedBooksList/TranslatedBooksList.tsx</h1>
                 </header>
                 
 
@@ -85,72 +85,92 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Link as RouterLink, NavLink } from 'react-router';
-import { Link, LinkProps as MuiLinkProps } from '@mui/material';
-import { forwardRef, ReactNode } from 'react';
-import { SxProps } from '@mui/system';
+            <pre class="prettyprint source linenums"><code>import { IBookProps } from '@/lib/types';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useNavigate } from 'react-router';
+import { createSlug } from '@/lib/helpers/createSlug.ts';
 
-/**
- * Props interface for CustomLink component
- * @interface ICustomLinkProps
- * @extends {Omit&lt;MuiLinkProps, 'component' | 'href'>}
- */
-interface ICustomLinkProps extends Omit&lt;MuiLinkProps, 'component' | 'href'> {
-  /** The URL or path to navigate to */
-  href: string;
-  /** The content to be rendered inside the link */
-  children: ReactNode;
-  /** Custom styles to apply to the link using MUI's sx prop */
-  styles?: SxProps;
-  /** Styles to apply when the link is active (only applicable when isNav is true) */
-  activeStyles?: SxProps;
-  /** Whether to use NavLink component for active state styling */
-  isNav?: boolean;
+export interface TranslatedBooksListProps {
+  /**
+   * Array of book objects to display in the translated books list.
+   * If null or empty, a message indicating no translated books will be shown.
+   */
+  books: IBookProps[] | null;
 }
 
 /**
- * A custom link component that integrates React Router navigation with Material-UI styling
+ * Renders a list of translated books.
+ * If the `books` array is null or empty, displays a message indicating
+ * that no translated books were found. Otherwise, displays each book’s
+ * Polish title in a Material UI List. Clicking on a list item navigates
+ * to the book’s detail page, using a slug created from the Polish title.
  *
- * @component
- * @example
- * // Basic usage as a regular link
- * &lt;CustomLink href="/about">About Us&lt;/CustomLink>
+ * @param {TranslatedBooksListProps} props - Component props.
+ * @param {IBookProps[] | null} props.books - The list of translated books to render.
  *
- * @example
- * // Usage as navigation link with active styling
- * &lt;CustomLink
- *   href="/dashboard"
- *   isNav={true}
- *   styles={{ color: 'primary.main' }}
- *   activeStyles={{ fontWeight: 'bold' }}
- * >
- *   Dashboard
- * &lt;/CustomLink>
- *
- * @param {ICustomLinkProps} props - The props for the CustomLink component
- * @param {string} props.href - The URL or path to navigate to
- * @param {ReactNode} props.children - The content to be rendered inside the link
- * @param {SxProps} [props.styles] - Custom styles to apply to the link using MUI's sx prop
- * @param {SxProps} [props.activeStyles] - Styles to apply when the link is active (only applicable when isNav is true)
- * @param {boolean} [props.isNav=false] - Whether to use NavLink component for active state styling
- * @param {HTMLAnchorElement} ref - Forwarded ref to the underlying anchor element
- * @returns {JSX.Element} A styled link component that handles navigation
- *
+ * @returns {JSX.Element} A section containing either a "no translated books"
+ * message or a navigable list of book titles.
  */
-const CustomLink = forwardRef&lt;HTMLAnchorElement, ICustomLinkProps>(
-  ({ children, href, styles, isNav, ...muiProps }, ref) => {
-    const RouterComponent = isNav ? NavLink : RouterLink;
+
+const TranslatedBooksList = ({ books }: TranslatedBooksListProps) => {
+  const navigate = useNavigate();
+
+  if (!books || books.length === 0) {
     return (
-      &lt;Link component={RouterComponent} to={href} ref={ref} sx={styles} {...muiProps}>
-        {children}
-      &lt;/Link>
+      &lt;Box>
+        &lt;Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
+          Translated books:
+        &lt;/Typography>
+        &lt;Typography variant="body1" color="text.secondary">
+          No translated books found
+        &lt;/Typography>
+      &lt;/Box>
     );
-  },
-);
+  }
 
-CustomLink.displayName = 'CustomLink';
+  return (
+    &lt;Box>
+      &lt;Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
+        Translated books:
+      &lt;/Typography>
+      &lt;List sx={{ width: 'fit-content' }}>
+        {books.map((book) => (
+          &lt;ListItem key={book.id} disablePadding>
+            &lt;ListItemButton
+              onClick={() => {
+                navigate(`/library/books/${createSlug(book.polishTitle)}`);
+              }}
+            >
+              &lt;ListItemIcon>
+                &lt;KeyboardArrowRightIcon />
+              &lt;/ListItemIcon>
+              &lt;ListItemText
+                primary={book.polishTitle}
+                slotProps={{
+                  primary: {
+                    variant: 'body1',
+                    sx: { fontWeight: 'medium' },
+                  },
+                }}
+              />
+            &lt;/ListItemButton>
+          &lt;/ListItem>
+        ))}
+      &lt;/List>
+    &lt;/Box>
+  );
+};
 
-export default CustomLink;
+export default TranslatedBooksList;
 </code></pre>
         </article>
     </section>

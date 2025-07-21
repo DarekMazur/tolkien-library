@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/atoms/CustomLink/CustomLink.tsx</title>
+  <title> hooks/useTranslatorData.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/atoms/CustomLink/CustomLink.tsx</h1>
+                    <h1>hooks/useTranslatorData.ts</h1>
                 </header>
                 
 
@@ -85,72 +85,102 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Link as RouterLink, NavLink } from 'react-router';
-import { Link, LinkProps as MuiLinkProps } from '@mui/material';
-import { forwardRef, ReactNode } from 'react';
-import { SxProps } from '@mui/system';
+            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
+import { useApi } from '@/hooks/useApi';
+import { getBooksByTranslator, getTranslatorBySlug } from '@/lib/getDataFromApi';
+import { IBookProps, ITranslatorProps } from '@/lib/types';
 
 /**
- * Props interface for CustomLink component
- * @interface ICustomLinkProps
- * @extends {Omit&lt;MuiLinkProps, 'component' | 'href'>}
+ * Return type for the useTranslatorData hook.
+ *
+ * @interface UseTranslatorDataResult
+ * @property {ITranslatorProps | null} translator - Translator data object or null
+ * @property {IBookProps[] | null} books - Array of books or null
+ * @property {boolean} isLoading - Loading state indicator
+ * @property {boolean} hasError - Error state indicator
+ * @property {string | null} errorMessage - Error message or null
  */
-interface ICustomLinkProps extends Omit&lt;MuiLinkProps, 'component' | 'href'> {
-  /** The URL or path to navigate to */
-  href: string;
-  /** The content to be rendered inside the link */
-  children: ReactNode;
-  /** Custom styles to apply to the link using MUI's sx prop */
-  styles?: SxProps;
-  /** Styles to apply when the link is active (only applicable when isNav is true) */
-  activeStyles?: SxProps;
-  /** Whether to use NavLink component for active state styling */
-  isNav?: boolean;
+
+interface UseTranslatorDataResult {
+  translator: ITranslatorProps | null;
+  books: IBookProps[] | null;
+  isLoading: boolean;
+  hasError: boolean;
+  errorMessage: string | null;
 }
 
 /**
- * A custom link component that integrates React Router navigation with Material-UI styling
+ * Custom React hook for fetching translator data and associated books.
  *
- * @component
+ * This hook manages the loading state and error handling for fetching both
+ * translator information by slug and all books associated with that translator.
+ * It uses the useApi hook internally to handle data fetching operations.
+ *
+ * @param {string} [slug] - The unique slug identifier for the translator.
+ *                         If not provided, the hook will not fetch translator data.
+ *
+ * @returns {UseTranslatorDataResult} An object containing:
+ * - translator: The translator data or null if not loaded/error occurred
+ * - books: Array of books by the translator or null if not loaded/error occurred
+ * - isLoading: Boolean indicating if any data is currently being fetched
+ * - hasError: Boolean indicating if any error occurred during fetching
+ * - errorMessage: Error message string or null if no error occurred
+ *
  * @example
- * // Basic usage as a regular link
- * &lt;CustomLink href="/about">About Us&lt;/CustomLink>
+ * ```
+ * const { translator, books, isLoading, hasError } = useTranslatorData('tolkien-slug');
+ *
+ * if (isLoading) return &lt;div>Loading...&lt;/div>;
+ * if (hasError) return &lt;div>Error loading data&lt;/div>;
+ * if (!translator) return &lt;div>Translator not found&lt;/div>;
+ *
+ * return (
+ *   &lt;div>
+ *     &lt;h1>{translator.name}&lt;/h1>
+ *     {books?.map(book => &lt;div key={book.id}>{book.title}&lt;/div>)}
+ *   &lt;/div>
+ * );
+ * ```
  *
  * @example
- * // Usage as navigation link with active styling
- * &lt;CustomLink
- *   href="/dashboard"
- *   isNav={true}
- *   styles={{ color: 'primary.main' }}
- *   activeStyles={{ fontWeight: 'bold' }}
- * >
- *   Dashboard
- * &lt;/CustomLink>
- *
- * @param {ICustomLinkProps} props - The props for the CustomLink component
- * @param {string} props.href - The URL or path to navigate to
- * @param {ReactNode} props.children - The content to be rendered inside the link
- * @param {SxProps} [props.styles] - Custom styles to apply to the link using MUI's sx prop
- * @param {SxProps} [props.activeStyles] - Styles to apply when the link is active (only applicable when isNav is true)
- * @param {boolean} [props.isNav=false] - Whether to use NavLink component for active state styling
- * @param {HTMLAnchorElement} ref - Forwarded ref to the underlying anchor element
- * @returns {JSX.Element} A styled link component that handles navigation
+ * ```
+ * // Hook without slug - will not fetch data
+ * const { isLoading } = useTranslatorData(); // isLoading will be false
+ * ```
  *
  */
-const CustomLink = forwardRef&lt;HTMLAnchorElement, ICustomLinkProps>(
-  ({ children, href, styles, isNav, ...muiProps }, ref) => {
-    const RouterComponent = isNav ? NavLink : RouterLink;
-    return (
-      &lt;Link component={RouterComponent} to={href} ref={ref} sx={styles} {...muiProps}>
-        {children}
-      &lt;/Link>
-    );
-  },
-);
 
-CustomLink.displayName = 'CustomLink';
+export const useTranslatorData = (slug?: string): UseTranslatorDataResult => {
+  const {
+    data: translator,
+    isError: translatorError,
+    isLoading: translatorLoading,
+  } = useApi(() => getTranslatorBySlug(slug!), {
+    enabled: !!slug,
+  });
 
-export default CustomLink;
+  const {
+    data: books,
+    isError: booksError,
+    isLoading: booksLoading,
+  } = useApi(() => getBooksByTranslator(translator!.id), {
+    enabled: !!translator?.id,
+  });
+
+  return useMemo(() => {
+    const isLoading = translatorLoading || booksLoading;
+    const hasError = translatorError || booksError;
+    const errorMessage = hasError ? 'Failed to load translator data' : null;
+
+    return {
+      translator: translator || null,
+      books: books || null,
+      isLoading,
+      hasError,
+      errorMessage,
+    };
+  }, [translator, books, translatorLoading, booksLoading, translatorError, booksError]);
+};
 </code></pre>
         </article>
     </section>

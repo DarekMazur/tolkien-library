@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/atoms/CustomLink/CustomLink.tsx</title>
+  <title> components/molecules/TranslatorInfo/TranslatorInfo.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/atoms/CustomLink/CustomLink.tsx</h1>
+                    <h1>components/molecules/TranslatorInfo/TranslatorInfo.tsx</h1>
                 </header>
                 
 
@@ -85,72 +85,58 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Link as RouterLink, NavLink } from 'react-router';
-import { Link, LinkProps as MuiLinkProps } from '@mui/material';
-import { forwardRef, ReactNode } from 'react';
-import { SxProps } from '@mui/system';
+            <pre class="prettyprint source linenums"><code>import { ITranslatorProps } from '@/lib/types';
+import { Box, Divider, Typography } from '@mui/material';
 
 /**
- * Props interface for CustomLink component
- * @interface ICustomLinkProps
- * @extends {Omit&lt;MuiLinkProps, 'component' | 'href'>}
- */
-interface ICustomLinkProps extends Omit&lt;MuiLinkProps, 'component' | 'href'> {
-  /** The URL or path to navigate to */
-  href: string;
-  /** The content to be rendered inside the link */
-  children: ReactNode;
-  /** Custom styles to apply to the link using MUI's sx prop */
-  styles?: SxProps;
-  /** Styles to apply when the link is active (only applicable when isNav is true) */
-  activeStyles?: SxProps;
-  /** Whether to use NavLink component for active state styling */
-  isNav?: boolean;
-}
-
-/**
- * A custom link component that integrates React Router navigation with Material-UI styling
+ * TranslatorInfo
  *
- * @component
- * @example
- * // Basic usage as a regular link
- * &lt;CustomLink href="/about">About Us&lt;/CustomLink>
+ * Renders information about a translator, including their full name,
+ * role label, and an optional descriptive section.
+ *
+ * @param {Object} props - Component props.
+ * @param {ITranslatorProps} props.translator - Translator data.
+ * @param {string} props.translator.firstName - Translator’s first name.
+ * @param {string} props.translator.lastName - Translator’s last name.
+ * @param {string} [props.translator.description] - Optional biography or description of the translator.
+ *
+ * @returns {JSX.Element} A layout displaying the translator’s full name, a "Translator" subtitle,
+ * and, if provided, a descriptive paragraph separated by a divider.
  *
  * @example
- * // Usage as navigation link with active styling
- * &lt;CustomLink
- *   href="/dashboard"
- *   isNav={true}
- *   styles={{ color: 'primary.main' }}
- *   activeStyles={{ fontWeight: 'bold' }}
- * >
- *   Dashboard
- * &lt;/CustomLink>
+ * const translator = {
+ *   firstName: 'Jane',
+ *   lastName: 'Doe',
+ *   description: 'Jane has been translating literature for over 10 years…'
+ * };
  *
- * @param {ICustomLinkProps} props - The props for the CustomLink component
- * @param {string} props.href - The URL or path to navigate to
- * @param {ReactNode} props.children - The content to be rendered inside the link
- * @param {SxProps} [props.styles] - Custom styles to apply to the link using MUI's sx prop
- * @param {SxProps} [props.activeStyles] - Styles to apply when the link is active (only applicable when isNav is true)
- * @param {boolean} [props.isNav=false] - Whether to use NavLink component for active state styling
- * @param {HTMLAnchorElement} ref - Forwarded ref to the underlying anchor element
- * @returns {JSX.Element} A styled link component that handles navigation
- *
+ * &lt;TranslatorInfo translator={translator} />
  */
-const CustomLink = forwardRef&lt;HTMLAnchorElement, ICustomLinkProps>(
-  ({ children, href, styles, isNav, ...muiProps }, ref) => {
-    const RouterComponent = isNav ? NavLink : RouterLink;
-    return (
-      &lt;Link component={RouterComponent} to={href} ref={ref} sx={styles} {...muiProps}>
-        {children}
-      &lt;/Link>
-    );
-  },
-);
 
-CustomLink.displayName = 'CustomLink';
+const TranslatorInfo = ({ translator }: { translator: ITranslatorProps }) => {
+  const fullName = `${translator.firstName} ${translator.lastName}`;
 
-export default CustomLink;
+  return (
+    &lt;Box>
+      &lt;Typography variant="h2" component="h1">
+        {fullName}
+      &lt;/Typography>
+      &lt;Typography variant="h3" component="h2" color="text.secondary">
+        Translator
+      &lt;/Typography>
+      {translator.description &amp;&amp; (
+        &lt;>
+          &lt;Divider sx={{ my: 4 }} />
+          &lt;Typography variant="body1" sx={{ mt: 2 }}>
+            {translator.description}
+          &lt;/Typography>
+        &lt;/>
+      )}
+    &lt;/Box>
+  );
+};
+
+export default TranslatorInfo;
 </code></pre>
         </article>
     </section>
