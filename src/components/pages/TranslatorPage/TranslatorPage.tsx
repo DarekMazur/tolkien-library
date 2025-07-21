@@ -1,7 +1,6 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import {
   Box,
-  Divider,
   List,
   ListItem,
   ListItemButton,
@@ -13,6 +12,7 @@ import { useParams } from 'react-router';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
+import TranslatorInfo from '@/components/molecules/TranslatorInfo/TranslatorInfo.tsx';
 
 const TranslatorPage = () => {
   const { slug } = useParams();
@@ -32,11 +32,8 @@ const TranslatorPage = () => {
 
   return (
     <Wrapper>
-      <Typography variant="h2">{`${translator.firstName} ${translator.lastName}`}</Typography>
-      <Typography variant="h3">Translator</Typography>
-      <Divider sx={{ my: 4 }} />
+      <TranslatorInfo translator={translator} />
       <Box>
-        {translator.description}
         {books ? (
           <Box>
             <Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
