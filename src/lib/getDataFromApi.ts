@@ -7,6 +7,7 @@ import {
   IPageProps,
   IPublicationProps,
   TResponse,
+  ITranslatorProps,
 } from '@/lib/types';
 
 export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
@@ -126,6 +127,26 @@ export const getAllFanzin = async (): Promise<TResponse<IFanzinProps[]>> => {
 
 export const getAllFanEditions = async (): Promise<TResponse<IFanEditionsProps[]>> => {
   const res = await fetchApi<IFanEditionsProps[]>(`${import.meta.env.VITE_API_URL}/faneditions`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  return {
+    data: res.data,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
+export const getTranslatorBySlug = async (slug: string): Promise<TResponse<ITranslatorProps[]>> => {
+  const res = await fetchApi<ITranslatorProps[]>(
+    `${import.meta.env.VITE_API_URL}/translator/${slug}`,
+  );
 
   if (res.isError || !res.data) {
     return {
