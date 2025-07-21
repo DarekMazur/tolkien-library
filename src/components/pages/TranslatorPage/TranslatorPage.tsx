@@ -10,59 +10,59 @@ import {
   Typography,
 } from '@mui/material';
 import { useParams } from 'react-router';
-import { useApi } from '@/hooks/useApi.tsx';
-import { getBooksByTranslator, getTranslatorBySlug } from '@/lib/getDataFromApi.ts';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
 
 const TranslatorPage = () => {
   const { slug } = useParams();
-  const { data, isError, isLoading } = useApi(() => getTranslatorBySlug(slug!));
-  const {
-    data: booksData,
-    isError: booksError,
-    isLoading: booksLoading,
-  } = useApi(() => getBooksByTranslator(data!.id), { enabled: !!data?.id });
+  const { translator, books, isLoading, hasError, errorMessage } = useTranslatorData(slug);
 
-  if (isLoading || booksLoading) {
+  if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
 
-  console.log(booksData);
+  if (hasError || !translator) {
+    return (
+      <Wrapper>
+        <Box>{errorMessage || 'Translator not found'}</Box>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
-      {!isError && !booksError && data ? (
-        <>
-          <Typography variant="h2">{`${data.firstName} ${data.lastName}`}</Typography>
-          <Typography variant="h3">Translator</Typography>
-          <Divider sx={{ my: 4 }} />
+      <Typography variant="h2">{`${translator.firstName} ${translator.lastName}`}</Typography>
+      <Typography variant="h3">Translator</Typography>
+      <Divider sx={{ my: 4 }} />
+      <Box>
+        {translator.description}
+        {books ? (
           <Box>
-            {data.description}
-            {booksData ? (
-              <>
-                <Typography variant="h3" sx={{ pt: 4, pb: 2 }}>
-                  Translated books:
-                </Typography>
-                <List sx={{ width: 'fit-content', listStyle: 'circle' }}>
-                  {booksData?.map((book) => (
-                    <ListItem key={book.id}>
-                      <ListItemButton>
-                        <ListItemIcon>
-                          <KeyboardArrowRightIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={book.polishTitle} />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
-              </>
-            ) : (
-              <Box>No translated books found</Box>
-            )}
+            <Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
+              Translated books:
+            </Typography>
+            <List sx={{ width: 'fit-content' }}>
+              {books.map((book) => (
+                <ListItem key={book.id} disablePadding>
+                  <ListItemButton
+                    onClick={() => {
+                      console.log(`Navigate to book: ${book.originalTitle}`);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <KeyboardArrowRightIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={book.polishTitle} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
           </Box>
-        </>
-      ) : null}
+        ) : (
+          <Box>No translated books found</Box>
+        )}
+      </Box>
     </Wrapper>
   );
 };
