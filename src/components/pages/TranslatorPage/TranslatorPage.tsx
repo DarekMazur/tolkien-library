@@ -1,18 +1,10 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import { useParams } from 'react-router';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
 import TranslatorInfo from '@/components/molecules/TranslatorInfo/TranslatorInfo.tsx';
+import TranslatedBooksList from '@/components/molecules/TranslatedBooksList/TranslatedBooksList.tsx';
 
 const TranslatorPage = () => {
   const { slug } = useParams();
@@ -33,41 +25,7 @@ const TranslatorPage = () => {
   return (
     <Wrapper>
       <TranslatorInfo translator={translator} />
-      <Box>
-        {books ? (
-          <Box>
-            <Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
-              Translated books:
-            </Typography>
-            <List sx={{ width: 'fit-content' }}>
-              {books.map((book) => (
-                <ListItem key={book.id} disablePadding>
-                  <ListItemButton
-                    onClick={() => {
-                      console.log(`Navigate to book: ${book.originalTitle}`);
-                    }}
-                  >
-                    <ListItemIcon>
-                      <KeyboardArrowRightIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={book.polishTitle}
-                      slotProps={{
-                        primary: {
-                          variant: 'body1',
-                          sx: { fontWeight: 'medium' },
-                        },
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        ) : (
-          <Box>No translated books found</Box>
-        )}
-      </Box>
+      <TranslatedBooksList books={books} />
     </Wrapper>
   );
 };
