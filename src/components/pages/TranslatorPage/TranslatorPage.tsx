@@ -53,7 +53,15 @@ const TranslatorPage = () => {
                     <ListItemIcon>
                       <KeyboardArrowRightIcon />
                     </ListItemIcon>
-                    <ListItemText primary={book.polishTitle} />
+                    <ListItemText
+                      primary={book.polishTitle}
+                      slotProps={{
+                        primary: {
+                          variant: 'body1',
+                          sx: { fontWeight: 'medium' },
+                        },
+                      }}
+                    />
                   </ListItemButton>
                 </ListItem>
               ))}
