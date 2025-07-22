@@ -56,7 +56,7 @@ describe('useTranslatorData', () => {
     vi.clearAllMocks();
   });
 
-  it('gdy slug undefined — brak fetchów, domyślny stan', () => {
+  it('when slug undefined - no fetch, default state', () => {
     mockedUseApi.mockReturnValue({
       data: null,
       isLoading: false,
@@ -107,7 +107,7 @@ describe('useTranslatorData', () => {
     expect(result.current.errorMessage).toBeNull();
   });
 
-  it('błąd pobierania translatora → hasError', () => {
+  it('translator download error → hasError', () => {
     mockedUseApi
       .mockReturnValueOnce(makeResponse<ITranslatorProps>(null, true, 'API error'))
       .mockReturnValueOnce(makeResponse<IBookProps[]>(null));
@@ -120,7 +120,7 @@ describe('useTranslatorData', () => {
     expect(result.current.books).toBeNull();
   });
 
-  it('błąd pobierania książek po translatorze → hasError', () => {
+  it('book download error after translator → hasError', () => {
     mockedUseApi
       .mockReturnValueOnce(makeResponse(fakeTranslator))
       .mockReturnValueOnce(makeResponse<IBookProps[]>(null, true, 'API error'));
