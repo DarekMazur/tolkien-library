@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseTranslatorDataResult.html">UseTranslatorDataResult</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#TranslatedBooksList">TranslatedBooksList</a></li><li><a href="global.html#TranslatorInfo">TranslatorInfo</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -898,6 +898,110 @@ const { type, slug, search, isValid } = useLibraryParams();
 
 </div>
             
+                <div class="member">
+
+<h4 class="name" id="useTranslatorData">
+    <a class="href-link" href="#useTranslatorData">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        useTranslatorData
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Custom React hook for fetching translator data and associated books.
+
+This hook manages the loading state and error handling for fetching both
+translator information by slug and all books associated with that translator.
+It uses the useApi hook internally to handle data fetching operations.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="hooks_useTranslatorData.ts.html" class="button">View Source</a>
+            <span>
+                <a href="hooks_useTranslatorData.ts.html">hooks/useTranslatorData.ts</a>, <a href="hooks_useTranslatorData.ts.html#line45">line 45</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    
+        <pre class="prettyprint"><code>```
+const { translator, books, isLoading, hasError } = useTranslatorData('tolkien-slug');
+
+if (isLoading) return &lt;div>Loading...&lt;/div>;
+if (hasError) return &lt;div>Error loading data&lt;/div>;
+if (!translator) return &lt;div>Translator not found&lt;/div>;
+
+return (
+  &lt;div>
+    &lt;h1>{translator.name}&lt;/h1>
+    {books?.map(book => &lt;div key={book.id}>{book.title}&lt;/div>)}
+  &lt;/div>
+);
+```</code></pre>
+    
+
+    
+        <pre class="prettyprint"><code>```
+// Hook without slug - will not fetch data
+const { isLoading } = useTranslatorData(); // isLoading will be false
+```</code></pre>
+    
+
+
+</div>
+            
             </div>
         </div>
     
@@ -1717,6 +1821,710 @@ when filters return an empty result set.
 &lt;NoContent />                          // → “Nothing found…”
 &lt;NoContent alert="No posts yet" />     // → “No posts yet”
 ```</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="TranslatedBooksList">
+        <a class="href-link" href="#TranslatedBooksList">#</a>
+        
+        <span class="code-name">
+            
+                TranslatedBooksList<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Renders a list of translated books.
+If the `books` array is null or empty, displays a message indicating
+that no translated books were found. Otherwise, displays each book’s
+Polish title in a Material UI List. Clicking on a list item navigates
+to the book’s detail page, using a slug created from the Polish title.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">TranslatedBooksListProps</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">Component props.</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>books</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;IBookProps></code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The list of translated books to render.</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_molecules_TranslatedBooksList_TranslatedBooksList.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_molecules_TranslatedBooksList_TranslatedBooksList.tsx.html">components/molecules/TranslatedBooksList/TranslatedBooksList.tsx</a>, <a href="components_molecules_TranslatedBooksList_TranslatedBooksList.tsx.html#line19">line 19</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>A section containing either a "no translated books"
+message or a navigable list of book titles.</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">JSX.Element</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="TranslatorInfo">
+        <a class="href-link" href="#TranslatorInfo">#</a>
+        
+        <span class="code-name">
+            
+                TranslatorInfo<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        TranslatorInfo
+
+Renders information about a translator, including their full name,
+role label, and an optional descriptive section.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">Component props.</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>translator</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">ITranslatorProps</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">Translator data.</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>translator.firstName</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">Translator’s first name.</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>translator.lastName</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">Translator’s last name.</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>translator.description</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">Optional biography or description of the translator.</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_molecules_TranslatorInfo_TranslatorInfo.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_molecules_TranslatorInfo_TranslatorInfo.tsx.html">components/molecules/TranslatorInfo/TranslatorInfo.tsx</a>, <a href="components_molecules_TranslatorInfo_TranslatorInfo.tsx.html#line27">line 27</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>A layout displaying the translator’s full name, a "Translator" subtitle,
+and, if provided, a descriptive paragraph separated by a divider.</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">JSX.Element</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const translator = {
+  firstName: 'Jane',
+  lastName: 'Doe',
+  description: 'Jane has been translating literature for over 10 years…'
+};
+
+&lt;TranslatorInfo translator={translator} /></code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="TranslatorPage">
+        <a class="href-link" href="#TranslatorPage">#</a>
+        
+        <span class="code-name">
+            
+                TranslatorPage<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        The component uses the following flow:
+1. Extracts the translator slug from URL parameters using useParams
+2. Fetches translator data using the useTranslatorData hook
+3. Handles three states:
+   - Loading: Shows a Loader component
+   - Error/Not Found: Shows error message in a Wrapper
+   - Success: Shows TranslatorInfo and TranslatedBooksList components
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="global.html#useTranslatorData">useTranslatorData</a> - Hook used for data fetching</li>
+        
+            <li><a href="global.html#TranslatorInfo">TranslatorInfo</a> - Child component for translator details</li>
+        
+            <li><a href="global.html#TranslatedBooksList">TranslatedBooksList</a> - Child component for books list</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_pages_TranslatorPage_TranslatorPage.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="components_pages_TranslatorPage_TranslatorPage.tsx.html">components/pages/TranslatorPage/TranslatorPage.tsx</a>, <a href="components_pages_TranslatorPage_TranslatorPage.tsx.html#line46">line 46</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+    <div class="method-parameter columns">
+        <div class="column is-2"><label>Requires:</label></div>
+        <div class="column is-10">
+            <ul>
+                <li>module:useParams</li>
+            
+                <li>module:useTranslatorData</li>
+            
+                <li>module:Wrapper</li>
+            
+                <li>module:Loader</li>
+            
+                <li>module:TranslatorInfo</li>
+            
+                <li>module:TranslatedBooksList</li>
+            
+                <li>module:Box</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>The rendered translator page component</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">JSX.Element</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>// Used as a route component in React Router
+&lt;Route path="/translator/:slug" component={TranslatorPage} /></code></pre>
     
 
 

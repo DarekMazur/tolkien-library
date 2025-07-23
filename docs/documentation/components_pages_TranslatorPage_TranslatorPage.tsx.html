@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/atoms/CustomLink/CustomLink.tsx</title>
+  <title> components/pages/TranslatorPage/TranslatorPage.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/atoms/CustomLink/CustomLink.tsx</h1>
+                    <h1>components/pages/TranslatorPage/TranslatorPage.tsx</h1>
                 </header>
                 
 
@@ -85,72 +85,77 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Link as RouterLink, NavLink } from 'react-router';
-import { Link, LinkProps as MuiLinkProps } from '@mui/material';
-import { forwardRef, ReactNode } from 'react';
-import { SxProps } from '@mui/system';
+            <pre class="prettyprint source linenums"><code>import Wrapper from '@/components/atoms/Wrapper/Wrapper';
+import { Box } from '@mui/material';
+import { useParams } from 'react-router';
+import Loader from '@/components/atoms/Loader/Loader.tsx';
+import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
+import TranslatorInfo from '@/components/molecules/TranslatorInfo/TranslatorInfo.tsx';
+import TranslatedBooksList from '@/components/molecules/TranslatedBooksList/TranslatedBooksList.tsx';
 
 /**
- * Props interface for CustomLink component
- * @interface ICustomLinkProps
- * @extends {Omit&lt;MuiLinkProps, 'component' | 'href'>}
- */
-interface ICustomLinkProps extends Omit&lt;MuiLinkProps, 'component' | 'href'> {
-  /** The URL or path to navigate to */
-  href: string;
-  /** The content to be rendered inside the link */
-  children: ReactNode;
-  /** Custom styles to apply to the link using MUI's sx prop */
-  styles?: SxProps;
-  /** Styles to apply when the link is active (only applicable when isNav is true) */
-  activeStyles?: SxProps;
-  /** Whether to use NavLink component for active state styling */
-  isNav?: boolean;
-}
-
-/**
- * A custom link component that integrates React Router navigation with Material-UI styling
+ * TranslatorPage - A React component that displays information about a translator and their translated books.
+ *
+ * This component fetches translator data based on the URL slug parameter and renders:
+ * - A loading state while data is being fetched
+ * - An error state if the translator is not found or an error occurs
+ * - The translator's information and list of their translated books when data is successfully loaded
  *
  * @component
  * @example
- * // Basic usage as a regular link
- * &lt;CustomLink href="/about">About Us&lt;/CustomLink>
+ * // Used as a route component in React Router
+ * &lt;Route path="/translator/:slug" component={TranslatorPage} />
  *
- * @example
- * // Usage as navigation link with active styling
- * &lt;CustomLink
- *   href="/dashboard"
- *   isNav={true}
- *   styles={{ color: 'primary.main' }}
- *   activeStyles={{ fontWeight: 'bold' }}
- * >
- *   Dashboard
- * &lt;/CustomLink>
+ * @returns {JSX.Element} The rendered translator page component
  *
- * @param {ICustomLinkProps} props - The props for the CustomLink component
- * @param {string} props.href - The URL or path to navigate to
- * @param {ReactNode} props.children - The content to be rendered inside the link
- * @param {SxProps} [props.styles] - Custom styles to apply to the link using MUI's sx prop
- * @param {SxProps} [props.activeStyles] - Styles to apply when the link is active (only applicable when isNav is true)
- * @param {boolean} [props.isNav=false] - Whether to use NavLink component for active state styling
- * @param {HTMLAnchorElement} ref - Forwarded ref to the underlying anchor element
- * @returns {JSX.Element} A styled link component that handles navigation
+ * @description
+ * The component uses the following flow:
+ * 1. Extracts the translator slug from URL parameters using useParams
+ * 2. Fetches translator data using the useTranslatorData hook
+ * 3. Handles three states:
+ *    - Loading: Shows a Loader component
+ *    - Error/Not Found: Shows error message in a Wrapper
+ *    - Success: Shows TranslatorInfo and TranslatedBooksList components
+ *
+ * @requires useParams from 'react-router' - For accessing URL parameters
+ * @requires useTranslatorData - Custom hook for fetching translator data
+ * @requires Wrapper - Layout wrapper component
+ * @requires Loader - Loading indicator component
+ * @requires TranslatorInfo - Component for displaying translator details
+ * @requires TranslatedBooksList - Component for displaying list of translated books
+ * @requires Box from '@mui/material' - Material-UI container component
+ *
+ * @see {@link useTranslatorData} - Hook used for data fetching
+ * @see {@link TranslatorInfo} - Child component for translator details
+ * @see {@link TranslatedBooksList} - Child component for books list
  *
  */
-const CustomLink = forwardRef&lt;HTMLAnchorElement, ICustomLinkProps>(
-  ({ children, href, styles, isNav, ...muiProps }, ref) => {
-    const RouterComponent = isNav ? NavLink : RouterLink;
+
+const TranslatorPage = () => {
+  const { slug } = useParams();
+  const { translator, books, isLoading, hasError, errorMessage } = useTranslatorData(slug);
+
+  if (isLoading) {
+    return &lt;Loader isLoading={isLoading} />;
+  }
+
+  if (hasError || !translator) {
     return (
-      &lt;Link component={RouterComponent} to={href} ref={ref} sx={styles} {...muiProps}>
-        {children}
-      &lt;/Link>
+      &lt;Wrapper>
+        &lt;Box>{errorMessage || 'Translator not found'}&lt;/Box>
+      &lt;/Wrapper>
     );
-  },
-);
+  }
 
-CustomLink.displayName = 'CustomLink';
+  return (
+    &lt;Wrapper>
+      &lt;TranslatorInfo translator={translator} />
+      &lt;TranslatedBooksList books={books} />
+    &lt;/Wrapper>
+  );
+};
 
-export default CustomLink;
+export default TranslatorPage;
 </code></pre>
         </article>
     </section>

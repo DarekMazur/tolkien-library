@@ -1,6 +1,7 @@
 import { EPublicationType } from '@/lib/types';
 import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
+import { createSlug } from '@/lib/helpers/createSlug.ts';
 
 const navigationMock = [
   { id: '1', title: 'Strona główna', link: '/', isDivider: false },
@@ -26,10 +27,11 @@ const booksMock = [
     polishTitle: 'Hobbit, czyli tam i z powrotem',
     author: 'J.R.R. Tolkien',
     translator: {
-      firstName: 'Marek',
-      lastName: 'Oramus',
-      id: 'marekormus',
-      description: '',
+      id: 'mariaskibniewska',
+      firstName: 'Maria',
+      lastName: 'Skibniewska',
+      description:
+        'Polska tłumaczka, głównie anglojęzycznej i francuskojęzycznej literatury pięknej. Pierwszą książką J.R.R. Tolkiena, którą Skibniewska przetłumaczyła był Hobbit, wydany po polsku w 1960 przez Wydawnictwo Iskry[31]. Natomiast umowę na przekład Władcy Pierścieni podpisała z „Czytelnikiem” już w 1958. Nie ma żadnych świadectw z przebiegu jej pracy. Wiadomo tylko, że w czerwcu 1959 napisała list do wydawnictwa Allen & Unwin, z pytaniami o wskazówki pomocne przy tłumaczeniu, który przekazano Tolkienowi. Ten obiecał szybką odpowiedź, jednak ze względu na problemy rodzinne, przez dłuższy czas jej nie udzielił. Dopiero po ponagleniach ze strony „Czytelnika” przekazał kilka ogólnych wskazówek, które zawarł w liście do Allen & Unwin, by przesłano je Skibniewskiej. Nie ma śladów żadnej bezpośredniej korespondencji między pisarzem a polską tłumaczką, być może jednak jej list, który przekazano Tolkienowi, znajduje się w spuściźnie po nim w Bodleian Library.',
     },
     publisher: {
       title: 'Rebis',
@@ -48,10 +50,11 @@ const booksMock = [
     polishTitle: 'Władca Pierścieni',
     author: 'J.R.R. Tolkien',
     translator: {
-      firstName: 'Marek',
-      lastName: 'Oramus',
-      id: 'marekormus',
-      description: '',
+      id: 'mariaskibniewska',
+      firstName: 'Maria',
+      lastName: 'Skibniewska',
+      description:
+        'Polska tłumaczka, głównie anglojęzycznej i francuskojęzycznej literatury pięknej. Pierwszą książką J.R.R. Tolkiena, którą Skibniewska przetłumaczyła był Hobbit, wydany po polsku w 1960 przez Wydawnictwo Iskry[31]. Natomiast umowę na przekład Władcy Pierścieni podpisała z „Czytelnikiem” już w 1958. Nie ma żadnych świadectw z przebiegu jej pracy. Wiadomo tylko, że w czerwcu 1959 napisała list do wydawnictwa Allen & Unwin, z pytaniami o wskazówki pomocne przy tłumaczeniu, który przekazano Tolkienowi. Ten obiecał szybką odpowiedź, jednak ze względu na problemy rodzinne, przez dłuższy czas jej nie udzielił. Dopiero po ponagleniach ze strony „Czytelnika” przekazał kilka ogólnych wskazówek, które zawarł w liście do Allen & Unwin, by przesłano je Skibniewskiej. Nie ma śladów żadnej bezpośredniej korespondencji między pisarzem a polską tłumaczką, być może jednak jej list, który przekazano Tolkienowi, znajduje się w spuściźnie po nim w Bodleian Library.',
     },
     publisher: {
       title: 'Rebis',
@@ -70,10 +73,11 @@ const booksMock = [
     polishTitle: 'Niedokończone opowieści',
     author: 'J.R.R. Tolkien',
     translator: {
-      firstName: 'Marek',
-      lastName: 'Oramus',
-      id: 'marekormus',
-      description: '',
+      id: 'mariaskibniewska',
+      firstName: 'Maria',
+      lastName: 'Skibniewska',
+      description:
+        'Polska tłumaczka, głównie anglojęzycznej i francuskojęzycznej literatury pięknej. Pierwszą książką J.R.R. Tolkiena, którą Skibniewska przetłumaczyła był Hobbit, wydany po polsku w 1960 przez Wydawnictwo Iskry[31]. Natomiast umowę na przekład Władcy Pierścieni podpisała z „Czytelnikiem” już w 1958. Nie ma żadnych świadectw z przebiegu jej pracy. Wiadomo tylko, że w czerwcu 1959 napisała list do wydawnictwa Allen & Unwin, z pytaniami o wskazówki pomocne przy tłumaczeniu, który przekazano Tolkienowi. Ten obiecał szybką odpowiedź, jednak ze względu na problemy rodzinne, przez dłuższy czas jej nie udzielił. Dopiero po ponagleniach ze strony „Czytelnika” przekazał kilka ogólnych wskazówek, które zawarł w liście do Allen & Unwin, by przesłano je Skibniewskiej. Nie ma śladów żadnej bezpośredniej korespondencji między pisarzem a polską tłumaczką, być może jednak jej list, który przekazano Tolkienowi, znajduje się w spuściźnie po nim w Bodleian Library.',
     },
     publisher: {
       title: 'Rebis',
@@ -327,6 +331,30 @@ const faneditionMock = [
   },
 ];
 
+const translatorsMock = [
+  {
+    id: 'mariaskibniewska',
+    firstName: 'Maria',
+    lastName: 'Skibniewska',
+    description:
+      'Polska tłumaczka, głównie anglojęzycznej i francuskojęzycznej literatury pięknej. Pierwszą książką J.R.R. Tolkiena, którą Skibniewska przetłumaczyła był Hobbit, wydany po polsku w 1960 przez Wydawnictwo Iskry[31]. Natomiast umowę na przekład Władcy Pierścieni podpisała z „Czytelnikiem” już w 1958. Nie ma żadnych świadectw z przebiegu jej pracy. Wiadomo tylko, że w czerwcu 1959 napisała list do wydawnictwa Allen & Unwin, z pytaniami o wskazówki pomocne przy tłumaczeniu, który przekazano Tolkienowi. Ten obiecał szybką odpowiedź, jednak ze względu na problemy rodzinne, przez dłuższy czas jej nie udzielił. Dopiero po ponagleniach ze strony „Czytelnika” przekazał kilka ogólnych wskazówek, które zawarł w liście do Allen & Unwin, by przesłano je Skibniewskiej. Nie ma śladów żadnej bezpośredniej korespondencji między pisarzem a polską tłumaczką, być może jednak jej list, który przekazano Tolkienowi, znajduje się w spuściźnie po nim w Bodleian Library.',
+  },
+  {
+    id: faker.string.uuid(),
+    firstName: 'Agnieszka',
+    lastName: 'Sylwanowicz',
+    description:
+      'Jest znawczynią twórczości J.R.R. Tolkiena[2] i prac Christophera Tolkiena, autorką i tłumaczką wielu prac teoretycznych z tego zakresu. Przełożyła Niedokończone opowieści Śródziemia i Númenoru oraz Dzieci Húrina (2007) – książkę, która została zredagowana z zapisków Tolkiena przez jego potomków: Christophera i Adama. Przetłumaczyła także inne utwory fantastyczne, m.in. powieści Guya Gavriela Kaya, Robin Hobb i C.J. Cherryh oraz opowiadania Ursuli Le Guin i Teda Chianga[3]. Jest członkinią Światowego Kongresu Fantastyki i współredaktorką Almanachu Tolkienowskiego „Aiglos”. Aktywnie uczestniczy w ruchu miłośników fantastyki, była współorganizatorką wielu zjazdów i konwentów oraz współredaktorką fanzinów.',
+  },
+  {
+    id: faker.string.uuid(),
+    firstName: 'Jerzy',
+    lastName: 'Łoziński',
+    description:
+      'Znawca filozofii europejskiej XIX i XX wieku. Dokonał kontrowersyjnych przekładów Władcy Pierścieni J.R.R. Tolkiena oraz cyklu Kroniki Diuny Franka Herberta (częściowo pod pseudonimem „Ładysław Jerzyński”)',
+  },
+];
+
 export const navigationHandler = http.get('/api/navigation', () => {
   return HttpResponse.json(navigationMock);
 });
@@ -339,8 +367,18 @@ export const pagesHandler = http.get('/api/pages/:slug', () => {
   return HttpResponse.json(pageMock);
 });
 
-export const booksHandler = http.get('/api/books', () => {
-  return HttpResponse.json(booksMock);
+export const booksHandler = http.get('https://tolkienarium.pl/api/books', ({ request }) => {
+  console.log(request.url);
+  const url = new URL(request.url);
+
+  const translatorId = url.searchParams.get('translator');
+
+  if (!translatorId) {
+    return HttpResponse.json(booksMock);
+  }
+
+  const filtered = booksMock.filter((book) => book.translator.id === translatorId);
+  return HttpResponse.json(filtered);
 });
 
 export const publicationsHandler = http.get('/api/publications', () => {
@@ -355,6 +393,25 @@ export const faneditionHandler = http.get('/api/faneditions', () => {
   return HttpResponse.json(faneditionMock);
 });
 
+export const translatorsHandler = http.get('/api/translators', () => {
+  return HttpResponse.json(translatorsMock);
+});
+
+export const singleTranslatorHandler = http.get(
+  'https://tolkienarium.pl/api/translators/:slug',
+  (req) => {
+    const { slug } = req.params as { slug: string };
+    const translator = translatorsMock.find(
+      (t) => createSlug(`${t.firstName} ${t.lastName}`) === slug,
+    );
+
+    if (!translator) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    return HttpResponse.json(translator);
+  },
+);
+
 export const handlers = [
   navigationHandler,
   articlesHandler,
@@ -363,4 +420,6 @@ export const handlers = [
   publicationsHandler,
   fanzinHandler,
   faneditionHandler,
+  translatorsHandler,
+  singleTranslatorHandler,
 ];

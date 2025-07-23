@@ -8,6 +8,7 @@ import { handlers as categoriesHandlers } from './categories.ts';
 import { handlers as booksHandlers } from './books';
 import { handlers as publicationsHandlers } from './publications';
 import { handlers as fanzoneHandlers } from './fanzone.ts';
+import { handlers as translatorsHandlers } from './translators';
 
 export const handlers = [
   ...rolesHandlers,
@@ -20,4 +21,5 @@ export const handlers = [
   ...booksHandlers,
   ...publicationsHandlers,
   ...fanzoneHandlers,
+  ...translatorsHandlers,
 ];

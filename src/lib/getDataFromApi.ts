@@ -7,6 +7,7 @@ import {
   IPageProps,
   IPublicationProps,
   TResponse,
+  ITranslatorProps,
 } from '@/lib/types';
 
 export const fetchApi = async <T>(url: string): Promise<TResponse<T>> => {
@@ -88,6 +89,28 @@ export const getBooksByAuthor = async (
   };
 };
 
+export const getBooksByTranslator = async (
+  translatorId: string,
+): Promise<TResponse<IBookProps[]>> => {
+  const res = await fetchApi<IBookProps[]>(
+    `${import.meta.env.VITE_API_URL}/books?translator=${translatorId}`,
+  );
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  return {
+    data: res.data,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
 export const getAllPublications = async (): Promise<TResponse<IPublicationProps[]>> => {
   const res = await fetchApi<IPublicationProps[]>(`${import.meta.env.VITE_API_URL}/publications`);
 
@@ -126,6 +149,26 @@ export const getAllFanzin = async (): Promise<TResponse<IFanzinProps[]>> => {
 
 export const getAllFanEditions = async (): Promise<TResponse<IFanEditionsProps[]>> => {
   const res = await fetchApi<IFanEditionsProps[]>(`${import.meta.env.VITE_API_URL}/faneditions`);
+
+  if (res.isError || !res.data) {
+    return {
+      data: null,
+      isError: res.isError,
+      errorMessage: res.errorMessage,
+    };
+  }
+
+  return {
+    data: res.data,
+    isError: false,
+    errorMessage: null,
+  };
+};
+
+export const getTranslatorBySlug = async (slug: string): Promise<TResponse<ITranslatorProps>> => {
+  const res = await fetchApi<ITranslatorProps>(
+    `${import.meta.env.VITE_API_URL}/translators/${slug}`,
+  );
 
   if (res.isError || !res.data) {
     return {
