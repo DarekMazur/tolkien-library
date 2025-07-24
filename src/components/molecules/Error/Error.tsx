@@ -6,10 +6,12 @@ const Error = ({ errorMessage }: { errorMessage?: string }) => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
+    <Wrapper sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
       <Typography variant="h3">Something went wrong...</Typography>
       <Typography>{errorMessage ?? 'Please try again'}</Typography>
-      <Button onClick={() => navigate('/')}>Go home</Button>
+      <Button variant="outlined" onClick={() => navigate('/')}>
+        Go home
+      </Button>
     </Wrapper>
   );
 };
