@@ -380,6 +380,17 @@ export const booksHandler = http.get('/api/books', ({ request }) => {
   return HttpResponse.json(filtered);
 });
 
+export const booksHandlerAbsolute = http.get('https://tolkienarium.pl/api/books', ({ request }) => {
+  const url = new URL(request.url);
+  const translatorId = url.searchParams.get('translator');
+
+  if (!translatorId) {
+    return HttpResponse.json(booksMock);
+  }
+  const filtered = booksMock.filter((book) => book.translator.id === translatorId);
+  return HttpResponse.json(filtered);
+});
+
 export const publicationsHandler = http.get('/api/publications', () => {
   return HttpResponse.json(publicationsMock);
 });
@@ -398,8 +409,8 @@ export const translatorsHandler = http.get('/api/translators', () => {
 
 export const singleTranslatorHandler = http.get(
   'https://tolkienarium.pl/api/translators/:slug',
-  (req) => {
-    const { slug } = req.params as { slug: string };
+  ({ params }) => {
+    const slug = params.slug as string;
     const translator = translatorsMock.find(
       (t) => createSlug(`${t.firstName} ${t.lastName}`) === slug,
     );
@@ -416,6 +427,7 @@ export const handlers = [
   articlesHandler,
   pagesHandler,
   booksHandler,
+  booksHandlerAbsolute,
   publicationsHandler,
   fanzinHandler,
   faneditionHandler,
