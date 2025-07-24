@@ -1,11 +1,15 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
+import { useNavigate } from 'react-router';
 
 const Error = ({ errorMessage }: { errorMessage?: string }) => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Typography variant="h3">Something went wrong...</Typography>
       <Typography>{errorMessage ?? 'Please try again'}</Typography>
+      <Button onClick={() => navigate('/')}>Go home</Button>
     </Wrapper>
   );
 };
