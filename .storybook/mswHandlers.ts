@@ -367,9 +367,8 @@ export const pagesHandler = http.get('/api/pages/:slug', () => {
   return HttpResponse.json(pageMock);
 });
 
-export const booksHandler = http.get('https://tolkienarium.pl/api/books', ({ request }) => {
-  console.log(request.url);
-  const url = new URL(request.url);
+export const booksHandler = http.get('/api/books', ({ request }) => {
+  const url = new URL(request.url, 'http://localhost');
 
   const translatorId = url.searchParams.get('translator');
 
