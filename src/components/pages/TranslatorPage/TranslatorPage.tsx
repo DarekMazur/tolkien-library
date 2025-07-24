@@ -1,5 +1,5 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
-import { Box } from '@mui/material';
+import Error from '@/components/molecules/Error/Error';
 import { useParams } from 'react-router';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
@@ -53,11 +53,7 @@ const TranslatorPage = () => {
   }
 
   if (hasError || !translator) {
-    return (
-      <Wrapper>
-        <Box>{errorMessage || 'Translator not found'}</Box>
-      </Wrapper>
-    );
+    return <Error errorMessage={errorMessage || 'Translator not found'} />;
   }
 
   return (
