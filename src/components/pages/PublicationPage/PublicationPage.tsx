@@ -44,7 +44,7 @@ const PublicationPage = ({ data = [] }: PublicationPageProps) => {
     return <Error errorMessage={'Error: Incorrect data format'} />;
   }
 
-  if (data.length > 0) return <NoContent alert="No publications found" />;
+  if (data.length === 0) return <NoContent alert="No publications found" />;
 
   const renderTable = useCallback(
     (type: EPublicationType, title: string) => {
