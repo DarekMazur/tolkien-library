@@ -30,7 +30,9 @@ const meta: Meta<typeof Error> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default: Story = {};
+
+export const CustomProps: Story = {
   args: {
     errorMessage: 'Data not found',
     errorCode: 404,
@@ -38,7 +40,7 @@ export const Default: Story = {
   },
 };
 
-export const DefaultErrorMessage: Story = {
+export const NoErrorMessage: Story = {
   args: {
     errorCode: 404,
     resetButtonText: 'Go back',
@@ -47,6 +49,14 @@ export const DefaultErrorMessage: Story = {
 
 export const NoErrorCode: Story = {
   args: {
+    errorMessage: 'Data not found',
     resetButtonText: 'Go back',
+  },
+};
+
+export const NoButtonText: Story = {
+  args: {
+    errorMessage: 'Data not found',
+    errorCode: 404,
   },
 };
