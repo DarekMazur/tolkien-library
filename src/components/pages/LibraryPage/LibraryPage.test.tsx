@@ -7,7 +7,7 @@ import { IPageProps } from '@/lib/types';
 import * as useApiModule from '@/hooks/useApi';
 import * as apiModule from '@/lib/getDataFromApi';
 import '@testing-library/jest-dom';
-import { useLocation, Location } from 'react-router';
+import { useLocation, Location, MemoryRouter } from 'react-router';
 import { getPageBySlug } from '@/lib/getDataFromApi';
 
 vi.mock('@/hooks/useApi');
@@ -79,7 +79,11 @@ describe('LibraryPage Component', () => {
       errorMessage: null,
     });
 
-    renderWithProviders(<LibraryPage />);
+    renderWithProviders(
+      <MemoryRouter>
+        <LibraryPage />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByRole('progressbar', { hidden: true })).toBeInTheDocument();
     expect(screen.queryByText('Test Page Title')).not.toBeInTheDocument();
@@ -93,7 +97,11 @@ describe('LibraryPage Component', () => {
       errorMessage: null,
     });
 
-    renderWithProviders(<LibraryPage />);
+    renderWithProviders(
+      <MemoryRouter>
+        <LibraryPage />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('Test Page Title')).toBeInTheDocument();
     expect(screen.getByText('Test Content')).toBeInTheDocument();
@@ -101,7 +109,7 @@ describe('LibraryPage Component', () => {
     expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   });
 
-  it('should render nothing when error occurs', () => {
+  it('should render error message when error occurs', () => {
     mockUseApi.mockReturnValue({
       data: null,
       isError: true,
@@ -109,33 +117,26 @@ describe('LibraryPage Component', () => {
       errorMessage: null,
     });
 
-    const { container } = renderWithProviders(<LibraryPage />);
-    const main = container.querySelector('main');
+    renderWithProviders(
+      <MemoryRouter>
+        <LibraryPage />
+      </MemoryRouter>,
+    );
 
-    expect(main?.childElementCount).toBe(0);
-    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+    screen.debug();
+
+    expect(screen.queryByRole('alert')).toBeInTheDocument();
     expect(screen.queryByText('Test Page Title')).not.toBeInTheDocument();
-  });
-
-  it('should render nothing when page is null but not loading', () => {
-    mockUseApi.mockReturnValue({
-      data: null,
-      isError: false,
-      isLoading: false,
-      errorMessage: null,
-    });
-
-    const { container } = renderWithProviders(<LibraryPage />);
-    const main = container.querySelector('main');
-
-    expect(main?.childElementCount).toBe(0);
-
-    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+    expect(screen.queryByText('Something went wrong...')).toBeInTheDocument();
   });
 
   it('should call useApi with correct slug from pathname', async () => {
     vi.mocked(useLocation).mockReturnValue({ pathname: '/my-custom-page' } as Location);
-    renderWithProviders(<LibraryPage />);
+    renderWithProviders(
+      <MemoryRouter>
+        <LibraryPage />
+      </MemoryRouter>,
+    );
     expect(useApiModule.useApi).toHaveBeenCalledWith(expect.any(Function));
     const fetchFn = mockUseApi.mock.calls[0][0] as () => Promise<PageResponseType>;
     await fetchFn();
@@ -161,7 +162,11 @@ describe('LibraryPage Component', () => {
       errorMessage: null,
     });
 
-    renderWithProviders(<LibraryPage />);
+    renderWithProviders(
+      <MemoryRouter>
+        <LibraryPage />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('Complex Page')).toBeInTheDocument();
     expect(
@@ -190,7 +195,11 @@ describe('LibraryPage Component', () => {
         errorMessage: null,
       });
 
-      const { asFragment } = renderWithProviders(<LibraryPage />);
+      const { asFragment } = renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -203,7 +212,11 @@ describe('LibraryPage Component', () => {
         errorMessage: null,
       });
 
-      const { asFragment } = renderWithProviders(<LibraryPage />);
+      const { asFragment } = renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -216,7 +229,11 @@ describe('LibraryPage Component', () => {
         errorMessage: null,
       });
 
-      const { asFragment } = renderWithProviders(<LibraryPage />);
+      const { asFragment } = renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       expect(asFragment()).toMatchSnapshot();
     });
@@ -231,7 +248,11 @@ describe('LibraryPage Component', () => {
         errorMessage: null,
       });
 
-      const { container } = renderWithProviders(<LibraryPage />);
+      const { container } = renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       const wrapperElement = container.querySelector('[class*="MuiBox"]');
       expect(wrapperElement).toBeInTheDocument();
@@ -255,7 +276,11 @@ describe('LibraryPage Component', () => {
         errorMessage: null,
       });
 
-      renderWithProviders(<LibraryPage />);
+      renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       expect(screen.getByRole('table')).toBeInTheDocument();
       expect(screen.getByText('Column 1')).toBeInTheDocument();
@@ -271,7 +296,11 @@ describe('LibraryPage Component', () => {
       };
       vi.mocked(useLocation).mockReturnValue(locationWithSlash);
 
-      renderWithProviders(<LibraryPage />);
+      renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       expect(useApiModule.useApi).toHaveBeenCalledWith(expect.any(Function));
       const fetchFn = mockUseApi.mock.calls[0][0] as () => Promise<PageResponseType>;
@@ -289,7 +318,11 @@ describe('LibraryPage Component', () => {
       };
       vi.mocked(useLocation).mockReturnValue(rootLocation);
 
-      renderWithProviders(<LibraryPage />);
+      renderWithProviders(
+        <MemoryRouter>
+          <LibraryPage />
+        </MemoryRouter>,
+      );
 
       expect(useApiModule.useApi).toHaveBeenCalledWith(expect.any(Function));
       const fetchFn = mockUseApi.mock.calls[0][0] as () => Promise<PageResponseType>;

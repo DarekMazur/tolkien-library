@@ -2,40 +2,7 @@
 
 exports[`LibraryPage Component > Component Snapshots > should match snapshot when error occurs 1`] = `
 <DocumentFragment>
-  @keyframes animation-0 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes animation-1 {
-  0% {
-    stroke-dasharray: 1px,200px;
-    stroke-dashoffset: 0;
-  }
-
-  50% {
-    stroke-dasharray: 100px,200px;
-    stroke-dashoffset: -15px;
-  }
-
-  100% {
-    stroke-dasharray: 1px,200px;
-    stroke-dashoffset: -126px;
-  }
-}
-
-.emotion-0 {
+  .emotion-0 {
   background-color: #FFFFF3;
   color: #1D263B;
   -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -66,11 +33,112 @@ exports[`LibraryPage Component > Component Snapshots > should match snapshot whe
 }
 
 .emotion-1 {
-  position: fixed;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1>:not(style):not(style) {
+  margin: 0;
+}
+
+.emotion-1>:not(style)~:not(style) {
+  margin-top: 24px;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-3 {
+  background-color: #FFFFF3;
+  color: #1D263B;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: var(--Paper-shadow);
+  background-image: var(--Paper-overlay);
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.43;
+  background-color: transparent;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 6px 16px;
+  color: rgb(95, 33, 32);
+  background-color: rgb(253, 237, 237);
+}
+
+.emotion-3 .MuiAlert-icon {
+  color: #d32f2f;
+}
+
+.emotion-4 {
+  margin-right: 12px;
+  padding: 7px 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.emotion-5 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  fill: currentColor;
+  font-size: inherit;
+}
+
+.emotion-6 {
+  padding: 8px 0;
+  min-width: 0;
+  overflow: auto;
+}
+
+.emotion-7 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+  color: #d32f2f;
+  margin-bottom: 0.35em;
+  font-weight: 500;
+  margin-top: -2px;
+}
+
+.emotion-8 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -79,32 +147,91 @@ exports[`LibraryPage Component > Component Snapshots > should match snapshot whe
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  color: #1D263B;
-  z-index: 999;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.75;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 4px;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding: 5px 15px;
+  border: 1px solid currentColor;
+  border-color: var(--variant-outlinedBorder, currentColor);
+  background-color: var(--variant-outlinedBg);
+  color: var(--variant-outlinedColor);
+  --variant-textColor: #1D263B;
+  --variant-outlinedColor: #1D263B;
+  --variant-outlinedBorder: rgba(29, 38, 59, 0.5);
+  --variant-containedColor: #960200;
+  --variant-containedBg: #1D263B;
+  -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.emotion-2 {
-  display: inline-block;
-  -webkit-animation: animation-0 1.4s linear infinite;
-  animation: animation-0 1.4s linear infinite;
+.emotion-8::-moz-focus-inner {
+  border-style: none;
 }
 
-.emotion-3 {
-  display: block;
+.emotion-8.Mui-disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
-.emotion-4 {
-  stroke: currentColor;
-  stroke-dasharray: 80px,200px;
-  stroke-dashoffset: 0;
-  -webkit-animation: animation-1 1.4s ease-in-out infinite;
-  animation: animation-1 1.4s ease-in-out infinite;
+@media print {
+  .emotion-8 {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+.emotion-8:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8.Mui-disabled {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.emotion-8.Mui-disabled {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+@media (hover: hover) {
+  .emotion-8:hover {
+    --variant-containedBg: #384A73;
+    --variant-textBg: rgba(29, 38, 59, 0.04);
+    --variant-outlinedBorder: #1D263B;
+    --variant-outlinedBg: rgba(29, 38, 59, 0.04);
+  }
+}
+
+.emotion-8.MuiButton-loading {
+  color: transparent;
 }
 
 <main
@@ -112,36 +239,58 @@ exports[`LibraryPage Component > Component Snapshots > should match snapshot whe
     style="--Paper-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);"
   >
     <div
-      aria-hidden="true"
-      aria-label="Loader"
-      class="MuiBackdrop-root emotion-1"
-      style="opacity: 0; visibility: hidden;"
+      class="MuiStack-root emotion-1"
     >
-      <span
-        class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit emotion-2"
-        role="progressbar"
-        style="width: 100px; height: 100px;"
+      <h3
+        class="MuiTypography-root MuiTypography-h3 emotion-2"
+        tabindex="-1"
       >
-        <svg
-          class="MuiCircularProgress-svg emotion-3"
-          viewBox="22 22 44 44"
+        Something went wrong...
+      </h3>
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-colorError MuiAlert-standardError MuiAlert-standard emotion-3"
+        role="alert"
+        style="--Paper-shadow: none;"
+      >
+        <div
+          class="MuiAlert-icon emotion-4"
         >
-          <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate emotion-4"
-            cx="44"
-            cy="44"
-            fill="none"
-            r="20.2"
-            stroke-width="3.6"
-          />
-        </svg>
-      </span>
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit emotion-5"
+            data-testid="ErrorOutlineIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+            />
+          </svg>
+        </div>
+        <div
+          class="MuiAlert-message emotion-6"
+        >
+          <div
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom MuiAlertTitle-root emotion-7"
+          >
+            Please try again
+          </div>
+        </div>
+      </div>
+      <button
+        aria-label="Go back home"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary emotion-8"
+        tabindex="0"
+        type="button"
+      >
+        Go home
+      </button>
     </div>
   </main>
 </DocumentFragment>
 `;
 
-exports[`LibraryPage Component > Component Snapshots > should match snapshot when page is loaded 1`] = `
+exports[`LibraryPage Component > Component Snapshots > should match snapshot when loading 1`] = `
 <DocumentFragment>
   @keyframes animation-0 {
   0% {
@@ -256,7 +405,7 @@ exports[`LibraryPage Component > Component Snapshots > should match snapshot whe
       aria-hidden="true"
       aria-label="Loader"
       class="MuiBackdrop-root emotion-1"
-      style="opacity: 0; visibility: hidden;"
+      style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     >
       <span
         class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInherit emotion-2"
@@ -277,6 +426,137 @@ exports[`LibraryPage Component > Component Snapshots > should match snapshot whe
           />
         </svg>
       </span>
+    </div>
+  </main>
+</DocumentFragment>
+`;
+
+exports[`LibraryPage Component > Component Snapshots > should match snapshot when page is loaded 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  background-color: #FFFFF3;
+  color: #1D263B;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 4px;
+  box-shadow: var(--Paper-shadow);
+  background-image: var(--Paper-overlay);
+  padding: 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 2rem;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: normal;
+  -ms-flex-pack: normal;
+  -webkit-justify-content: normal;
+  justify-content: normal;
+  background-color: default;
+  min-height: 100vh;
+  color: black;
+}
+
+.emotion-1 a {
+  color: #960200;
+  font-weight: 500;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-1 img {
+  min-width: 20rem;
+  min-height: 15rem;
+  max-width: 30rem;
+  max-height: 25rem;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.emotion-1 blockquote {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #C2D8FF;
+  margin: 1rem 0;
+  font-style: italic;
+  min-height: 48px;
+  padding-left: 5rem;
+}
+
+.emotion-1 blockquote::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 100%;
+  background-color: #7796CB;
+  background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20448%20512'%3e%3c!--!Font%20Awesome%20Free%206.7.2%20by%20@fontawesome%20-%20https://fontawesome.com%20License%20-%20https://fontawesome.com/license/free%20Copyright%202025%20Fonticons,%20Inc.--%3e%3cpath%20d='M0%20216C0%20149.7%2053.7%2096%20120%2096l8%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032l-8%200c-30.9%200-56%2025.1-56%2056l0%208%2064%200c35.3%200%2064%2028.7%2064%2064l0%2064c0%2035.3-28.7%2064-64%2064l-64%200c-35.3%200-64-28.7-64-64l0-32%200-32%200-72zm256%200c0-66.3%2053.7-120%20120-120l8%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032l-8%200c-30.9%200-56%2025.1-56%2056l0%208%2064%200c35.3%200%2064%2028.7%2064%2064l0%2064c0%2035.3-28.7%2064-64%2064l-64%200c-35.3%200-64-28.7-64-64l0-32%200-32%200-72z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  -webkit-background-position: center;
+  background-position: center;
+  -webkit-background-size: 18px;
+  background-size: 18px;
+}
+
+.emotion-1 table {
+  margin: 2rem auto;
+  border-spacing: 0;
+  border: 0.5px solid black;
+}
+
+.emotion-1 table th {
+  background-color: #C2D8FF;
+}
+
+.emotion-1 table td,
+.emotion-1 table th {
+  border: 0.5px solid black;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+<main
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation2 emotion-0"
+    style="--Paper-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12);"
+  >
+    <div
+      class="MuiBox-root emotion-1"
+    >
+      <h2
+        class="MuiTypography-root MuiTypography-h2 emotion-2"
+      >
+        Test Page Title
+      </h2>
+      <h1>
+        Test Content
+      </h1>
+      
+
+      <p>
+        This is test markdown content.
+      </p>
     </div>
   </main>
 </DocumentFragment>

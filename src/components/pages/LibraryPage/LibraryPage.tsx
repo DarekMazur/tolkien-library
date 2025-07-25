@@ -20,7 +20,7 @@ const LibraryPage = () => {
     errorMessage,
   } = useApi(() => getPageBySlug(location.pathname.slice(1)));
 
-  if (!isLoading) {
+  if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
 
