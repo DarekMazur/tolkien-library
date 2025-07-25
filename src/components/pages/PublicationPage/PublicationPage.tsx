@@ -3,6 +3,7 @@ import GenericTable from '@/components/organisms/GenericTable/GenericTable.tsx';
 import { Divider, Typography } from '@mui/material';
 import { useCallback } from 'react';
 import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
+import Error from '@/components/molecules/Error/Error';
 
 /**
  * A site with Tolkien publications divided into three categories.
@@ -40,8 +41,10 @@ interface PublicationPageProps {
 
 const PublicationPage = ({ data = [] }: PublicationPageProps) => {
   if (!Array.isArray(data)) {
-    return <Typography>Error: Incorrect data format</Typography>;
+    return <Error errorMessage={'Error: Incorrect data format'} />;
   }
+
+  if (data.length === 0) return <NoContent alert="No publications found" />;
 
   const renderTable = useCallback(
     (type: EPublicationType, title: string) => {
@@ -66,18 +69,14 @@ const PublicationPage = ({ data = [] }: PublicationPageProps) => {
         Fragmentarium
       </Typography>
       <Divider sx={{ mb: 4 }} />
-      {data.length > 0 ? (
-        <>
-          {renderTable(EPublicationType.PARTIAL, 'Items partly related to Tolkien')}
-          {renderTable(
-            EPublicationType.INCLUDING,
-            "Items that contain Tolkien articles or are partially devoted to Tolkien's works",
-          )}
-          {renderTable(EPublicationType.EPUB, 'E-publications')}
-        </>
-      ) : (
-        <NoContent alert="No publications found" />
-      )}
+      <>
+        {renderTable(EPublicationType.PARTIAL, 'Items partly related to Tolkien')}
+        {renderTable(
+          EPublicationType.INCLUDING,
+          "Items that contain Tolkien articles or are partially devoted to Tolkien's works",
+        )}
+        {renderTable(EPublicationType.EPUB, 'E-publications')}
+      </>
     </>
   );
 };

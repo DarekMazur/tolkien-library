@@ -1,5 +1,6 @@
 import { Card, CardContent, Snackbar, Alert } from '@mui/material';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
+import Error from '@/components/molecules/Error/Error';
 import { useMe } from '@/hooks/useMe.tsx';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useState } from 'react';
@@ -17,25 +18,25 @@ const UserProfile = () => {
 
   if (isLoading) return <Loader isLoading />;
 
+  if (!user) return <Error errorMessage={'User not found.'} />;
+
   const handleCloseNotification = () => {
     setNotification((prev) => ({ ...prev, open: false }));
   };
 
   return (
     <Wrapper>
-      {user ? (
-        <Card sx={{ maxWidth: 800, margin: '0 auto', borderRadius: 2, overflow: 'hidden' }}>
-          <UserHeader editMode={editMode} setEditMode={setEditMode} />
-          <CardContent sx={{ p: 4 }}>
-            <UserForm
-              user={user}
-              setNotification={setNotification}
-              editMode={editMode}
-              setEditMode={setEditMode}
-            />
-          </CardContent>
-        </Card>
-      ) : null}
+      <Card sx={{ maxWidth: 800, margin: '0 auto', borderRadius: 2, overflow: 'hidden' }}>
+        <UserHeader editMode={editMode} setEditMode={setEditMode} />
+        <CardContent sx={{ p: 4 }}>
+          <UserForm
+            user={user}
+            setNotification={setNotification}
+            editMode={editMode}
+            setEditMode={setEditMode}
+          />
+        </CardContent>
+      </Card>
       <Snackbar
         open={notification.open}
         autoHideDuration={6000}

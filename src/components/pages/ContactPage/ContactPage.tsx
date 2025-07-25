@@ -4,16 +4,17 @@ import bilbo from '@/assets/images/bilbo-martinfreeman.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/../store';
 import { useEffect } from 'react';
-import { modifyIdentity } from '@/../store/reducers/identityReducer.ts';
+import { modifyIdentity } from '@/../store/reducers/identityReducer';
 import { sendMessage } from '@/lib/helpers/sendMessage.ts';
-import ContactButtons from '@/components/molecules/ContactButtons/ContactButtons.tsx';
-import { useApi } from '@/hooks/useApi.tsx';
-import { getPageIdentity } from '@/lib/getDataFromApi.ts';
-import Loader from '@/components/atoms/Loader/Loader.tsx';
+import ContactButtons from '@/components/molecules/ContactButtons/ContactButtons';
+import { useApi } from '@/hooks/useApi';
+import { getPageIdentity } from '@/lib/getDataFromApi';
+import Loader from '@/components/atoms/Loader/Loader';
+import Error from '@/components/molecules/Error/Error';
 
 const ContactPage = () => {
   const pageIdentity = useSelector((state: RootState) => state.identity);
-  const { data: identity, isLoading, isError } = useApi(() => getPageIdentity());
+  const { data: identity, isLoading, isError, errorMessage } = useApi(() => getPageIdentity());
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,27 +25,25 @@ const ContactPage = () => {
     }
   }, [pageIdentity, identity]);
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
+  if (isError) {
+    return <Error errorMessage={errorMessage || undefined} />;
+  }
+
   return (
     <Wrapper>
-      {isLoading ? (
-        <Loader isLoading={isLoading} />
-      ) : (
-        <>
-          {isError ? null : (
-            <>
-              <Typography variant="h2">Contact</Typography>
-              <Box
-                sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}
-              >
-                <ContactButtons
-                  email={pageIdentity ? sendMessage(pageIdentity.adminContact.value) : ''}
-                />
-                <img src={bilbo} alt="Bilbo Baggins reading contract" />
-              </Box>
-            </>
-          )}
-        </>
-      )}
+      <>
+        <Typography variant="h2">Contact</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <ContactButtons
+            email={pageIdentity ? sendMessage(pageIdentity.adminContact.value) : ''}
+          />
+          <img src={bilbo} alt="Bilbo Baggins reading contract" />
+        </Box>
+      </>
     </Wrapper>
   );
 };

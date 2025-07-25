@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { expect, vi } from 'vitest';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { renderWithProviders } from '@/lib/providers/renderWithProviders';
 import UserProfile from './UserProfile';
@@ -8,6 +8,7 @@ vi.mock('@/hooks/useMe', () => ({
 }));
 
 import { useMe } from '@/hooks/useMe';
+import { MemoryRouter } from 'react-router';
 
 describe('UserProfile', () => {
   beforeEach(() => {
@@ -21,7 +22,11 @@ describe('UserProfile', () => {
       isAuthenticated: false,
     });
 
-    renderWithProviders(<UserProfile />);
+    renderWithProviders(
+      <MemoryRouter>
+        <UserProfile />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByLabelText(/loader/i)).toBeInTheDocument();
   });
@@ -41,24 +46,32 @@ describe('UserProfile', () => {
       isAuthenticated: true,
     });
 
-    renderWithProviders(<UserProfile />);
+    renderWithProviders(
+      <MemoryRouter>
+        <UserProfile />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByDisplayValue(/TestUser/i)).toBeInTheDocument();
     expect(screen.getByRole('form')).toBeInTheDocument();
     expect(document.body).toMatchSnapshot();
   });
 
-  it('renders nothing when not loading and no user exists', () => {
+  it('renders error when not loading and no user exists', () => {
     (useMe as jest.Mock).mockReturnValue({
       user: null,
       isLoading: false,
       isAuthenticated: false,
     });
 
-    const { container } = renderWithProviders(<UserProfile />);
-    const main = container.querySelector('main');
+    renderWithProviders(
+      <MemoryRouter>
+        <UserProfile />
+      </MemoryRouter>,
+    );
 
-    expect(main?.childElementCount).toBe(0);
+    expect(screen.queryByRole('alert')).toBeInTheDocument();
+    expect(screen.queryByText('Something went wrong...')).toBeInTheDocument();
   });
 
   it('shows success notification after form submit in edit mode', async () => {
@@ -76,7 +89,11 @@ describe('UserProfile', () => {
       isAuthenticated: true,
     });
 
-    renderWithProviders(<UserProfile />);
+    renderWithProviders(
+      <MemoryRouter>
+        <UserProfile />
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /edit/i }));
 

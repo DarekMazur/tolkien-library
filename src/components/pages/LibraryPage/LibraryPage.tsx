@@ -1,4 +1,5 @@
 import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
+import Error from '@/components/molecules/Error/Error';
 import { Box, Typography } from '@mui/material';
 import { articleCardContentStyles } from '@/components/molecules/ArticleCard/ArticleCard.styles.ts';
 import remarkGfm from 'remark-gfm';
@@ -16,24 +17,29 @@ const LibraryPage = () => {
     data: page,
     isError,
     isLoading,
+    errorMessage,
   } = useApi(() => getPageBySlug(location.pathname.slice(1)));
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
+  if (isError || !page) {
+    return <Error errorMessage={errorMessage || undefined} />;
+  }
 
   return (
     <Wrapper>
-      {isLoading ? (
-        <Loader isLoading={isLoading} />
-      ) : isError || !page ? null : (
-        <Box sx={articleCardContentStyles}>
-          <Typography variant="h2">{page.title}</Typography>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            components={components}
-          >
-            {page.content}
-          </ReactMarkdown>
-        </Box>
-      )}
+      <Box sx={articleCardContentStyles}>
+        <Typography variant="h2">{page.title}</Typography>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={components}
+        >
+          {page.content}
+        </ReactMarkdown>
+      </Box>
     </Wrapper>
   );
 };
