@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseTranslatorDataResult.html">UseTranslatorDataResult</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#TranslatedBooksList">TranslatedBooksList</a></li><li><a href="global.html#TranslatorInfo">TranslatorInfo</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ErrorProps.html">ErrorProps</a></li><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseTranslatorDataResult.html">UseTranslatorDataResult</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#TranslatedBooksList">TranslatedBooksList</a></li><li><a href="global.html#TranslatorInfo">TranslatorInfo</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -86,7 +86,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import Wrapper from '@/components/atoms/Wrapper/Wrapper';
-import { Box } from '@mui/material';
+import Error from '@/components/molecules/Error/Error';
 import { useParams } from 'react-router';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
@@ -140,11 +140,7 @@ const TranslatorPage = () => {
   }
 
   if (hasError || !translator) {
-    return (
-      &lt;Wrapper>
-        &lt;Box>{errorMessage || 'Translator not found'}&lt;/Box>
-      &lt;/Wrapper>
-    );
+    return &lt;Error errorMessage={errorMessage || 'Translator not found'} />;
   }
 
   return (
