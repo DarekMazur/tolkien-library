@@ -41,11 +41,9 @@ import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
  */
 
 const FanzinPage = ({ data }: { data: IFanzinProps[] }) => {
-  return data ? (
-    <GenericTable data={data} publicationType={ETableType.FANZIN} title="Fanzins" />
-  ) : (
-    <NoContent />
-  );
+  if (!data) return <NoContent />;
+
+  return <GenericTable data={data} publicationType={ETableType.FANZIN} title="Fanzins" />;
 };
 
 export default FanzinPage;
