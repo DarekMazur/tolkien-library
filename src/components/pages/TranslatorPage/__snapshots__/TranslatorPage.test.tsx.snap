@@ -816,8 +816,8 @@ exports[`TranslatorPage > should render default not found message when translato
         </div>
       </div>
       <button
-        aria-label="Go back home"
         class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary emotion-8"
+        role="button"
         tabindex="0"
         type="button"
       >
@@ -1106,8 +1106,8 @@ exports[`TranslatorPage > should render error message when hasError is true 1`] 
         </div>
       </div>
       <button
-        aria-label="Go back home"
         class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary emotion-8"
+        role="button"
         tabindex="0"
         type="button"
       >

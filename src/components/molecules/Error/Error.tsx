@@ -69,7 +69,7 @@ const Error = ({ errorMessage, errorCode, resetButtonText = 'Go home', onReset }
           <AlertTitle color="error">{errorMessage ?? 'Please try again'}</AlertTitle>
           {errorCode && <Typography variant="subtitle1">{`Code: ${errorCode}`}</Typography>}
         </Alert>
-        <Button aria-label="Go back home" variant="outlined" onClick={handleReset}>
+        <Button role="button" variant="outlined" onClick={handleReset}>
           {resetButtonText}
         </Button>
       </Stack>
