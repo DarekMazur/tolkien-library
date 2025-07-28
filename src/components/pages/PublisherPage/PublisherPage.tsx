@@ -4,7 +4,13 @@ import { EntityPage } from '@/components/pages/_shared/EntityPage/EntityPage.tsx
 
 const PublisherPage = () => {
   const { slug } = useParams();
-  return <EntityPage hook={() => usePublisherData(slug)} entityLabel="Publisher" />;
+  return (
+    <EntityPage
+      hook={() => usePublisherData(slug)}
+      entityLabel="Publisher"
+      itemsSectionTitle="Publications:"
+    />
+  );
 };
 
 export default PublisherPage;

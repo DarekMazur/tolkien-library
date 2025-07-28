@@ -17,6 +17,7 @@ interface EntityPageProps<
     errorMessage: string | null;
   };
   entityLabel: string;
+  itemsSectionTitle: string;
 }
 
 export const EntityPage = <
@@ -25,6 +26,7 @@ export const EntityPage = <
 >({
   hook,
   entityLabel,
+  itemsSectionTitle = 'Items:',
 }: EntityPageProps<E, B>) => {
   const { entity, books, isLoading, hasError, errorMessage } = hook();
 
@@ -40,7 +42,11 @@ export const EntityPage = <
         description={entity.description}
       />
 
-      <ItemList items={books} header="Publications" getPrimaryText={(book) => book.polishTitle} />
+      <ItemList
+        items={books}
+        header={itemsSectionTitle}
+        getPrimaryText={(book) => book.polishTitle}
+      />
     </Wrapper>
   );
 };
