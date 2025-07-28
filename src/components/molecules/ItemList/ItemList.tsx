@@ -14,7 +14,6 @@ interface ItemListProps<Item> {
   getPrimaryText: (item: Item) => string;
   onClickItem?: (item: Item) => void;
   emptyMessage?: string;
-  header?: string;
 }
 
 export const ItemList = <T extends object>({
@@ -22,7 +21,6 @@ export const ItemList = <T extends object>({
   getPrimaryText,
   onClickItem,
   emptyMessage = 'No items found',
-  header,
 }: ItemListProps<T>) => {
   if (!items || items.length === 0) {
     return (
@@ -34,11 +32,6 @@ export const ItemList = <T extends object>({
 
   return (
     <Box>
-      {header && (
-        <Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
-          {header}
-        </Typography>
-      )}
       <List sx={{ width: 'fit-content' }}>
         {items.map((item, idx) => (
           <ListItem key={idx} disablePadding>

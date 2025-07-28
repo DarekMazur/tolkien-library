@@ -1,52 +1,49 @@
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import Loader from '@/components/atoms/Loader/Loader.tsx';
-import Error from '@/components/molecules/Error/Error.tsx';
-import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
-import PersonInfo from '@/components/molecules/PersonInfo/PersonInfo.tsx';
-import { ItemList } from '@/components/molecules/ItemList/ItemList.tsx';
+import Wrapper from '@/components/atoms/Wrapper/Wrapper';
+import Loader from '@/components/atoms/Loader/Loader';
+import Error from '@/components/molecules/Error/Error';
+import NoContent from '@/components/atoms/NoContent/NoContent';
+import { Box, Typography } from '@mui/material';
+import { ComponentType } from 'react';
 
-interface EntityPageProps<
-  E extends { title?: string; description?: string },
-  B extends { id: string; polishTitle: string },
-> {
-  hook: () => {
+interface EntityPageProps<E extends object, I extends object = never> {
+  useData: () => {
     entity: E | null;
-    books: B[] | null;
+    books: I[] | null;
     isLoading: boolean;
     hasError: boolean;
     errorMessage: string | null;
   };
-  entityLabel: string;
-  itemsSectionTitle: string;
+  InfoComponent: ComponentType<{ entity: E }>;
+  ItemsComponent?: ComponentType<{ items: I[] | null }>;
+  itemsSectionTitle?: string;
 }
 
-export const EntityPage = <
-  E extends { title?: string; description?: string },
-  B extends { id: string; polishTitle: string },
->({
-  hook,
-  entityLabel,
+const EntityPage = <E extends object, I extends object = never>({
+  useData,
+  InfoComponent,
+  ItemsComponent,
   itemsSectionTitle = 'Items:',
-}: EntityPageProps<E, B>) => {
-  const { entity, books, isLoading, hasError, errorMessage } = hook();
+}: EntityPageProps<E, I>) => {
+  const { entity, books, isLoading, hasError, errorMessage } = useData();
 
   if (isLoading) return <Loader isLoading />;
-  if (hasError) return <Error errorMessage={errorMessage || undefined} />;
+  if (hasError) return <Error errorMessage={errorMessage ?? 'Unknown error'} />;
   if (!entity) return <NoContent />;
 
   return (
     <Wrapper>
-      <PersonInfo
-        fullName={entity.title as string}
-        roleLabel={entityLabel}
-        description={entity.description}
-      />
+      <InfoComponent entity={entity} />
 
-      <ItemList
-        items={books}
-        header={itemsSectionTitle}
-        getPrimaryText={(book) => book.polishTitle}
-      />
+      {ItemsComponent && (
+        <Box sx={{ pt: 4 }}>
+          <Typography variant="h3" component="h2" sx={{ pb: 2 }}>
+            {itemsSectionTitle}
+          </Typography>
+          <ItemsComponent items={books} />
+        </Box>
+      )}
     </Wrapper>
   );
 };
+
+export default EntityPage;
