@@ -11,22 +11,40 @@ import {
   Typography,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useApi } from '@/hooks/useApi.tsx';
+import { getPublisherBySlug } from '@/lib/getDataFromApi';
+import Loader from '@/components/atoms/Loader/Loader';
+import Error from '@/components/molecules/Error/Error';
+import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
 
 const PublisherPage = () => {
   const { slug } = useParams();
+  const { data, isLoading, isError, errorMessage } = useApi(() => getPublisherBySlug(slug!));
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
+  if (isError || !slug) {
+    return <Error errorMessage={errorMessage || 'Unknown error'} />;
+  }
+
+  if (!data) {
+    return <NoContent />;
+  }
 
   return (
     <Wrapper>
       <Box>
         <Typography variant="h2" component="h1">
-          Publisher title for {slug}
+          {data.title}
         </Typography>
         <Typography variant="h3" component="h2" color="text.secondary">
           Publisher
         </Typography>
         <Divider sx={{ my: 4 }} />
         <Typography variant="body1" sx={{ mt: 2 }}>
-          Publisher description
+          {data.description}
         </Typography>
       </Box>
       <Box>
@@ -40,7 +58,7 @@ const PublisherPage = () => {
                 <KeyboardArrowRightIcon />
               </ListItemIcon>
               <ListItemText
-                primary={`${slug} books list`}
+                primary={`${data.title} books list`}
                 slotProps={{
                   primary: {
                     variant: 'body1',
