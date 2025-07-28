@@ -4,7 +4,6 @@ import Error from '@/components/molecules/Error/Error.tsx';
 import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
 import {
   Box,
-  Divider,
   List,
   ListItem,
   ListItemButton,
@@ -13,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import PersonInfo from '@/components/molecules/PersonInfo/PersonInfo.tsx';
 
 interface EntityPageProps<
   E extends { title?: string; description?: string },
@@ -43,20 +43,11 @@ export const EntityPage = <
 
   return (
     <Wrapper>
-      <Box>
-        <Typography variant="h2" component="h1">
-          {entity.title}
-        </Typography>
-        <Typography variant="h3" component="h2" color="text.secondary">
-          {entityLabel}
-        </Typography>
-        <Divider sx={{ my: 4 }} />
-        {entity.description && (
-          <Typography variant="body1" sx={{ mt: 2 }}>
-            {entity.description}
-          </Typography>
-        )}
-      </Box>
+      <PersonInfo
+        fullName={entity.title as string}
+        roleLabel={entityLabel}
+        description={entity.description}
+      />
 
       <Box>
         <Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
