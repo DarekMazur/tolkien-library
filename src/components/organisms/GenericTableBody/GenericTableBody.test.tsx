@@ -237,7 +237,7 @@ describe('GenericTableBody', () => {
     expect(translatorLinks).toHaveLength(3);
     expect(translatorLinks[0].getAttribute('href')).toBe('/library/translator/marek-oramus');
     expect(publisherLinks).toHaveLength(3);
-    expect(publisherLinks[0].getAttribute('href')).toBe('/library/publishers/rebis');
+    expect(publisherLinks[0].getAttribute('href')).toBe('/library/publisher/rebis');
   });
 
   it('renders "-" for null values', () => {
