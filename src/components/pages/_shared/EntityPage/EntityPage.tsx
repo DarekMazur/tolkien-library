@@ -2,17 +2,8 @@ import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
 import Loader from '@/components/atoms/Loader/Loader.tsx';
 import Error from '@/components/molecules/Error/Error.tsx';
 import NoContent from '@/components/atoms/NoContent/NoContent.tsx';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import PersonInfo from '@/components/molecules/PersonInfo/PersonInfo.tsx';
+import { ItemList } from '@/components/molecules/ItemList/ItemList.tsx';
 
 interface EntityPageProps<
   E extends { title?: string; description?: string },
@@ -49,31 +40,7 @@ export const EntityPage = <
         description={entity.description}
       />
 
-      <Box>
-        <Typography variant="h3" component="h2" sx={{ pt: 4, pb: 2 }}>
-          Publications:
-        </Typography>
-        <List sx={{ width: 'fit-content' }}>
-          {books?.map((book) => (
-            <ListItem key={book.id} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <KeyboardArrowRightIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={book.polishTitle}
-                  slotProps={{
-                    primary: {
-                      variant: 'body1',
-                      sx: { fontWeight: 'medium' },
-                    },
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
+      <ItemList items={books} header="Publications" getPrimaryText={(book) => book.polishTitle} />
     </Wrapper>
   );
 };
