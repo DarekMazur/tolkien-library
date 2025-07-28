@@ -20,8 +20,6 @@ const PublisherPage = () => {
   const { slug } = useParams();
   const { publisher, books, isLoading, hasError, errorMessage } = usePublisherData(slug!);
 
-  console.log(books);
-
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
