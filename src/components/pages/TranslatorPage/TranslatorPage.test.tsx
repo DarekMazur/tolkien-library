@@ -56,7 +56,7 @@ describe('TranslatorPage', () => {
 
     const { getByText, container } = renderWithProviders(<TranslatorPage />);
 
-    expect(getByText('Translator not found')).toBeDefined();
+    expect(getByText('Nothing found...')).toBeDefined();
     expect(container).toMatchSnapshot();
   });
 
@@ -106,7 +106,7 @@ describe('TranslatorPage', () => {
     ];
     (useParams as Mock).mockReturnValue({ slug: 'kowalski' });
     (useTranslatorData as Mock).mockReturnValue({
-      translator: mockTranslator,
+      entity: mockTranslator,
       books: mockBooks,
       isLoading: false,
       hasError: false,
