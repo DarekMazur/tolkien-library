@@ -1,0 +1,167 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PersonInfo Component > Snapshot tests > should match snapshot with description > person-info-with-description 1`] = `
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1D263B;
+}
+
+.emotion-3 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.emotion-4 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+}
+
+<div
+  class="MuiBox-root emotion-0"
+>
+  <h1
+    class="MuiTypography-root MuiTypography-h2 emotion-1"
+    role="heading"
+  >
+    Éowyn of Rohan
+  </h1>
+  <h2
+    class="MuiTypography-root MuiTypography-h3 emotion-2"
+    role="heading"
+  >
+    Shieldmaiden
+  </h2>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-3"
+  />
+  <p
+    class="MuiTypography-root MuiTypography-body1 emotion-4"
+  >
+    I am no man!
+  </p>
+</div>
+`;
+
+exports[`PersonInfo Component > Snapshot tests > should match snapshot with long content > person-info-with-long-content 1`] = `
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1D263B;
+}
+
+.emotion-3 {
+  margin: 0;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.emotion-4 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+}
+
+<div
+  class="MuiBox-root emotion-0"
+>
+  <h1
+    class="MuiTypography-root MuiTypography-h2 emotion-1"
+    role="heading"
+  >
+    Very Long Name With Multiple Words And Special Characters Éowyn
+  </h1>
+  <h2
+    class="MuiTypography-root MuiTypography-h3 emotion-2"
+    role="heading"
+  >
+    Very Long Role Label That Might Wrap To Multiple Lines
+  </h2>
+  <hr
+    class="MuiDivider-root MuiDivider-fullWidth emotion-3"
+  />
+  <p
+    class="MuiTypography-root MuiTypography-body1 emotion-4"
+  >
+    This is a very long description that contains multiple sentences and should test how the component handles extensive content. It includes various punctuation marks, numbers like 123, and special characters such as @#$%.
+  </p>
+</div>
+`;
+
+exports[`PersonInfo Component > Snapshot tests > should match snapshot without description > person-info-without-description 1`] = `
+.emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1D263B;
+}
+
+<div
+  class="MuiBox-root emotion-0"
+>
+  <h1
+    class="MuiTypography-root MuiTypography-h2 emotion-1"
+    role="heading"
+  >
+    Éowyn of Rohan
+  </h1>
+  <h2
+    class="MuiTypography-root MuiTypography-h3 emotion-2"
+    role="heading"
+  >
+    Shieldmaiden
+  </h2>
+</div>
+`;

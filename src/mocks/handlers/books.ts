@@ -5,12 +5,20 @@ export const handlers = [
   http.get(`${import.meta.env.VITE_API_URL}/books`, ({ request }) => {
     const url = new URL(request.url);
     const translatorId = url.searchParams.get('translator');
+    const publisherId = url.searchParams.get('publisher');
 
     const books = db.book.getAll();
 
     if (translatorId) {
       return HttpResponse.json(
         books.filter((book) => book.translator?.id === translatorId),
+        { status: 200 },
+      );
+    }
+
+    if (publisherId) {
+      return HttpResponse.json(
+        books.filter((book) => book.publisher?.id === publisherId),
         { status: 200 },
       );
     }

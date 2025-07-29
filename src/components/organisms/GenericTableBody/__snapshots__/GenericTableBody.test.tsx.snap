@@ -107,7 +107,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         <a
           class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
           data-discover="true"
-          href="/library/publishers/rebis"
+          href="/library/publisher/rebis"
         >
           Rebis
         </a>
@@ -154,7 +154,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         <a
           class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
           data-discover="true"
-          href="/library/publishers/rebis"
+          href="/library/publisher/rebis"
         >
           Rebis
         </a>
@@ -201,7 +201,7 @@ exports[`GenericTableBody > matches snapshot with sorted data 1`] = `
         <a
           class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-4"
           data-discover="true"
-          href="/library/publishers/rebis"
+          href="/library/publisher/rebis"
         >
           Rebis
         </a>

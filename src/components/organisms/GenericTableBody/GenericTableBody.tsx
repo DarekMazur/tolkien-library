@@ -72,7 +72,7 @@ const GenericTableBody = <T extends ICommonId>({
       type === 'book'
         ? `/library/books/${slug}`
         : type === 'publisher'
-          ? `/library/publishers/${slug}`
+          ? `/library/publisher/${slug}`
           : `/library/translator/${slug}`;
     return <CustomLink href={path}>{value}</CustomLink>;
   };

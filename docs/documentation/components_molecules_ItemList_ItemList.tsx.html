@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> components/molecules/ItemList/ItemList.tsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ErrorProps.html">ErrorProps</a></li><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="ItemListProps.html">ItemListProps</a></li><li><a href="PersonInfoProps.html">PersonInfoProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseEntityWithBooksProps.html">UseEntityWithBooksProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#ItemList">ItemList</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#PersonInfo">PersonInfo</a></li><li><a href="global.html#PublisherPage">PublisherPage</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useEntityWithBooks">useEntityWithBooks</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#usePublisherData">usePublisherData</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>components/molecules/ItemList/ItemList.tsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
+/**
+ * Props interface for the ItemList component.
+ *
+ * @template Item - The type of items in the list
+ */
+interface ItemListProps&lt;Item> {
+  /**
+   * Array of items to display in the list. Can be null to indicate loading state.
+   * @type {Item[] | null}
+   */
+  items: Item[] | null;
+  /**
+   * Function to extract the primary display text from each item.
+   * @param {Item} item - The item to extract text from
+   * @returns {string} The primary text to display for the item
+   */
+  getPrimaryText: (item: Item) => string;
+  /**
+   * Optional callback function called when an item is clicked.
+   * @param {Item} item - The clicked item
+   * @returns {void}
+   * @optional
+   */
+  onClickItem?: (item: Item) => void;
+  /**
+   * Optional message to display when the items array is empty or null.
+   * @type {string}
+   * @default "No items found"
+   * @optional
+   */
+  emptyMessage?: string;
+}
+
+/**
+ * A generic reusable list component that displays items with Material-UI styling.
+ *
+ * Features:
+ * - Generic type support for any object type
+ * - Customizable text extraction via getPrimaryText function
+ * - Optional click handlers for interactive behavior
+ * - Empty state handling with customizable message
+ * - Material-UI integration with consistent styling
+ *
+ * @template T - The type of objects in the items array, must extend object
+ *
+ * @param {ItemListProps&lt;T>} props - The component props
+ * @param {T[] | null} props.items - Array of items to display, null indicates loading/empty state
+ * @param {(item: T) => string} props.getPrimaryText - Function to extract display text from each item
+ * @param {(item: T) => void} [props.onClickItem] - Optional click handler for items
+ * @param {string} [props.emptyMessage="No items found"] - Message shown when no items are available
+ *
+ * @returns {JSX.Element} A Material-UI List component or Typography component for empty state
+ *
+ * @example
+ * ```
+ * // Basic usage with string array
+ * &lt;ItemList
+ *   items={['Item 1', 'Item 2', 'Item 3']}
+ *   getPrimaryText={(item) => item}
+ * />
+ *
+ * // Usage with custom object type
+ * interface User {
+ *   id: number;
+ *   name: string;
+ *   email: string;
+ * }
+ *
+ * &lt;ItemList&lt;User>
+ *   items={users}
+ *   getPrimaryText={(user) => user.name}
+ *   onClickItem={(user) => navigate(`/users/${user.id}`)}
+ *   emptyMessage="No users available"
+ * />
+ *
+ * // Loading state
+ * &lt;ItemList
+ *   items={null}
+ *   getPrimaryText={(item) => item.name}
+ *   emptyMessage="Loading..."
+ * />
+ * ```
+ *
+ */
+const ItemList = &lt;T extends object>({
+  items,
+  getPrimaryText,
+  onClickItem,
+  emptyMessage = 'No items found',
+}: ItemListProps&lt;T>) => {
+  if (!items || items.length === 0) {
+    return (
+      &lt;Typography variant="body1" color="text.secondary">
+        {emptyMessage}
+      &lt;/Typography>
+    );
+  }
+
+  return (
+    &lt;Box>
+      &lt;List sx={{ width: 'fit-content' }}>
+        {items.map((item, idx) => (
+          &lt;ListItem key={idx} disablePadding>
+            &lt;ListItemButton onClick={() => onClickItem?.(item)}>
+              &lt;ListItemIcon>
+                &lt;KeyboardArrowRightIcon />
+              &lt;/ListItemIcon>
+              &lt;ListItemText
+                primary={getPrimaryText(item)}
+                slotProps={{
+                  primary: { variant: 'body1', sx: { fontWeight: 'medium' } },
+                }}
+              />
+            &lt;/ListItemButton>
+          &lt;/ListItem>
+        ))}
+      &lt;/List>
+    &lt;/Box>
+  );
+};
+
+export default ItemList;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

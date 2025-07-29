@@ -1,18 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TranslatedBooksList component > should match snapshot with two translated books 1`] = `
-<DocumentFragment>
-  .emotion-1 {
-  margin: 0;
-  font-family: "Tolkien",sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.5;
-  font-weight: 400;
-  padding-top: 32px;
-  padding-bottom: 16px;
-}
-
-.emotion-2 {
+exports[`ItemList component > renders the list with items and matches snapshot 1`] = `
+.emotion-1 {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -24,7 +13,7 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   width: fit-content;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,7 +34,7 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   text-align: left;
 }
 
-.emotion-4 {
+.emotion-3 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -108,61 +97,61 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   padding-right: 16px;
 }
 
-.emotion-4::-moz-focus-inner {
+.emotion-3::-moz-focus-inner {
   border-style: none;
 }
 
-.emotion-4.Mui-disabled {
+.emotion-3.Mui-disabled {
   pointer-events: none;
   cursor: default;
 }
 
 @media print {
-  .emotion-4 {
+  .emotion-3 {
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
   }
 }
 
-.emotion-4:hover {
+.emotion-3:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0.04);
 }
 
 @media (hover: none) {
-  .emotion-4:hover {
+  .emotion-3:hover {
     background-color: transparent;
   }
 }
 
-.emotion-4.Mui-selected {
+.emotion-3.Mui-selected {
   background-color: rgba(29, 38, 59, 0.08);
 }
 
-.emotion-4.Mui-selected.Mui-focusVisible {
+.emotion-3.Mui-selected.Mui-focusVisible {
   background-color: rgba(29, 38, 59, 0.2);
 }
 
-.emotion-4.Mui-selected:hover {
+.emotion-3.Mui-selected:hover {
   background-color: rgba(29, 38, 59, 0.12);
 }
 
 @media (hover: none) {
-  .emotion-4.Mui-selected:hover {
+  .emotion-3.Mui-selected:hover {
     background-color: rgba(29, 38, 59, 0.08);
   }
 }
 
-.emotion-4.Mui-focusVisible {
+.emotion-3.Mui-focusVisible {
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-.emotion-4.Mui-disabled {
+.emotion-3.Mui-disabled {
   opacity: 0.38;
 }
 
-.emotion-5 {
+.emotion-4 {
   min-width: 56px;
   color: rgba(0, 0, 0, 0.54);
   -webkit-flex-shrink: 0;
@@ -174,7 +163,7 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   display: inline-flex;
 }
 
-.emotion-6 {
+.emotion-5 {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -191,7 +180,7 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   font-size: 1.7142857142857142rem;
 }
 
-.emotion-7 {
+.emotion-6 {
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -200,15 +189,15 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   margin-bottom: 4px;
 }
 
-.MuiTypography-root:where(.emotion-7 .MuiListItemText-primary) {
+.MuiTypography-root:where(.emotion-6 .MuiListItemText-primary) {
   display: block;
 }
 
-.MuiTypography-root:where(.emotion-7 .MuiListItemText-secondary) {
+.MuiTypography-root:where(.emotion-6 .MuiListItemText-secondary) {
   display: block;
 }
 
-.emotion-8 {
+.emotion-7 {
   margin: 0;
   font-family: "Montserrat Variable",sans-serif;
   font-weight: 400;
@@ -217,31 +206,27 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
   font-weight: 500;
 }
 
-<div
+<div>
+  <div
     class="MuiBox-root emotion-0"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h3 emotion-1"
-    >
-      Translated books:
-    </h2>
     <ul
-      class="MuiList-root MuiList-padding emotion-2"
+      class="MuiList-root MuiList-padding emotion-1"
     >
       <li
-        class="MuiListItem-root MuiListItem-gutters emotion-3"
+        class="MuiListItem-root MuiListItem-gutters emotion-2"
       >
         <div
-          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-4"
+          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-3"
           role="button"
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root emotion-5"
+            class="MuiListItemIcon-root emotion-4"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-5"
               data-testid="KeyboardArrowRightIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -252,10 +237,10 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
             </svg>
           </div>
           <div
-            class="MuiListItemText-root emotion-7"
+            class="MuiListItemText-root emotion-6"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-8"
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-7"
             >
               Hobbit, czyli tam i z powrotem
             </p>
@@ -263,19 +248,19 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
         </div>
       </li>
       <li
-        class="MuiListItem-root MuiListItem-gutters emotion-3"
+        class="MuiListItem-root MuiListItem-gutters emotion-2"
       >
         <div
-          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-4"
+          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-3"
           role="button"
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root emotion-5"
+            class="MuiListItemIcon-root emotion-4"
           >
             <svg
               aria-hidden="true"
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-6"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-5"
               data-testid="KeyboardArrowRightIcon"
               focusable="false"
               viewBox="0 0 24 24"
@@ -286,17 +271,119 @@ exports[`TranslatedBooksList component > should match snapshot with two translat
             </svg>
           </div>
           <div
-            class="MuiListItemText-root emotion-7"
+            class="MuiListItemText-root emotion-6"
           >
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-8"
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-7"
             >
               Władca Pierścieni
             </p>
           </div>
         </div>
       </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters emotion-2"
+      >
+        <div
+          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-3"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="MuiListItemIcon-root emotion-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-5"
+              data-testid="KeyboardArrowRightIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+              />
+            </svg>
+          </div>
+          <div
+            class="MuiListItemText-root emotion-6"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-7"
+            >
+              Niedokończone opowieści
+            </p>
+          </div>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters emotion-2"
+      >
+        <div
+          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-3"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="MuiListItemIcon-root emotion-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-5"
+              data-testid="KeyboardArrowRightIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+              />
+            </svg>
+          </div>
+          <div
+            class="MuiListItemText-root emotion-6"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-7"
+            >
+              Silmarillion
+            </p>
+          </div>
+        </div>
+      </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters emotion-2"
+      >
+        <div
+          class="MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-root MuiListItemButton-gutters emotion-3"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="MuiListItemIcon-root emotion-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium emotion-5"
+              data-testid="KeyboardArrowRightIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"
+              />
+            </svg>
+          </div>
+          <div
+            class="MuiListItemText-root emotion-6"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary emotion-7"
+            >
+              Dzieci Húrina
+            </p>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
-</DocumentFragment>
+</div>
 `;

@@ -694,7 +694,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             <a
               class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
               data-discover="true"
-              href="/library/publishers/rebis"
+              href="/library/publisher/rebis"
             >
               Rebis
             </a>
@@ -761,7 +761,7 @@ exports[`BooksPage component > should match snapshot when books list is provided
             <a
               class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-35"
               data-discover="true"
-              href="/library/publishers/zysk-i-s-ks"
+              href="/library/publisher/zysk-i-s-ks"
             >
               Zysk i S-ks
             </a>

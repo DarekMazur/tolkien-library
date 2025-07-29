@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> hooks/useEntityWithBooks.ts</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ErrorProps.html">ErrorProps</a></li><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="ItemListProps.html">ItemListProps</a></li><li><a href="PersonInfoProps.html">PersonInfoProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseEntityWithBooksProps.html">UseEntityWithBooksProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#ItemList">ItemList</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#PersonInfo">PersonInfo</a></li><li><a href="global.html#PublisherPage">PublisherPage</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useEntityWithBooks">useEntityWithBooks</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#usePublisherData">usePublisherData</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>hooks/useEntityWithBooks.ts</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
+import { useApi } from '@/hooks/useApi';
+import { TResponse } from '@/lib/types';
+
+/**
+ * Props for the useEntityWithBooks hook.
+ *
+ * @template E - Entity type that must extend an object with an `id` property
+ * @template B - Book type
+ */
+interface UseEntityWithBooksProps&lt;E, B> {
+  slug?: string;
+  fetchEntity: (slug: string) => Promise&lt;TResponse&lt;E>>;
+  fetchBooks: (id: string) => Promise&lt;TResponse&lt;B[]>>;
+}
+
+/**
+ * Custom hook for fetching an entity and its associated books.
+ *
+ * This hook manages the sequential loading of an entity (based on slug) and its related books.
+ * It handles loading states, error states, and provides a unified interface for accessing
+ * both the entity and its books data.
+ *
+ * @template E - Entity type that must have an `id` property of type string
+ * @template B - Book type (can be any structure)
+ *
+ * @param props - Configuration object for the hook
+ * @param props.slug - Optional slug identifier for the entity. If not provided, entity fetch is disabled
+ * @param props.fetchEntity - Async function that fetches entity data by slug
+ * @param props.fetchBooks - Async function that fetches books array by entity ID
+ *
+ * @returns Object containing:
+ *   - `entity`: The fetched entity data or null if not available
+ *   - `books`: Array of books associated with the entity or null if not available
+ *   - `isLoading`: Boolean indicating if either entity or books are currently loading
+ *   - `hasError`: Boolean indicating if any error occurred during fetching
+ *   - `errorMessage`: Error message string or null if no errors occurred
+ *
+ * @example
+ * ```
+ * // Usage with Author entity and Book types
+ * const { entity: author, books, isLoading, hasError } = useEntityWithBooks({
+ *   slug: 'tolkien',
+ *   fetchEntity: fetchAuthorBySlug,
+ *   fetchBooks: fetchBooksByAuthorId
+ * });
+ *
+ * if (isLoading) return &lt;LoadingSpinner />;
+ * if (hasError) return &lt;ErrorMessage />;
+ *
+ * return (
+ *   &lt;div>
+ *     &lt;h1>{author?.name}&lt;/h1>
+ *     &lt;BooksList books={books} />
+ *   &lt;/div>
+ * );
+ * ```
+ *
+ * @remarks
+ * - The hook uses sequential loading: books are only fetched after the entity is successfully loaded
+ * - Both API calls are managed by the `useApi` hook with appropriate enabling conditions
+ * - The return value is memoized to prevent unnecessary re-renders
+ * - Error handling is unified - any error in either request will set `hasError` to true
+ */
+export const useEntityWithBooks = &lt;E extends { id: string }, B>({
+  slug,
+  fetchEntity,
+  fetchBooks,
+}: UseEntityWithBooksProps&lt;E, B>) => {
+  const {
+    data: entity,
+    isError: entityError,
+    isLoading: entityLoading,
+  } = useApi(() => fetchEntity(slug!), { enabled: !!slug });
+
+  const {
+    data: books,
+    isError: booksError,
+    isLoading: booksLoading,
+  } = useApi(() => fetchBooks(entity!.id), { enabled: !!entity?.id });
+
+  return useMemo(
+    () => ({
+      entity: entity ?? null,
+      books: books ?? null,
+      isLoading: entityLoading || booksLoading,
+      hasError: entityError || booksError,
+      errorMessage: entityError || booksError ? 'An error occurred while downloading data.' : null,
+    }),
+    [entity, books, entityLoading, booksLoading, entityError, booksError],
+  );
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

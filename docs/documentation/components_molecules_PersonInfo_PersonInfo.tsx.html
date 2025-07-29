@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> components/molecules/PersonInfo/PersonInfo.tsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ErrorProps.html">ErrorProps</a></li><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="ItemListProps.html">ItemListProps</a></li><li><a href="PersonInfoProps.html">PersonInfoProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseEntityWithBooksProps.html">UseEntityWithBooksProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#ItemList">ItemList</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#PersonInfo">PersonInfo</a></li><li><a href="global.html#PublisherPage">PublisherPage</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useEntityWithBooks">useEntityWithBooks</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#usePublisherData">usePublisherData</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>components/molecules/PersonInfo/PersonInfo.tsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Box, Divider, Typography } from '@mui/material';
+
+/**
+ * Renders basic personal information such as full name, role label
+ * and an optional description block.
+ *
+ * @component
+ * @example
+ * ```
+ * &lt;PersonInfo
+ *   fullName="Éowyn of Rohan"
+ *   roleLabel="Shieldmaiden"
+ *   description="I am no man!"
+ * />
+ * ```
+ *
+ * @param {PersonInfoProps} props
+ * @param {string} props.fullName - Person’s full display name.
+ * @param {string} props.roleLabel - Short role or title to show under the name.
+ * @param {string} [props.description] - Optional longer description or biography.
+ *
+ * @returns {JSX.Element} Read-only React element that displays person details.
+ */
+interface PersonInfoProps {
+  fullName: string;
+  roleLabel: string;
+  description?: string;
+}
+
+/**
+ * Functional component that displays a name, role label
+ * and (optionally) a descriptive paragraph separated by a divider.
+ */
+const PersonInfo = ({ fullName, roleLabel, description }: PersonInfoProps) => (
+  &lt;Box>
+    &lt;Typography role="heading" variant="h2" component="h1">
+      {fullName}
+    &lt;/Typography>
+
+    &lt;Typography role="heading" variant="h3" component="h2" color="text.secondary">
+      {roleLabel}
+    &lt;/Typography>
+
+    {description &amp;&amp; (
+      &lt;>
+        &lt;Divider sx={{ my: 4 }} />
+        &lt;Typography variant="body1">{description}&lt;/Typography>
+      &lt;/>
+    )}
+  &lt;/Box>
+);
+
+export default PersonInfo;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

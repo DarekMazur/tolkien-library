@@ -67,7 +67,7 @@ describe('useTranslatorData', () => {
     const { result } = renderHook(() => useTranslatorData());
     expect(result.current.isLoading).toBe(false);
     expect(result.current.hasError).toBe(false);
-    expect(result.current.translator).toBeNull();
+    expect(result.current.entity).toBeNull();
     expect(result.current.books).toBeNull();
     expect(result.current.errorMessage).toBeNull();
   });
@@ -84,7 +84,7 @@ describe('useTranslatorData', () => {
       initialProps: { slug: 'marek-oramus' },
     });
     expect(result.current.isLoading).toBe(true);
-    expect(result.current.translator).toBeNull();
+    expect(result.current.entity).toBeNull();
 
     mockedUseApi.mockReturnValueOnce(makeResponse(fakeTranslator)).mockReturnValueOnce({
       ...makeResponse<IBookProps[]>(null),
@@ -93,7 +93,7 @@ describe('useTranslatorData', () => {
 
     rerender({ slug: 'marek-oramus' });
     expect(result.current.isLoading).toBe(true);
-    expect(result.current.translator).toEqual(fakeTranslator);
+    expect(result.current.entity).toEqual(fakeTranslator);
 
     mockedUseApi
       .mockReturnValueOnce(makeResponse(fakeTranslator))
@@ -101,7 +101,7 @@ describe('useTranslatorData', () => {
 
     rerender({ slug: 'marek-oramus' });
     expect(result.current.isLoading).toBe(false);
-    expect(result.current.translator).toEqual(fakeTranslator);
+    expect(result.current.entity).toEqual(fakeTranslator);
     expect(result.current.books).toEqual(fakeBooks);
     expect(result.current.hasError).toBe(false);
     expect(result.current.errorMessage).toBeNull();
@@ -115,8 +115,8 @@ describe('useTranslatorData', () => {
     const { result } = renderHook(() => useTranslatorData('marek-oramus'));
     expect(result.current.isLoading).toBe(false);
     expect(result.current.hasError).toBe(true);
-    expect(result.current.errorMessage).toBe('Failed to load translator data');
-    expect(result.current.translator).toBeNull();
+    expect(result.current.errorMessage).toBe('An error occurred while downloading data.');
+    expect(result.current.entity).toBeNull();
     expect(result.current.books).toBeNull();
   });
 
@@ -127,9 +127,9 @@ describe('useTranslatorData', () => {
 
     const { result } = renderHook(() => useTranslatorData('marek-oramus'));
     expect(result.current.isLoading).toBe(false);
-    expect(result.current.translator).toEqual(fakeTranslator);
+    expect(result.current.entity).toEqual(fakeTranslator);
     expect(result.current.hasError).toBe(true);
-    expect(result.current.errorMessage).toBe('Failed to load translator data');
+    expect(result.current.errorMessage).toBe('An error occurred while downloading data.');
     expect(result.current.books).toBeNull();
   });
 });

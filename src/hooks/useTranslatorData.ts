@@ -1,96 +1,55 @@
-import { useMemo } from 'react';
-import { useApi } from '@/hooks/useApi';
 import { getBooksByTranslator, getTranslatorBySlug } from '@/lib/getDataFromApi';
 import { IBookProps, ITranslatorProps } from '@/lib/types';
+import { useEntityWithBooks } from '@/hooks/useEntityWithBooks.ts';
 
 /**
- * Return type for the useTranslatorData hook.
+ * Custom React hook for fetching translator data along with associated books.
  *
- * @interface UseTranslatorDataResult
- * @property {ITranslatorProps | null} translator - Translator data object or null
- * @property {IBookProps[] | null} books - Array of books or null
- * @property {boolean} isLoading - Loading state indicator
- * @property {boolean} hasError - Error state indicator
- * @property {string | null} errorMessage - Error message or null
- */
-
-interface UseTranslatorDataResult {
-  translator: ITranslatorProps | null;
-  books: IBookProps[] | null;
-  isLoading: boolean;
-  hasError: boolean;
-  errorMessage: string | null;
-}
-
-/**
- * Custom React hook for fetching translator data and associated books.
- *
- * This hook manages the loading state and error handling for fetching both
- * translator information by slug and all books associated with that translator.
- * It uses the useApi hook internally to handle data fetching operations.
+ * This hook leverages the generic `useEntityWithBooks` hook to provide
+ * translator-specific data fetching functionality. It retrieves translator
+ * information by slug and fetches all books associated with that translator.
  *
  * @param {string} [slug] - The unique slug identifier for the translator.
- *                         If not provided, the hook will not fetch translator data.
+ *                         If not provided, the hook will not fetch any data.
  *
- * @returns {UseTranslatorDataResult} An object containing:
- * - translator: The translator data or null if not loaded/error occurred
- * - books: Array of books by the translator or null if not loaded/error occurred
- * - isLoading: Boolean indicating if any data is currently being fetched
- * - hasError: Boolean indicating if any error occurred during fetching
- * - errorMessage: Error message string or null if no error occurred
- *
- * @example
- * ```
- * const { translator, books, isLoading, hasError } = useTranslatorData('tolkien-slug');
- *
- * if (isLoading) return <div>Loading...</div>;
- * if (hasError) return <div>Error loading data</div>;
- * if (!translator) return <div>Translator not found</div>;
- *
- * return (
- *   <div>
- *     <h1>{translator.name}</h1>
- *     {books?.map(book => <div key={book.id}>{book.title}</div>)}
- *   </div>
- * );
- * ```
+ * @returns {Object} Hook return object containing:
+ * @returns {ITranslatorProps | null} returns.entity - The translator data object
+ *                                                    or null if not found/loading
+ * @returns {IBookProps[]} returns.books - Array of books associated with the translator
+ * @returns {boolean} returns.isLoading - Loading state indicator
+ * @returns {Error | null} returns.error - Error object if fetch failed, null otherwise
+ * @returns {() => void} returns.refetch - Function to manually refetch the data
  *
  * @example
  * ```
- * // Hook without slug - will not fetch data
- * const { isLoading } = useTranslatorData(); // isLoading will be false
+ * const TranslatorProfile = ({ translatorSlug }: { translatorSlug: string }) => {
+ *   const { entity: translator, books, isLoading, error } = useTranslatorData(translatorSlug);
+ *
+ *   if (isLoading) return <div>Loading...</div>;
+ *   if (error) return <div>Error: {error.message}</div>;
+ *   if (!translator) return <div>Translator not found</div>;
+ *
+ *   return (
+ *     <div>
+ *       <h1>{translator.name}</h1>
+ *       <p>Books translated: {books.length}</p>
+ *       {books.map(book => (
+ *         <div key={book.id}>{book.title}</div>
+ *       ))}
+ *     </div>
+ *   );
+ * };
  * ```
  *
+ * @see {@link useEntityWithBooks} - The generic hook this is based on
+ * @see {@link getTranslatorBySlug} - API function for fetching translator data
+ * @see {@link getBooksByTranslator} - API function for fetching translator's books
+ *
+ * @since 1.0.0
  */
-
-export const useTranslatorData = (slug?: string): UseTranslatorDataResult => {
-  const {
-    data: translator,
-    isError: translatorError,
-    isLoading: translatorLoading,
-  } = useApi(() => getTranslatorBySlug(slug!), {
-    enabled: !!slug,
+export const useTranslatorData = (slug?: string) =>
+  useEntityWithBooks<ITranslatorProps, IBookProps>({
+    slug,
+    fetchEntity: getTranslatorBySlug,
+    fetchBooks: getBooksByTranslator,
   });
-
-  const {
-    data: books,
-    isError: booksError,
-    isLoading: booksLoading,
-  } = useApi(() => getBooksByTranslator(translator!.id), {
-    enabled: !!translator?.id,
-  });
-
-  return useMemo(() => {
-    const isLoading = translatorLoading || booksLoading;
-    const hasError = translatorError || booksError;
-    const errorMessage = hasError ? 'Failed to load translator data' : null;
-
-    return {
-      translator: translator || null,
-      books: books || null,
-      isLoading,
-      hasError,
-      errorMessage,
-    };
-  }, [translator, books, translatorLoading, booksLoading, translatorError, booksError]);
-};
