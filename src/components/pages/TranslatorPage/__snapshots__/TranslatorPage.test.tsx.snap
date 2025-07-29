@@ -438,11 +438,13 @@ exports[`TranslatorPage > should render TranslatorInfo and TranslatedBooksList w
     >
       <h1
         class="MuiTypography-root MuiTypography-h2 emotion-2"
+        role="heading"
       >
         Maria Skibniewska
       </h1>
       <h2
         class="MuiTypography-root MuiTypography-h3 emotion-3"
+        role="heading"
       >
         Publisher
       </h2>

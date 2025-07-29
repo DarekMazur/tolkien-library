@@ -33,11 +33,11 @@ interface PersonInfoProps {
  */
 const PersonInfo = ({ fullName, roleLabel, description }: PersonInfoProps) => (
   <Box>
-    <Typography variant="h2" component="h1">
+    <Typography role="heading" variant="h2" component="h1">
       {fullName}
     </Typography>
 
-    <Typography variant="h3" component="h2" color="text.secondary">
+    <Typography role="heading" variant="h3" component="h2" color="text.secondary">
       {roleLabel}
     </Typography>
 
