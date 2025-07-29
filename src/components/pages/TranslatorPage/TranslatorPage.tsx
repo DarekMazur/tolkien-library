@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router';
 import { useTranslatorData } from '@/hooks/useTranslatorData.ts';
 import PersonInfo from '@/components/molecules/PersonInfo/PersonInfo.tsx';
-import { ItemList } from '@/components/molecules/ItemList/ItemList.tsx';
+import ItemList from '@/components/molecules/ItemList/ItemList.tsx';
 import { IBookProps } from '@/lib/types';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 import EntityPage from '@/components/pages/_shared/EntityPage/EntityPage.tsx';

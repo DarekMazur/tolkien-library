@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { usePublisherData } from '@/hooks/usePublisherData';
 import EntityPage from '@/components/pages/_shared/EntityPage/EntityPage';
-import { ItemList } from '@/components/molecules/ItemList/ItemList';
+import ItemList from '@/components/molecules/ItemList/ItemList';
 import { IBookProps } from '@/lib/types';
 import { createSlug } from '@/lib/helpers/createSlug';
 import { useNavigate } from 'react-router';
