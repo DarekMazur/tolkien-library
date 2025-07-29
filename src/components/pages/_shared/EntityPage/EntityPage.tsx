@@ -66,7 +66,7 @@ import { ComponentType } from 'react';
  * @see {@link Error} - Error state component
  * @see {@link NoContent} - No content state component
  */
-interface EntityPageProps<E extends object, I extends object = never> {
+export interface EntityPageProps<E extends object, I extends object = never> {
   useData: () => {
     entity: E | null;
     books: I[] | null;
