@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> components/pages/PublisherPage/PublisherPage.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,62 +75,93 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>components/pages/PublisherPage/PublisherPage.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>Tolkien Library – Polish Editions &amp; Related Works</h1>
-<h2>Project Overview</h2>
-<p><strong>Tolkien Library</strong> is a web project dedicated to cataloging and presenting comprehensive information about Polish editions of works by J.R.R. Tolkien, as well as publications about the author (such as biographies and critical studies) and related Tolkien-inspired literature. The goal is to create a centralized, accessible resource for readers, researchers, and collectors interested in the Polish Tolkien publishing landscape.</p>
-<h2>Key Features</h2>
-<ul>
-<li><strong>Database of Polish Editions</strong>: Detailed records of all known Polish editions of Tolkien’s works, including translators, publishers, publication dates, and cover images.</li>
-<li><strong>Publications About Tolkien</strong>: Listings and descriptions of biographies, essays, and studies about J.R.R. Tolkien published in Poland.</li>
-<li><strong>Tolkien-Related Publications</strong>: Information on books inspired by Tolkien’s legendarium or scholarship, including fan publications and academic works.</li>
-<li><strong>Search &amp; Filter</strong>: Tools to help users find specific editions, authors, or topics of interest.</li>
-<li><strong>Resource for Collectors and Fans</strong>: A reference point for those seeking to expand their collections or deepen their knowledge of Tolkien’s presence in Polish culture.</li>
-</ul>
-<h2>Motivation</h2>
-<p>The project aims to fill a gap in accessible, well-organized information on Tolkien’s works and related literature as published in Poland. While Tolkien’s books have been translated and published in many countries, Polish editions are notable for their diversity, unique translations, and rich publishing history. This site seeks to document and celebrate that legacy.</p>
-<h2>Technologies</h2>
-<ul>
-<li><strong>Frontend</strong>: React (with TypeScript), Vite</li>
-<li><strong>Linting &amp; Formatting</strong>: ESLint, Prettier, Husky, lint-staged</li>
-<li><strong>Testing</strong>: Vitest</li>
-<li><strong>Documentation</strong>: Markdown, Storybook, JSDoc</li>
-</ul>
-<h2>Status</h2>
-<p>This project is in early development. Contributions, suggestions, and feedback are welcome!</p>
-<h2>License</h2>
-<p>This repository is licensed under the MIT License.</p>
-<hr>
-<p><em>This project is not affiliated with the Tolkien Estate or any official publisher. It is a non-commercial, educational initiative for fans and researchers.</em></p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useParams } from 'react-router';
+import { usePublisherData } from '@/hooks/usePublisherData';
+import EntityPage from '@/components/pages/_shared/EntityPage/EntityPage';
+import ItemList from '@/components/molecules/ItemList/ItemList';
+import { IBookProps } from '@/lib/types';
+import { createSlug } from '@/lib/helpers/createSlug';
+import { useNavigate } from 'react-router';
+import PersonInfo from '@/components/molecules/PersonInfo/PersonInfo.tsx';
+
+/**
+ * A React component that displays a publisher's information page.
+ *
+ * This component renders a page showing publisher details including
+ * their name, description, and a list of their published books.
+ * It uses the EntityPage wrapper component to provide consistent
+ * layout and data fetching patterns.
+ *
+ * @component
+ * @example
+ * // Used within React Router with a slug parameter
+ * &lt;Route path="/publishers/:slug" element={&lt;PublisherPage />} />
+ *
+ * @returns {JSX.Element} The rendered publisher page component
+ *
+ * @description
+ * The component:
+ * - Extracts the publisher slug from URL parameters
+ * - Fetches publisher data using the usePublisherData hook
+ * - Renders publisher information using PersonInfo component
+ * - Displays a list of published books using ItemList component
+ * - Provides navigation to individual book pages when books are clicked
+ *
+ * @requires react-router - For useParams and useNavigate hooks
+ * @requires @/hooks/usePublisherData - Custom hook for fetching publisher data
+ * @requires @/components/pages/_shared/EntityPage/EntityPage - Wrapper component
+ * @requires @/components/molecules/ItemList/ItemList - List display component
+ * @requires @/components/molecules/PersonInfo/PersonInfo - Info display component
+ * @requires @/lib/types - Type definitions for IBookProps
+ * @requires @/lib/helpers/createSlug - Utility function for creating URL slugs
+ *
+ * @see {@link EntityPage} - The wrapper component used for layout
+ * @see {@link usePublisherData} - Data fetching hook
+ * @see {@link PersonInfo} - Component for displaying publisher information
+ * @see {@link ItemList} - Component for displaying book list
+ *
+ */
+const PublisherPage = () => {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+
+  return (
+    &lt;EntityPage
+      useData={() => usePublisherData(slug)}
+      InfoComponent={({ entity }) => (
+        &lt;PersonInfo
+          fullName={entity.title}
+          roleLabel="Publisher"
+          description={entity.description}
+        />
+      )}
+      ItemsComponent={({ items }) => (
+        &lt;ItemList&lt;IBookProps>
+          items={items}
+          emptyMessage="No publications found"
+          getPrimaryText={(b) => b.polishTitle}
+          onClickItem={(b) => navigate(`/library/books/${createSlug(b.polishTitle)}`)}
+        />
+      )}
+      itemsSectionTitle="Publications:"
+    />
+  );
+};
+
+export default PublisherPage;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

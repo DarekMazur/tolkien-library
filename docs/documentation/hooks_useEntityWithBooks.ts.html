@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> hooks/useEntityWithBooks.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,62 +75,111 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>hooks/useEntityWithBooks.ts</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>Tolkien Library – Polish Editions &amp; Related Works</h1>
-<h2>Project Overview</h2>
-<p><strong>Tolkien Library</strong> is a web project dedicated to cataloging and presenting comprehensive information about Polish editions of works by J.R.R. Tolkien, as well as publications about the author (such as biographies and critical studies) and related Tolkien-inspired literature. The goal is to create a centralized, accessible resource for readers, researchers, and collectors interested in the Polish Tolkien publishing landscape.</p>
-<h2>Key Features</h2>
-<ul>
-<li><strong>Database of Polish Editions</strong>: Detailed records of all known Polish editions of Tolkien’s works, including translators, publishers, publication dates, and cover images.</li>
-<li><strong>Publications About Tolkien</strong>: Listings and descriptions of biographies, essays, and studies about J.R.R. Tolkien published in Poland.</li>
-<li><strong>Tolkien-Related Publications</strong>: Information on books inspired by Tolkien’s legendarium or scholarship, including fan publications and academic works.</li>
-<li><strong>Search &amp; Filter</strong>: Tools to help users find specific editions, authors, or topics of interest.</li>
-<li><strong>Resource for Collectors and Fans</strong>: A reference point for those seeking to expand their collections or deepen their knowledge of Tolkien’s presence in Polish culture.</li>
-</ul>
-<h2>Motivation</h2>
-<p>The project aims to fill a gap in accessible, well-organized information on Tolkien’s works and related literature as published in Poland. While Tolkien’s books have been translated and published in many countries, Polish editions are notable for their diversity, unique translations, and rich publishing history. This site seeks to document and celebrate that legacy.</p>
-<h2>Technologies</h2>
-<ul>
-<li><strong>Frontend</strong>: React (with TypeScript), Vite</li>
-<li><strong>Linting &amp; Formatting</strong>: ESLint, Prettier, Husky, lint-staged</li>
-<li><strong>Testing</strong>: Vitest</li>
-<li><strong>Documentation</strong>: Markdown, Storybook, JSDoc</li>
-</ul>
-<h2>Status</h2>
-<p>This project is in early development. Contributions, suggestions, and feedback are welcome!</p>
-<h2>License</h2>
-<p>This repository is licensed under the MIT License.</p>
-<hr>
-<p><em>This project is not affiliated with the Tolkien Estate or any official publisher. It is a non-commercial, educational initiative for fans and researchers.</em></p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
+import { useApi } from '@/hooks/useApi';
+import { TResponse } from '@/lib/types';
+
+/**
+ * Props for the useEntityWithBooks hook.
+ *
+ * @template E - Entity type that must extend an object with an `id` property
+ * @template B - Book type
+ */
+interface UseEntityWithBooksProps&lt;E, B> {
+  slug?: string;
+  fetchEntity: (slug: string) => Promise&lt;TResponse&lt;E>>;
+  fetchBooks: (id: string) => Promise&lt;TResponse&lt;B[]>>;
+}
+
+/**
+ * Custom hook for fetching an entity and its associated books.
+ *
+ * This hook manages the sequential loading of an entity (based on slug) and its related books.
+ * It handles loading states, error states, and provides a unified interface for accessing
+ * both the entity and its books data.
+ *
+ * @template E - Entity type that must have an `id` property of type string
+ * @template B - Book type (can be any structure)
+ *
+ * @param props - Configuration object for the hook
+ * @param props.slug - Optional slug identifier for the entity. If not provided, entity fetch is disabled
+ * @param props.fetchEntity - Async function that fetches entity data by slug
+ * @param props.fetchBooks - Async function that fetches books array by entity ID
+ *
+ * @returns Object containing:
+ *   - `entity`: The fetched entity data or null if not available
+ *   - `books`: Array of books associated with the entity or null if not available
+ *   - `isLoading`: Boolean indicating if either entity or books are currently loading
+ *   - `hasError`: Boolean indicating if any error occurred during fetching
+ *   - `errorMessage`: Error message string or null if no errors occurred
+ *
+ * @example
+ * ```
+ * // Usage with Author entity and Book types
+ * const { entity: author, books, isLoading, hasError } = useEntityWithBooks({
+ *   slug: 'tolkien',
+ *   fetchEntity: fetchAuthorBySlug,
+ *   fetchBooks: fetchBooksByAuthorId
+ * });
+ *
+ * if (isLoading) return &lt;LoadingSpinner />;
+ * if (hasError) return &lt;ErrorMessage />;
+ *
+ * return (
+ *   &lt;div>
+ *     &lt;h1>{author?.name}&lt;/h1>
+ *     &lt;BooksList books={books} />
+ *   &lt;/div>
+ * );
+ * ```
+ *
+ * @remarks
+ * - The hook uses sequential loading: books are only fetched after the entity is successfully loaded
+ * - Both API calls are managed by the `useApi` hook with appropriate enabling conditions
+ * - The return value is memoized to prevent unnecessary re-renders
+ * - Error handling is unified - any error in either request will set `hasError` to true
+ */
+export const useEntityWithBooks = &lt;E extends { id: string }, B>({
+  slug,
+  fetchEntity,
+  fetchBooks,
+}: UseEntityWithBooksProps&lt;E, B>) => {
+  const {
+    data: entity,
+    isError: entityError,
+    isLoading: entityLoading,
+  } = useApi(() => fetchEntity(slug!), { enabled: !!slug });
+
+  const {
+    data: books,
+    isError: booksError,
+    isLoading: booksLoading,
+  } = useApi(() => fetchBooks(entity!.id), { enabled: !!entity?.id });
+
+  return useMemo(
+    () => ({
+      entity: entity ?? null,
+      books: books ?? null,
+      isLoading: entityLoading || booksLoading,
+      hasError: entityError || booksError,
+      errorMessage: entityError || booksError ? 'An error occurred while downloading data.' : null,
+    }),
+    [entity, books, entityLoading, booksLoading, entityError, booksError],
+  );
+};
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

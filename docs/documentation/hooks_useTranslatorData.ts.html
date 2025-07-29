@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ErrorProps.html">ErrorProps</a></li><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseTranslatorDataResult.html">UseTranslatorDataResult</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#TranslatedBooksList">TranslatedBooksList</a></li><li><a href="global.html#TranslatorInfo">TranslatorInfo</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="ArticleTableStrategy.html">ArticleTableStrategy</a></li><li><a href="BookTableStrategy.html">BookTableStrategy</a></li><li><a href="FanEditionTableStrategy.html">FanEditionTableStrategy</a></li><li><a href="FanzinTableStrategy.html">FanzinTableStrategy</a></li><li><a href="TableStrategyFactory.html">TableStrategyFactory</a></li></ul><h3>Interfaces</h3><ul><li><a href="ErrorProps.html">ErrorProps</a></li><li><a href="ICustomLinkProps.html">ICustomLinkProps</a></li><li><a href="ItemListProps.html">ItemListProps</a></li><li><a href="PersonInfoProps.html">PersonInfoProps</a></li><li><a href="PublicationPageProps.html">PublicationPageProps</a></li><li><a href="UseEntityWithBooksProps.html">UseEntityWithBooksProps</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#FanEditionPage">FanEditionPage</a></li><li><a href="global.html#FanZonePage">FanZonePage</a></li><li><a href="global.html#FanzinPage">FanzinPage</a></li><li><a href="global.html#ItemList">ItemList</a></li><li><a href="global.html#NoContent">NoContent</a></li><li><a href="global.html#PersonInfo">PersonInfo</a></li><li><a href="global.html#PublisherPage">PublisherPage</a></li><li><a href="global.html#TranslatorPage">TranslatorPage</a></li><li><a href="global.html#calculateCheckDigit">calculateCheckDigit</a></li><li><a href="global.html#calculateISBN13Checksum">calculateISBN13Checksum</a></li><li><a href="global.html#generateBaseDigits">generateBaseDigits</a></li><li><a href="global.html#generateISSN">generateISSN</a></li><li><a href="global.html#useEntityWithBooks">useEntityWithBooks</a></li><li><a href="global.html#useGenericHeaders">useGenericHeaders</a></li><li><a href="global.html#useLibraryParams">useLibraryParams</a></li><li><a href="global.html#usePublisherData">usePublisherData</a></li><li><a href="global.html#useTranslatorData">useTranslatorData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -85,102 +85,61 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
-import { useApi } from '@/hooks/useApi';
-import { getBooksByTranslator, getTranslatorBySlug } from '@/lib/getDataFromApi';
+            <pre class="prettyprint source linenums"><code>import { getBooksByTranslator, getTranslatorBySlug } from '@/lib/getDataFromApi';
 import { IBookProps, ITranslatorProps } from '@/lib/types';
+import { useEntityWithBooks } from '@/hooks/useEntityWithBooks.ts';
 
 /**
- * Return type for the useTranslatorData hook.
+ * Custom React hook for fetching translator data along with associated books.
  *
- * @interface UseTranslatorDataResult
- * @property {ITranslatorProps | null} translator - Translator data object or null
- * @property {IBookProps[] | null} books - Array of books or null
- * @property {boolean} isLoading - Loading state indicator
- * @property {boolean} hasError - Error state indicator
- * @property {string | null} errorMessage - Error message or null
- */
-
-interface UseTranslatorDataResult {
-  translator: ITranslatorProps | null;
-  books: IBookProps[] | null;
-  isLoading: boolean;
-  hasError: boolean;
-  errorMessage: string | null;
-}
-
-/**
- * Custom React hook for fetching translator data and associated books.
- *
- * This hook manages the loading state and error handling for fetching both
- * translator information by slug and all books associated with that translator.
- * It uses the useApi hook internally to handle data fetching operations.
+ * This hook leverages the generic `useEntityWithBooks` hook to provide
+ * translator-specific data fetching functionality. It retrieves translator
+ * information by slug and fetches all books associated with that translator.
  *
  * @param {string} [slug] - The unique slug identifier for the translator.
- *                         If not provided, the hook will not fetch translator data.
+ *                         If not provided, the hook will not fetch any data.
  *
- * @returns {UseTranslatorDataResult} An object containing:
- * - translator: The translator data or null if not loaded/error occurred
- * - books: Array of books by the translator or null if not loaded/error occurred
- * - isLoading: Boolean indicating if any data is currently being fetched
- * - hasError: Boolean indicating if any error occurred during fetching
- * - errorMessage: Error message string or null if no error occurred
- *
- * @example
- * ```
- * const { translator, books, isLoading, hasError } = useTranslatorData('tolkien-slug');
- *
- * if (isLoading) return &lt;div>Loading...&lt;/div>;
- * if (hasError) return &lt;div>Error loading data&lt;/div>;
- * if (!translator) return &lt;div>Translator not found&lt;/div>;
- *
- * return (
- *   &lt;div>
- *     &lt;h1>{translator.name}&lt;/h1>
- *     {books?.map(book => &lt;div key={book.id}>{book.title}&lt;/div>)}
- *   &lt;/div>
- * );
- * ```
+ * @returns {Object} Hook return object containing:
+ * @returns {ITranslatorProps | null} returns.entity - The translator data object
+ *                                                    or null if not found/loading
+ * @returns {IBookProps[]} returns.books - Array of books associated with the translator
+ * @returns {boolean} returns.isLoading - Loading state indicator
+ * @returns {Error | null} returns.error - Error object if fetch failed, null otherwise
+ * @returns {() => void} returns.refetch - Function to manually refetch the data
  *
  * @example
  * ```
- * // Hook without slug - will not fetch data
- * const { isLoading } = useTranslatorData(); // isLoading will be false
+ * const TranslatorProfile = ({ translatorSlug }: { translatorSlug: string }) => {
+ *   const { entity: translator, books, isLoading, error } = useTranslatorData(translatorSlug);
+ *
+ *   if (isLoading) return &lt;div>Loading...&lt;/div>;
+ *   if (error) return &lt;div>Error: {error.message}&lt;/div>;
+ *   if (!translator) return &lt;div>Translator not found&lt;/div>;
+ *
+ *   return (
+ *     &lt;div>
+ *       &lt;h1>{translator.name}&lt;/h1>
+ *       &lt;p>Books translated: {books.length}&lt;/p>
+ *       {books.map(book => (
+ *         &lt;div key={book.id}>{book.title}&lt;/div>
+ *       ))}
+ *     &lt;/div>
+ *   );
+ * };
  * ```
  *
+ * @see {@link useEntityWithBooks} - The generic hook this is based on
+ * @see {@link getTranslatorBySlug} - API function for fetching translator data
+ * @see {@link getBooksByTranslator} - API function for fetching translator's books
+ *
+ * @since 1.0.0
  */
-
-export const useTranslatorData = (slug?: string): UseTranslatorDataResult => {
-  const {
-    data: translator,
-    isError: translatorError,
-    isLoading: translatorLoading,
-  } = useApi(() => getTranslatorBySlug(slug!), {
-    enabled: !!slug,
+export const useTranslatorData = (slug?: string) =>
+  useEntityWithBooks&lt;ITranslatorProps, IBookProps>({
+    slug,
+    fetchEntity: getTranslatorBySlug,
+    fetchBooks: getBooksByTranslator,
   });
-
-  const {
-    data: books,
-    isError: booksError,
-    isLoading: booksLoading,
-  } = useApi(() => getBooksByTranslator(translator!.id), {
-    enabled: !!translator?.id,
-  });
-
-  return useMemo(() => {
-    const isLoading = translatorLoading || booksLoading;
-    const hasError = translatorError || booksError;
-    const errorMessage = hasError ? 'Failed to load translator data' : null;
-
-    return {
-      translator: translator || null,
-      books: books || null,
-      isLoading,
-      hasError,
-      errorMessage,
-    };
-  }, [translator, books, translatorLoading, booksLoading, translatorError, booksError]);
-};
 </code></pre>
         </article>
     </section>
