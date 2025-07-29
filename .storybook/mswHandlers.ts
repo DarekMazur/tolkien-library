@@ -355,6 +355,27 @@ const translatorsMock = [
   },
 ];
 
+const publishersMock = [
+  {
+    title: 'Rebis',
+    id: 'rebis',
+    description:
+      'Wydawnictwo założone w sierpniu 1990 w Poznaniu przez Tomasza Szpondera i Tadeusza Zyska. Pod koniec 1993 roku Tadeusz Zysk odszedł z Rebisu, by założyć własne wydawnictwo.',
+  },
+  {
+    title: 'Amber',
+    id: 'amber',
+    description:
+      'Pierwsze polskie prywatne i niezależne wydawnictwo w III Rzeczpospolitej, założone 28 lutego 1989 roku, prowadzone przez małżeństwo Zbigniewa Fonioka (do 1990 roku pracownika naukowego Zakładu Aparatury Mikrofalowej Polskiej Akademii Nauk) i Małgorzatę Cebo-Foniok, tłumaczkę i krytyczkę literatury francuskiej, członkinię Stowarzyszenia Pisarzy Polskich i Stowarzyszenia Tłumaczy Polskich.',
+  },
+  {
+    title: 'Zysk i S-ka',
+    id: 'zysk',
+    description:
+      'Wydawnictwo z siedzibą w Poznaniu przy ulicy Wielkiej na Starym Mieście, założone w 1994 przez Tadeusza Zyska i Aleksandra Szablińskiego, po ich odejściu z wydawnictwa Rebis.',
+  },
+];
+
 export const navigationHandler = http.get('/api/navigation', () => {
   return HttpResponse.json(navigationMock);
 });
@@ -422,6 +443,19 @@ export const singleTranslatorHandler = http.get(
   },
 );
 
+export const singlePublisherHandler = http.get(
+  'https://tolkienarium.pl/api/publishers/:slug',
+  ({ params }) => {
+    const slug = params.slug as string;
+    const publisher = publishersMock.find((t) => createSlug(t.title) === slug);
+
+    if (!publisher) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    return HttpResponse.json(publisher);
+  },
+);
+
 export const handlers = [
   navigationHandler,
   articlesHandler,
@@ -433,4 +467,5 @@ export const handlers = [
   faneditionHandler,
   translatorsHandler,
   singleTranslatorHandler,
+  singlePublisherHandler,
 ];
