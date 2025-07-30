@@ -5,6 +5,8 @@ export default {
   title: 'Components/Molecules/LoginForm',
   component: LoginForm,
   decorators: [
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     (Story, context) => (
       <Auth0Provider value={context.args.auth0}>
         <Story />
@@ -16,22 +18,25 @@ export default {
   },
 };
 
-export const Loading = {
+export const Default = {
   args: {
     auth0: {
-      isAuthenticated: false,
-      isLoading: true,
+      isAuthenticated: true,
+      isLoading: false,
       loginWithRedirect: () => {},
       logout: () => {},
     },
   },
 };
 
-export const Authenticated = {
+export const Loading = {
+  parameters: {
+    docs: { disable: true },
+  },
   args: {
     auth0: {
-      isAuthenticated: true,
-      isLoading: false,
+      isAuthenticated: false,
+      isLoading: true,
       loginWithRedirect: () => {},
       logout: () => {},
     },
