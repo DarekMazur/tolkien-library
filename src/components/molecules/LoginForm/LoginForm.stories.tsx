@@ -1,24 +1,25 @@
+import { Meta, StoryObj } from '@storybook/react';
 import { Auth0Provider } from '@/lib/providers/MockedAuth0Provider.tsx';
 import LoginForm from './LoginForm';
+import { ComponentProps } from 'react';
 
-export default {
-  title: 'Components/Molecules/LoginForm',
-  component: LoginForm,
-  decorators: [
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    (Story, context) => (
-      <Auth0Provider value={context.args.auth0}>
-        <Story />
-      </Auth0Provider>
-    ),
-  ],
-  argTypes: {
-    auth0: { control: 'object' },
-  },
+type LoginFormProps = ComponentProps<typeof LoginForm>;
+
+type StoryArgs = LoginFormProps & {
+  auth0: {
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    loginWithRedirect: () => void;
+    logout: () => void;
+  };
 };
 
-export const Default = {
+const meta: Meta<StoryArgs> = {
+  title: 'Components/Organisms/LoginForm',
+  component: LoginForm,
+  parameters: {
+    layout: 'padded',
+  },
   args: {
     auth0: {
       isAuthenticated: true,
@@ -27,9 +28,25 @@ export const Default = {
       logout: () => {},
     },
   },
+  argTypes: {
+    auth0: { control: 'object' },
+  },
+  decorators: [
+    (Story, context) => (
+      <Auth0Provider value={context.args.auth0}>
+        <Story />
+      </Auth0Provider>
+    ),
+  ],
 };
 
-export const Loading = {
+export default meta;
+
+type Story = StoryObj<typeof LoginForm>;
+
+export const Default: Story = {};
+
+export const Loading: Story = {
   parameters: {
     docs: { disable: true },
   },
