@@ -3,6 +3,14 @@ import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 
+const identityMock = {
+  id: '1',
+  adminContact: {
+    name: 'email',
+    value: 'bilbo.baggins@shire.me',
+  },
+};
+
 const navigationMock = [
   { id: '1', title: 'Strona główna', link: '/', isDivider: false },
   { id: '2', title: 'Produkty', link: '/products', isDivider: false },
@@ -375,6 +383,10 @@ const publishersMock = [
       'Wydawnictwo z siedzibą w Poznaniu przy ulicy Wielkiej na Starym Mieście, założone w 1994 przez Tadeusza Zyska i Aleksandra Szablińskiego, po ich odejściu z wydawnictwa Rebis.',
   },
 ];
+
+export const identityHandler = http.get(`${import.meta.env.VITE_API_URL}/identity`, () => {
+  return HttpResponse.json(identityMock);
+});
 
 export const navigationHandler = http.get('/api/navigation', () => {
   return HttpResponse.json(navigationMock);
