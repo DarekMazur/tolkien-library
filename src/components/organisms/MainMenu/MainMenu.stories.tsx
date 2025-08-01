@@ -41,19 +41,3 @@ export const Open: Story = {
     },
   },
 };
-
-export const Close: Story = {
-  args: {
-    isMenuOpen: false,
-    toggleMenu: () => console.log('Menu toggled'),
-  },
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(`${import.meta.env.VITE_API_URL}/navigation`, () => {
-          return HttpResponse.json(defaultNavigation);
-        }),
-      ],
-    },
-  },
-};
