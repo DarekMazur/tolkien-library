@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import { useMe } from '@/hooks/useMe';
 import Loader from '@/components/atoms/Loader/Loader';
@@ -19,7 +19,25 @@ const BoardPage = () => {
     <Wrapper>
       <Typography variant="h2">Admin Panel</Typography>
       <Typography variant="h3">You're logged in as {user.role.roleName}</Typography>
-      <Box></Box>
+      <Box>
+        <List>
+          <ListItem>
+            <ListItemButton>Add book</ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>Add Publication</ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>Add Fan edition</ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>Add Translator</ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>Add Publisher</ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
     </Wrapper>
   );
 };
