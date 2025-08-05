@@ -35,6 +35,7 @@ export const handlers = [
 
         const newUser = {
           id: uuid(),
+          createdAt: new Date(Date.now()),
           avatar,
           email,
           emailVerified,

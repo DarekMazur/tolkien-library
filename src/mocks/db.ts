@@ -15,6 +15,7 @@ export const db = factory({
   },
   page: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     title: () => faker.lorem.words({ min: 1, max: 2 }),
     slug: () => faker.lorem.words({ min: 1, max: 2 }),
     content: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
@@ -22,6 +23,7 @@ export const db = factory({
   },
   category: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     title: () => faker.lorem.words({ min: 1, max: 2 }),
     slug: () => faker.lorem.words({ min: 1, max: 2 }),
     pages: manyOf('page'),
@@ -34,11 +36,13 @@ export const db = factory({
   },
   role: {
     id: primaryKey(faker.number.int().toString),
+    createdAt: () => faker.date.past(),
     roleName: () => faker.lorem.words({ min: 1, max: 2 }),
     roleShorthand: () => faker.word.adjective({ strategy: 'shortest' }),
   },
   user: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     email: () => faker.internet.email(),
     emailVerified: () => faker.datatype.boolean(),
     userName: () => faker.person.firstName(),
@@ -48,23 +52,27 @@ export const db = factory({
   },
   article: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     date: () => faker.date.recent(),
     category: nullable(() => faker.lorem.word()),
     content: () => faker.lorem.paragraphs({ min: 1, max: 10 }),
   },
   translator: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     firstName: () => faker.person.firstName(),
     lastName: () => faker.person.lastName(),
     description: () => faker.lorem.paragraph(),
   },
   publisher: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     title: () => faker.lorem.words({ min: 1, max: 2 }),
     description: () => faker.lorem.paragraph(),
   },
   book: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     originalTitle: nullable(() => faker.lorem.words({ min: 1, max: 4 })),
     polishTitle: () => faker.lorem.words({ min: 1, max: 4 }),
     author: nullable(() => faker.person.fullName()),
@@ -78,6 +86,7 @@ export const db = factory({
   },
   publication: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     title: () => faker.lorem.words({ min: 1, max: 4 }),
     author: () => faker.person.fullName(),
     publisher: oneOf('publisher'),
@@ -94,6 +103,7 @@ export const db = factory({
   },
   fanzin: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     title: () => faker.lorem.words({ min: 1, max: 4 }),
     version: () => faker.number.int({ min: 1, max: 5 }).toString(),
     publisher: oneOf('publisher'),
@@ -103,6 +113,7 @@ export const db = factory({
   },
   fanEditions: {
     id: primaryKey(faker.string.uuid),
+    createdAt: () => faker.date.past(),
     cover: () => faker.image.url(),
     title: () => faker.lorem.words({ min: 1, max: 4 }),
     year: () => faker.date.past().getFullYear().toString(),
