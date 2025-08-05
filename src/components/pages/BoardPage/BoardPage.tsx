@@ -16,17 +16,27 @@ import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import { useMe } from '@/hooks/useMe';
 import Loader from '@/components/atoms/Loader/Loader';
 import Error from '@/components/molecules/Error/Error';
-import { useGetUsersQuery } from '../../../../store';
+import { useGetLatestQuery, useGetUsersQuery } from '../../../../store';
+import {
+  isBook,
+  isFanEdition,
+  isFanzin,
+  isPublication,
+  isPublisher,
+  isTranslator,
+} from '@/lib/helpers/publicationsTypeGuard.ts';
+import { createSlug } from '@/lib/helpers/createSlug.ts';
 
 const BoardPage = () => {
   const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
+  const { data: entryData, isLoading: entryLoading, isError: entryError } = useGetLatestQuery();
   const { user, isLoading } = useMe();
 
-  if (isLoading || dataLoading) {
-    return <Loader isLoading={isLoading || dataLoading} />;
+  if (isLoading || dataLoading || entryLoading) {
+    return <Loader isLoading={isLoading || dataLoading || entryLoading} />;
   }
 
-  if (!user || isError) {
+  if (!user || isError || entryError) {
     return <Error />;
   }
 
@@ -51,6 +61,27 @@ const BoardPage = () => {
     return format(date, 'd MMMM yyyy HH:mm', { locale: pl });
   };
 
+  const getLatest = () => {
+    if (isBook(entryData)) {
+      return entryData.polishTitle;
+    }
+
+    if (isTranslator(entryData)) {
+      return `${entryData.firstName} ${entryData.lastName}`;
+    }
+
+    if (
+      isPublication(entryData) ||
+      isFanzin(entryData) ||
+      isFanEdition(entryData) ||
+      isPublisher(entryData)
+    ) {
+      return entryData.title;
+    }
+
+    return null;
+  };
+
   return (
     <Wrapper>
       <Typography variant="h2">Admin Panel</Typography>
@@ -71,9 +102,18 @@ const BoardPage = () => {
             Newest Entry
           </Typography>
           <Typography>
-            <Link component={RouterLink} to={'/'}>
-              Lorem ipsum
-            </Link>
+            {entryData &&
+            getLatest() &&
+            (isBook(entryData) || isTranslator(entryData) || isPublisher(entryData)) ? (
+              <Link
+                component={RouterLink}
+                to={`/library/${isBook(entryData) ? 'books' : isTranslator(entryData) ? 'translator' : 'publisher'}/${createSlug(getLatest()!)}`}
+              >
+                {getLatest()} ({formatDate(entryData!.createdAt)})
+              </Link>
+            ) : (
+              `${getLatest()} (${formatDate(entryData!.createdAt)})`
+            )}
           </Typography>
         </Box>
       </Box>
