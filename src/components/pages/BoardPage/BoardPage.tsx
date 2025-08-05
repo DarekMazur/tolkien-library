@@ -9,6 +9,8 @@ import {
   Typography,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router';
+import { format, isToday, isYesterday } from 'date-fns';
+import { pl } from 'date-fns/locale';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import { useMe } from '@/hooks/useMe';
@@ -37,6 +39,18 @@ const BoardPage = () => {
     }
   };
 
+  const formatDate = (date: Date): string => {
+    if (isToday(date)) {
+      return 'today';
+    }
+
+    if (isYesterday(date)) {
+      return 'yesterday';
+    }
+
+    return format(date, 'd MMMM yyyy HH:mm', { locale: pl });
+  };
+
   return (
     <Wrapper>
       <Typography variant="h2">Admin Panel</Typography>
@@ -48,7 +62,7 @@ const BoardPage = () => {
           </Typography>
           <Typography>
             {lastUser()
-              ? `${lastUser()?.userName} (${lastUser()?.id === user.id ? 'you' : lastUser()?.createdAt})`
+              ? `${lastUser()?.userName} (${lastUser()?.id === user.id ? 'you' : formatDate(lastUser()!.createdAt)})`
               : 'No users'}
           </Typography>
         </Box>
