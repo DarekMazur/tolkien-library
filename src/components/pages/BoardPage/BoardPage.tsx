@@ -14,17 +14,28 @@ import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import { useMe } from '@/hooks/useMe';
 import Loader from '@/components/atoms/Loader/Loader';
 import Error from '@/components/molecules/Error/Error';
+import { useGetUsersQuery } from '../../../../store';
 
 const BoardPage = () => {
+  const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
   const { user, isLoading } = useMe();
 
-  if (isLoading) {
-    return <Loader isLoading={isLoading} />;
+  if (isLoading || dataLoading) {
+    return <Loader isLoading={isLoading || dataLoading} />;
   }
 
-  if (!user) {
+  if (!user || isError) {
     return <Error />;
   }
+
+  const lastUser = () => {
+    if (data) {
+      const users = [...data];
+      return users.sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      )[0];
+    }
+  };
 
   return (
     <Wrapper>
@@ -35,7 +46,9 @@ const BoardPage = () => {
           <Typography variant="h3" component="h4">
             Newest User
           </Typography>
-          <Typography>John Doe</Typography>
+          <Typography>
+            {lastUser ? `${lastUser()?.userName} (${lastUser()?.createdAt})` : 'No users'}
+          </Typography>
         </Box>
         <Box>
           <Typography variant="h3" component="h4">
