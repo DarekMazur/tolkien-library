@@ -82,6 +82,8 @@ const BoardPage = () => {
     return null;
   };
 
+  const content = ['news', 'book', 'Publication', 'FanZone', 'Translator', 'Publisher'];
+
   return (
     <Wrapper>
       <Typography variant="h2">Admin Panel</Typography>
@@ -124,54 +126,16 @@ const BoardPage = () => {
             minWidth: 0,
           }}
         >
-          <ListItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemButton>
-              <ListItemText primary="Add news" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemButton>
-              <ListItemText primary="Add book" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemButton>
-              <ListItemText primary="Add Publication" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemButton>
-              <ListItemText primary="Add Fan edition" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemButton>
-              <ListItemText primary="Add Translator" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemButton>
-              <ListItemText primary="Add Publisher" />
-            </ListItemButton>
-          </ListItem>
+          {content.map((item) => (
+            <ListItem key={item}>
+              <ListItemIcon>
+                <AddCircleIcon />
+              </ListItemIcon>
+              <ListItemButton>
+                <ListItemText primary={`Add ${item}`} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Box>
     </Wrapper>
