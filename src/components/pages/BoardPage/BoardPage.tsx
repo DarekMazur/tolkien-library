@@ -47,7 +47,9 @@ const BoardPage = () => {
             Newest User
           </Typography>
           <Typography>
-            {lastUser ? `${lastUser()?.userName} (${lastUser()?.createdAt})` : 'No users'}
+            {lastUser()
+              ? `${lastUser()?.userName} (${lastUser()?.id === user.id ? 'you' : lastUser()?.createdAt})`
+              : 'No users'}
           </Typography>
         </Box>
         <Box>
