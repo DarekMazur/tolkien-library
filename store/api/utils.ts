@@ -1,12 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
-  IFanEditionsProps,
-  IFanzinProps,
-  IBookProps,
-  IPublicationProps,
-  IPublisherProps,
-  ITranslatorProps,
-} from '@/lib/types';
+import { TPublications } from '@/lib/types';
 
 export const utilsApi = createApi({
   reducerPath: 'utilsApi',
@@ -15,15 +8,7 @@ export const utilsApi = createApi({
   }),
   tagTypes: ['Utils'],
   endpoints: (builder) => ({
-    getLatest: builder.query<
-      | IBookProps
-      | IFanzinProps
-      | IFanEditionsProps
-      | IPublicationProps
-      | IPublisherProps
-      | ITranslatorProps,
-      void
-    >({
+    getLatest: builder.query<TPublications, void>({
       query: () => ({
         url: 'latest',
       }),

@@ -26,6 +26,7 @@ import {
   isTranslator,
 } from '@/lib/helpers/publicationsTypeGuard.ts';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
+import { TPublications } from '@/lib/types';
 
 const BoardPage = () => {
   const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
@@ -61,7 +62,7 @@ const BoardPage = () => {
     return format(date, 'd MMMM yyyy HH:mm', { locale: pl });
   };
 
-  const getLatest = () => {
+  const getLatest = (entryData: TPublications | undefined) => {
     if (isBook(entryData)) {
       return entryData.polishTitle;
     }
@@ -105,16 +106,16 @@ const BoardPage = () => {
           </Typography>
           <Typography>
             {entryData &&
-            getLatest() &&
+            getLatest(entryData) &&
             (isBook(entryData) || isTranslator(entryData) || isPublisher(entryData)) ? (
               <Link
                 component={RouterLink}
-                to={`/library/${isBook(entryData) ? 'books' : isTranslator(entryData) ? 'translator' : 'publisher'}/${createSlug(getLatest()!)}`}
+                to={`/library/${isBook(entryData) ? 'books' : isTranslator(entryData) ? 'translator' : 'publisher'}/${createSlug(getLatest(entryData)!)}`}
               >
-                {getLatest()} ({formatDate(entryData!.createdAt)})
+                {getLatest(entryData)} ({formatDate(entryData!.createdAt)})
               </Link>
             ) : (
-              `${getLatest()} (${formatDate(entryData!.createdAt)})`
+              `${getLatest(entryData)} (${formatDate(entryData!.createdAt)})`
             )}
           </Typography>
         </Box>
