@@ -15,22 +15,18 @@ import { useMe } from '@/hooks/useMe';
 import Loader from '@/components/atoms/Loader/Loader';
 import Error from '@/components/molecules/Error/Error';
 import { useGetLatestQuery, useGetUsersQuery } from '../../../../store';
-import {
-  isBook,
-  isFanEdition,
-  isFanzin,
-  isPublication,
-  isPublisher,
-  isTranslator,
-} from '@/lib/helpers/publicationsTypeGuard.ts';
+import { isBook, isPublisher, isTranslator } from '@/lib/helpers/publicationsTypeGuard.ts';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
-import { TPublications } from '@/lib/types';
 import { formatDate } from '@/lib/helpers/formatDate';
+import { getLatest } from '@/lib/helpers/getLatest.ts';
+import { EBoardEnums } from '@/lib/utils/boardEnums.ts';
 
 const BoardPage = () => {
   const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
   const { data: entryData, isLoading: entryLoading, isError: entryError } = useGetLatestQuery();
   const { user, isLoading } = useMe();
+
+  const { NEWS, BOOK, PUBLISHER, PUBLICATION, FANZONE, TRANSLATOR } = EBoardEnums;
 
   if (isLoading || dataLoading || entryLoading) {
     return <Loader isLoading={isLoading || dataLoading || entryLoading} />;
@@ -49,28 +45,7 @@ const BoardPage = () => {
     }
   };
 
-  const getLatest = (entryData: TPublications | undefined) => {
-    if (isBook(entryData)) {
-      return entryData.polishTitle;
-    }
-
-    if (isTranslator(entryData)) {
-      return `${entryData.firstName} ${entryData.lastName}`;
-    }
-
-    if (
-      isPublication(entryData) ||
-      isFanzin(entryData) ||
-      isFanEdition(entryData) ||
-      isPublisher(entryData)
-    ) {
-      return entryData.title;
-    }
-
-    return null;
-  };
-
-  const content = ['news', 'book', 'Publication', 'FanZone', 'Translator', 'Publisher'];
+  const content = [NEWS, BOOK, PUBLISHER, PUBLICATION, FANZONE, TRANSLATOR];
 
   return (
     <Wrapper>
