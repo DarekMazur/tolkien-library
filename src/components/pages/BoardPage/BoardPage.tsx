@@ -9,8 +9,6 @@ import {
   Typography,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router';
-import { format, isToday, isYesterday } from 'date-fns';
-import { pl } from 'date-fns/locale';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import { useMe } from '@/hooks/useMe';
@@ -27,6 +25,7 @@ import {
 } from '@/lib/helpers/publicationsTypeGuard.ts';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 import { TPublications } from '@/lib/types';
+import { formatDate } from '@/lib/helpers/formatDate';
 
 const BoardPage = () => {
   const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
@@ -48,18 +47,6 @@ const BoardPage = () => {
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       )[0];
     }
-  };
-
-  const formatDate = (date: Date): string => {
-    if (isToday(date)) {
-      return 'today';
-    }
-
-    if (isYesterday(date)) {
-      return 'yesterday';
-    }
-
-    return format(date, 'd MMMM yyyy HH:mm', { locale: pl });
   };
 
   const getLatest = (entryData: TPublications | undefined) => {
