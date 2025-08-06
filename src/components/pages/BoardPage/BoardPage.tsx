@@ -20,6 +20,7 @@ import { createSlug } from '@/lib/helpers/createSlug.ts';
 import { formatDate } from '@/lib/helpers/formatDate';
 import { getLatest } from '@/lib/helpers/getLatest.ts';
 import { EBoardEnums } from '@/lib/utils/boardEnums.ts';
+import BoardHeader from '@/components/atoms/BoardHeader/BoardHeader.tsx';
 
 const BoardPage = () => {
   const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
@@ -49,8 +50,7 @@ const BoardPage = () => {
 
   return (
     <Wrapper>
-      <Typography variant="h2">Admin Panel</Typography>
-      <Typography variant="h3">You're logged in as {user.role.roleName}</Typography>
+      <BoardHeader userRole={user.role.roleName} />
       <Box sx={{ width: '100%', py: 4, display: 'flex', justifyContent: 'space-evenly' }}>
         <Box>
           <Typography variant="h3" component="h4">
