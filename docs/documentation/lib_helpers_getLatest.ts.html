@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/molecules/Error/Error.tsx</title>
+  <title> lib/helpers/getLatest.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/molecules/Error/Error.tsx</h1>
+                    <h1>lib/helpers/getLatest.ts</h1>
                 </header>
                 
 
@@ -85,86 +85,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Alert, Button, Stack, Typography, AlertTitle } from '@mui/material';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useNavigate } from 'react-router';
+            <pre class="prettyprint source linenums"><code>import { TPublications } from '@/lib/types';
+import {
+  isBook,
+  isFanEdition,
+  isFanzin,
+  isPublication,
+  isPublisher,
+  isTranslator,
+} from '@/lib/helpers/publicationsTypeGuard.ts';
 
 /**
- * Props for the Error component.
+ * Returns the latest relevant title or name from the provided entry data.
+ *
+ * - If the entry is a Book, returns its Polish title.
+ * - If the entry is a Translator, returns their full name (first and last name).
+ * - If the entry is a Publication, Fanzin, Fan Edition, or Publisher, returns its title.
+ *
+ * @param {TPublications | undefined} entryData - The publication entry to get the latest title or name from.
+ * @returns {string | null} The latest title or full name based on entry type, or null if none matches.
  */
-export interface ErrorProps {
-  errorMessage?: string;
-  errorCode?: number | string;
-  resetButtonText?: string;
-  onReset?: () => void;
-}
 
-/**
- * Error component that displays error information with a reset action.
- *
- * This component renders an error screen with:
- * - A main error title
- * - An alert box containing the error message and optional error code
- * - A button to reset/navigate away from the error state
- *
- * @component
- * @example
- * ```
- * // Basic usage with default message
- * &lt;Error />
- *
- * // With custom message and error code
- * &lt;Error
- *   errorMessage="Failed to load user data"
- *   errorCode={404}
- *   resetButtonText="Try again"
- * />
- *
- * // With custom reset handler
- * &lt;Error
- *   errorMessage="Session expired"
- *   errorCode={401}
- *   onReset={() => signOut()}
- * />
- * ```
- *
- * @param props - The component props
- * @returns JSX.Element representing the error screen
- */
-const Error = ({ errorMessage, errorCode, resetButtonText = 'Go home', onReset }: ErrorProps) => {
-  const navigate = useNavigate();
+export const getLatest = (entryData: TPublications | undefined) => {
+  if (isBook(entryData)) {
+    return entryData.polishTitle;
+  }
 
-  /**
-   * Handles the reset button click event.
-   * Executes custom onReset callback if provided, otherwise navigates to home page.
-   */
-  const handleReset = () => {
-    if (onReset) {
-      onReset();
-    } else {
-      navigate('/', { replace: true });
-    }
-  };
+  if (isTranslator(entryData)) {
+    return `${entryData.firstName} ${entryData.lastName}`;
+  }
 
-  return (
-    &lt;Wrapper>
-      &lt;Stack spacing={3} alignItems="center">
-        &lt;Typography variant="h3" component="h3" tabIndex={-1}>
-          Something went wrong...
-        &lt;/Typography>
-        &lt;Alert severity="error">
-          &lt;AlertTitle color="error">{errorMessage ?? 'Please try again'}&lt;/AlertTitle>
-          {errorCode &amp;&amp; &lt;Typography variant="subtitle1">{`Code: ${errorCode}`}&lt;/Typography>}
-        &lt;/Alert>
-        &lt;Button role="button" variant="outlined" onClick={handleReset}>
-          {resetButtonText}
-        &lt;/Button>
-      &lt;/Stack>
-    &lt;/Wrapper>
-  );
+  if (
+    isPublication(entryData) ||
+    isFanzin(entryData) ||
+    isFanEdition(entryData) ||
+    isPublisher(entryData)
+  ) {
+    return entryData.title;
+  }
+
+  return null;
 };
-
-export default Error;
 </code></pre>
         </article>
     </section>

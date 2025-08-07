@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/molecules/Error/Error.tsx</title>
+  <title> components/molecules/BoardStats/BoardStats.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/molecules/Error/Error.tsx</h1>
+                    <h1>components/molecules/BoardStats/BoardStats.tsx</h1>
                 </header>
                 
 
@@ -85,86 +85,42 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Alert, Button, Stack, Typography, AlertTitle } from '@mui/material';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useNavigate } from 'react-router';
+            <pre class="prettyprint source linenums"><code>import { Box } from '@mui/material';
+import NewestItem from '@/components/atoms/NewestItem/NewestItem.tsx';
+import { IUser, TPublications } from '@/lib/types';
 
-/**
- * Props for the Error component.
- */
-export interface ErrorProps {
-  errorMessage?: string;
-  errorCode?: number | string;
-  resetButtonText?: string;
-  onReset?: () => void;
+interface BoardStatsProps {
+  latestUser?: IUser;
+  latestEntry?: TPublications;
 }
 
 /**
- * Error component that displays error information with a reset action.
+ * BoardStats component displays the latest user and latest publication entry.
  *
- * This component renders an error screen with:
- * - A main error title
- * - An alert box containing the error message and optional error code
- * - A button to reset/navigate away from the error state
+ * @param {Object} props - Component props
+ * @param {IUser} [props.latestUser] - The most recently registered user to display
+ * @param {TPublications} [props.latestEntry] - The most recent publication entry to display
+ *
+ * @returns {JSX.Element} A layout box containing latest user and entry components
  *
  * @component
  * @example
- * ```
- * // Basic usage with default message
- * &lt;Error />
- *
- * // With custom message and error code
- * &lt;Error
- *   errorMessage="Failed to load user data"
- *   errorCode={404}
- *   resetButtonText="Try again"
+ * &lt;BoardStats
+ *   latestUser={{ id: '123', name: 'John Doe', ... }}
+ *   latestEntry={{ id: '456', title: 'New Publication', ... }}
  * />
- *
- * // With custom reset handler
- * &lt;Error
- *   errorMessage="Session expired"
- *   errorCode={401}
- *   onReset={() => signOut()}
- * />
- * ```
- *
- * @param props - The component props
- * @returns JSX.Element representing the error screen
  */
-const Error = ({ errorMessage, errorCode, resetButtonText = 'Go home', onReset }: ErrorProps) => {
-  const navigate = useNavigate();
 
-  /**
-   * Handles the reset button click event.
-   * Executes custom onReset callback if provided, otherwise navigates to home page.
-   */
-  const handleReset = () => {
-    if (onReset) {
-      onReset();
-    } else {
-      navigate('/', { replace: true });
-    }
-  };
-
+const boardStats = ({ latestUser, latestEntry }: BoardStatsProps) => {
   return (
-    &lt;Wrapper>
-      &lt;Stack spacing={3} alignItems="center">
-        &lt;Typography variant="h3" component="h3" tabIndex={-1}>
-          Something went wrong...
-        &lt;/Typography>
-        &lt;Alert severity="error">
-          &lt;AlertTitle color="error">{errorMessage ?? 'Please try again'}&lt;/AlertTitle>
-          {errorCode &amp;&amp; &lt;Typography variant="subtitle1">{`Code: ${errorCode}`}&lt;/Typography>}
-        &lt;/Alert>
-        &lt;Button role="button" variant="outlined" onClick={handleReset}>
-          {resetButtonText}
-        &lt;/Button>
-      &lt;/Stack>
-    &lt;/Wrapper>
+    &lt;Box sx={{ width: '100%', py: 4, display: 'flex', justifyContent: 'space-evenly' }}>
+      &lt;NewestItem type="user" content={latestUser} />
+      &lt;NewestItem type="entry" content={latestEntry} />
+    &lt;/Box>
   );
 };
 
-export default Error;
+export default boardStats;
 </code></pre>
         </article>
     </section>

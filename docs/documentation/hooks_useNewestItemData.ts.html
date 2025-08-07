@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/molecules/Error/Error.tsx</title>
+  <title> hooks/useNewestItemData.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/molecules/Error/Error.tsx</h1>
+                    <h1>hooks/useNewestItemData.ts</h1>
                 </header>
                 
 
@@ -85,86 +85,86 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Alert, Button, Stack, Typography, AlertTitle } from '@mui/material';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useNavigate } from 'react-router';
+            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
+import { useMe } from '@/hooks/useMe';
+import { IUser, TPublications } from '@/lib/types';
+import { formatDate } from '@/lib/helpers/formatDate';
+import { getLatest } from '@/lib/helpers/getLatest';
+import { isBook, isTranslator, isPublisher } from '@/lib/helpers/publicationsTypeGuard';
+import { createSlug } from '@/lib/helpers/createSlug';
 
 /**
- * Props for the Error component.
+ * Custom React hook for generating display text and optional link for the newest item data based on
+ * user or entry type content.
+ *
+ * @param {'user' | 'entry'} type - The type of content being processed, either 'user' or 'entry'.
+ * @param {IUser | TPublications} [content] - The content object to derive information from. It can be either a user or publication entry.
+ *
+ * @returns {{
+ *   itemData: {
+ *     displayText: string, // Formatted text for display (e.g., username with creation date or latest entry title)
+ *     link: string | null // URL link to the related resource or null if none applicable
+ *   },
+ *   isLoading: boolean // Loading state indicating if user data is still being fetched
+ * }}
+ *
+ * @remarks
+ * - When the type is 'user', the hook formats the display text with the username plus either 'you' if it's the current user or the user's creation date.
+ * - When the type is 'entry', it determines the latest publication title and generates a link to the appropriate resource (book, translator, or publisher) if applicable.
+ * - If no relevant content is provided, appropriate fallback display text ('No users' or 'No entries') is returned.
  */
-export interface ErrorProps {
-  errorMessage?: string;
-  errorCode?: number | string;
-  resetButtonText?: string;
-  onReset?: () => void;
-}
 
-/**
- * Error component that displays error information with a reset action.
- *
- * This component renders an error screen with:
- * - A main error title
- * - An alert box containing the error message and optional error code
- * - A button to reset/navigate away from the error state
- *
- * @component
- * @example
- * ```
- * // Basic usage with default message
- * &lt;Error />
- *
- * // With custom message and error code
- * &lt;Error
- *   errorMessage="Failed to load user data"
- *   errorCode={404}
- *   resetButtonText="Try again"
- * />
- *
- * // With custom reset handler
- * &lt;Error
- *   errorMessage="Session expired"
- *   errorCode={401}
- *   onReset={() => signOut()}
- * />
- * ```
- *
- * @param props - The component props
- * @returns JSX.Element representing the error screen
- */
-const Error = ({ errorMessage, errorCode, resetButtonText = 'Go home', onReset }: ErrorProps) => {
-  const navigate = useNavigate();
+export const useNewestItemData = (type: 'user' | 'entry', content?: IUser | TPublications) => {
+  const { user, isLoading } = useMe();
 
-  /**
-   * Handles the reset button click event.
-   * Executes custom onReset callback if provided, otherwise navigates to home page.
-   */
-  const handleReset = () => {
-    if (onReset) {
-      onReset();
-    } else {
-      navigate('/', { replace: true });
+  const itemData = useMemo(() => {
+    if (type === 'user' &amp;&amp; content) {
+      const userContent = content as IUser;
+      const isCurrentUser = userContent.id === user?.id;
+      return {
+        displayText: `${userContent.userName} (${isCurrentUser ? 'you' : formatDate(userContent.createdAt)})`,
+        link: null,
+      };
     }
-  };
 
-  return (
-    &lt;Wrapper>
-      &lt;Stack spacing={3} alignItems="center">
-        &lt;Typography variant="h3" component="h3" tabIndex={-1}>
-          Something went wrong...
-        &lt;/Typography>
-        &lt;Alert severity="error">
-          &lt;AlertTitle color="error">{errorMessage ?? 'Please try again'}&lt;/AlertTitle>
-          {errorCode &amp;&amp; &lt;Typography variant="subtitle1">{`Code: ${errorCode}`}&lt;/Typography>}
-        &lt;/Alert>
-        &lt;Button role="button" variant="outlined" onClick={handleReset}>
-          {resetButtonText}
-        &lt;/Button>
-      &lt;/Stack>
-    &lt;/Wrapper>
-  );
+    if (type === 'entry' &amp;&amp; content) {
+      const entryContent = content as TPublications;
+      const latestTitle = getLatest(entryContent);
+
+      if (!latestTitle) {
+        return { displayText: 'No entries', link: null };
+      }
+
+      const hasLink =
+        isBook(entryContent) || isTranslator(entryContent) || isPublisher(entryContent);
+
+      if (hasLink) {
+        const linkType = isBook(entryContent)
+          ? 'books'
+          : isTranslator(entryContent)
+            ? 'translator'
+            : 'publisher';
+
+        return {
+          displayText: `${latestTitle} (${formatDate(entryContent.createdAt)})`,
+          link: `/library/${linkType}/${createSlug(latestTitle)}`,
+        };
+      }
+
+      return {
+        displayText: `${latestTitle} (${formatDate((entryContent as TPublications).createdAt)})`,
+        link: null,
+      };
+    }
+
+    return {
+      displayText: type === 'user' ? 'No users' : 'No entries',
+      link: null,
+    };
+  }, [type, content, user]);
+
+  return { itemData, isLoading };
 };
-
-export default Error;
 </code></pre>
         </article>
     </section>

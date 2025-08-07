@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/molecules/Error/Error.tsx</title>
+  <title> components/pages/BoardPage/BoardPage.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/molecules/Error/Error.tsx</h1>
+                    <h1>components/pages/BoardPage/BoardPage.tsx</h1>
                 </header>
                 
 
@@ -85,86 +85,67 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Alert, Button, Stack, Typography, AlertTitle } from '@mui/material';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useNavigate } from 'react-router';
+            <pre class="prettyprint source linenums"><code>import Wrapper from '@/components/atoms/Wrapper/Wrapper';
+import Loader from '@/components/atoms/Loader/Loader';
+import Error from '@/components/molecules/Error/Error';
+import BoardHeader from '@/components/atoms/BoardHeader/BoardHeader';
+import BoardStats from '@/components/molecules/BoardStats/BoardStats';
+import ActionsList from '@/components/molecules/ActionsList/ActionsList';
+import { useBoardData } from '@/hooks/useBoardData';
 
 /**
- * Props for the Error component.
- */
-export interface ErrorProps {
-  errorMessage?: string;
-  errorCode?: number | string;
-  resetButtonText?: string;
-  onReset?: () => void;
-}
-
-/**
- * Error component that displays error information with a reset action.
+ * Main dashboard component that displays the board page with user statistics and actions.
  *
- * This component renders an error screen with:
- * - A main error title
- * - An alert box containing the error message and optional error code
- * - A button to reset/navigate away from the error state
+ * This component serves as the primary dashboard view, handling loading states, error states,
+ * and rendering the main board interface when data is successfully loaded. It fetches board
+ * data using the useBoardData hook and conditionally renders different UI states.
  *
  * @component
+ * @returns {JSX.Element} The rendered board page component
+ *
  * @example
- * ```
- * // Basic usage with default message
- * &lt;Error />
+ * // Basic usage
+ * &lt;BoardPage />
  *
- * // With custom message and error code
- * &lt;Error
- *   errorMessage="Failed to load user data"
- *   errorCode={404}
- *   resetButtonText="Try again"
- * />
+ * @see {@link useBoardData} Hook used for fetching board data
+ * @see {@link BoardHeader} Component for displaying board header
+ * @see {@link BoardStats} Component for displaying user statistics
+ * @see {@link ActionsList} Component for displaying available actions
  *
- * // With custom reset handler
- * &lt;Error
- *   errorMessage="Session expired"
- *   errorCode={401}
- *   onReset={() => signOut()}
- * />
- * ```
+ * @description
+ * The component handles three main states:
+ * - Loading: Shows a loader component while data is being fetched
+ * - Error: Displays an error component when data fetching fails
+ * - Success: Renders the complete board interface with header, stats, and actions
  *
- * @param props - The component props
- * @returns JSX.Element representing the error screen
+ * @requires user User data must be available (non-null) to render the board header
+ * @requires user.role.roleName User role name is required for board header display
+ *
+ * @throws {Error} Implicitly handles errors through the Error component when hasError is true
+ *
  */
-const Error = ({ errorMessage, errorCode, resetButtonText = 'Go home', onReset }: ErrorProps) => {
-  const navigate = useNavigate();
 
-  /**
-   * Handles the reset button click event.
-   * Executes custom onReset callback if provided, otherwise navigates to home page.
-   */
-  const handleReset = () => {
-    if (onReset) {
-      onReset();
-    } else {
-      navigate('/', { replace: true });
-    }
-  };
+const BoardPage = () => {
+  const { user, latestUser, latestEntry, isLoading, hasError } = useBoardData();
+
+  if (isLoading) {
+    return &lt;Loader isLoading={isLoading} />;
+  }
+
+  if (hasError) {
+    return &lt;Error />;
+  }
 
   return (
     &lt;Wrapper>
-      &lt;Stack spacing={3} alignItems="center">
-        &lt;Typography variant="h3" component="h3" tabIndex={-1}>
-          Something went wrong...
-        &lt;/Typography>
-        &lt;Alert severity="error">
-          &lt;AlertTitle color="error">{errorMessage ?? 'Please try again'}&lt;/AlertTitle>
-          {errorCode &amp;&amp; &lt;Typography variant="subtitle1">{`Code: ${errorCode}`}&lt;/Typography>}
-        &lt;/Alert>
-        &lt;Button role="button" variant="outlined" onClick={handleReset}>
-          {resetButtonText}
-        &lt;/Button>
-      &lt;/Stack>
+      &lt;BoardHeader userRole={user!.role.roleName} />
+      &lt;BoardStats latestUser={latestUser} latestEntry={latestEntry} />
+      &lt;ActionsList />
     &lt;/Wrapper>
   );
 };
 
-export default Error;
+export default BoardPage;
 </code></pre>
         </article>
     </section>

@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> components/molecules/Error/Error.tsx</title>
+  <title> hooks/useBoardData.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/molecules/Error/Error.tsx</h1>
+                    <h1>hooks/useBoardData.ts</h1>
                 </header>
                 
 
@@ -85,86 +85,50 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Alert, Button, Stack, Typography, AlertTitle } from '@mui/material';
-import Wrapper from '@/components/atoms/Wrapper/Wrapper.tsx';
-import { useNavigate } from 'react-router';
+            <pre class="prettyprint source linenums"><code>import { useMemo } from 'react';
+import { useMe } from '@/hooks/useMe';
+import { IUser } from '@/lib/types';
+import { useGetLatestQuery, useGetUsersQuery } from '../../store';
 
 /**
- * Props for the Error component.
+ * Custom hook to fetch and manage board-related data.
+ *
+ * This hook consolidates user data, the latest entry data, and the current user information,
+ * while also providing loading and error states for convenience.
+ *
+ * @returns {{
+ *   user: IUser | null;           // Current authenticated user data
+ *   latestUser: IUser | undefined; // The most recently created user from the users list
+ *   latestEntry: any;              // The latest entry data fetched from the store
+ *   isLoading: boolean;            // Indicates if any of the data fetching processes are still loading
+ *   hasError: boolean;             // Indicates if there is any error or missing required user data
+ * }}
  */
-export interface ErrorProps {
-  errorMessage?: string;
-  errorCode?: number | string;
-  resetButtonText?: string;
-  onReset?: () => void;
-}
 
-/**
- * Error component that displays error information with a reset action.
- *
- * This component renders an error screen with:
- * - A main error title
- * - An alert box containing the error message and optional error code
- * - A button to reset/navigate away from the error state
- *
- * @component
- * @example
- * ```
- * // Basic usage with default message
- * &lt;Error />
- *
- * // With custom message and error code
- * &lt;Error
- *   errorMessage="Failed to load user data"
- *   errorCode={404}
- *   resetButtonText="Try again"
- * />
- *
- * // With custom reset handler
- * &lt;Error
- *   errorMessage="Session expired"
- *   errorCode={401}
- *   onReset={() => signOut()}
- * />
- * ```
- *
- * @param props - The component props
- * @returns JSX.Element representing the error screen
- */
-const Error = ({ errorMessage, errorCode, resetButtonText = 'Go home', onReset }: ErrorProps) => {
-  const navigate = useNavigate();
+export const useBoardData = () => {
+  const { data: usersData, isLoading: usersLoading, isError: usersError } = useGetUsersQuery();
+  const { data: entryData, isLoading: entryLoading, isError: entryError } = useGetLatestQuery();
+  const { user, isLoading: userLoading } = useMe();
 
-  /**
-   * Handles the reset button click event.
-   * Executes custom onReset callback if provided, otherwise navigates to home page.
-   */
-  const handleReset = () => {
-    if (onReset) {
-      onReset();
-    } else {
-      navigate('/', { replace: true });
-    }
+  const latestUser = useMemo((): IUser | undefined => {
+    if (!usersData?.length) return undefined;
+
+    return [...usersData].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )[0];
+  }, [usersData]);
+
+  const isLoading = userLoading || usersLoading || entryLoading;
+  const hasError = !user || usersError || entryError;
+
+  return {
+    user,
+    latestUser,
+    latestEntry: entryData,
+    isLoading,
+    hasError,
   };
-
-  return (
-    &lt;Wrapper>
-      &lt;Stack spacing={3} alignItems="center">
-        &lt;Typography variant="h3" component="h3" tabIndex={-1}>
-          Something went wrong...
-        &lt;/Typography>
-        &lt;Alert severity="error">
-          &lt;AlertTitle color="error">{errorMessage ?? 'Please try again'}&lt;/AlertTitle>
-          {errorCode &amp;&amp; &lt;Typography variant="subtitle1">{`Code: ${errorCode}`}&lt;/Typography>}
-        &lt;/Alert>
-        &lt;Button role="button" variant="outlined" onClick={handleReset}>
-          {resetButtonText}
-        &lt;/Button>
-      &lt;/Stack>
-    &lt;/Wrapper>
-  );
 };
-
-export default Error;
 </code></pre>
         </article>
     </section>
