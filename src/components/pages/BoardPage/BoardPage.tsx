@@ -7,7 +7,7 @@ import Error from '@/components/molecules/Error/Error';
 import { useGetLatestQuery, useGetUsersQuery } from '../../../../store';
 import { EBoardEnums } from '@/lib/utils/boardEnums.ts';
 import BoardHeader from '@/components/atoms/BoardHeader/BoardHeader.tsx';
-import NewestItem from '@/components/atoms/NewestItem/NewestItem.tsx';
+import BoardStats from '@/components/molecules/BoardStats/BoardStats.tsx';
 
 const BoardPage = () => {
   const { data, isLoading: dataLoading, isError } = useGetUsersQuery();
@@ -38,10 +38,7 @@ const BoardPage = () => {
   return (
     <Wrapper>
       <BoardHeader userRole={user.role.roleName} />
-      <Box sx={{ width: '100%', py: 4, display: 'flex', justifyContent: 'space-evenly' }}>
-        <NewestItem type="user" content={lastUser()} />
-        <NewestItem type="entry" content={entryData} />
-      </Box>
+      <BoardStats latestEntry={entryData} latestUser={lastUser()} />
       <Box>
         <List
           sx={{
