@@ -7,15 +7,15 @@ import {
   ITranslatorProps,
 } from '@/lib/types';
 
-export function isBook(item: unknown): item is IBookProps {
-  return typeof item === 'object' && item !== null && 'polishTitle' in item;
-}
+export const isBook = (item: unknown): item is IBookProps => {
+  return Boolean(item && typeof item === 'object' && 'polishTitle' in item);
+};
 
-export function isTranslator(item: unknown): item is ITranslatorProps {
-  return typeof item === 'object' && item !== null && 'firstName' in item && 'lastName' in item;
-}
+export const isTranslator = (item: unknown): item is ITranslatorProps => {
+  return Boolean(item && typeof item === 'object' && 'firstName' in item && 'lastName' in item);
+};
 
-export function isPublication(item: unknown): item is IPublicationProps {
+export const isPublication = (item: unknown): item is IPublicationProps => {
   return (
     typeof item === 'object' &&
     item !== null &&
@@ -23,9 +23,9 @@ export function isPublication(item: unknown): item is IPublicationProps {
     'description' in item &&
     'type' in item
   );
-}
+};
 
-export function isFanzin(item: unknown): item is IFanzinProps {
+export const isFanzin = (item: unknown): item is IFanzinProps => {
   return (
     typeof item === 'object' &&
     item !== null &&
@@ -33,9 +33,9 @@ export function isFanzin(item: unknown): item is IFanzinProps {
     'lastIssueDate' in item &&
     'numbers' in item
   );
-}
+};
 
-export function isFanEdition(item: unknown): item is IFanEditionsProps {
+export const isFanEdition = (item: unknown): item is IFanEditionsProps => {
   return (
     typeof item === 'object' &&
     item !== null &&
@@ -44,9 +44,9 @@ export function isFanEdition(item: unknown): item is IFanEditionsProps {
     !('isbn' in item) &&
     !('version' in item)
   );
-}
+};
 
-export function isPublisher(item: unknown): item is IPublisherProps {
+export const isPublisher = (item: unknown): item is IPublisherProps => {
   return (
     typeof item === 'object' &&
     item !== null &&
@@ -55,4 +55,4 @@ export function isPublisher(item: unknown): item is IPublisherProps {
     !('firstName' in item) &&
     !('lastName' in item)
   );
-}
+};

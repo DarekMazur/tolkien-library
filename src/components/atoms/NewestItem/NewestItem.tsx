@@ -1,26 +1,21 @@
 import { Box, Link, Typography } from '@mui/material';
-import { formatDate } from '@/lib/helpers/formatDate.ts';
-import { IUser, TPublications } from '@/lib/types';
-import { getLatest } from '@/lib/helpers/getLatest.ts';
-import { isBook, isPublisher, isTranslator } from '@/lib/helpers/publicationsTypeGuard.ts';
 import { Link as RouterLink } from 'react-router';
-import { createSlug } from '@/lib/helpers/createSlug.ts';
-import { useMe } from '@/hooks/useMe.tsx';
+import { IUser, TPublications } from '@/lib/types';
+import { useNewestItemData } from '@/hooks/useNewestItemData';
 
-const NewestItem = ({
-  type,
-  content,
-}: {
+interface NewestItemProps {
   type: 'user' | 'entry';
   content?: IUser | TPublications;
-}) => {
-  const { user, isLoading } = useMe();
+}
 
-  const title = type === 'user' ? 'Newest User' : 'Newest Entry';
+const NewestItem = ({ type, content }: NewestItemProps) => {
+  const { itemData, isLoading } = useNewestItemData(type, content);
 
   if (isLoading) {
     return null;
   }
+
+  const title = type === 'user' ? 'Newest User' : 'Newest Entry';
 
   return (
     <Box>
@@ -28,23 +23,12 @@ const NewestItem = ({
         {title}
       </Typography>
       <Typography>
-        {type === 'user' ? (
-          content ? (
-            `${(content as IUser)?.userName} (${content?.id === user?.id ? 'you' : formatDate(content!.createdAt)})`
-          ) : (
-            'No users'
-          )
-        ) : content &&
-          getLatest(content as TPublications) &&
-          (isBook(content) || isTranslator(content) || isPublisher(content)) ? (
-          <Link
-            component={RouterLink}
-            to={`/library/${isBook(content) ? 'books' : isTranslator(content) ? 'translator' : 'publisher'}/${createSlug(getLatest(content)!)}`}
-          >
-            {getLatest(content)} ({formatDate(content!.createdAt)})
+        {itemData.link ? (
+          <Link component={RouterLink} to={itemData.link}>
+            {itemData.displayText}
           </Link>
         ) : (
-          `${getLatest(content as TPublications)} (${formatDate(content!.createdAt)})`
+          itemData.displayText
         )}
       </Typography>
     </Box>
