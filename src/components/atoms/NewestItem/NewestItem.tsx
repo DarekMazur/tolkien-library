@@ -8,6 +8,24 @@ interface NewestItemProps {
   content?: IUser | TPublications;
 }
 
+/**
+ * Component displaying the newest item of a given type (user or entry).
+ *
+ * @param {object} props - Component props.
+ * @param {'user' | 'entry'} props.type - Specifies whether to display the newest user or entry.
+ * @param {IUser | TPublications} [props.content] - Optional content data used to fetch the newest item details.
+ *
+ * @returns {JSX.Element | null} The rendered component showing the newest item's title and a link or text.
+ *
+ * @example
+ * // Display newest user with optional content
+ * <NewestItem type="user" content={someUserObject} />
+ *
+ * @example
+ * // Display newest entry without content
+ * <NewestItem type="entry" />
+ */
+
 const NewestItem = ({ type, content }: NewestItemProps) => {
   const { itemData, isLoading } = useNewestItemData(type, content);
 
