@@ -24,7 +24,7 @@ interface BoardStatsProps {
  * />
  */
 
-const boardStats = ({ latestUser, latestEntry }: BoardStatsProps) => {
+const BoardStats = ({ latestUser, latestEntry }: BoardStatsProps) => {
   return (
     <Box sx={{ width: '100%', py: 4, display: 'flex', justifyContent: 'space-evenly' }}>
       <NewestItem type="user" content={latestUser} />
@@ -33,4 +33,4 @@ const boardStats = ({ latestUser, latestEntry }: BoardStatsProps) => {
   );
 };
 
-export default boardStats;
+export default BoardStats;
