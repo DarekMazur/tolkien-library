@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BoardHeader > should match snapshot 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 4.285714285714286rem;
+}
+
+<h2
+    class="MuiTypography-root MuiTypography-h2 emotion-0"
+  >
+    Admin Panel
+  </h2>
+  .emotion-0 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+<h3
+    class="MuiTypography-root MuiTypography-h3 emotion-0"
+  >
+    You're logged in as Moderator
+  </h3>
+</DocumentFragment>
+`;
