@@ -10,6 +10,7 @@ import { handlers as publicationsHandlers } from './publications';
 import { handlers as fanzoneHandlers } from './fanzone.ts';
 import { handlers as translatorsHandlers } from './translators';
 import { handlers as publishersHandlers } from './publishers';
+import { handlers as utilsHandlers } from './utils.ts';
 
 export const handlers = [
   ...rolesHandlers,
@@ -24,4 +25,5 @@ export const handlers = [
   ...fanzoneHandlers,
   ...translatorsHandlers,
   ...publishersHandlers,
+  ...utilsHandlers,
 ];

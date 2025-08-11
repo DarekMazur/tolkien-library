@@ -1,5 +1,6 @@
 export interface ICommonId {
   readonly id: string;
+  readonly createdAt: Date;
 }
 
 export type TResponse<T> = {

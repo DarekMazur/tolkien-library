@@ -1,0 +1,128 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NewestItem Component > should display newest entry without link 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+}
+
+<div
+    class="MuiBox-root emotion-0"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h3 emotion-1"
+    >
+      Newest Entry
+    </h4>
+    <p
+      class="MuiTypography-root MuiTypography-body1 emotion-2"
+    >
+      Understanding React
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`NewestItem Component > should display newest user with link 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+}
+
+.emotion-3 {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: #1D263B;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: var(--Link-underlineColor);
+  --Link-underlineColor: rgba(29, 38, 59, 0.4);
+}
+
+.emotion-3:hover {
+  text-decoration-color: inherit;
+}
+
+<div
+    class="MuiBox-root emotion-0"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h3 emotion-1"
+    >
+      Newest User
+    </h4>
+    <p
+      class="MuiTypography-root MuiTypography-body1 emotion-2"
+    >
+      <a
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways emotion-3"
+        data-discover="true"
+        href="/users/123"
+      >
+        John Doe
+      </a>
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`NewestItem Component > should display newest user without link 1`] = `
+<DocumentFragment>
+  .emotion-1 {
+  margin: 0;
+  font-family: "Tolkien",sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-2 {
+  margin: 0;
+  font-family: "Montserrat Variable",sans-serif;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+}
+
+<div
+    class="MuiBox-root emotion-0"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h3 emotion-1"
+    >
+      Newest User
+    </h4>
+    <p
+      class="MuiTypography-root MuiTypography-body1 emotion-2"
+    >
+      Jane Smith
+    </p>
+  </div>
+</DocumentFragment>
+`;

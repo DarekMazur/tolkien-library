@@ -14,6 +14,7 @@ export interface IRegisteredUser {
 
 export interface IUser extends IRegisteredUser {
   readonly id: string;
+  readonly createdAt: Date;
   isBanned: boolean;
   role: IRole;
 }

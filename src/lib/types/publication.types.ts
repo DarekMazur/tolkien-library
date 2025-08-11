@@ -60,6 +60,8 @@ export enum EPublicationType {
 
 export type TPublicationType = IBookProps | IPublicationProps | IFanzinProps | IFanEditionsProps;
 
+export type TPublications = (TPublicationType & IPublisherProps) | ITranslatorProps;
+
 export enum ETableType {
   BOOK = 'book',
   ARTICLE = 'article',

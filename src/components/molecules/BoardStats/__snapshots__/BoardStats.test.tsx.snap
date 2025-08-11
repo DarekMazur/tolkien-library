@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BoardStats Component > renders a container element even when no props provided 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 100%;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+<div
+    class="MuiBox-root emotion-0"
+  >
+    <div>
+      No User
+    </div>
+    <div>
+      No Entry
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`BoardStats Component > renders latest user and entry when props provided 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  width: 100%;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+<div
+    class="MuiBox-root emotion-0"
+  >
+    <div>
+      Jane Doe
+    </div>
+    <div>
+      Rebis
+    </div>
+  </div>
+</DocumentFragment>
+`;

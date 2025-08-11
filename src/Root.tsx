@@ -16,6 +16,7 @@ import LibraryLayout from '@/layouts/LibraryLayout.tsx';
 import LibraryPage from '@/components/pages/LibraryPage/LibraryPage.tsx';
 import TranslatorPage from '@/components/pages/TranslatorPage/TranslatorPage.tsx';
 import PublisherPage from '@/components/pages/PublisherPage/PublisherPage.tsx';
+import BoardPage from '@/components/pages/BoardPage/BoardPage.tsx';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, user, isLoading } = useMe();
@@ -62,7 +63,7 @@ const Root = () => {
           </Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/board" element={<ProtectedRoute />}>
-            <Route index element={<div>Board</div>} />
+            <Route index element={<BoardPage />} />
           </Route>
           <Route path="/profile" element={<SemiProtectedRoute />}>
             <Route index element={<UserProfile />} />
