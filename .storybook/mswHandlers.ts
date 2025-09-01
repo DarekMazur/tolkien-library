@@ -3,13 +3,86 @@ import { faker } from '@faker-js/faker';
 import { http, HttpResponse } from 'msw';
 import { createSlug } from '@/lib/helpers/createSlug.ts';
 
-const identityMock = {
+export const identityMock = {
   id: '1',
   adminContact: {
     name: 'email',
     value: 'bilbo.baggins@shire.me',
   },
 };
+
+const usersMock = [
+  {
+    id: 'bilbobaggins',
+    createdAt: new Date(faker.date.past()),
+    isBanned: false,
+    role: {
+      id: '1',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+    avatar: faker.image.avatar(),
+    email: 'bilbo.baggins@shire.me',
+    emailVerified: true,
+    userName: 'Barrel-rider',
+  },
+  {
+    id: 'frodobaggins',
+    createdAt: new Date(faker.date.past()),
+    isBanned: false,
+    role: {
+      id: '1',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+    avatar: faker.image.avatar(),
+    email: 'frodo.baggins@shire.me',
+    emailVerified: true,
+    userName: 'Ring Bearer',
+  },
+  {
+    id: 'samwisegamgee',
+    createdAt: new Date(faker.date.past()),
+    isBanned: false,
+    role: {
+      id: '1',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+    avatar: faker.image.avatar(),
+    email: 'sam.gamgee@shire.me',
+    emailVerified: true,
+    userName: 'Potato Lover',
+  },
+  {
+    id: 'meriadockbrandybuck',
+    createdAt: new Date(faker.date.past()),
+    isBanned: false,
+    role: {
+      id: '1',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+    avatar: faker.image.avatar(),
+    email: 'merry.brandybuck@shire.me',
+    emailVerified: true,
+    userName: 'Nazguls Hunter',
+  },
+  {
+    id: 'peregrintook',
+    createdAt: new Date(faker.date.past()),
+    isBanned: false,
+    role: {
+      id: '1',
+      roleName: 'User',
+      roleShorthand: 'user',
+    },
+    avatar: faker.image.avatar(),
+    email: 'pippin.took@shire.me',
+    emailVerified: true,
+    userName: 'That Smart Guy',
+  },
+];
 
 const navigationMock = [
   { id: '1', title: 'Strona główna', link: '/', isDivider: false },
@@ -51,6 +124,7 @@ const booksMock = [
     cover: 'Miękka',
     series: 'Middle-earth',
     isbn: '9781234567897',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: '2',
@@ -74,6 +148,7 @@ const booksMock = [
     cover: 'Twarda',
     series: 'Middle-earth',
     isbn: '9781234567890',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: '3',
@@ -97,6 +172,7 @@ const booksMock = [
     cover: 'Miękka',
     series: null,
     isbn: '123INVALID',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: '4',
@@ -119,6 +195,7 @@ const booksMock = [
     cover: 'Twarda',
     series: 'Middle-earth',
     isbn: '9780123456789',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: '5',
@@ -141,6 +218,7 @@ const booksMock = [
     cover: 'Miękka',
     series: 'Middle-earth',
     isbn: '9780987654321',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: '6',
@@ -163,6 +241,7 @@ const booksMock = [
     cover: 'Twarda',
     series: 'Middle-earth',
     isbn: '9781111111111',
+    createdAt: new Date(faker.date.past()),
   },
 ];
 
@@ -180,6 +259,7 @@ const publicationsMock = [
     issn: '83-7150-663-5',
     year: '1999',
     description: '',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -194,6 +274,7 @@ const publicationsMock = [
     issn: '83-89031-45-0',
     year: '2003',
     description: '',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -208,6 +289,7 @@ const publicationsMock = [
     issn: '978-83-7595-037-3',
     year: '2011',
     description: '',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -222,6 +304,7 @@ const publicationsMock = [
     issn: '1730-9549',
     year: '26/2017',
     description: '(artykuł) Wyprawa do źródła magii w Śródziemiu',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -237,6 +320,7 @@ const publicationsMock = [
     issn: '2449–8181',
     year: '2/II 2016',
     description: '',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -251,6 +335,7 @@ const publicationsMock = [
     issn: '97883-242-3613-8',
     year: '2019',
     description: '',
+    createdAt: new Date(faker.date.past()),
   },
 ];
 
@@ -258,6 +343,7 @@ const STSKF = {
   id: faker.string.uuid(),
   title: 'Sekcja Tolkienowska Śląskiego Klubu Fantastyki',
   description: '',
+  createdAt: new Date(faker.date.past()),
 };
 
 const fanzinMock = [
@@ -269,6 +355,7 @@ const fanzinMock = [
     numbers: '26',
     startDate: new Date('2004'),
     lastIssueDate: new Date('2024'),
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -278,6 +365,7 @@ const fanzinMock = [
     numbers: '31',
     startDate: new Date('1997'),
     lastIssueDate: new Date('2019'),
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -287,6 +375,7 @@ const fanzinMock = [
     numbers: '11',
     startDate: new Date('1984'),
     lastIssueDate: new Date('2024'),
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -296,6 +385,7 @@ const fanzinMock = [
     numbers: '95',
     startDate: new Date('1989'),
     lastIssueDate: new Date('1997'),
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -305,6 +395,7 @@ const fanzinMock = [
     numbers: '100+',
     startDate: new Date('1989'),
     lastIssueDate: null,
+    createdAt: new Date(faker.date.past()),
   },
 ];
 
@@ -315,6 +406,7 @@ const faneditionMock = [
     isMumakil: true,
     year: 2006,
     description: 'fanfick Katarzyny Chmiel-Gugulskiej',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -322,6 +414,7 @@ const faneditionMock = [
     isMumakil: true,
     year: 2007,
     description: 'Opowieść o Klątwie Morgotha/ alternatywa dla Dzieci Húrina',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
@@ -329,19 +422,22 @@ const faneditionMock = [
     isMumakil: true,
     year: 2008,
     description: 'Antologia tekstów i ilustracji inspirowanych twórczością J.R.R. Tolkiena',
+    createdAt: new Date(faker.date.past()),
   },
   {
     id: faker.string.uuid(),
     title: 'Słownik Sindarinu',
     year: 2000,
-    desription:
+    description:
       'Słownik języka Elfów Szarych opracowany na podstawie pism Profesora Johna Ronalda Reula Tolkiena',
+    createdAt: new Date(faker.date.past()),
   },
 ];
 
 const translatorsMock = [
   {
     id: 'mariaskibniewska',
+    createdAt: new Date(faker.date.past()),
     firstName: 'Maria',
     lastName: 'Skibniewska',
     description:
@@ -349,6 +445,7 @@ const translatorsMock = [
   },
   {
     id: faker.string.uuid(),
+    createdAt: new Date(faker.date.past()),
     firstName: 'Agnieszka',
     lastName: 'Sylwanowicz',
     description:
@@ -356,6 +453,7 @@ const translatorsMock = [
   },
   {
     id: faker.string.uuid(),
+    createdAt: new Date(faker.date.past()),
     firstName: 'Jerzy',
     lastName: 'Łoziński',
     description:
@@ -366,26 +464,58 @@ const translatorsMock = [
 const publishersMock = [
   {
     title: 'Rebis',
+    createdAt: new Date(faker.date.past()),
     id: 'rebis',
     description:
       'Wydawnictwo założone w sierpniu 1990 w Poznaniu przez Tomasza Szpondera i Tadeusza Zyska. Pod koniec 1993 roku Tadeusz Zysk odszedł z Rebisu, by założyć własne wydawnictwo.',
   },
   {
     title: 'Amber',
+    createdAt: new Date(faker.date.past()),
     id: 'amber',
     description:
       'Pierwsze polskie prywatne i niezależne wydawnictwo w III Rzeczpospolitej, założone 28 lutego 1989 roku, prowadzone przez małżeństwo Zbigniewa Fonioka (do 1990 roku pracownika naukowego Zakładu Aparatury Mikrofalowej Polskiej Akademii Nauk) i Małgorzatę Cebo-Foniok, tłumaczkę i krytyczkę literatury francuskiej, członkinię Stowarzyszenia Pisarzy Polskich i Stowarzyszenia Tłumaczy Polskich.',
   },
   {
     title: 'Zysk i S-ka',
+    createdAt: new Date(faker.date.past()),
     id: 'zysk',
     description:
       'Wydawnictwo z siedzibą w Poznaniu przy ulicy Wielkiej na Starym Mieście, założone w 1994 przez Tadeusza Zyska i Aleksandra Szablińskiego, po ich odejściu z wydawnictwa Rebis.',
   },
 ];
 
+const latestMock = {
+  id: '2',
+  originalTitle: 'The Lord of the Rings',
+  polishTitle: 'Władca Pierścieni',
+  author: 'J.R.R. Tolkien',
+  translator: {
+    id: 'mariaskibniewska',
+    firstName: 'Maria',
+    lastName: 'Skibniewska',
+    description:
+      'Polska tłumaczka, głównie anglojęzycznej i francuskojęzycznej literatury pięknej. Pierwszą książką J.R.R. Tolkiena, którą Skibniewska przetłumaczyła był Hobbit, wydany po polsku w 1960 przez Wydawnictwo Iskry[31]. Natomiast umowę na przekład Władcy Pierścieni podpisała z „Czytelnikiem” już w 1958. Nie ma żadnych świadectw z przebiegu jej pracy. Wiadomo tylko, że w czerwcu 1959 napisała list do wydawnictwa Allen & Unwin, z pytaniami o wskazówki pomocne przy tłumaczeniu, który przekazano Tolkienowi. Ten obiecał szybką odpowiedź, jednak ze względu na problemy rodzinne, przez dłuższy czas jej nie udzielił. Dopiero po ponagleniach ze strony „Czytelnika” przekazał kilka ogólnych wskazówek, które zawarł w liście do Allen & Unwin, by przesłano je Skibniewskiej. Nie ma śladów żadnej bezpośredniej korespondencji między pisarzem a polską tłumaczką, być może jednak jej list, który przekazano Tolkienowi, znajduje się w spuściźnie po nim w Bodleian Library.',
+  },
+  publisher: {
+    title: 'Rebis',
+    id: 'rebis',
+    description: '',
+  },
+  year: 2019,
+  publicationNumber: 3,
+  cover: 'Twarda',
+  series: 'Middle-earth',
+  isbn: '9781234567890',
+  createdAt: new Date(faker.date.past()),
+};
+
 export const identityHandler = http.get(`${import.meta.env.VITE_API_URL}/identity`, () => {
   return HttpResponse.json(identityMock);
+});
+
+export const usersHandler = http.get(`${import.meta.env.VITE_API_URL}/users`, () => {
+  return HttpResponse.json(usersMock);
 });
 
 export const navigationHandler = http.get('/api/navigation', () => {
@@ -468,7 +598,17 @@ export const singlePublisherHandler = http.get(
   },
 );
 
+export const latestEntryHandler = http.get('/api/latest', () => {
+  return HttpResponse.json(latestMock);
+});
+
+export const latestEntryHandlerAbsolute = http.get('https://tolkienarium.pl/api/latest', () => {
+  return HttpResponse.json(latestMock);
+});
+
 export const handlers = [
+  identityHandler,
+  usersHandler,
   navigationHandler,
   articlesHandler,
   pagesHandler,
@@ -480,4 +620,6 @@ export const handlers = [
   translatorsHandler,
   singleTranslatorHandler,
   singlePublisherHandler,
+  latestEntryHandler,
+  latestEntryHandlerAbsolute,
 ];
